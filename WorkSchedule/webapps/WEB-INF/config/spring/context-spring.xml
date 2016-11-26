@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jee="http://www.springframework.org/schema/jee"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+		http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.0.xsd">
+	
+	<context:component-scan base-package="*"></context:component-scan>
+	<mvc:annotation-driven />
+	
+	<!-- handler mapper 등록 -->
+	<bean 	id="annotationMapper" 
+				class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" />
+	
+	<!-- view resolver 등록 -->
+	<bean	id="viewResolver"
+				class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/jsp/"/>
+		<property name="suffix" value=".jsp" />
+
+	</bean>
+	
+	<!-- 
+	<bean id="intro" class="intro.ctrl.IntrolCtrl" />
+	
+	
+	<bean id="userD" class="user.model.sql.UserDaoImpl" />
+	<bean id="userS" class="user.service.UserServiceImpl">
+		<property name="dao">
+			<ref bean="userD"/>
+		</property>
+	</bean>
+	
+	<bean id="insert" class="user.ctrl.InsertCtrl">
+		<property name="service">
+			<ref bean="userS"/>
+		</property>
+	</bean>
+	 -->
+	<!-- 
+	<bean 	id="handler"
+				class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<property name="mappings">
+			<props>
+				<prop key="index.ots">intro</prop>
+				<prop key="insert.ots">insert</prop>
+			</props>
+		</property>
+	</bean>
+ 	-->
+	
+	
+	<!-- fileUpload -->
+	<bean	id="multipartResolver"
+				class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
+	
+</beans>
+
+
+
+
+
+
+
+
