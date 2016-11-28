@@ -58,7 +58,22 @@
 		<script src="./common/index.js"></script>
 		<script type="text/javascript">
 		
-	
+		$("#allChk").on("click", function() {
+			//prop() checked 속성
+
+			if ($(this).prop("checked")) {
+				$("input[name='check']").each(function() {//배열에 같은 이름 여러개
+					$(this).prop("checked", true);
+				});
+			} else {
+				$("input[name='check']").each(function() {//배열에 같은 이름 여러개
+					$(this).prop("checked", false);
+				});
+			}
+
+		});//allchk
+		
+		
 	</script>		
 </body>
 </html>
