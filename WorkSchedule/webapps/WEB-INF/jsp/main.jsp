@@ -128,8 +128,8 @@
 
 
 					<hr />
-					<a href="list.inc" class="btn btn-default" role="button"> 게시물
-						보러가기 </a>
+					<a href="list.inc" class="btn btn-default" role="button"> 친구 추가하기 </a>
+					
 					<a href="book/list.inc" class="btn btn-default" role="button">
 						책 목록 보러가기 </a>
 				</c:if>

@@ -1,5 +1,7 @@
 package Service;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -11,11 +13,11 @@ import model.sql.OracleDaoImpl;
 @Service("UserService")
 public class UserServiceImpl {
 
-	// ¼­ºí¸´Àº ÇÁ¸®Á¨Å×ÀÌ¼Ç ¿µ¿ª¿¡¼­ ´ã´çÇÏ´Â ¼­ºí¸´¸¸ ¼­ºí¸´ ÆÄÀÏ »ç¿ë. ³ª¸ÓÁö´Â ÀÏ¹Ý ÀÚ¹Ù ÆÄÀÏ.
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ï¹ï¿½ ï¿½Ú¹ï¿½ ï¿½ï¿½ï¿½ï¿½.
 	@Resource(name="UserDao")
 	private OracleDao dao;
 	
-	// ·Î±×ÀÎ ¸Þ¼Òµå »ý¼º. 
+	// ï¿½Î±ï¿½ï¿½ï¿½ ï¿½Þ¼Òµï¿½ ï¿½ï¿½ï¿½ï¿½. 
 	public MemberVO login(MemberVO member) {
 		System.out.println("UserService login");
 		return dao.loginRow(member);	
@@ -31,6 +33,19 @@ public class UserServiceImpl {
 		System.out.println("UserService update");
 		return dao.updateRow(member);
 	}
+	
+
+	public List<MemberVO> list() {
+		System.out.println("USER SERVICE LIST");
+		return dao.listRow();
+	}
+
+
+	public MemberVO cart(MemberVO member) {
+		System.out.println("user service cart");
+		return dao.cartRow(member);
+	}
+
 
 	
 }
