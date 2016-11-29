@@ -1,18 +1,25 @@
 package model.sql;
 
 import java.util.List;
+
+
 import model.domain.vo.MemberVO;
 
 public interface OracleDao {
-	// DMLÀº ¸®ÅÏÀ¸·Î result setÀÌ ÇÊ¿ä ¾øÀ¸¹Ç·Î ¸®ÅÏ Å¸ÀÔÀÌ int
+	// DMLï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ result setï¿½ï¿½ ï¿½Ê¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ ï¿½ï¿½ï¿½ï¿½ Å¸ï¿½ï¿½ï¿½ï¿½ int
 	public int insertRow(MemberVO member); 
 	public int updateRow(MemberVO member);
 	public int deleteRow(MemberVO member);
 	
 	public MemberVO loginRow(MemberVO member);
-	// select´Â return Å¸ÀÔÀÌ list
+	// selectï¿½ï¿½ return Å¸ï¿½ï¿½ï¿½ï¿½ list
 	public List<MemberVO> selectRow();
+	
+	
+	//ì¡°ì§ë„ ë„ìš°ê¸°
+	public List<MemberVO> listRow();
 
+	public MemberVO cartRow(MemberVO book);
 	
 }
 

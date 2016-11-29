@@ -1,10 +1,5 @@
 package model.sql;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -23,7 +18,7 @@ public class OracleDaoImpl implements OracleDao {
 	@Override
 	public MemberVO loginRow(MemberVO member) {
 		System.out.println("Dao loginRow");
-		return sqlSession.selectOne("member.login", member); // ½Äº°ÀÚ, ÆÄ¶ó¹ÌÅÍ. °´Ã¼ ÇÏ³ª¸¸ Àü´Þ. 
+		return sqlSession.selectOne("member.login", member); // ï¿½Äºï¿½ï¿½ï¿½, ï¿½Ä¶ï¿½ï¿½ï¿½ï¿½. ï¿½ï¿½Ã¼ ï¿½Ï³ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½. 
 	}
 
 	@Override
@@ -49,5 +44,20 @@ public class OracleDaoImpl implements OracleDao {
 		System.out.println("Dao deleteRow");
 		return sqlSession.delete("member.delete", member);
 	}
+
+	@Override
+	public List<MemberVO> listRow() {
+		System.out.println("Dao listrow");		
+		return sqlSession.selectList("member.list");
+	}
+
+
+	@Override
+	public MemberVO cartRow(MemberVO book) {
+		System.out.println("dao cartrow");		
+		return sqlSession.selectOne("member.getCart",book);
+	}
+	
+	
 	
 }

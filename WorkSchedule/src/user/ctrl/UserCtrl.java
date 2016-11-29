@@ -1,5 +1,8 @@
 package user.ctrl;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
@@ -14,9 +17,9 @@ import Service.UserServiceImpl;
 import model.domain.vo.MemberVO;
 
 @Controller
-@SessionAttributes({"login", "cart"}) // ¼¼¼Ç ÀÛ¾÷ÀÌ ÇÊ¿äÇÑ °æ¿ì Ãß°¡
+@SessionAttributes({"login", "cart"}) // ï¿½ï¿½ï¿½ï¿½ ï¿½Û¾ï¿½ï¿½ï¿½ ï¿½Ê¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ß°ï¿½
 
-public class UserCtrl { // ¾÷¹« ¸ðµâ¿¡ ¸Þ¼Òµå¸¦ ½ÉÀ½
+public class UserCtrl { // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½â¿¡ ï¿½Þ¼Òµå¸¦ ï¿½ï¿½ï¿½ï¿½
 
 	@Resource(name="UserService")
 	private UserServiceImpl service;
@@ -30,57 +33,81 @@ public class UserCtrl { // ¾÷¹« ¸ðµâ¿¡ ¸Þ¼Òµå¸¦ ½ÉÀ½
 	
 	
 	@RequestMapping(value="/login.inc", method=RequestMethod.POST)
-	public String login(MemberVO member, Model model) { // member¿¡ ¼¼¼ÇÀ» ½É°í ½ÍÀ» °æ¿ì 1. model Ãß°¡
+	public String login(MemberVO member, Model model) { // memberï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½É°ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ 1. model ï¿½ß°ï¿½
 		System.out.println("UserCtrl login");
 		MemberVO user = service.login(member);
-		model.addAttribute("login", user);	// 2. attribute Ãß°¡.
+		model.addAttribute("login", user);	// 2. attribute ï¿½ß°ï¿½.
 		
-		return "redirect:/main.inc"; // ¼¼¼ÇÀ» ³¯¸± ¶§´Â sendredirect »ç¿ë
+		return "redirect:/main.inc"; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ sendredirect ï¿½ï¿½ï¿½
 	}
 	
-	@RequestMapping(value="/logout.inc", method=RequestMethod.GET) // logoutÀº ¾ÞÄ¿ Çü½ÄÀ¸·Î ¹ÞÀ½. -> get ¹æ½Ä.
-	public String logout(SessionStatus status, HttpSession session) { //logoutÀº ¸Å°³º¯¼ö¸¦ ÁÙ ÇÊ¿ä ¾øÀ½
+	@RequestMapping(value="/logout.inc", method=RequestMethod.GET) // logoutï¿½ï¿½ ï¿½ï¿½Ä¿ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½. -> get ï¿½ï¿½ï¿½.
+	public String logout(SessionStatus status, HttpSession session) { //logoutï¿½ï¿½ ï¿½Å°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ê¿ï¿½ ï¿½ï¿½ï¿½ï¿½
 		System.out.println("UserCtrl logout");
 		System.out.println(status);
 		session.invalidate();
-		status.setComplete(); // ¼¼¼Ç ³¡³»±â À§ÇØ¼­ ÇöÀç ¼¼¼Ç ¹Þ¾Æ¿È
+		status.setComplete(); // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ø¼ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Þ¾Æ¿ï¿½
 		
 		return "redirect:/main.inc"; 
 
 	}
 
-	@RequestMapping(value="/joinForm.inc", method=RequestMethod.GET) // logoutÀº ¾ÞÄ¿ Çü½ÄÀ¸·Î ¹ÞÀ½. -> get ¹æ½Ä.
+	@RequestMapping(value="/joinForm.inc", method=RequestMethod.GET) // logoutï¿½ï¿½ ï¿½ï¿½Ä¿ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½. -> get ï¿½ï¿½ï¿½.
 	public String joinForm(MemberVO member) {
 		System.out.println("UserCtrl joinForm");
 		return "joinForm"; 
 	}
 	
-	@RequestMapping(value="/join.inc", method=RequestMethod.POST) // logoutÀº ¾ÞÄ¿ Çü½ÄÀ¸·Î ¹ÞÀ½. -> get ¹æ½Ä.
+	@RequestMapping(value="/join.inc", method=RequestMethod.POST) // logoutï¿½ï¿½ ï¿½ï¿½Ä¿ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½. -> get ï¿½ï¿½ï¿½.
 	public String join(MemberVO member, Model model) {
 		System.out.println("UserCtrl join");
 		service.join(member);
 		
-		// ¼¼¼Ç Ãß°¡
+		// ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½
 		model.addAttribute("login", member);	
 
 		return "redirect:/main.inc"; 
 	}
 	
-	@RequestMapping(value="/updateForm.inc", method=RequestMethod.GET) // logoutÀº ¾ÞÄ¿ Çü½ÄÀ¸·Î ¹ÞÀ½. -> get ¹æ½Ä.
+	@RequestMapping(value="/updateForm.inc", method=RequestMethod.GET) // logoutï¿½ï¿½ ï¿½ï¿½Ä¿ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½. -> get ï¿½ï¿½ï¿½.
 	public String updateForm(MemberVO member, Model model) {
 		System.out.println("UserCtrl updateForm");
 		return "updateForm"; 
 	}
 
-	@RequestMapping(value="/update.inc", method=RequestMethod.POST) // logoutÀº ¾ÞÄ¿ Çü½ÄÀ¸·Î ¹ÞÀ½. -> get ¹æ½Ä.
+	@RequestMapping(value="/update.inc", method=RequestMethod.POST) // logoutï¿½ï¿½ ï¿½ï¿½Ä¿ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½. -> get ï¿½ï¿½ï¿½.
 	public String update(MemberVO member, Model model) {
 		System.out.println("UserCtrl update");
-		int flag = service.update(member);
-		
-		// ¼¼¼Ç Ãß°¡
+		// ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½
 		model.addAttribute("login", member);	
 
 		return "redirect:/main.inc"; 
+	}
+	
+	@RequestMapping(value = "/list.inc", method = RequestMethod.GET)
+	public String boardList(Model model) {
+		System.out.println("BoardCtrl boardList");
+		List<MemberVO> list = service.list();		
+		model.addAttribute("lists", list);
+		return "boardlist";
+	}
+	
+	//FAVORITE ë¶ˆëŸ¬ì˜¤ê¸°
+	@RequestMapping(value = "/cartin.inc", method = RequestMethod.GET)
+	public String favorite(HttpSession session, MemberVO member, Model model) {
+		MemberVO result = service.cart(member);
+		System.out.println("ctrl add favorite:" + session);
+		if (session.getAttribute("cart") == null) {
+			ArrayList<MemberVO> cart = new ArrayList<MemberVO>();
+			cart.add(result);
+			model.addAttribute("cart",cart);
+		} else {
+			ArrayList<MemberVO> cart = (ArrayList<MemberVO>) session.getAttribute("cart");
+			cart.add(result);
+		}
+		
+		return "redirect:list.inc";
+
 	}
 }
 
