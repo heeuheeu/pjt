@@ -22,9 +22,9 @@ import model.domain.vo.MemberVO;
 
 
 @Controller
-@SessionAttributes({"login", "cart"}) // ���� �۾��� �ʿ��� ��� �߰�
+@SessionAttributes({"login", "cart"}) // 세션 작업이 필요한 경우 추가
 
-public class UserCtrl { // ���� ��⿡ �޼ҵ带 ����
+public class UserCtrl { // 업무 모듈에 메소드를 심음
 
 	@Resource(name="UserService")
 	private UserServiceImpl service;
@@ -35,47 +35,31 @@ public class UserCtrl { // ���� ��⿡ �޼ҵ带 ����
 		System.out.println("MainCrl main");
 		return "main"; 
 	}
-	
-/*	
-	@RequestMapping(value="/login.inc", method=RequestMethod.POST)
-	public String login(MemberVO member, Model model) { // member�� ������ �ɰ� ���� ��� 1. model �߰�
-		System.out.println("UserCtrl login");
-		MemberVO user = service.login(member);
-		model.addAttribute("login", user);	// 2. attribute �߰�.
-		
-		return "redirect:/main.inc"; // ������ ���� ���� sendredirect ���
-	}
-	*/
-	@RequestMapping(value="/login.inc", method=RequestMethod.POST)
+
+	/*@RequestMapping(value="/login.inc", method=RequestMethod.POST)
 	public String login(MemberVO member, Model model) { 
 		System.out.println("UserCtrl login");
 		MemberVO user = service.login(member);
 		model.addAttribute("login", user);	
 		
 		return "list";
-	}
+	}*/
 	
-/*	
-	@RequestMapping("/pagemove.inc")
-	public String move(Model model) {
-		System.out.println("AndroidCtrl move");
-		ArrayList<AndroidVO> list = new ArrayList<AndroidVO>();
-		list.add(new AndroidVO(1, "����ʹ�", "������"));
-		list.add(new AndroidVO(1, "���̷�", "������"));
-		list.add(new AndroidVO(1, "�氡", "������"));
-		model.addAttribute("lists", list);
+	@RequestMapping(value="/login.inc", method=RequestMethod.POST)
+	public String loginEmp(EmployeeVO employee, Model model) { 
+		System.out.println("UserCtrl loginEmp");
+		EmployeeVO user = service.loginEmp(employee);
+		model.addAttribute("login", user);	
 		
-		return "ch02/table-sample";
+		return "list";
 	}
 	
-	*/
-	
-	@RequestMapping(value="/logout.inc", method=RequestMethod.GET) // logout�� ��Ŀ �������� ����. -> get ���.
-	public String logout(SessionStatus status, HttpSession session) { //logout�� �Ű������� �� �ʿ� ����
+	@RequestMapping(value="/logout.inc", method=RequestMethod.GET) // logout은 앵커 형식으로 받음. -> get 방식.
+	public String logout(SessionStatus status, HttpSession session) { //logout은 매개변수를 줄 필요 없음
 		System.out.println("UserCtrl logout");
 		System.out.println(status);
 		session.invalidate();
-		status.setComplete(); // ���� ������ ���ؼ� ���� ���� �޾ƿ�
+		status.setComplete(); // 세션 끝내기 위해서 현재 세션 받아옴
 		
 		return "redirect:/main.inc"; 
 
@@ -92,7 +76,7 @@ public class UserCtrl { // ���� ��⿡ �޼ҵ带 ����
 		System.out.println("UserCtrl join");
 		service.join(member);
 		
-		// ���� �߰�
+		// 세션 추가
 		model.addAttribute("login", member);	
 
 		return "redirect:/main.inc"; 
@@ -109,22 +93,14 @@ public class UserCtrl { // ���� ��⿡ �޼ҵ带 ����
 		System.out.println("UserCtrl update");
 		int flag = service.update(member);
 		
-		// ���� �߰�
+		// 세션 추가
 		model.addAttribute("login", member);	
 
 		return "redirect:/main.inc"; 
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	//플러스 버튼 누르면 인사팀 리스트 보여주기
+
+	//�뵆�윭�뒪 踰꾪듉 �늻瑜대㈃ �씤�궗�� 由ъ뒪�듃 蹂댁뿬二쇨린
 	@RequestMapping(value = "/list.inc", method = RequestMethod.GET)
 	public String boardList(Model model) {
 		System.out.println("UserCtrl boardList");
@@ -134,15 +110,15 @@ public class UserCtrl { // ���� ��⿡ �޼ҵ带 ����
 	}
 	
 	
-	//즐겨찾기 check한 사람 id와  받아오기 +  +뿌려주기
+	//利먭꺼李얘린 check�븳 �궗�엺 id��  諛쏆븘�삤湲� +  +肉뚮젮二쇨린
 		@RequestMapping(value = "/favorite.inc")		
 		public String testCheck(@RequestParam(value="valueArrTest[]") List<String> valueArr, HttpSession session,Model model){
 			System.out.println("UserCtrl testcheck");
 			EmployeeVO member = (EmployeeVO)session.getAttribute("loginSession");
-			System.out.println(valueArr.size()); //check된 것 갯수			
+			System.out.println(valueArr.size()); //check�맂 寃� 媛��닔			
 			
 			for(int i=0 ; i<valueArr.size() ; i++){
-				System.out.println(valueArr.get(i)); //check된 사람 이름 뿌려보기
+				System.out.println(valueArr.get(i)); //check�맂 �궗�엺 �씠由� 肉뚮젮蹂닿린
 			}
 			
 			ArrayList<FavoriteVO> list = new ArrayList<FavoriteVO>();
@@ -163,8 +139,6 @@ public class UserCtrl { // ���� ��⿡ �޼ҵ带 ����
 			return "orgachart";
 		}
 			
-	
-	
 	
 }
 

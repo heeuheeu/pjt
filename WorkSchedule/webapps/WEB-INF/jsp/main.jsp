@@ -43,13 +43,13 @@
 						method="post">
 						<div class="form-group">
 							<label for="Name">아이디 </label> <input type="text"
-								class="form-control" placeholder="아이디" name="id">
+								class="form-control" placeholder="아이디" name="empid">
 						</div>
 						<br/><br/>
 						<div class="form-group">
 
 							<label for="Password">패스워드</label> <input type="password"
-								class="form-control" placeholder="패스워드" name="pwd">
+								class="form-control" placeholder="패스워드" name="emppwd">
 						</div>
 						<br/><br/><br/> 
 						<div class="form-group">

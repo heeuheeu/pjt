@@ -36,7 +36,10 @@
 		
 	<select id="selectemp" parameterType="model.domain.vo.EmployeeVO" resultType="model.domain.vo.EmployeeVO">
 		SELECT *
-		FROM EMPLOYEE
+		FROM EMPLOYEE A
+		JOIN DEPARTMENT B USING (DEPTID)
+		JOIN WORK C USING (EMPID) 
+		WHERE EMPID = #{empid} 
 	</select>
 
 	<select id="loginemp" parameterType="model.domain.vo.EmployeeVO" resultType="model.domain.vo.EmployeeVO">

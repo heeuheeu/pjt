@@ -47,9 +47,9 @@
     </div>
     <div class="ms_menu_body__wrapper hide-menu">
         <ul>
-        	<li><a href="#"><img src="img/1.png"></a></li>
-         	<li>${login.dept} ${login.name} 담당</li> 
-         	<li>${login.id}</li>
+        	<li><a href="#"><img src="img/${login.empid}.png"></a></li>
+         	<li>${login.deptid} ${login.empname} 담당</li> 
+         	<li>${login.empid}</li>
             <li class="ms_menu__item"><i class="ms_menu__item-icon fa fa-circle-thin"></i> 나의 일정</li>
             <li class="ms_menu__item"><i class="ms_menu__item-icon fa fa-circle-thin"></i> 로그아웃</li>
         </ul>
@@ -81,60 +81,26 @@
 <!---------------------------------------------- 내 아이디 --------------------------------------------->
 <div align='center'>
 		   <ul>
-		   <li><a href="#"><img src="img/1.png"></a></li>
-		   <li>${login.dept} ${login.name} 담당</li> 
-		   <li>${login.id}</li>
-		   <li>${login.hiredate}</li>
-		   <li>${login.salary}</li>
-		   </ul>
-</div>
-<!--------------------------------------------------------------------------------------------------->
-<!---------------------------------------------- 내 아이디 --------------------------------------------->
-<div align='right'>
-		   <ul>
-		   <li><a href="#"><img src="img/1.png"></a></li>
-		   <li>${login.dept} ${login.name} 담당</li> 
-		   <li>${login.id}</li>
-		   <li>${login.hiredate}</li>
-		   <li>${login.salary}</li>
+		   <li><a href="#"><img src="img/${login.empid}.png"></a></li>
+		   <li>${login.deptid} ${login.empname} 담당</li> 
+		   <li>${login.empid}</li>
 		   </ul>
 </div>
 <!--------------------------------------------------------------------------------------------------->
    
+   
 			<div class="loginform" align='center'>
-				<c:if test="${login == null}">
-					<!-- jsp 문법. 만약 로그인 정보가 없으면 아래를 출력 -->
 
-					<form role="form" class="form-inline" action="login.inc"
-						method="post">
-						<div class="form-group">
-							<label for="Name">아이디 </label> <input type="text"
-								class="form-control" placeholder="아이디" name="id">
-						</div>
-						<br/><br/>
-						<div class="form-group">
-
-							<label for="Password">패스워드</label> <input type="password"
-								class="form-control" placeholder="패스워드" name="pwd">
-						</div>
-						<br/><br/><br/> 
-						<div class="form-group">
-							<button type="submit" class="btn btn-primary">로그인</button>
-							<a href="joinForm.inc" class="btn btn-default" role="button">
-								회원가입 </a>
-						</div>
-					</form>
-				</c:if>
 				<c:if test="${login != null}">
-	    	<p>${login.name}님 환영합니다.</p>
+	    	<p>${login.empname}님 환영합니다.</p>
 	    	 <a href="logout.inc" class="btn btn-default" role="button">
 						로그아웃 </a>
 					<a href="updateForm.inc" class="btn btn-default" role="button">
 						회원정보수정 </a>
 
-
 					<hr />
-					<a href="list.inc" class="btn btn-default" role="button"> 플러스 버튼!! </a>
+					<a href="list.inc" class="btn btn-default" role="button"> 게시물
+						보러가기 </a>
 					<a href="book/list.inc" class="btn btn-default" role="button">
 						책 목록 보러가기 </a>
 				</c:if>
