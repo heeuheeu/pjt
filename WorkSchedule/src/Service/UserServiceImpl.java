@@ -48,7 +48,7 @@ public class UserServiceImpl {
 
 	public int addFav(String loginId, String valueArr) {
 		System.out.println("user service addFav");
-		return dao.addFavRow(loginId,valueArr);
+		return dao.addFavRow(loginId, valueArr);
 	}
 
 	
