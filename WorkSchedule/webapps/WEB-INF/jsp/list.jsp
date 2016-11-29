@@ -89,7 +89,17 @@
 		   </ul>
 </div>
 <!--------------------------------------------------------------------------------------------------->
-   
+<!---------------------------------------------- 내 아이디 --------------------------------------------->
+<div align='right'>
+		   <ul>
+		   <li><a href="#"><img src="img/1.png"></a></li>
+		   <li>${login.dept} ${login.name} 담당</li> 
+		   <li>${login.id}</li>
+		   <li>${login.hiredate}</li>
+		   <li>${login.salary}</li>
+		   </ul>
+</div>
+<!--------------------------------------------------------------------------------------------------->
    
 			<div class="loginform" align='center'>
 				<c:if test="${login == null}">
@@ -124,8 +134,7 @@
 
 
 					<hr />
-					<a href="list.inc" class="btn btn-default" role="button"> 게시물
-						보러가기 </a>
+					<a href="list.inc" class="btn btn-default" role="button"> 플러스 버튼!! </a>
 					<a href="book/list.inc" class="btn btn-default" role="button">
 						책 목록 보러가기 </a>
 				</c:if>

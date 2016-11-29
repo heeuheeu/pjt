@@ -32,24 +32,24 @@
 		<table class="table table-bordered">
 			<thead>
 				<tr>
-					<th>아이디</th>
-					<th>비밀번호</th>
 					<th>이름</th>
-					<th>추가하기<input type="checkbox" name="check" id="allChk">전체선택</th>					
+					<th>직급</th>
+					<th>부서명</th>
+					<th>추가하기<input type="checkbox" name="checkTotal" id="allChk"> 전체선택</th>					
 				</tr>
 			</thead>
 
 			<c:forEach items="${lists}" var="member">
 				<tr>
-					<td>${member.id}</td>
-					<td>${member.pwd}</td>
-					<td>${member.name}</td>		
-					<td><input type="checkbox" name="check" value="${member.id}">즐겨찾기</td>		
+					<td>${member.empname}</td>
+					<td>${member.empgrade}</td>
+					<td>${member.deptname}</td>		
+					<td><input type="checkbox" name="chk" value="${member.empname}">즐겨찾기</td>		
 				</tr>				
 			</c:forEach>
 		</table>
 		
-		<a href="cartin.inc" class="btn btn-default" role="button">추가하기</a>
+		<a href="favorite.inc" class="btn btn-default" role="button" id="addBtn">즐겨찾기 추가하기</a>
 	</form>
 	
 	<script
@@ -62,17 +62,37 @@
 			//prop() checked 속성
 
 			if ($(this).prop("checked")) {
-				$("input[name='check']").each(function() {//배열에 같은 이름 여러개
+				$("input[name='chk']").each(function() {//배열에 같은 이름 여러개
 					$(this).prop("checked", true);
 				});
 			} else {
-				$("input[name='check']").each(function() {//배열에 같은 이름 여러개
+				$("input[name='chk']").each(function() {//배열에 같은 이름 여러개
 					$(this).prop("checked", false);
 				});
 			}
 
 		});//allchk
 		
+		
+		$("#addBtn").on("click", function(){
+			
+			
+			var checkArr = [];
+			//checkArr.push("${member.id}");
+			$("input[name='chk']:checked").each(function(i){
+				checkArr.push($(this).val());
+			});
+			
+			$.ajax({
+				url: "favorite.inc",
+				type: "post",
+				dataType: "text",
+				data: {
+					valueArrTest: checkArr
+				}
+			});	
+			
+		});	
 		
 	</script>		
 </body>

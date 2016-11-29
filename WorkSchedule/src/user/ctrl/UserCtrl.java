@@ -1,5 +1,8 @@
 package user.ctrl;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
@@ -7,17 +10,21 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
 import Service.UserServiceImpl;
+import model.domain.vo.EmployeeDepartmentVO;
+import model.domain.vo.EmployeeVO;
+import model.domain.vo.FavoriteVO;
 import model.domain.vo.MemberVO;
 
 
 @Controller
-@SessionAttributes({"login", "cart"}) // ¼¼¼Ç ÀÛ¾÷ÀÌ ÇÊ¿äÇÑ °æ¿ì Ãß°¡
+@SessionAttributes({"login", "cart"}) // ï¿½ï¿½ï¿½ï¿½ ï¿½Û¾ï¿½ï¿½ï¿½ ï¿½Ê¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ß°ï¿½
 
-public class UserCtrl { // ¾÷¹« ¸ğµâ¿¡ ¸Ş¼Òµå¸¦ ½ÉÀ½
+public class UserCtrl { // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½â¿¡ ï¿½Ş¼Òµå¸¦ ï¿½ï¿½ï¿½ï¿½
 
 	@Resource(name="UserService")
 	private UserServiceImpl service;
@@ -31,12 +38,12 @@ public class UserCtrl { // ¾÷¹« ¸ğµâ¿¡ ¸Ş¼Òµå¸¦ ½ÉÀ½
 	
 /*	
 	@RequestMapping(value="/login.inc", method=RequestMethod.POST)
-	public String login(MemberVO member, Model model) { // member¿¡ ¼¼¼ÇÀ» ½É°í ½ÍÀ» °æ¿ì 1. model Ãß°¡
+	public String login(MemberVO member, Model model) { // memberï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½É°ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ 1. model ï¿½ß°ï¿½
 		System.out.println("UserCtrl login");
 		MemberVO user = service.login(member);
-		model.addAttribute("login", user);	// 2. attribute Ãß°¡.
+		model.addAttribute("login", user);	// 2. attribute ï¿½ß°ï¿½.
 		
-		return "redirect:/main.inc"; // ¼¼¼ÇÀ» ³¯¸± ¶§´Â sendredirect »ç¿ë
+		return "redirect:/main.inc"; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ sendredirect ï¿½ï¿½ï¿½
 	}
 	*/
 	@RequestMapping(value="/login.inc", method=RequestMethod.POST)
@@ -53,9 +60,9 @@ public class UserCtrl { // ¾÷¹« ¸ğµâ¿¡ ¸Ş¼Òµå¸¦ ½ÉÀ½
 	public String move(Model model) {
 		System.out.println("AndroidCtrl move");
 		ArrayList<AndroidVO> list = new ArrayList<AndroidVO>();
-		list.add(new AndroidVO(1, "½¬°í½Í´Ù", "¼·¼·ÇØ"));
-		list.add(new AndroidVO(1, "ÇÏÀÌ·ç", "¼·¼·ÇØ"));
-		list.add(new AndroidVO(1, "¹æ°¡", "¼·¼·ÇØ"));
+		list.add(new AndroidVO(1, "ï¿½ï¿½ï¿½ï¿½Í´ï¿½", "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"));
+		list.add(new AndroidVO(1, "ï¿½ï¿½ï¿½Ì·ï¿½", "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"));
+		list.add(new AndroidVO(1, "ï¿½æ°¡", "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"));
 		model.addAttribute("lists", list);
 		
 		return "ch02/table-sample";
@@ -63,12 +70,12 @@ public class UserCtrl { // ¾÷¹« ¸ğµâ¿¡ ¸Ş¼Òµå¸¦ ½ÉÀ½
 	
 	*/
 	
-	@RequestMapping(value="/logout.inc", method=RequestMethod.GET) // logoutÀº ¾ŞÄ¿ Çü½ÄÀ¸·Î ¹ŞÀ½. -> get ¹æ½Ä.
-	public String logout(SessionStatus status, HttpSession session) { //logoutÀº ¸Å°³º¯¼ö¸¦ ÁÙ ÇÊ¿ä ¾øÀ½
+	@RequestMapping(value="/logout.inc", method=RequestMethod.GET) // logoutï¿½ï¿½ ï¿½ï¿½Ä¿ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½. -> get ï¿½ï¿½ï¿½.
+	public String logout(SessionStatus status, HttpSession session) { //logoutï¿½ï¿½ ï¿½Å°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ê¿ï¿½ ï¿½ï¿½ï¿½ï¿½
 		System.out.println("UserCtrl logout");
 		System.out.println(status);
 		session.invalidate();
-		status.setComplete(); // ¼¼¼Ç ³¡³»±â À§ÇØ¼­ ÇöÀç ¼¼¼Ç ¹Ş¾Æ¿È
+		status.setComplete(); // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ø¼ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ş¾Æ¿ï¿½
 		
 		return "redirect:/main.inc"; 
 
@@ -85,7 +92,7 @@ public class UserCtrl { // ¾÷¹« ¸ğµâ¿¡ ¸Ş¼Òµå¸¦ ½ÉÀ½
 		System.out.println("UserCtrl join");
 		service.join(member);
 		
-		// ¼¼¼Ç Ãß°¡
+		// ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½
 		model.addAttribute("login", member);	
 
 		return "redirect:/main.inc"; 
@@ -102,10 +109,62 @@ public class UserCtrl { // ¾÷¹« ¸ğµâ¿¡ ¸Ş¼Òµå¸¦ ½ÉÀ½
 		System.out.println("UserCtrl update");
 		int flag = service.update(member);
 		
-		// ¼¼¼Ç Ãß°¡
+		// ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½
 		model.addAttribute("login", member);	
 
 		return "redirect:/main.inc"; 
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	//í”ŒëŸ¬ìŠ¤ ë²„íŠ¼ ëˆ„ë¥´ë©´ ì¸ì‚¬íŒ€ ë¦¬ìŠ¤íŠ¸ ë³´ì—¬ì£¼ê¸°
+	@RequestMapping(value = "/list.inc", method = RequestMethod.GET)
+	public String boardList(Model model) {
+		System.out.println("UserCtrl boardList");
+		List<EmployeeDepartmentVO> list = service.list();		
+		model.addAttribute("lists", list);
+		return "orgachart";
+	}
+	
+	
+	//ì¦ê²¨ì°¾ê¸° checkí•œ ì‚¬ëŒ idì™€  ë°›ì•„ì˜¤ê¸° +  +ë¿Œë ¤ì£¼ê¸°
+		@RequestMapping(value = "/favorite.inc")		
+		public String testCheck(@RequestParam(value="valueArrTest[]") List<String> valueArr, HttpSession session,Model model){
+			System.out.println("UserCtrl testcheck");
+			EmployeeVO member = (EmployeeVO)session.getAttribute("loginSession");
+			System.out.println(valueArr.size()); //checkëœ ê²ƒ ê°¯ìˆ˜			
+			
+			for(int i=0 ; i<valueArr.size() ; i++){
+				System.out.println(valueArr.get(i)); //checkëœ ì‚¬ëŒ ì´ë¦„ ë¿Œë ¤ë³´ê¸°
+			}
+			
+			ArrayList<FavoriteVO> list = new ArrayList<FavoriteVO>();
+			
+			for(int i=0 ; i<valueArr.size() ; i++){
+				int flag = service.addFav(member.getEmpid(), valueArr.get(i));
+				System.out.println("insert flag >>>>>>>>>>>>>>>>>>>>>>>>>>>>>> "+flag);
+			}
+			
+			/*for(int i=0 ; i<valueArr.size() ; i++){
+				MemberVO m = service.getFav(member.getId(), valueArr.get(i));
+				list.add(m);
+			}			
+			model.addAttribute("favorite", list);
+			return "redirect:/main.inc?empid="+member.getId();
+			List<MemberVO>
+			*/
+			return "orgachart";
+		}
+			
+	
+	
+	
 }
 

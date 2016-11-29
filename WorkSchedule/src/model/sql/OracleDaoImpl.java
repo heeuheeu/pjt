@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import model.domain.vo.DepartmentVO;
 import model.domain.vo.DivisionVO;
+import model.domain.vo.EmployeeDepartmentVO;
 import model.domain.vo.EmployeeVO;
 import model.domain.vo.FavoriteVO;
 import model.domain.vo.LocationlistVO;
@@ -25,7 +26,7 @@ public class OracleDaoImpl implements OracleDao {
 	@Override
 	public MemberVO loginRow(MemberVO member) {
 		System.out.println("Dao loginRow");
-		return sqlSession.selectOne("member.login", member); // ½Äº°ÀÚ, ÆÄ¶ó¹ÌÅÍ. °´Ã¼ ÇÏ³ª¸¸ Àü´Þ. 
+		return sqlSession.selectOne("member.login", member); // ï¿½Äºï¿½ï¿½ï¿½, ï¿½Ä¶ï¿½ï¿½ï¿½ï¿½. ï¿½ï¿½Ã¼ ï¿½Ï³ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½. 
 	}
 
 	@Override
@@ -93,6 +94,20 @@ public class OracleDaoImpl implements OracleDao {
 	public List<WorkVO> selectWork() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public List<EmployeeDepartmentVO> listRow() {
+		System.out.println("Dao listrow");		
+		return sqlSession.selectList("member.pluslist");
+	}
+	
+	@Override
+	public int addFavRow(String loginId, String valueArr) {
+		System.out.println("dao addFavRow");	
+		FavoriteVO fav = new FavoriteVO(loginId, valueArr);
+		int flag = sqlSession.insert("member.getCart", fav);
+		return flag ; 
 	}
 
 

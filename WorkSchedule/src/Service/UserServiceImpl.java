@@ -1,9 +1,12 @@
 package Service;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import model.domain.vo.EmployeeDepartmentVO;
 import model.domain.vo.EmployeeVO;
 import model.domain.vo.MemberVO;
 import model.sql.OracleDao;
@@ -12,7 +15,7 @@ import model.sql.OracleDaoImpl;
 @Service("UserService")
 public class UserServiceImpl {
 
-	// ¼­ºí¸´Àº ÇÁ¸®Á¨Å×ÀÌ¼Ç ¿µ¿ª¿¡¼­ ´ã´çÇÏ´Â ¼­ºí¸´¸¸ ¼­ºí¸´ ÆÄÀÏ »ç¿ë. ³ª¸ÓÁö´Â ÀÏ¹İ ÀÚ¹Ù ÆÄÀÏ.
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ï¹ï¿½ ï¿½Ú¹ï¿½ ï¿½ï¿½ï¿½ï¿½.
 	@Resource(name="UserDao")
 	private OracleDao dao;
 	
@@ -31,11 +34,24 @@ public class UserServiceImpl {
 		return dao.updateRow(member);
 	}
 
-	/////////////////////////////////////////////////////// ¼öÁ¤Áß
+	/////////////////////////////////////////////////////// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	public EmployeeVO loginEmp(EmployeeVO employee) {
 		System.out.println("UserService login");
 		return dao.loginEmp(employee);	
 	}
+	
+	//plusë²„íŠ¼ ëˆ„ë¥´ë©´ ì¡°ì§ë„ ë„ìš°ê¸°
+	public List<EmployeeDepartmentVO> list() {
+		System.out.println("USER SERVICE LIST");
+		return dao.listRow();
+	}
+
+	public int addFav(String loginId, String valueArr) {
+		System.out.println("user service addFav");
+		return dao.addFavRow(loginId,valueArr);
+	}
+
+	
 	
 	
 }

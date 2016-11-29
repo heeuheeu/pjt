@@ -45,6 +45,19 @@
 	</select>
 
 
+	
+	<select id="pluslist" resultType="model.domain.vo.EmployeeDepartmentVO">
+	 	SELECT EMPNAME, EMPGRADE, DEPTNAME 
+	 	FROM EMPLOYEE
+	 	JOIN DEPARTMENT USING (DEPTID)
+	</select>
+	
+	
+	<insert id="addFavorite" parameterType="model.domain.vo.FavoriteVO">
+		INSERT INTO FAVORITE
+		VALUES (#{empId}, #{empIdFav})
+	</insert>
+	
 </mapper>
 
 
