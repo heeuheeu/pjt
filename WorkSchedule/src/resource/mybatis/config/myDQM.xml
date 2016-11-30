@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="emp">
+	<!-- get메소드 호출 getID -> 네이밍 룰에 의해 id 소문자를 사용한다. -->
+	
+	<select id="countwork" parameterType="model.domain.vo.EmployeeWorkDeptVO" resultType="int">
+		SELECT 	COUNT(*) 
+		FROM 	WORK 
+		WHERE 	EMPID = #{empid} AND WORKDATE = TO_CHAR(SYSDATE,'YYYY-MM-DD')
+	</select>
+
+	<select id="selectemp" parameterType="model.domain.vo.EmployeeWorkDeptVO" resultType="model.domain.vo.EmployeeWorkDeptVO">
+		SELECT 	EMPID, EMPPWD, EMPNAME, EMPGRADE, EMPPHONE, EMPMAIL, EMPLOC, DEPTNAME
+		FROM 	EMPLOYEE A
+		JOIN 	DEPARTMENT B USING (DEPTID)
+		WHERE 	EMPID = #{empid}
+	</select>
+	
+	<select id="selectwork" parameterType="model.domain.vo.EmployeeWorkDeptVO" resultType="model.domain.vo.EmployeeWorkDeptVO">
+
+		SELECT 	EMPID, EMPPWD, EMPNAME, EMPGRADE, EMPPHONE, EMPMAIL, EMPLOC, DEPTNAME, 
+	    		TO_CHAR(WORKDATE,'YYYY-MM-DD'), AMLOC, AMLOCDETAIL, PMLOC, PMLOCDETAIL
+		FROM 	EMPLOYEE A
+		JOIN 	DEPARTMENT B USING (DEPTID)
+		JOIN 	WORK C USING (EMPID) 
+		WHERE 	EMPID = #{empid}
+		AND 	WORKDATE = TO_CHAR(SYSDATE,'YYYY-MM-DD')
+	
+	</select>		
+		
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

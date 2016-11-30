@@ -6,6 +6,7 @@ import model.domain.vo.DepartmentVO;
 import model.domain.vo.DivisionVO;
 import model.domain.vo.EmployeeDepartmentVO;
 import model.domain.vo.EmployeeVO;
+import model.domain.vo.EmployeeWorkDeptVO;
 import model.domain.vo.FavoriteVO;
 import model.domain.vo.LocationlistVO;
 import model.domain.vo.MemberVO;
@@ -13,7 +14,7 @@ import model.domain.vo.WorkVO;
 
 public interface OracleDao {
 
-	////////////////////////////////////////////////////////////////////////////////////// �ӽ�
+	////////////////////////////////////////////////////////////////////////////////////// 占쌈쏙옙
 	public int insertRow(MemberVO member); 
 	public int updateRow(MemberVO member);
 	public int deleteRow(MemberVO member);	
@@ -29,10 +30,14 @@ public interface OracleDao {
 	public List<LocationlistVO> selectLoc();
 	public List<WorkVO> 		selectWork();
 	
-	//plusbutton 누르면 조직도 띄우기
+	//plusbutton �늻瑜대㈃ 議곗쭅�룄 �쓣�슦湲�
 	public List<EmployeeDepartmentVO> listRow();
-	//check하면 favorite 테이블에 insert
+	//check�븯硫� favorite �뀒�씠釉붿뿉 insert
 	public int addFavRow(String loginId, String valueArr);
 	
+	// mylist 
+	public int selectWorkRow(EmployeeWorkDeptVO user);	
+	public EmployeeWorkDeptVO mylistRow1(EmployeeWorkDeptVO user); 
+	public EmployeeWorkDeptVO mylistRow2(EmployeeWorkDeptVO user); 
 }
 

@@ -17,12 +17,13 @@ import org.springframework.web.bind.support.SessionStatus;
 import Service.UserServiceImpl;
 import model.domain.vo.EmployeeDepartmentVO;
 import model.domain.vo.EmployeeVO;
+import model.domain.vo.EmployeeWorkDeptVO;
 import model.domain.vo.FavoriteVO;
 import model.domain.vo.MemberVO;
 
 
 @Controller
-@SessionAttributes({"login", "cart"}) // 세션 작업이 필요한 경우 추가
+@SessionAttributes({"login", "myinfo"}) // 세션 작업이 필요한 경우 추가
 
 public class UserCtrl { // 업무 모듈에 메소드를 심음
 
@@ -51,6 +52,39 @@ public class UserCtrl { // 업무 모듈에 메소드를 심음
 		EmployeeVO user = service.loginEmp(employee);
 		model.addAttribute("login", user);	
 		
+		return "redirect:/user.inc";
+	}
+	
+	
+	@RequestMapping(value="/user.inc", method=RequestMethod.GET)
+	public String list(EmployeeWorkDeptVO useremp, HttpSession session, Model model) {
+		System.out.println("UserCtrl list");
+
+		// login session (empid) 붙이기
+		EmployeeVO user = (EmployeeVO)session.getAttribute("login");
+		System.out.println(user.getEmpid()); 		
+		EmployeeWorkDeptVO mylist = new EmployeeWorkDeptVO();
+		mylist.setEmpid(user.getEmpid());
+		
+		// work table validation, 있는지 없는지 확인
+		int work = service.selectwork(mylist);
+		System.out.println("select work table count: "+work);
+
+		// 1.  table empty, 근무 일정 비어있을 때
+		if(work==0) {
+			mylist = service.mylist1(mylist);
+			mylist.setAmloc(mylist.getEmploc()); // emploc 가져와서 ampoc, pmloc 채우기
+			mylist.setPmloc(mylist.getEmploc());
+			System.out.println("amloc, pmloc : "+mylist.getAmloc()+mylist.getPmloc());
+		}
+		
+		// 2. work table 입력된 경우 
+		else {
+			mylist = service.mylist2(mylist);
+			System.out.println("amloc, pmloc : "+mylist.getAmloc()+mylist.getPmloc());
+		}	
+		
+		model.addAttribute("myinfo", mylist);
 		return "list";
 	}
 	
@@ -65,6 +99,7 @@ public class UserCtrl { // 업무 모듈에 메소드를 심음
 
 	}
 
+	/*
 	@RequestMapping(value="/joinForm.inc", method=RequestMethod.GET) 
 	public String joinForm(MemberVO member) {
 		System.out.println("UserCtrl joinForm");
@@ -98,6 +133,7 @@ public class UserCtrl { // 업무 모듈에 메소드를 심음
 
 		return "redirect:/main.inc"; 
 	}
+	*/
 	
 
 	//�뵆�윭�뒪 踰꾪듉 �늻瑜대㈃ �씤�궗�� 由ъ뒪�듃 蹂댁뿬二쇨린

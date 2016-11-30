@@ -4,13 +4,13 @@ import java.sql.Date;
 
 public class WorkVO { // 테이블에 명세되어 있는 객체를 클래스화 
 
-	private Date workdate;
+	private String workdate;
 	private String empid, amloc, amlocdetail, pmloc, pmlocdetail ;
 	public WorkVO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public WorkVO(Date workdate, String empid, String amloc, String amlocdetail, String pmloc, String pmlocdetail) {
+	public WorkVO(String workdate, String empid, String amloc, String amlocdetail, String pmloc, String pmlocdetail) {
 		super();
 		this.workdate = workdate;
 		this.empid = empid;
@@ -19,10 +19,10 @@ public class WorkVO { // 테이블에 명세되어 있는 객체를 클래스화
 		this.pmloc = pmloc;
 		this.pmlocdetail = pmlocdetail;
 	}
-	public Date getWorkdate() {
+	public String getWorkdate() {
 		return workdate;
 	}
-	public void setWorkdate(Date workdate) {
+	public void setWorkdate(String workdate) {
 		this.workdate = workdate;
 	}
 	public String getEmpid() {

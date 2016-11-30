@@ -47,9 +47,9 @@
     </div>
     <div class="ms_menu_body__wrapper hide-menu">
         <ul>
-        	<li><a href="#"><img src="img/${login.empid}.png"></a></li>
-         	<li>${login.deptid} ${login.empname} 담당</li> 
-         	<li>${login.empid}</li>
+        	<li><a href="#"><img src="img/${myinfo.empid}.png"></a></li>
+         	<li>${myinfo.deptname} ${myinfo.empname} 담당</li> 
+         	<li>${myinfo.empid}</li>
             <li class="ms_menu__item"><i class="ms_menu__item-icon fa fa-circle-thin"></i> 나의 일정</li>
             <li class="ms_menu__item"><i class="ms_menu__item-icon fa fa-circle-thin"></i> 로그아웃</li>
         </ul>
@@ -81,9 +81,12 @@
 <!---------------------------------------------- 내 아이디 --------------------------------------------->
 <div align='center'>
 		   <ul>
-		   <li><a href="#"><img src="img/${login.empid}.png"></a></li>
-		   <li>${login.deptid} ${login.empname} 담당</li> 
-		   <li>${login.empid}</li>
+		   <li><a href="#"><img src="img/${myinfo.empid}.png"></a></li>
+		   <li>${myinfo.deptname} ${myinfo.empname} 담당</li> 
+		   <li>${myinfo.empid}</li>
+		   <li>오전 : ${myinfo.amloc}</li>
+		   <li>오후 : ${myinfo.pmloc}</li>
+		   <li>default : ${myinfo.emploc}</li>
 		   </ul>
 </div>
 <!--------------------------------------------------------------------------------------------------->
@@ -92,7 +95,7 @@
 			<div class="loginform" align='center'>
 
 				<c:if test="${login != null}">
-	    	<p>${login.empname}님 환영합니다.</p>
+	    	<p>${myinfo.empname}님 환영합니다.</p>
 	    	 <a href="logout.inc" class="btn btn-default" role="button">
 						로그아웃 </a>
 					<a href="updateForm.inc" class="btn btn-default" role="button">

@@ -11,6 +11,7 @@ import model.domain.vo.DepartmentVO;
 import model.domain.vo.DivisionVO;
 import model.domain.vo.EmployeeDepartmentVO;
 import model.domain.vo.EmployeeVO;
+import model.domain.vo.EmployeeWorkDeptVO;
 import model.domain.vo.FavoriteVO;
 import model.domain.vo.LocationlistVO;
 import model.domain.vo.MemberVO;
@@ -26,7 +27,7 @@ public class OracleDaoImpl implements OracleDao {
 	@Override
 	public MemberVO loginRow(MemberVO member) {
 		System.out.println("Dao loginRow");
-		return sqlSession.selectOne("member.login", member); // �ĺ���, �Ķ����. ��ü �ϳ��� ����. 
+		return sqlSession.selectOne("member.login", member); // 占식븝옙占쏙옙, 占식띰옙占쏙옙占�. 占쏙옙체 占싹놂옙占쏙옙 占쏙옙占쏙옙. 
 	}
 
 	@Override
@@ -110,6 +111,24 @@ public class OracleDaoImpl implements OracleDao {
 		return flag ; 
 	}
 
-
 	
+	///////////////////////////////////////////////////////// myDQM > mylist
+
+	@Override
+	public int selectWorkRow(EmployeeWorkDeptVO user) {
+		System.out.println("Dao selectWorkRow");
+		return sqlSession.selectOne("emp.countwork", user);
+	}
+
+	@Override
+	public EmployeeWorkDeptVO mylistRow1(EmployeeWorkDeptVO user) {
+		System.out.println("Dao mylistrow1");		
+		return sqlSession.selectOne("emp.selectemp", user);
+	}
+
+	@Override
+	public EmployeeWorkDeptVO mylistRow2(EmployeeWorkDeptVO user) {
+		System.out.println("Dao mylistrow2");		
+		return sqlSession.selectOne("emp.selectwork", user);
+	}	
 }
