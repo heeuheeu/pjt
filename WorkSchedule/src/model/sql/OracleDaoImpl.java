@@ -130,5 +130,7 @@ public class OracleDaoImpl implements OracleDao {
 	public EmployeeWorkDeptVO mylistRow2(EmployeeWorkDeptVO user) {
 		System.out.println("Dao mylistrow2");		
 		return sqlSession.selectOne("emp.selectwork", user);
-	}	
+	}
+
+
 }

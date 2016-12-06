@@ -1,7 +1,7 @@
 package model.domain.vo;
 
 
-public class EmployeeVO { // Å×ÀÌºí¿¡ ¸í¼¼µÇ¾î ÀÖ´Â °´Ã¼¸¦ Å¬·¡½ºÈ­ 
+public class EmployeeVO { // ï¿½ï¿½ï¿½Ìºï¿½ ï¿½ï¿½ï¿½Ç¾ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½Ã¼ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½È­ 
 
 	private String empid, emppwd, empname, empgrade, empphone, empmail, emploc, deptid;
 	

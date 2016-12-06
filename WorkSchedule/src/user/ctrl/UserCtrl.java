@@ -1,6 +1,9 @@
 package user.ctrl;
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -34,7 +37,7 @@ public class UserCtrl { // 업무 모듈에 메소드를 심음
 	@RequestMapping("/main.inc")
 	public String main() {
 		System.out.println("MainCrl main");
-		return "main"; 
+		return "intro"; 
 	}
 
 	/*@RequestMapping(value="/login.inc", method=RequestMethod.POST)
@@ -66,6 +69,13 @@ public class UserCtrl { // 업무 모듈에 메소드를 심음
 		EmployeeWorkDeptVO mylist = new EmployeeWorkDeptVO();
 		mylist.setEmpid(user.getEmpid());
 		
+		Calendar cal = Calendar.getInstance();
+		SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy:MM:dd");
+		String currdate = sdf1.format(cal.getTime());
+		System.out.println("<<<<<<<<<<<<<<<<<<<<<<currdate>>>>>>>>>>>>>>>>>>>>>"+currdate);
+		
+		mylist.setCurrdate(currdate);
+		
 		// work table validation, 있는지 없는지 확인
 		int work = service.selectwork(mylist);
 		System.out.println("select work table count: "+work);
@@ -85,8 +95,52 @@ public class UserCtrl { // 업무 모듈에 메소드를 심음
 		}	
 		
 		model.addAttribute("myinfo", mylist);
-		return "list";
+		
+		return "view";
 	}
+	
+	
+	//////////////////////////////////////////////////////////// 
+	@RequestMapping(value="/calDay.inc", method=RequestMethod.POST) 
+	public String prevDay(@RequestParam(value="currDate") String currdate, EmployeeWorkDeptVO useremp, HttpSession session, Model model) {
+		System.out.println("calDay Ctrl");
+		
+		// login session (empid) 붙이기
+				EmployeeVO user = (EmployeeVO)session.getAttribute("login");
+				System.out.println(user.getEmpid()); 		
+				EmployeeWorkDeptVO mylist = new EmployeeWorkDeptVO();
+				mylist.setEmpid(user.getEmpid());
+				
+				mylist.setCurrdate(currdate);
+				
+				// work table validation, 있는지 없는지 확인
+				int work = service.selectwork(mylist);
+				System.out.println("select work table count: "+work);
+
+				// 1.  table empty, 근무 일정 비어있을 때
+				if(work==0) {
+					mylist = service.mylist1(mylist);
+					mylist.setAmloc(mylist.getEmploc()); // emploc 가져와서 ampoc, pmloc 채우기
+					mylist.setPmloc(mylist.getEmploc());
+					System.out.println("amloc, pmloc : "+mylist.getAmloc()+mylist.getPmloc());
+				}
+				
+				// 2. work table 입력된 경우 
+				else {
+					mylist = service.mylist2(mylist);
+					System.out.println("amloc, pmloc : "+mylist.getAmloc()+mylist.getPmloc());
+				}	
+				
+				model.addAttribute("myinfo", mylist);
+				model.addAttribute("day", currdate);
+		
+		// 현재 페이지 날짜 심기
+		System.out.println("현재 페이지 날짜 :"+currdate);
+		return "viewOtherDay";
+	}
+	////////////////////////////////////////////////////////////////
+	
+	
 	
 	@RequestMapping(value="/logout.inc", method=RequestMethod.GET) // logout은 앵커 형식으로 받음. -> get 방식.
 	public String logout(SessionStatus status, HttpSession session) { //logout은 매개변수를 줄 필요 없음

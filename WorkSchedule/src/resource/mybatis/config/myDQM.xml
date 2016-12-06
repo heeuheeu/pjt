@@ -9,7 +9,7 @@
 	<select id="countwork" parameterType="model.domain.vo.EmployeeWorkDeptVO" resultType="int">
 		SELECT 	COUNT(*) 
 		FROM 	WORK 
-		WHERE 	EMPID = #{empid} AND WORKDATE = TO_CHAR(SYSDATE,'YYYY-MM-DD')
+		WHERE 	EMPID = #{empid} AND WORKDATE = <!-- TO_CHAR(SYSDATE,'YYYY-MM-DD') --> #{currdate}
 	</select>
 
 	<select id="selectemp" parameterType="model.domain.vo.EmployeeWorkDeptVO" resultType="model.domain.vo.EmployeeWorkDeptVO">
@@ -27,7 +27,7 @@
 		JOIN 	DEPARTMENT B USING (DEPTID)
 		JOIN 	WORK C USING (EMPID) 
 		WHERE 	EMPID = #{empid}
-		AND 	WORKDATE = TO_CHAR(SYSDATE,'YYYY-MM-DD')
+		AND 	WORKDATE = <!-- TO_CHAR(SYSDATE,'YYYY-MM-DD') --> #{currdate}
 	
 	</select>		
 		

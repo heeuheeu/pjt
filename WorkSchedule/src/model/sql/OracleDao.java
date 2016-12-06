@@ -39,5 +39,6 @@ public interface OracleDao {
 	public int selectWorkRow(EmployeeWorkDeptVO user);	
 	public EmployeeWorkDeptVO mylistRow1(EmployeeWorkDeptVO user); 
 	public EmployeeWorkDeptVO mylistRow2(EmployeeWorkDeptVO user); 
+	
 }
 

@@ -71,6 +71,6 @@ public class UserServiceImpl {
 		System.out.println("UserService mylist2");
 		return dao.mylistRow2(user); 
 	}
-		
+	
 	
 }

@@ -2,11 +2,12 @@ package model.domain.vo;
 
 import java.sql.Date;
 
-public class EmployeeWorkDeptVO { // Å×ÀÌºí¿¡ ¸í¼¼µÇ¾î ÀÖ´Â °´Ã¼¸¦ Å¬·¡½ºÈ­ 
+public class EmployeeWorkDeptVO { // ï¿½ï¿½ï¿½Ìºï¿½ ï¿½ï¿½ï¿½Ç¾ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½Ã¼ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½È­ 
 
 	private String empid, emppwd, empname, empgrade, empphone, empmail, emploc, deptid;
 	private String workdate;
 	private String amloc, amlocdetail, pmloc, pmlocdetail, deptname, divid;
+	private String currdate;
 
 	public EmployeeWorkDeptVO() {
 		super();
@@ -14,8 +15,8 @@ public class EmployeeWorkDeptVO { // Å×ÀÌºí¿¡ ¸í¼¼µÇ¾î ÀÖ´Â °´Ã¼¸¦ Å¬·¡½ºÈ­
 	}
 
 	public EmployeeWorkDeptVO(String empid, String emppwd, String empname, String empgrade, String empphone,
-			String empmail, String emploc, String deptid, String workdate, String amloc, String amlocdetail, String pmloc,
-			String pmlocdetail, String deptname, String divid) {
+			String empmail, String emploc, String deptid, String workdate, String amloc, String amlocdetail,
+			String pmloc, String pmlocdetail, String deptname, String divid, String currdate) {
 		super();
 		this.empid = empid;
 		this.emppwd = emppwd;
@@ -32,6 +33,7 @@ public class EmployeeWorkDeptVO { // Å×ÀÌºí¿¡ ¸í¼¼µÇ¾î ÀÖ´Â °´Ã¼¸¦ Å¬·¡½ºÈ­
 		this.pmlocdetail = pmlocdetail;
 		this.deptname = deptname;
 		this.divid = divid;
+		this.currdate = currdate;
 	}
 
 	public String getEmpid() {
@@ -154,13 +156,15 @@ public class EmployeeWorkDeptVO { // Å×ÀÌºí¿¡ ¸í¼¼µÇ¾î ÀÖ´Â °´Ã¼¸¦ Å¬·¡½ºÈ­
 		this.divid = divid;
 	}
 
-	@Override
-	public String toString() {
-		return "EmployeeWorkDeptVO [empid=" + empid + ", emppwd=" + emppwd + ", empname=" + empname + ", empgrade="
-				+ empgrade + ", empphone=" + empphone + ", empmail=" + empmail + ", emploc=" + emploc + ", deptid="
-				+ deptid + ", workdate=" + workdate + ", amloc=" + amloc + ", amlocdetail=" + amlocdetail + ", pmloc="
-				+ pmloc + ", pmlocdetail=" + pmlocdetail + ", deptname=" + deptname + ", divid=" + divid + "]";
-	} 
+	public String getCurrdate() {
+		return currdate;
+	}
+
+	public void setCurrdate(String currdate) {
+		this.currdate = currdate;
+	}
+
+	
 	
 	
 

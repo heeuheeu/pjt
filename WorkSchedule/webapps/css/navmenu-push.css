@@ -1,0 +1,28 @@
+html, body {
+  height: 100%;
+}
+
+body {
+  padding: 50px 0 0 0;
+}
+
+.navbar-toggle {
+  float: left;
+  margin-left: 15px;
+}
+
+@media (min-width: 0) {
+  .navbar-toggle {
+    display: block; /* force showing the toggle */
+  }
+}
+
+
+}
+
+/* .navmenu-fixed-right {
+    left: auto !important;
+	}
+	
+body.canvas-sliding, body.canvas-slid {left: auto !important;}
+ */

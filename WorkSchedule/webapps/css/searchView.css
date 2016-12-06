@@ -1,0 +1,78 @@
+/*상단*/
+section#search-bar{padding: 15px; word-spacing: -6px;}
+section#search-bar input[type="text"]{display:inline-block; border-right: 0;vertical-align: top;margin-bottom: 5px; width: 80%; line-height: 35px; height: 35px; border:solid 1px #ddd;;}
+input[type="submit"]{display: inline-block; width: 20%; vertical-align: top;background:#d3492c; border: 0; color: #fff; line-height:35px; height: 35px; }
+
+.path{margin: 10px 0;}
+.path div{display: inline-block; text-align: left;}
+.path div span{ margin: 0 8px;}
+.path div a{font-size: 13px; display: inline-block; border: solid 1px #ddd; color: #222; padding: 5px 8px;}
+
+
+/*아이템*/
+section#list-item{background: #ebebeb; padding:20px 15px; overflow: auto;}
+
+#list-item input[type="checkbox"]{-webkit-appearance:none ;-moz-appearance: none;appearance: none;}
+#list-item .all-check{display:block; text-align: right; margin-bottom: 10px; }
+#list-item .all-check input[type="checkbox"]{display: inline-block; vertical-align: middle;width: 20px; height: 20px; border-radius: 0; border: solid 1px #999; background: #fff;} 
+#list-item .all-check label{vertical-align: middle;margin-left: 5px;} 
+
+
+#list-item article{float: left; width: 100%; background: #fff; border-radius: 3px;margin-bottom: 20px;}
+#list-item article .item-lay{display: table; padding: 20px; -webkit-box-shadow: 2px 2px 10px 0px rgba(0,0,0,0.2);
+-moz-box-shadow: 2px 2px 10px 0px rgba(0,0,0,0.2);
+box-shadow: 2px 2px 10px 0px rgba(0,0,0,0.2);}
+#list-item article .profile{display: table-cell; width: 20%;text-align: left; margin-bottom: 10px;vertical-align: middle;
+}
+#list-item article .profile img{width: 100%; border-radius: 50%; border: solid 1px #ddd}
+#list-item article .name{display: table-cell;width: auto; text-align: left; padding-left: 20px;vertical-align: middle;}
+
+
+
+input[type=checkbox] {
+ display:none;   
+ vertical-align: middle;
+}
+
+/* 
+.all-check:before{
+ content: "";
+ display: inline-block;
+ vertical-align: middle;
+ width: 50px;
+ height: 50px;
+ background-size: contain;
+ background: url('../img/totalCheck.png');
+} 
+
+input[type=checkbox]:checked + .all-check:before {
+ background: url('../img/redCheck.PNG');
+ background-size: contain;
+ width: 30px;
+ height: 30px;
+ vertical-align: middle;
+}  */
+
+.checkbox:before {
+ content: "";
+ display: inline-block;
+ vertical-align: middle;
+ width: 35px;
+ height: 35px;
+ margin-top: 20px;
+ background-size: contain;
+ background: url('../img/grayCheck.PNG');
+ cursor: pointer; 
+}
+
+
+
+input[type=checkbox]:checked + .checkbox:before {
+ background: url('../img/redCheck.PNG');
+ background-size: contain;
+ width: 35px;
+ height: 35px;
+ vertical-align: middle;
+ margin-top: 20px;
+}
+

@@ -1,0 +1,22 @@
+body{background: #ebebeb; position: relative;}
+
+/*상단*/
+section#top-bar{background: #fff;}
+.date{padding: 20px 0;  text-align: center;}
+.date a{display: inline-block; margin:0 10px; vertical-align: middle;}
+.date .date-text{display: inline-block;vertical-align: middle;}
+
+.group-title{margin-top: 10px; font-weight: bold; font-size: 20px;}
+
+/*아이템*/
+section#card-item{background: #ebebeb; padding:30px 15px; overflow: auto;}
+#card-item article{float: left; width: 20%; border-radius: 3px;  margin-bottom: 20px;}
+#card-item article .item-lay{padding: 20px; margin-right: 10px;}
+#card-item article .item-lay.status1{background: #fff;}
+#card-item article .item-lay.status2{background: #c5d1e8;}
+#card-item article .item-lay.status3{background: #eccece;}
+#card-item article .profile{text-align: center; margin-bottom: 10px;}
+#card-item article .profile img{width: 80%; border-radius: 50%;}
+#card-item article .name{text-align: center; padding:5px 0; margin-bottom: 10px;border-bottom:solid 1px #cd4c2c;}
+#card-item article .status{text-align: center;}
+#card-item article .status div{margin-bottom: 5px;}

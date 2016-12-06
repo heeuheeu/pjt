@@ -1,0 +1,26 @@
+.popup{background: rgba(0,0,0,0.5); width: 100%; height: 100%; position: absolute; z-index: 999;}
+
+.popup-content{background: #fff; width: 70%; margin: auto; padding:10px;}
+.popup-content .btn {float: left;}
+.popup-content .btn .close-btn{float: right;}
+.popup-content .user-info{}
+.popup-content .user-info .profile{text-align: center; margin-bottom: 10px;}
+.popup-content .user-info .profile img{width: 50%; border-radius: 50%; border: solid 1px #ddd}
+.popup-content .user-info .name{text-align: center; margin-bottom: 10px;}
+.popup-content .user-contact{padding: 10px;border-bottom:solid 1px #ddd;text-align: center;}
+.popup-content .user-contact a{display: inline-block;margin:0 10px;}
+
+.popup-content .date{padding: 10px 0; margin-bottom: 10px;text-align: center;}
+.popup-content .date a{display: inline-block; margin:0 10px; vertical-align: middle;}
+.popup-content .date a img{width:10px; vertical-align: middle;}
+.popup-content .date .date-text{display: inline-block;vertical-align: middle; font-size: 14px;}
+
+.popup-content .ampm{display: table;width: 100%; padding-bottom: 20px;border-bottom:solid 1px #ddd;}
+.popup-content .am{display: table-cell;width: 50%; border-right: solid 1px #ddd; padding: 0 10px; text-align: center;}
+.popup-content .am span{display: inline-block; background: #3e3f44; color: #fff; margin-bottom: 10px;border-radius: 3px; font-size: 12px; padding: 2px 20px;}
+.popup-content .am b{display: block; font-weight: bold; font-size: 16px;}
+.popup-content .am font{display: block; font-size: 12px; color: #888;}
+.popup-content .pm{display: table-cell;width: 50%;  padding: 0 10px; text-align: center;}
+.popup-content .pm span{display: inline-block; background: #c94c30; color: #fff; margin-bottom: 10px;border-radius: 3px; font-size: 12px; padding: 2px 20px;}
+.popup-content .pm b{display: block; font-weight: bold; font-size: 16px;}
+.popup-content .pm font{display: block; font-size: 12px; color: #888;}
