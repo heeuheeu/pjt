@@ -49,7 +49,7 @@
 			</c:forEach>
 		</table>
 		
-		<a href="favorite.inc" class="btn btn-default" role="button" id="addBtn">즐겨찾기 추가하기</a>
+		<a href="addfavorite.inc" class="btn btn-default" role="button" id="addBtn">즐겨찾기 추가하기</a>
 	</form>
 	
 	<script
@@ -84,7 +84,7 @@
 			});
 			
 			$.ajax({
-				url: "favorite.inc",
+				url: "addfavorite.inc",
 				type: "post",
 				dataType: "text",
 				data: {

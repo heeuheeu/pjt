@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import model.domain.vo.DepartmentVO;
 import model.domain.vo.DivisionVO;
 import model.domain.vo.EmployeeDepartmentVO;
+import model.domain.vo.EmployeeFavWorkDeptVO;
 import model.domain.vo.EmployeeVO;
 import model.domain.vo.EmployeeWorkDeptVO;
 import model.domain.vo.FavoriteVO;
@@ -27,7 +28,7 @@ public class OracleDaoImpl implements OracleDao {
 	@Override
 	public MemberVO loginRow(MemberVO member) {
 		System.out.println("Dao loginRow");
-		return sqlSession.selectOne("member.login", member); // 占식븝옙占쏙옙, 占식띰옙占쏙옙占�. 占쏙옙체 占싹놂옙占쏙옙 占쏙옙占쏙옙. 
+		return sqlSession.selectOne("member.login", member); 
 	}
 
 	@Override
@@ -132,5 +133,10 @@ public class OracleDaoImpl implements OracleDao {
 		return sqlSession.selectOne("emp.selectwork", user);
 	}
 
-
+	@Override
+	public List<EmployeeFavWorkDeptVO> selectFavRow(EmployeeVO user) {
+		System.out.println("Dao selectFavRow");		
+		sqlSession.selectList("emp.selectfav", user);
+		return sqlSession.selectList("emp.selectfavlist", user);
+	}	
 }

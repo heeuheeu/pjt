@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<html >
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link href="./css/reset.css" rel="stylesheet" type="text/css">
@@ -94,120 +97,25 @@
 			</div>
 		</article>
 	
+	  <c:forEach items="${myfav}" var="fav">
 		<article>
 			<div class="item-lay">
 				<div class="profile" >
 					<img src="img/hyun.PNG" data-toggle="modal" data-target="#myModal" />
 				</div>
-				<div class="name">손정현 상무</div>
+				<div class="name">${fav.empname} ${fav.empgrade}</div>
 				<div class="ampm">
 					<div class="am">
-						<span>AM</span>성수
+						<span>AM</span>${fav.amloc}
 					</div>
 					<div class="pm">
-						<span>PM</span>본사 10F
+						<span>PM</span>${fav.pmloc}
 					</div>
 				</div>
 			</div>
 		</article>
-
-
-		<article>
-			<div class="item-lay">
-				<div class="profile">
-					<img src="img/min.PNG" />
-				</div>
-				<div class="name">한훈민 팀장</div>
-				<div class="ampm">
-					<div class="am">
-						<span>AM</span>본사 10F
-					</div>
-					<div class="pm">
-						<span>PM</span>본사 10F
-					</div>
-				</div>
-			</div>
-		</article>
-		<article>
-			<div class="item-lay">
-				<div class="profile">
-					<img src="img/chul.PNG" />
-				</div>
-				<div class="name">손승철 담당</div>
-				<div class="ampm">
-					<div class="am">
-						<span>AM</span>본사 10F
-					</div>
-					<div class="pm">
-						<span>PM</span>본사 10F
-					</div>
-				</div>
-			</div>
-		</article>
-		<article>
-			<div class="item-lay">
-				<div class="profile">
-					<img src="img/eun.PNG" />
-				</div>
-				<div class="name">박정은 담당</div>
-				<div class="ampm">
-					<div class="am">
-						<span>AM</span>성수
-					</div>
-					<div class="pm">
-						<span>PM</span>성수
-					</div>
-				</div>
-			</div>
-		</article>
-		<article>
-			<div class="item-lay">
-				<div class="profile">
-					<img src="img/ah.png" />
-				</div>
-				<div class="name">오상아 담당</div>
-				<div class="ampm">
-					<div class="am">
-						<span>AM</span>본사 10F
-					</div>
-					<div class="pm">
-						<span>PM</span>메사빌딩
-					</div>
-				</div>
-			</div>
-		</article>
-		<article>
-			<div class="item-lay">
-				<div class="profile">
-					<img src="img/hwan.png" />
-				</div>
-				<div class="name">김재환 담당</div>
-				<div class="ampm">
-					<div class="am">
-						<span>AM</span>본사 10F
-					</div>
-					<div class="pm">
-						<span>PM</span>본사 10F
-					</div>
-				</div>
-			</div>
-		</article>
-		<article>
-			<div class="item-lay">
-				<div class="profile">
-					<img src="img/man.png" />
-				</div>
-				<div class="name">안석만 담당</div>
-				<div class="ampm">
-					<div class="am">
-						<span>AM</span>본사 10F
-					</div>
-					<div class="pm">
-						<span>PM</span>본사 10F
-					</div>
-				</div>
-			</div>
-		</article>
+	  </c:forEach>
+	  
 	</section>
 	<!--카드-->
 

@@ -5,6 +5,7 @@ import java.util.List;
 import model.domain.vo.DepartmentVO;
 import model.domain.vo.DivisionVO;
 import model.domain.vo.EmployeeDepartmentVO;
+import model.domain.vo.EmployeeFavWorkDeptVO;
 import model.domain.vo.EmployeeVO;
 import model.domain.vo.EmployeeWorkDeptVO;
 import model.domain.vo.FavoriteVO;
@@ -14,7 +15,7 @@ import model.domain.vo.WorkVO;
 
 public interface OracleDao {
 
-	////////////////////////////////////////////////////////////////////////////////////// 占쌈쏙옙
+	////////////////////////////////////////////////////////////////////////////////////// �뜝�뙂�룞�삕
 	public int insertRow(MemberVO member); 
 	public int updateRow(MemberVO member);
 	public int deleteRow(MemberVO member);	
@@ -30,15 +31,15 @@ public interface OracleDao {
 	public List<LocationlistVO> selectLoc();
 	public List<WorkVO> 		selectWork();
 	
-	//plusbutton �늻瑜대㈃ 議곗쭅�룄 �쓣�슦湲�
+	//plusbutton 占쎈듇�몴���늺 鈺곌퀣彛낉옙猷� 占쎌뱽占쎌뒭疫뀐옙
 	public List<EmployeeDepartmentVO> listRow();
-	//check�븯硫� favorite �뀒�씠釉붿뿉 insert
+	//check占쎈릭筌롳옙 favorite 占쎈�믭옙�뵠�뇡遺용퓠 insert
 	public int addFavRow(String loginId, String valueArr);
 	
 	// mylist 
-	public int selectWorkRow(EmployeeWorkDeptVO user);	
-	public EmployeeWorkDeptVO mylistRow1(EmployeeWorkDeptVO user); 
-	public EmployeeWorkDeptVO mylistRow2(EmployeeWorkDeptVO user); 
-	
+	public int 							selectWorkRow(EmployeeWorkDeptVO user);	
+	public EmployeeWorkDeptVO 			mylistRow1(EmployeeWorkDeptVO user); 
+	public EmployeeWorkDeptVO 			mylistRow2(EmployeeWorkDeptVO user); 
+	public List<EmployeeFavWorkDeptVO> 	selectFavRow(EmployeeVO user);
 }
 

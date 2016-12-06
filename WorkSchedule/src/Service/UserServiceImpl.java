@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import model.domain.vo.EmployeeDepartmentVO;
+import model.domain.vo.EmployeeFavWorkDeptVO;
 import model.domain.vo.EmployeeVO;
 import model.domain.vo.EmployeeWorkDeptVO;
 import model.domain.vo.MemberVO;
@@ -16,7 +17,6 @@ import model.sql.OracleDaoImpl;
 @Service("UserService")
 public class UserServiceImpl {
 
-	// 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙占쏙옙占싱쇽옙 占쏙옙占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙求占� 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙 占쏙옙占쏙옙 占쏙옙占�. 占쏙옙占쏙옙占쏙옙占쏙옙 占싹뱄옙 占쌘뱄옙 占쏙옙占쏙옙.
 	@Resource(name="UserDao")
 	private OracleDao dao;
 	
@@ -35,13 +35,13 @@ public class UserServiceImpl {
 		return dao.updateRow(member);
 	}
 
-	/////////////////////////////////////////////////////// 占쏙옙占쏙옙占쏙옙
+	/////////////////////////////////////////////////////// �뜝�룞�삕�뜝�룞�삕�뜝�룞�삕
 	public EmployeeVO loginEmp(EmployeeVO employee) {
 		System.out.println("UserService login");
 		return dao.loginEmp(employee);	
 	}
 	
-	//plus踰꾪듉 �늻瑜대㈃ 議곗쭅�룄 �쓣�슦湲�
+	//plus甕곌쑵�뱣 占쎈듇�몴���늺 鈺곌퀣彛낉옙猷� 占쎌뱽占쎌뒭疫뀐옙
 	public List<EmployeeDepartmentVO> list() {
 		System.out.println("USER SERVICE LIST");
 		return dao.listRow();
@@ -56,7 +56,7 @@ public class UserServiceImpl {
 	
 	/////////////////////////////////////////////////////// About user
 	
-	public int selectwork(EmployeeWorkDeptVO user) { // work table에 값 있는지 찾기
+	public int selectwork(EmployeeWorkDeptVO user) { // work table�뿉 媛� �엳�뒗吏� 李얘린
 		System.out.println("UserService mylist");
 		return dao.selectWorkRow(user); 
 	}
@@ -72,5 +72,12 @@ public class UserServiceImpl {
 		return dao.mylistRow2(user); 
 	}
 	
+	
+	/////////////////////////////////////////////////////// About favorite
+
+	public List<EmployeeFavWorkDeptVO> selectempfav(EmployeeVO user) {
+		System.out.println("UserService selectempfav");
+		return dao.selectFavRow(user);
+}
 	
 }

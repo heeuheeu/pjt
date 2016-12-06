@@ -22,15 +22,43 @@
 	<select id="selectwork" parameterType="model.domain.vo.EmployeeWorkDeptVO" resultType="model.domain.vo.EmployeeWorkDeptVO">
 
 		SELECT 	EMPID, EMPPWD, EMPNAME, EMPGRADE, EMPPHONE, EMPMAIL, EMPLOC, DEPTNAME, 
-	    		TO_CHAR(WORKDATE,'YYYY-MM-DD'), AMLOC, AMLOCDETAIL, PMLOC, PMLOCDETAIL
+	    		TO_CHAR(WORKDATE,'YYYY-MM-DD') AS WORKDATE, AMLOC, AMLOCDETAIL, PMLOC, PMLOCDETAIL
 		FROM 	EMPLOYEE A
 		JOIN 	DEPARTMENT B USING (DEPTID)
 		JOIN 	WORK C USING (EMPID) 
 		WHERE 	EMPID = #{empid}
-		AND 	WORKDATE = <!-- TO_CHAR(SYSDATE,'YYYY-MM-DD') --> #{currdate}
-	
+		AND 	WORKDATE = <!-- TO_CHAR(SYSDATE,'YYYY-MM-DD') --> #{currdate}	
 	</select>		
-		
+
+	<select id="selectfav" parameterType="model.domain.vo.EmployeeVO" resultType="model.domain.vo.EmployeeFavWorkDeptVO">
+		SELECT 	EMPIDFAV
+		FROM 	FAVORITE 			
+		WHERE 	EMPID = #{empid}
+	</select>
+	
+	<select id="selectfavlist" parameterType="model.domain.vo.EmployeeVO" resultType="model.domain.vo.EmployeeFavWorkDeptVO">
+		SELECT 	A.EMPID 							AS EMPID, 
+				A.EMPPWD 							AS EMPPWD, 
+				A.EMPNAME 							AS EMPNAME, 
+				A.EMPGRADE							AS EMPGRADE, 
+				A.EMPPHONE							AS EMPPHONE, 
+				A.EMPMAIL							AS EMPMAIL, 
+				A.EMPLOC							AS EMPLOC, 
+				B.DEPTNAME							AS DEPTNAME, 
+				TO_CHAR(C.WORKDATE,'YYYY-MM-DD')	AS WORKDATE, 
+				C.AMLOC								AS AMLOC, 
+				C.AMLOCDETAIL						AS AMLOCDETAIL,
+				C.PMLOC								AS PMLOC, 
+				C.PMLOCDETAIL						AS PMLOCDETAIL
+		FROM 	EMPLOYEE A 		
+		JOIN 	DEPARTMENT B 	ON (A.DEPTID = B.DEPTID)
+		JOIN 	WORK C 			ON (A.EMPID	 = C.EMPID) 
+		WHERE 	A.EMPID 		IN (SELECT 	EMPIDFAV
+									FROM 	FAVORITE 
+									WHERE 	EMPID=#{empid} )					
+		AND 	TO_CHAR(C.WORKDATE,'YYYY-MM-DD') = TO_CHAR(SYSDATE,'YYYY-MM-DD')
+	</select>		
+				
 </mapper>
 
 
