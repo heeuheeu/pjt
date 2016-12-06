@@ -30,13 +30,13 @@
 		AND 	WORKDATE = <!-- TO_CHAR(SYSDATE,'YYYY-MM-DD') --> #{currdate}	
 	</select>		
 
-	<select id="selectfav" parameterType="model.domain.vo.EmployeeVO" resultType="model.domain.vo.EmployeeFavWorkDeptVO">
+	<select id="selectfav" parameterType="model.domain.vo.EmployeeWorkDeptVO" resultType="model.domain.vo.EmployeeFavWorkDeptVO">
 		SELECT 	EMPIDFAV
 		FROM 	FAVORITE 			
 		WHERE 	EMPID = #{empid}
 	</select>
 	
-	<select id="selectfavlist" parameterType="model.domain.vo.EmployeeVO" resultType="model.domain.vo.EmployeeFavWorkDeptVO">
+	<select id="selectfavlist" parameterType="model.domain.vo.EmployeeWorkDeptVO" resultType="model.domain.vo.EmployeeFavWorkDeptVO">
 		SELECT 	A.EMPID 							AS EMPID, 
 				A.EMPPWD 							AS EMPPWD, 
 				A.EMPNAME 							AS EMPNAME, 
@@ -56,7 +56,7 @@
 		WHERE 	A.EMPID 		IN (SELECT 	EMPIDFAV
 									FROM 	FAVORITE 
 									WHERE 	EMPID=#{empid} )					
-		AND 	TO_CHAR(C.WORKDATE,'YYYY-MM-DD') = TO_CHAR(SYSDATE,'YYYY-MM-DD')
+		AND 	C.WORKDATE = #{currdate}
 	</select>		
 				
 </mapper>

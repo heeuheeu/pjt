@@ -23,7 +23,6 @@ import model.domain.vo.EmployeeFavWorkDeptVO;
 import model.domain.vo.EmployeeVO;
 import model.domain.vo.EmployeeWorkDeptVO;
 import model.domain.vo.FavoriteVO;
-import model.domain.vo.MemberVO;
 
 
 @Controller
@@ -51,36 +50,33 @@ public class UserCtrl {
 	}
 		
 	@RequestMapping(value="/user.inc", method=RequestMethod.GET)
-	public String list(EmployeeWorkDeptVO useremp, HttpSession session, Model model) {
+	public String userlist(EmployeeWorkDeptVO useremp, HttpSession session, Model model) {
 		System.out.println("UserCtrl list");
 
-		// login session (empid) 遺숈씠湲�
-		EmployeeVO user = (EmployeeVO)session.getAttribute("login");
-		System.out.println(user.getEmpid()); 		
+		// login session (empid)
+		EmployeeVO user = (EmployeeVO)session.getAttribute("login");		
 		EmployeeWorkDeptVO mylist = new EmployeeWorkDeptVO();
 		mylist.setEmpid(user.getEmpid());
 		
-		///////////////// Date setting
+		// Date setting
 		Calendar cal = Calendar.getInstance();
-		SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy:MM:dd");
+		SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
 		String currdate = sdf1.format(cal.getTime());
 		System.out.println("<<<<<<<<<<<<<<<<<<<<<<currdate>>>>>>>>>>>>>>>>>>>>>"+currdate);
-		
 		mylist.setCurrdate(currdate);
 		
 		// work table validation
 		int work = service.selectwork(mylist);
 		System.out.println("select work table count: "+work);
 
-		// 1.  table empty, 洹쇰Т �씪�젙 鍮꾩뼱�엳�쓣 �븣
+		// 1.  table empty, 
 		if(work==0) {
 			mylist = service.mylist1(mylist);
-			mylist.setAmloc(mylist.getEmploc()); // emploc 媛��졇���꽌 ampoc, pmloc 梨꾩슦湲�
+			mylist.setAmloc(mylist.getEmploc()); 
 			mylist.setPmloc(mylist.getEmploc());
-			System.out.println("amloc, pmloc : "+mylist.getAmloc()+mylist.getPmloc());
 		}
 		
-		// 2. work table �엯�젰�맂 寃쎌슦 
+		// 2. work table exist
 		else {
 			mylist = service.mylist2(mylist);
 			System.out.println("amloc, pmloc : "+mylist.getAmloc()+mylist.getPmloc());
@@ -95,12 +91,21 @@ public class UserCtrl {
 	public String favoritelist(ArrayList<EmployeeFavWorkDeptVO> favemp, HttpSession session, Model model) {
 		System.out.println("UserCtrl favoritelist");
 
-		// login session (empid) 遺숈씠湲�
-		EmployeeVO user = (EmployeeVO)session.getAttribute("login");
-		System.out.println(user.getEmpid()); 		
-
+		// login session (empid) 
+		EmployeeVO user = (EmployeeVO)session.getAttribute("login");		
+		EmployeeWorkDeptVO list = new EmployeeWorkDeptVO();
+		list.setEmpid(user.getEmpid());
+		System.out.println(list.getEmpid());
+		
+		// Date setting
+		Calendar cal = Calendar.getInstance();
+		SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
+		String currdate = sdf1.format(cal.getTime());
+		System.out.println("<<<<<<<<<<<<<<<<<<<<<<currdate>>>>>>>>>>>>>>>>>>>>>"+currdate);
+		list.setCurrdate(currdate);
+		
 		List<EmployeeFavWorkDeptVO> favlist = new ArrayList<EmployeeFavWorkDeptVO>();
-		favlist = service.selectempfav(user);
+		favlist = service.selectempfav(list);
 		
 		for(int i=0 ; i<favlist.size() ; i++) {
 			System.out.println(favlist.get(i));			
@@ -112,58 +117,62 @@ public class UserCtrl {
 		
 	
 	//////////////////////////////////////////////////////////// 
-	@RequestMapping(value="/calDay.inc", method=RequestMethod.POST) 
-	public String prevDay(@RequestParam(value="currDate") String currdate, EmployeeWorkDeptVO useremp, ArrayList<EmployeeFavWorkDeptVO> favemp, HttpSession session, Model model) {
-		System.out.println("calDay Ctrl");
-		
+	@RequestMapping(value="/calDay.inc") 
+	public String userlist2(@RequestParam(value="currDate") String currdate, EmployeeWorkDeptVO useremp, HttpSession session, Model model) {
+		System.out.println("UserCtrl userlist2 calDay.inc");
+		System.out.println(currdate);
 		// login session (empid) 
-				EmployeeVO user = (EmployeeVO)session.getAttribute("login");
-				System.out.println(user.getEmpid()); 						
+		EmployeeVO user = (EmployeeVO)session.getAttribute("login");						
+		EmployeeWorkDeptVO mylist = new EmployeeWorkDeptVO();
 				
-				////////////////////////////////////////////////////////////////////////////////mylist reload
-				EmployeeWorkDeptVO mylist = new EmployeeWorkDeptVO();
-				mylist.setEmpid(user.getEmpid());
-				mylist.setCurrdate(currdate);
+		//////////////////////////////////////////////////////////////////////////////// mylist reload
+		mylist.setEmpid(user.getEmpid());
+		mylist.setCurrdate(currdate);
 				
-				// work table validation
-				int work = service.selectwork(mylist);
-				System.out.println("select work table count: "+work);
+		///////////////////////////////////////////////////////////////////////////////// 수정 필요
+		// work table validation
+		int work = service.selectwork(mylist);
 
-				// 1.  table empty, 
-				if(work==0) {
-					mylist = service.mylist1(mylist);
-					mylist.setAmloc(mylist.getEmploc()); // emploc 媛��졇���꽌 ampoc, pmloc 梨꾩슦湲�
-					mylist.setPmloc(mylist.getEmploc());
-					System.out.println("amloc, pmloc : "+mylist.getAmloc()+mylist.getPmloc());
-				}
+		// 1.  table empty, 
+		if(work==0) {
+			mylist = service.mylist1(mylist);
+			mylist.setAmloc(mylist.getEmploc());
+			mylist.setPmloc(mylist.getEmploc());
+		}
 				
-				// 2. work table �엯�젰�맂 寃쎌슦 
-				else {
-					mylist = service.mylist2(mylist);
-					System.out.println("amloc, pmloc : "+mylist.getAmloc()+mylist.getPmloc());
-				}	
-				
-				//////////////////////////////////////////////////////////////////////////////// favorite reload
-				
-				List<EmployeeFavWorkDeptVO> favlist = new ArrayList<EmployeeFavWorkDeptVO>();
-				favlist = service.selectempfav(user);
-				
-				for(int i=0 ; i<favlist.size() ; i++) {
-					System.out.println(favlist.get(i));			
-				}
-				
-				////////////////////////////////////////////////////////////////////////////////
+		// 2. work table exist
+		else {
+			mylist = service.mylist2(mylist);
+		}	
+					
+		model.addAttribute("myinfo", mylist);
+		model.addAttribute("day", currdate);
 
-				model.addAttribute("myinfo", mylist);
-				model.addAttribute("day", currdate);
-				model.addAttribute("myfav", favlist);
-				
-		// �쁽�옱 �럹�씠吏� �궇吏� �떖湲�
-		System.out.println("�쁽�옱 �럹�씠吏� �궇吏� :"+currdate);
 		return "viewOtherDay";
 	}
-	////////////////////////////////////////////////////////////////
+	
+	
+	@RequestMapping(value="/calDayfav.inc") 
+	public String favoritelist2(@RequestParam(value="currDate") String currdate, ArrayList<EmployeeFavWorkDeptVO> favemp, HttpSession session, Model model) {
+		System.out.println("UserCtrl favoritelist2");
 
+		// login session (empid) 
+		EmployeeVO user = (EmployeeVO)session.getAttribute("login");		
+		EmployeeWorkDeptVO list = new EmployeeWorkDeptVO();
+		list.setEmpid(user.getEmpid());
+		list.setCurrdate(currdate);
+		
+		List<EmployeeFavWorkDeptVO> favlist = new ArrayList<EmployeeFavWorkDeptVO>();
+		favlist = service.selectempfav(list); 
+		
+		for(int i=0 ; i<favlist.size() ; i++) {
+			System.out.println(favlist.get(i));			
+		}
+		
+		model.addAttribute("myfav", favlist);
+		return "viewOtherDay";
+	}
+	
 	
 	@RequestMapping(value="/logout.inc", method=RequestMethod.GET) 
 	public String logout(SessionStatus status, HttpSession session) { 

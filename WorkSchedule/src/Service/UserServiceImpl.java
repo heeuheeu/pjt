@@ -10,30 +10,13 @@ import model.domain.vo.EmployeeDepartmentVO;
 import model.domain.vo.EmployeeFavWorkDeptVO;
 import model.domain.vo.EmployeeVO;
 import model.domain.vo.EmployeeWorkDeptVO;
-import model.domain.vo.MemberVO;
 import model.sql.OracleDao;
-import model.sql.OracleDaoImpl;
 
 @Service("UserService")
 public class UserServiceImpl {
 
 	@Resource(name="UserDao")
 	private OracleDao dao;
-	
-	public MemberVO login(MemberVO member) {
-		System.out.println("UserService login");
-		return dao.loginRow(member);	
-	}
-		
-	public int join(MemberVO member) {
-		System.out.println("UserService join");
-		return dao.insertRow(member);
-	}
-	
-	public int update(MemberVO member) {
-		System.out.println("UserService update");
-		return dao.updateRow(member);
-	}
 
 	/////////////////////////////////////////////////////// �뜝�룞�삕�뜝�룞�삕�뜝�룞�삕
 	public EmployeeVO loginEmp(EmployeeVO employee) {
@@ -75,7 +58,7 @@ public class UserServiceImpl {
 	
 	/////////////////////////////////////////////////////// About favorite
 
-	public List<EmployeeFavWorkDeptVO> selectempfav(EmployeeVO user) {
+	public List<EmployeeFavWorkDeptVO> selectempfav(EmployeeWorkDeptVO user) {
 		System.out.println("UserService selectempfav");
 		return dao.selectFavRow(user);
 }

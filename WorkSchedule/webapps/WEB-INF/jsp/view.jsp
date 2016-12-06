@@ -7,6 +7,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link href="./css/reset.css" rel="stylesheet" type="text/css">
+    <link href="./css/listView.css" rel="stylesheet" type="text/css">
     <link href="./css/cardView.css" rel="stylesheet" type="text/css">
     <link href="./css/popup.css" rel="stylesheet" type="text/css">
         <!-- Bootstrap core CSS -->
@@ -16,13 +17,14 @@
 
     <!-- Custom styles for this template -->
     <link href="./css/navmenu-push.css" rel="stylesheet">
+
     
     <style>
 
 		.modal-header {
 		    height: 40px;
 		}
-		
+
 	</style>
     
   </head>
@@ -47,7 +49,6 @@
 
       </div>
     </div>
-      
 	
     <div class="navbar navbar-default navbar-fixed-top" style="background-color: #3e3f44; text-align: center">
       <button type="button" class="navbar-toggle" data-toggle="offcanvas" data-target=".navmenu" data-canvas="body">
@@ -57,37 +58,46 @@
       </button>
       <a class="navbar-brand" href="cardView.jsp" style="color: white; margin-left: 60px">SSG 워크플레이스</a>
     </div>
-    
-	<form name='dateForm' method='post'>
-	    <!--상단-->
+
+	<form role="form" method="post" name='dateForm'>
+	    <!----상단---->
 		<section id="top-bar">
-			<!--날짜-->
+			<!----날짜---->
 				<div class="date">
 					<input type="image" src="img/date-prev.png" onclick="prevDay()">
-					<a href="#" id="currDateView" class="date-text" style="color: black;"></a> <input type="image"
-						src="img/date-next.png" onclick="nextDay()">
+					 <a href="#" id="currDateView" class="date-text" style="color: black;"></a> 
+					<input type="image" src="img/date-next.png" onclick="nextDay()">
 					<input type="hidden" id="currDate">
 				</div>
-				<!--날짜-->
-	
-			<!--view 버튼-->
+			<!----날짜----> 
+				
+			<!----view 버튼---->
 			<div class="view-btn">
-				<a href="listView.jsp"><img src="img/list-icon-off.png" /></a> <a
-					href="cardView.jsp"><img src="img/card-icon-on.png" /></a>
+				<ul>
+					<li style="display: inline;"><a href="#listView" data-toggle="tab" onclick="listImgOn()"> 
+						<img src="img/list-icon-off.png" id="listIcon" /></a></li>
+					<li style="display: inline;"><a href="#cardView" data-toggle="tab" onclick="cardImgOn()"> 
+						<img src="img/card-icon-on.png" id="cardIcon" /></a></li>
+				</ul>
 			</div>
-			<!--view 버튼-->
+			<!----view 버튼---->
+
 		</section>
-		<!--상단-->
+		<!----상단---->
 	</form>
 	
-	<!--카드-->
+	<!----카드---->
+
+<div class="tab-content"> 
+ 	<div class="tab-pane fade in active" id="cardView"> 
 	<section id="card-item">
+	
 		<article>
 			<div class="item-lay">
 				<div class="profile">
 					<img src="./img/${myinfo.empid}.gif">
 				</div>
-				<div class="name">${myinfo.empname} 담당</div>
+				<div class="name">${myinfo.empname} ${myinfo.empgrade}</div>
 				<div class="ampm">
 					<div class="am">
 						<span>AM</span>${myinfo.amloc}</div>
@@ -101,7 +111,10 @@
 		<article>
 			<div class="item-lay">
 				<div class="profile" >
-					<img src="img/hyun.PNG" data-toggle="modal" data-target="#myModal" />
+					<input type="image" src="img/${fav.empid}.png" 
+					onclick="show('${fav.empid}','${fav.empname}','${fav.empgrade}','${fav.deptname}',
+					      '${fav.amloc}','${fav.amlocdetail}','${fav.pmloc}','${fav.pmlocdetail}','${fav.workdate}','${fav.empid}')">
+					
 				</div>
 				<div class="name">${fav.empname} ${fav.empgrade}</div>
 				<div class="ampm">
@@ -117,39 +130,78 @@
 	  </c:forEach>
 	  
 	</section>
-	<!--카드-->
+ 	</div>
 
+	<!----카드---->
+
+	<!-- 리스트 뷰 -->
+  	<div class="tab-pane fade" id="listView">
+
+      <section id="list-item">
+       <article>
+           <div class="item-lay">
+             <div class="name"> <b> ${myinfo.empname} ${myinfo.empgrade} </b>
+              <br/>신세계아이앤씨<br/>
+              ${myinfo.deptname}</div>
+             <div class="ampm">
+               <div class="am"><span>AM</span>${myinfo.amloc}</div>
+               <div class="pm"><span>PM</span>${myinfo.pmloc}</div>
+             </div>
+           </div>
+         </article>
+	
+	  <c:forEach items="${myfav}" var="fav">
+		<article> 
+			<div class="item-lay">
+             <div class="name"> <b> ${fav.empname} ${fav.empgrade} </b>
+              <br/>신세계아이앤씨<br/>
+              ${fav.deptname}</div>
+             <div class="ampm">
+               <div class="am"><span>AM</span>${fav.amloc}</div>
+               <div class="pm"><span>PM</span>${fav.pmloc}</div>
+             </div>
+           </div>
+		</article>
+	  </c:forEach>
+        
+	</section>
+  </div>
+</div>
 	<!--btn-->
 	<div class="add-btn" style="position: fixed;">
 		<a href="searchView.jsp"><img src="img/add-user-btn-on.png" /></a>
 	</div>
-	<!--btn-->
+	<!----btn---->
 
 
 
-<!-- Modal -->
-<!-- Modal -->
+<!---- Modal ---->
+<!---- Modal ---->
+
 
 <div class="modal fade popup" id="myModal" tabindex="-1" role="dialog"
 	aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-					aria-hidden="true"><img src="img/close-icon.png"/></button>
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					<img src="img/close-icon.png"/></button>
 					
-					<button type="button" class="close" data-dismiss="modal"
-					aria-hidden="true" style="float: left;"><img src="img/edit-icon.png"/></button>
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="float: left;">
+					<img src="img/edit-icon.png"/></button>
 					
-			</div >
-			
+			</div >		
 			<div class="modal-body" >
-			<!-- 모달 내용-->		
+			<!---- 모달 내용---->		
 			
 		      <div class="popup-content">
 		        <div class="user-info">
-		          <div class="profile"><img src="img/hyun.PNG"/></div>
-		          <div class="name">손정현 상무</div>
+		          <div class="profile"><img id='empprofile' /></div>
+		          <div class="name" id="empdept"></div>
+		          <div class="name"> 
+		          	<span id="empname"> </span>
+		          	<span id="empgrade"> </span>
+		          </div>
 		        </div>
 		        
 		        <div class="user-contact">
@@ -159,22 +211,20 @@
 		        </div>
 		        
 		        <div class="date">
-		          <a href=""><img src="img/date-prev.png"/></a>
-		          <div class="date-text"><a href="calendar.jsp" style="text-decoration: none; color: black;">2016년 12월 1일</a></div>
-		          <a href=""><img src="img/date-next.png"/></a>
+		          <div class="date-text" style="text-decoration: none; color: black;" id=workdate></div>
 		        </div>
 		        
 		        <div class="ampm">
 		          <div class="am">
 		            <span>AM</span>
-		            <b>성수</b>
-		            <font>이마트팀 미팅</font>
+		            <b id="amloc">근무지</b>
+		            <font id="amlocdetail">세부 근무지</font>
 		          </div>
 		          
 		          <div class="pm">
 		            <span>PM</span>
-		            <b>본사 10F</b>
-		            <font>본사 근무</font>
+		            <b id="pmloc">근무지</b>
+		            <font id="pmlocdetail">세부 근무지</font>
 		          </div>
 		        </div>
 		      </div>
@@ -183,14 +233,15 @@
     </div>
   </div>
     
-    <!--btn-->
+
+    
+    <!----btn---->
 	    <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="./js/jquery-1.10.2.min.js"></script>
     <script src="./js/bootstrap.min.js"></script>
     <script src="./js/jasny-bootstrap.min.js"></script>
-    
     
     <script type="text/javascript">
 		var currDate = new Date();
@@ -209,6 +260,24 @@
 
 		draw();
 
+		///////////////////////////////////////////// show modal 
+		function show(id,name,grade,dept,am,amdetail,pm,pmdetail,workdate,img){
+			$("#empname").html(name);
+		    $("#empgrade").html(grade);
+		    $("#empdept").html(dept);
+		    
+		    $("#amloc").html(am);
+		    $("#amlocdetail").html(amdetail);
+		    $("#pmloc").html(pm);
+		    $("#pmlocdetail").html(pmdetail);	
+		    $("#workdate").html(workdate);	
+		    $("#empprofile").prop("src","img/"+img+".png");	
+
+			$("#myModal").modal('show');
+		    
+		    
+		}
+		
 		function prevDay() {
 			var caleMonth, caleDay, caleYear;
 			var loadDt = new Date(pageDate);
@@ -228,9 +297,10 @@
 
 			var date = caleYear + "-" + caleMonth + "-" + caleDay;
 			$("#currDate").html(date);
-			document.dateForm.action = 'calDay.inc?currDate='
+			
+			 document.dateForm.action = 'calDay.inc?currDate='
 					+ $("#currDate").text();
-			document.dateForm.submit();
+			document.submit();
 		}
 
 		function nextDay() {
@@ -252,10 +322,22 @@
 
 			var date = caleYear + "-" + caleMonth + "-" + caleDay;
 			$("#currDate").html(date);
-			document.dateForm.action = 'calDay.inc?currDate='
-					+ $("#currDate").text();
-			document.dateForm.submit();
+			/* document.dateForm.action = 'calDay.inc?currDate='
+					+ $("#currDate").text(); */
+			//document.submit();
+			document.submit();
 		}
+		
+        function listImgOn(){
+            document.getElementById("listIcon").src="img/list-icon-on.png";
+            document.getElementById("cardIcon").src="img/card-icon-off.png";
+        }
+           
+        function cardImgOn(){
+            document.getElementById("listIcon").src="img/list-icon-off.png";
+            document.getElementById("cardIcon").src="img/card-icon-on.png";
+        }
+             
 	</script>
     
   </body>

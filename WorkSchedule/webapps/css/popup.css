@@ -4,7 +4,7 @@
 .popup-content .btn {float: left;}
 .popup-content .btn .close-btn{float: right;}
 .popup-content .user-info{}
-.popup-content .user-info .profile{text-align: center; margin-bottom: 10px;}
+.popup-content .user-info .profile{text-align: center; margin-bottom: 10px;} 
 .popup-content .user-info .profile img{width: 50%; border-radius: 50%; border: solid 1px #ddd}
 .popup-content .user-info .name{text-align: center; margin-bottom: 10px;}
 .popup-content .user-contact{padding: 10px;border-bottom:solid 1px #ddd;text-align: center;}
