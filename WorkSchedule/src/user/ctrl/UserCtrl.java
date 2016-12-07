@@ -19,6 +19,7 @@ import org.springframework.web.bind.support.SessionStatus;
 
 import Service.UserServiceImpl;
 import model.domain.vo.EmployeeDepartmentVO;
+import model.domain.vo.EmployeeDeptVO;
 import model.domain.vo.EmployeeFavWorkDeptVO;
 import model.domain.vo.EmployeeVO;
 import model.domain.vo.EmployeeWorkDeptVO;
@@ -118,61 +119,83 @@ public class UserCtrl {
 	
 	//////////////////////////////////////////////////////////// 
 	@RequestMapping(value="/calDay.inc") 
-	public String userlist2(@RequestParam(value="currDate") String currdate, EmployeeWorkDeptVO useremp, HttpSession session, Model model) {
+	public String userlist2(@RequestParam(value="currDate") String currdate, EmployeeWorkDeptVO useremp, ArrayList<EmployeeFavWorkDeptVO> favemp, HttpSession session, Model model) {
+		System.out.println("===================================페이지 변경=====================================");
 		System.out.println("UserCtrl userlist2 calDay.inc");
 		System.out.println(currdate);
-		// login session (empid) 
-		EmployeeVO user = (EmployeeVO)session.getAttribute("login");						
-		EmployeeWorkDeptVO mylist = new EmployeeWorkDeptVO();
-				
+	
+		EmployeeVO user = (EmployeeVO)session.getAttribute("login");	
+		System.out.println(user.getEmpid());
+		
 		//////////////////////////////////////////////////////////////////////////////// mylist reload
+		EmployeeWorkDeptVO mylist = new EmployeeWorkDeptVO();	
 		mylist.setEmpid(user.getEmpid());
-		mylist.setCurrdate(currdate);
-				
-		///////////////////////////////////////////////////////////////////////////////// 수정 필요
-		// work table validation
-		int work = service.selectwork(mylist);
+		mylist.setCurrdate(currdate);	
 
-		// 1.  table empty, 
-		if(work==0) {
+		int work = service.selectwork(mylist); // work table validation
+
+		if(work==0) { // 1.  table empty, 
 			mylist = service.mylist1(mylist);
 			mylist.setAmloc(mylist.getEmploc());
 			mylist.setPmloc(mylist.getEmploc());
 		}
 				
-		// 2. work table exist
-		else {
+		else { // 2. work table exist
 			mylist = service.mylist2(mylist);
 		}	
 					
-		model.addAttribute("myinfo", mylist);
-		model.addAttribute("day", currdate);
-
-		return "viewOtherDay";
-	}
-	
-	
-	@RequestMapping(value="/calDayfav.inc") 
-	public String favoritelist2(@RequestParam(value="currDate") String currdate, ArrayList<EmployeeFavWorkDeptVO> favemp, HttpSession session, Model model) {
-		System.out.println("UserCtrl favoritelist2");
-
-		// login session (empid) 
-		EmployeeVO user = (EmployeeVO)session.getAttribute("login");		
+		///////////////////////////////////////////////////////////////////////////////// favorite reload		
 		EmployeeWorkDeptVO list = new EmployeeWorkDeptVO();
 		list.setEmpid(user.getEmpid());
 		list.setCurrdate(currdate);
 		
 		List<EmployeeFavWorkDeptVO> favlist = new ArrayList<EmployeeFavWorkDeptVO>();
-		favlist = service.selectempfav(list); 
-		
-		for(int i=0 ; i<favlist.size() ; i++) {
-			System.out.println(favlist.get(i));			
-		}
-		
+		favlist = service.selectempfav(list);
+
 		model.addAttribute("myfav", favlist);
+		model.addAttribute("myinfo", mylist);
+		model.addAttribute("day", currdate);
+
 		return "viewOtherDay";
 	}
-	
+
+	////////////////////////////// eunbi eunbi//////////////////////////////
+
+	// show searchForm
+	@RequestMapping(value = "/searchview.inc", method = RequestMethod.GET)
+	public String searchForm(Model model) {
+		System.out.println("UserCtrl searchForm");
+		List<EmployeeDeptVO> list = service.list(); 
+		model.addAttribute("lists", list);
+		return "searchView";
+	} 
+
+	// orgachart check
+	@RequestMapping(value = "/addfavorite.inc", method = RequestMethod.GET)
+	public String addFavorite(@RequestParam(value = "valueArrTest[]") List<String> valueArr, HttpSession session,
+			Model model) {
+		System.out.println("UserCtrl addFavorite");
+		EmployeeVO user = (EmployeeVO) session.getAttribute("login");
+
+		// check된 사람의 empid받아 왔음
+		System.out.println(valueArr.size());
+		for (int i = 0; i < valueArr.size(); i++) {
+			System.out.println(valueArr.get(i));
+		}
+
+		// (empid,empidfav) favorite table DB insert
+		ArrayList<FavoriteVO> list = new ArrayList<FavoriteVO>();
+		for (int i = 0; i < valueArr.size(); i++) {
+			int flag = service.addFav(user.getEmpid(), valueArr.get(i));
+			System.out.println("insert flag >>>>>>>>>>>>>>>>>>>>>>>>>>>>>> " + flag);
+		}
+
+		/////////// 서희꺼 가져오기 - favorite list 카드뷰 보여주기////////
+
+		return "view";
+
+	}
+
 	
 	@RequestMapping(value="/logout.inc", method=RequestMethod.GET) 
 	public String logout(SessionStatus status, HttpSession session) { 
@@ -221,7 +244,7 @@ public class UserCtrl {
 	}
 	*/
 	
-
+/*
 	@RequestMapping(value = "/list.inc", method = RequestMethod.GET)
 	public String boardList(Model model) {
 		System.out.println("UserCtrl boardList");
@@ -230,35 +253,6 @@ public class UserCtrl {
 		return "orgachart";
 	}
 	
-	//筌앸Þ爰쇽㎕�뼐由� check占쎈립 占쎄텢占쎌뿺 id占쏙옙  獄쏆룇釉섓옙�궎疫뀐옙 +  +�굢�슢�젻雅뚯눊由�
-		@RequestMapping(value = "/addfavorite.inc")		
-		public String testCheck(@RequestParam(value="valueArrTest[]") List<String> valueArr, HttpSession session,Model model){
-			System.out.println("UserCtrl testcheck");
-			EmployeeVO member = (EmployeeVO)session.getAttribute("loginSession");
-			System.out.println(valueArr.size()); //check占쎈쭆 野껓옙 揶쏉옙占쎈땾			
-			
-			for(int i=0 ; i<valueArr.size() ; i++){
-				System.out.println(valueArr.get(i)); //check占쎈쭆 占쎄텢占쎌뿺 占쎌뵠�뵳占� �굢�슢�젻癰귣떯由�
-			}
-			
-			ArrayList<FavoriteVO> list = new ArrayList<FavoriteVO>();
-			
-			for(int i=0 ; i<valueArr.size() ; i++){
-				int flag = service.addFav(member.getEmpid(), valueArr.get(i));
-				System.out.println("insert flag >>>>>>>>>>>>>>>>>>>>>>>>>>>>>> "+flag);
-			}
-			
-			/*for(int i=0 ; i<valueArr.size() ; i++){
-				MemberVO m = service.getFav(member.getId(), valueArr.get(i));
-				list.add(m);
-			}			
-			model.addAttribute("favorite", list);
-			return "redirect:/main.inc?empid="+member.getId();
-			List<MemberVO>
-			*/
-			return "orgachart";
-		}
-			
-	
+	*/
 }
 

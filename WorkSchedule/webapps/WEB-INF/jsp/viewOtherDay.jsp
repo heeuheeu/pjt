@@ -100,7 +100,8 @@
 		<article>
 			<div class="item-lay">
 				<div class="profile">
-					<img src="./img/${myinfo.empid}.gif">
+					<img src="./img/${myinfo.empid}.gif" onclick="show('${myinfo.empid}','${myinfo.empname}','${myinfo.empgrade}','${myinfo.deptname}',
+					      '${myinfo.amloc}','${myinfo.amlocdetail}','${myinfo.pmloc}','${myinfo.pmlocdetail}','${myinfo.workdate}','${myinfo.empid}')">
 				</div>
 				<div class="name">${myinfo.empname} ${myinfo.empgrade}</div>
 				<div class="ampm">
@@ -143,7 +144,8 @@
   	<div class="tab-pane fade" id="listView">
 
       <section id="list-item">
-       <article>
+       <article onclick="show('${myinfo.empid}','${myinfo.empname}','${myinfo.empgrade}','${myinfo.deptname}',
+					      '${myinfo.amloc}','${myinfo.amlocdetail}','${myinfo.pmloc}','${myinfo.pmlocdetail}','${myinfo.workdate}','${myinfo.empid}')">
            <div class="item-lay">
              <div class="name"> <b> ${myinfo.empname} ${myinfo.empgrade} </b>
               <br/>신세계아이앤씨<br/>
@@ -156,7 +158,8 @@
          </article>
 	
 	  <c:forEach items="${myfav}" var="fav">
-		<article> 
+		<article onclick="show('${fav.empid}','${fav.empname}','${fav.empgrade}','${fav.deptname}',
+					      '${fav.amloc}','${fav.amlocdetail}','${fav.pmloc}','${fav.pmlocdetail}','${fav.workdate}','${fav.empid}')"> 
 			<div class="item-lay">
              <div class="name"> <b> ${fav.empname} ${fav.empgrade} </b>
               <br/>신세계아이앤씨<br/>

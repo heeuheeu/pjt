@@ -6,7 +6,9 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import model.domain.vo.DeptDivisionVO;
 import model.domain.vo.EmployeeDepartmentVO;
+import model.domain.vo.EmployeeDeptVO;
 import model.domain.vo.EmployeeFavWorkDeptVO;
 import model.domain.vo.EmployeeVO;
 import model.domain.vo.EmployeeWorkDeptVO;
@@ -23,18 +25,6 @@ public class UserServiceImpl {
 		System.out.println("UserService login");
 		return dao.loginEmp(employee);	
 	}
-	
-	//plus甕곌쑵�뱣 占쎈듇�몴���늺 鈺곌퀣彛낉옙猷� 占쎌뱽占쎌뒭疫뀐옙
-	public List<EmployeeDepartmentVO> list() {
-		System.out.println("USER SERVICE LIST");
-		return dao.listRow();
-	}
-
-	public int addFav(String loginId, String valueArr) {
-		System.out.println("user service addFav");
-		return dao.addFavRow(loginId, valueArr);
-	}
-
 	
 	
 	/////////////////////////////////////////////////////// About user
@@ -61,6 +51,29 @@ public class UserServiceImpl {
 	public List<EmployeeFavWorkDeptVO> selectempfav(EmployeeWorkDeptVO user) {
 		System.out.println("UserService selectempfav");
 		return dao.selectFavRow(user);
-}
-	
+	}
+
+	//////////// eunbieunbi//////////////////////////////
+	///////////////////////// plus button - orga list /////////////////
+	public List<EmployeeDeptVO> list() {
+		System.out.println("USER SERVICE LIST");
+		return dao.listRow();
+	}
+
+	public int addFav(String loginId, String valueArr) {
+		System.out.println("user service addFav");
+		return dao.addFavRow(loginId, valueArr);
+	}
+
+	public List<DeptDivisionVO> selectdeptdiv() {
+		System.out.println("USER SERVICE LIST");
+		return dao.selectDeptDivRow();
+	}
+
+	// sign up
+	public int join(EmployeeDeptVO emp) {
+		System.out.println("UserService join");
+		return dao.insertRow(emp);
+	}
+
 }

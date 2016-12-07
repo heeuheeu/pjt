@@ -58,7 +58,14 @@
 									WHERE 	EMPID=#{empid} )					
 		AND 	C.WORKDATE = #{currdate}
 	</select>		
-				
+	
+	<!--  /////////////////eunbieunbi///////////////////// -->
+	<insert id="insert" parameterType="model.domain.vo.EmployeeVO">
+	   INSERT INTO EMPLOYEE
+	   VALUES ( #{empid}, #{emppwd}, #{empname}, #{empgrade}, #{empphone}, #{empmail}, #{emploc}, #{deptid} ) 
+	</insert>  
+	<!--  /////////////////eunbieunbi///////////////////// -->
+	 			
 </mapper>
 
 

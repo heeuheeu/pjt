@@ -48,18 +48,40 @@
 	</select>
 
 
-	
-	<select id="pluslist" resultType="model.domain.vo.EmployeeDepartmentVO">
-	 	SELECT EMPNAME, EMPGRADE, DEPTNAME 
-	 	FROM EMPLOYEE
-	 	JOIN DEPARTMENT USING (DEPTID)
-	</select>
-	
-	
-	<insert id="addFavorite" parameterType="model.domain.vo.FavoriteVO">
-		INSERT INTO FAVORITE
-		VALUES (#{empId}, #{empIdFav})
-	</insert>
+	<!-- ///////////////////////eunbi eunbi//////////////////////// -->
+	 
+	 <insert id="insertemp" parameterType="model.domain.vo.EmployeeDeptVO" >
+	   
+	   INSERT INTO EMPLOYEE
+	  VALUES ( #{empid}, #{emppwd}, #{empname}, #{empgrade}, #{empphone}, #{empmail}, #{emploc}, 
+	   (SELECT DEPTID
+	     FROM DEPARTMENT
+	     WHERE DEPTNAME = #{deptname}) )
+	     
+	 </insert>
+	 
+	 
+	 <select id="pluslist" resultType="model.domain.vo.EmployeeDeptVO">
+	   SELECT * 
+	   FROM EMPLOYEE
+	   JOIN DEPARTMENT USING (DEPTID)
+	 </select>
+	 
+	 
+	 <insert id="addFavorite" parameterType="model.domain.vo.FavoriteVO">
+	  INSERT INTO FAVORITE
+	  VALUES (#{empid}, #{empidfav})
+	 </insert>
+	  
+	 <select id="selectdeptdiv" resultType="model.domain.vo.EmployeeDeptVO">
+	   SELECT * 
+	   FROM DEPARTMENT
+	   JOIN DIVISION USING (DIVID)
+	 </select>
+	 
+	<!-- ///////////////////////eunbi eunbi//////////////////////// --> 
+
+
 	
 </mapper>
 

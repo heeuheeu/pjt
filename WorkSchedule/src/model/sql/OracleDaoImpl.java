@@ -7,7 +7,9 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import model.domain.vo.DeptDivisionVO;
 import model.domain.vo.EmployeeDepartmentVO;
+import model.domain.vo.EmployeeDeptVO;
 import model.domain.vo.EmployeeFavWorkDeptVO;
 import model.domain.vo.EmployeeVO;
 import model.domain.vo.EmployeeWorkDeptVO;
@@ -33,21 +35,6 @@ public class OracleDaoImpl implements OracleDao {
 		return sqlSession.selectOne("member.loginemp",employee);
 	}
 	
-
-	@Override
-	public List<EmployeeDepartmentVO> listRow() {
-		System.out.println("Dao listrow");		
-		return sqlSession.selectList("member.pluslist");
-	}
-	
-	@Override
-	public int addFavRow(String loginId, String valueArr) {
-		System.out.println("dao addFavRow");	
-		FavoriteVO fav = new FavoriteVO(loginId, valueArr);
-		int flag = sqlSession.insert("member.getCart", fav);
-		return flag ; 
-	}
-
 	
 	///////////////////////////////////////////////////////// myDQM > mylist
 
@@ -75,4 +62,34 @@ public class OracleDaoImpl implements OracleDao {
 		//sqlSession.selectList("emp.selectfav", user);
 		return sqlSession.selectList("emp.selectfavlist", user);
 	}	
+	
+	///////////////////////// eunbieunbi/////////////////////////////
+	// sign up
+	@Override
+	public int insertRow(EmployeeDeptVO emp) {
+		System.out.println("Dao insertRow");
+		return sqlSession.insert("member.insertemp", emp);
+	}
+
+	@Override
+	public List<EmployeeDeptVO> listRow() {
+		System.out.println("Dao listrow");
+		return sqlSession.selectList("member.pluslist");
+	}
+
+	@Override
+	public int addFavRow(String loginId, String valueArr) {
+		System.out.println("dao addFavRow");
+		FavoriteVO fav = new FavoriteVO(loginId, valueArr);
+		int flag = sqlSession.insert("member.addFavorite", fav);
+		return flag;
+	}
+
+	@Override
+	public List<DeptDivisionVO> selectDeptDivRow() {
+		System.out.println("Dao selectDeptDivRow");
+		return sqlSession.selectList("member.selectdeptdiv");
+	}
+	///////////////////////// eunbieunbi/////////////////////////////
+
 }
