@@ -48,7 +48,7 @@
       <a class="navbar-brand" href="cardView.jsp" style="color: white; margin-left: 60px">SSG 워크플레이스</a>
       
       <!-- check 버튼 -->      
-      <a id="addBtn" href="addfavorite.inc"><img src="img/check.png" style="width: 42px; height: 36px; float: right; margin-top: 7px; margin-right: 8px"></a>
+      <a id="addBtn" href="#transbtn"><img src="img/check.png" style="width: 42px; height: 36px; float: right; margin-top: 7px; margin-right: 8px"></a>
     </div>
 
     <!--상단-->
@@ -68,8 +68,9 @@
 
     <!--리스트-->
     <section id="list-item">
-    
-	<div class="path" style="float: right; margin-top: 0px" >       
+    <form action="addfavorite.inc" method="post">
+	<div class="path" style="float: right; margin-top: 0px" >    
+		<button type="submit" id="transbtn">전송</button>   
         <div><input type="checkbox" id="allChk">전체 선택/해제</div>
       </div> 
     
@@ -84,14 +85,14 @@
 		          </div>
        
 		          <div class="check">	          
-		            <input onchange="checkbox()" type="checkbox" value="${member.empid}" name="chk">
+		            <input type="checkbox" value="${member.empid}" name="chk">
 		            <label class="checkbox" for="Option"></label>
 		          </div>
 		        </div>
 		      </article>	     
 	     
 	      </c:forEach>
-      
+    </form>  
     </section>
     
     <!--리스트-->
@@ -117,7 +118,7 @@
 	});//allchk
 	
 	
-	
+/*  	
 	$("#addBtn").on("click", function(){	
 		
 		var checkArr = [];
@@ -129,16 +130,44 @@
 		$.ajax({
 			url: "addfavorite.inc",
 			type: "post",
-			dataType: "text",
+			dataType: "json",
 			data: {
 				valueArrTest: checkArr
+			},
+			success : function(json) {
+				alert("success"); 
+				location.href="user.inc" ; 
+			},
+			error : function() {
+				alert("error"); 
+				pageChange();
 			}
 		});	
 		
 	});	
 	
 
-	
+	function pageChange() {
+		alert("forward"); 
+		location.href="user.inc" ;
+	} */
     </script>
   </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

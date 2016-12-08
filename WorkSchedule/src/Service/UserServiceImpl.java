@@ -20,12 +20,17 @@ public class UserServiceImpl {
 	@Resource(name="UserDao")
 	private OracleDao dao;
 
-	/////////////////////////////////////////////////////// �뜝�룞�삕�뜝�룞�삕�뜝�룞�삕
+	/////////////////////////////////////////////////////// main.jsp
 	public EmployeeVO loginEmp(EmployeeVO employee) {
 		System.out.println("UserService login");
 		return dao.loginEmp(employee);	
 	}
-	
+
+	// sign up
+	public int join(EmployeeDeptVO emp) {
+		System.out.println("UserService join");
+		return dao.insertRow(emp);
+	}
 	
 	/////////////////////////////////////////////////////// About user
 	
@@ -70,10 +75,12 @@ public class UserServiceImpl {
 		return dao.selectDeptDivRow();
 	}
 
-	// sign up
-	public int join(EmployeeDeptVO emp) {
-		System.out.println("UserService join");
-		return dao.insertRow(emp);
-	}
+	
+	 ////////////////////////search//////////////////
+	 public List<EmployeeDeptVO> searchEmp(EmployeeDeptVO member) {
+	  System.out.println("UserService searchEmp");
+	  return dao.searchEmpRow(member);
+	 }
+
 
 }

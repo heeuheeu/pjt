@@ -178,7 +178,7 @@
 
 	<!--btn-->
 	<div class="add-btn" style="position: fixed;">
-		<a href="searchView.jsp"><img src="img/add-user-btn-on.png" /></a>
+		<a href="searchview.inc"><img src="img/add-user-btn-on.png" /></a>
 	</div>
 	<!--btn-->
 

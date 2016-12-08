@@ -14,10 +14,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
 import Service.UserServiceImpl;
+import model.domain.vo.EmpIdVO;
 import model.domain.vo.EmployeeDepartmentVO;
 import model.domain.vo.EmployeeDeptVO;
 import model.domain.vo.EmployeeFavWorkDeptVO;
@@ -41,7 +43,7 @@ public class UserCtrl {
 		return "intro"; 
 	}
 	
-	@RequestMapping(value="/login.inc", method=RequestMethod.POST)
+	@RequestMapping(value="/login.inc")
 	public String loginEmp(EmployeeVO employee, Model model) { 
 		System.out.println("UserCtrl loginEmp");
 		EmployeeVO user = service.loginEmp(employee);
@@ -50,7 +52,7 @@ public class UserCtrl {
 		return "redirect:/user.inc";
 	}
 		
-	@RequestMapping(value="/user.inc", method=RequestMethod.GET)
+	@RequestMapping(value="/user.inc")
 	public String userlist(EmployeeWorkDeptVO useremp, HttpSession session, Model model) {
 		System.out.println("UserCtrl list");
 
@@ -88,7 +90,7 @@ public class UserCtrl {
 		return "redirect:/favorite.inc";
 	}
 	
-	@RequestMapping(value="/favorite.inc", method=RequestMethod.GET)
+	@RequestMapping(value="/favorite.inc")
 	public String favoritelist(ArrayList<EmployeeFavWorkDeptVO> favemp, HttpSession session, Model model) {
 		System.out.println("UserCtrl favoritelist");
 
@@ -162,7 +164,7 @@ public class UserCtrl {
 	////////////////////////////// eunbi eunbi//////////////////////////////
 
 	// show searchForm
-	@RequestMapping(value = "/searchview.inc", method = RequestMethod.GET)
+	@RequestMapping(value = "/searchview.inc")
 	public String searchForm(Model model) {
 		System.out.println("UserCtrl searchForm");
 		List<EmployeeDeptVO> list = service.list(); 
@@ -171,14 +173,16 @@ public class UserCtrl {
 	} 
 
 	// orgachart check
-	@RequestMapping(value = "/addfavorite.inc", method = RequestMethod.GET)
+	/*
+	@RequestMapping(value = "/addfavorite.inc")
+	@ResponseBody
 	public String addFavorite(@RequestParam(value = "valueArrTest[]") List<String> valueArr, HttpSession session,
 			Model model) {
 		System.out.println("UserCtrl addFavorite");
 		EmployeeVO user = (EmployeeVO) session.getAttribute("login");
 
+		
 		// check된 사람의 empid받아 왔음
-		System.out.println(valueArr.size());
 		for (int i = 0; i < valueArr.size(); i++) {
 			System.out.println(valueArr.get(i));
 		}
@@ -192,12 +196,43 @@ public class UserCtrl {
 
 		/////////// 서희꺼 가져오기 - favorite list 카드뷰 보여주기////////
 
-		return "view";
+		return "true" ;
+
+	}
+	*/
+	@RequestMapping(value = "/addfavorite.inc")
+	public String addFavorite(EmpIdVO eivo, HttpSession session,Model model) {
+		System.out.println("UserCtrl addFavorite");
+		EmployeeVO user = (EmployeeVO) session.getAttribute("login");
+
+		
+		// check된 사람의 empid받아 왔음
+		for (int i = 0; i < eivo.getChk().size(); i++) {
+			System.out.println(">>>>>>>>>>>>>>>>>>>>> size "+eivo.getChk().get(i));
+		}
+
+		// (empid,empidfav) favorite table DB insert
+		ArrayList<FavoriteVO> list = new ArrayList<FavoriteVO>();
+		for (int i = 0; i < eivo.getChk().size(); i++) {
+			int flag = service.addFav(user.getEmpid(), eivo.getChk().get(i));
+			System.out.println("insert flag >>>>>>>>>>>>>>>>>>>>>>>>>>>>>> for i " + flag);
+		}
+
+		/////////// 서희꺼 가져오기 - favorite list 카드뷰 보여주기////////
+
+		return "redirect:/user.inc" ;
 
 	}
 
+	@RequestMapping(value = "/search.inc")
+	  public String search(EmployeeDeptVO member, Model model) {
+	   System.out.println("UserCtrl search");
+	   List<EmployeeDeptVO> list = service.searchEmp(member);
+	   model.addAttribute("lists", list);
+	   return "searchView";
+	  }
 	
-	@RequestMapping(value="/logout.inc", method=RequestMethod.GET) 
+	@RequestMapping(value="/logout.inc") 
 	public String logout(SessionStatus status, HttpSession session) { 
 		System.out.println("UserCtrl logout");
 		System.out.println(status);

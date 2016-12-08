@@ -1,6 +1,5 @@
 package model.sql;
 
-
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -15,10 +14,8 @@ import model.domain.vo.EmployeeVO;
 import model.domain.vo.EmployeeWorkDeptVO;
 import model.domain.vo.FavoriteVO;
 
-
-
 @Repository("UserDao")
-public class OracleDaoImpl implements OracleDao { 	
+public class OracleDaoImpl implements OracleDao {
 
 	@Autowired
 	private SqlSession sqlSession;
@@ -28,14 +25,13 @@ public class OracleDaoImpl implements OracleDao {
 		System.out.println("Dao selectEmp");
 		return sqlSession.selectList("member.selectemp");
 	}
-	
+
 	@Override
 	public EmployeeVO loginEmp(EmployeeVO employee) {
 		System.out.println("Dao loginEmp");
-		return sqlSession.selectOne("member.loginemp",employee);
+		return sqlSession.selectOne("member.loginemp", employee);
 	}
-	
-	
+
 	///////////////////////////////////////////////////////// myDQM > mylist
 
 	@Override
@@ -46,23 +42,23 @@ public class OracleDaoImpl implements OracleDao {
 
 	@Override
 	public EmployeeWorkDeptVO mylistRow1(EmployeeWorkDeptVO user) {
-		System.out.println("Dao mylistrow1");		
+		System.out.println("Dao mylistrow1");
 		return sqlSession.selectOne("emp.selectemp", user);
 	}
 
 	@Override
 	public EmployeeWorkDeptVO mylistRow2(EmployeeWorkDeptVO user) {
-		System.out.println("Dao mylistrow2");		
+		System.out.println("Dao mylistrow2");
 		return sqlSession.selectOne("emp.selectwork", user);
 	}
 
 	@Override
 	public List<EmployeeFavWorkDeptVO> selectFavRow(EmployeeWorkDeptVO user) {
-		System.out.println("Dao selectFavRow");		
-		//sqlSession.selectList("emp.selectfav", user);
+		System.out.println("Dao selectFavRow");
+		// sqlSession.selectList("emp.selectfav", user);
 		return sqlSession.selectList("emp.selectfavlist", user);
-	}	
-	
+	}
+
 	///////////////////////// eunbieunbi/////////////////////////////
 	// sign up
 	@Override
@@ -92,4 +88,10 @@ public class OracleDaoImpl implements OracleDao {
 	}
 	///////////////////////// eunbieunbi/////////////////////////////
 
+	////////////////////////// search//////////////////////////
+	@Override
+	public List<EmployeeDeptVO> searchEmpRow(EmployeeDeptVO member) {
+		System.out.println("Dao searchEmpRow");
+		return sqlSession.selectList("member.searchemp", member);
+	}
 }

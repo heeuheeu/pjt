@@ -10,6 +10,7 @@
   <body>
     <section>
       <div class="logo"><img src="./img/logo.jpg" style="width: 250px; height: 160px"/></div>
+      
       <div class="sign-form">
         <form action="login.inc" method="post">
         <input type="text" placeholder="사번" name="empid"/>
@@ -19,9 +20,11 @@
           <label>로그인 상태 유지</label>
         </div>
         <input type="submit" value="LOGIN" style="margin-bottom: 10px">
-        <input type="submit" value="SIGN UP" style="background-color: #3e3f44 ">
-        </form>
-      </div>
+        </form>   
+          <form action="joinForm.inc" >
+	   	  <input type="submit" value="SIGN UP" style="background-color: #3e3f44">
+	      </form>
+   </div>
     </section>
   </body>
 </html>

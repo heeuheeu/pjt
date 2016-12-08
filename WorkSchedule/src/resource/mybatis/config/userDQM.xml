@@ -81,8 +81,13 @@
 	 
 	<!-- ///////////////////////eunbi eunbi//////////////////////// --> 
 
-
-	
+	<select id="searchemp" parameterType="model.domain.vo.EmployeeDeptVO" resultType="model.domain.vo.EmployeeDeptVO">
+	   SELECT * 
+	   FROM EMPLOYEE
+	   JOIN DEPARTMENT USING (DEPTID)
+	   WHERE EMPNAME LIKE '%'||#{searchKeyword}||'%'
+ 	</select>
+ 
 </mapper>
 
 

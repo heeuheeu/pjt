@@ -16,7 +16,8 @@ public interface OracleDao {
 	//////////////////////////////////////////////////////////////////////////////////////
 	public List<EmployeeVO> 	selectEmp();
 	public EmployeeVO			loginEmp(EmployeeVO employee);
-
+	public int insertRow(EmployeeDeptVO emp); 	// sign up
+	 
 	// mylist 
 	public int 							selectWorkRow(EmployeeWorkDeptVO user);	
 	public EmployeeWorkDeptVO 			mylistRow1(EmployeeWorkDeptVO user); 
@@ -30,10 +31,9 @@ public interface OracleDao {
 	 public int addFavRow(String loginId, String valueArr);
 	 //select dept
 	 public List<DeptDivisionVO> selectDeptDivRow();
-	 // sign up
-	 public int insertRow(EmployeeDeptVO emp);
-	 //////////////////eunbieunbi///////////////////
 
+	 ///////////////////////search////////////////////////////
+	 public List<EmployeeDeptVO> searchEmpRow(EmployeeDeptVO member);
 
 
 }

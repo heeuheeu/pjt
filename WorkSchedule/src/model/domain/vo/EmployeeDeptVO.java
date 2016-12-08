@@ -1,6 +1,6 @@
 package model.domain.vo;
 
-public class EmployeeDeptVO { // ���̺� ���Ǿ� �ִ� ��ü�� Ŭ����ȭ
+public class EmployeeDeptVO extends SearchVO{ // ���̺� ���Ǿ� �ִ� ��ü�� Ŭ����ȭ
 
 	private String empid, emppwd, empname, empgrade, empphone, empmail, emploc, deptid;
 	private String deptname, divid;
