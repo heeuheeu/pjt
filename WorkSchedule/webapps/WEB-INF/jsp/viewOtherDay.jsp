@@ -17,6 +17,7 @@
 
 <!-- Custom styles for this template -->
 <link href="./css/navmenu-push.css" rel="stylesheet">
+    <link href="./css/flatpickr.css" rel="stylesheet">
 
 <style>
 .modal-header {
@@ -39,15 +40,13 @@
 				<div class="name">${myinfo.empname}담당</div>
 			</div>
 
-			<ul class="nav navmenu-nav btns">
-				<div class="btns">
-					<li><a href="calendar.jsp" class="btn1" style="color: white;"><img
-							src="img/side-icon1.png" />나의일정</a></li>
-					<li><a href="intro.jsp" class="btn2" style="color: white;"><img
-							src="img/side-icon2.png" />로그아웃</a></li>
-				</div>
-			</ul>
 
+	      <ul class="nav navmenu-nav btns">
+		      <div class="btns">
+		        <li><a href="calMove.inc" class="btn1" style="color: white;"><img src="img/side-icon1.png"/>나의일정</a></li>
+		        <li><a href="logout.inc" class="btn2" style="color: white;"><img src="img/side-icon2.png"/>로그아웃</a></li>
+		      </div>
+	      </ul>
 		</div>
 	</div>
 

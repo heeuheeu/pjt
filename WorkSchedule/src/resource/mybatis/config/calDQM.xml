@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="cal">
+
+	<select id="selectmywork" parameterType="model.domain.vo.CalendarVO" resultType="model.domain.vo.CalendarVO">
+
+		SELECT 	EMPID, EMPPWD, EMPNAME, EMPGRADE, EMPPHONE, EMPMAIL, EMPLOC, DEPTNAME, 
+	    		TO_CHAR(WORKDATE,'YYYY-MM-DD') AS WORKDATE, AMLOC, AMLOCDETAIL, PMLOC, PMLOCDETAIL
+		FROM 	EMPLOYEE A
+		JOIN 	DEPARTMENT B USING (DEPTID)
+		JOIN 	WORK C USING (EMPID) 
+		WHERE 	EMPID = #{empid}
+	</select>		
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import model.domain.vo.CalendarVO;
 import model.domain.vo.DeptDivisionVO;
 import model.domain.vo.EmployeeDepartmentVO;
 import model.domain.vo.EmployeeDeptVO;
@@ -94,4 +95,20 @@ public class OracleDaoImpl implements OracleDao {
 		System.out.println("Dao searchEmpRow");
 		return sqlSession.selectList("member.searchemp", member);
 	}
+	
+	
+	// calendar
+	@Override
+	public List<CalendarVO> myWorkRow(CalendarVO user) {
+		System.out.println("Dao myWorkRow");
+		return sqlSession.selectList("cal.selectmywork", user);
+	}
+
+	// modal update
+	@Override
+	public int updateMyWork(EmployeeWorkDeptVO myinfo) {
+		System.out.println("Dao updateWorkRow");
+		return sqlSession.update("emp.updatemywork", myinfo);
+	}
+	  
 }

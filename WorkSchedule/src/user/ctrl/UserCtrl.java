@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
 import Service.UserServiceImpl;
+import model.domain.vo.CalendarNoteVO;
+import model.domain.vo.CalendarVO;
 import model.domain.vo.EmpIdVO;
 import model.domain.vo.EmployeeDepartmentVO;
 import model.domain.vo.EmployeeDeptVO;
@@ -289,5 +291,45 @@ public class UserCtrl {
 	}
 	
 	*/
+	
+	////////////////////////////////////// to calendar.jsp
+	@RequestMapping("/calMove.inc")
+	public String calendarMove() {
+		System.out.println("calendarMove 호출");
+		return "calendar";
+	}
+
+	////////////////////////////////////// requestMapping to calendar.jsp
+	@RequestMapping("/calendar.inc")
+	@ResponseBody
+	public List<CalendarNoteVO> main(Model model, HttpSession session) {
+		System.out.println("calendar에 VO 받아온 후 호출");
+		// 나의 일정 전체 select
+		EmployeeVO user = (EmployeeVO) session.getAttribute("login");
+		CalendarVO cal = new CalendarVO();
+		cal.setEmpid(user.getEmpid());
+
+		List<CalendarVO> work = service.selectMyWork(cal);
+		List<CalendarNoteVO> list = new ArrayList<CalendarNoteVO>();
+
+		for (int i = 0; i < work.size(); i++) {
+			if (work.get(i).getEmploc().equals(work.get(i).getAmloc())
+					&& work.get(i).getEmploc().equals(work.get(i).getPmloc())) {
+				// default loc와 ampm loc가 같을 때는 list에 저장 안함
+			} else {
+				String date = work.get(i).getWorkdate().substring(0, 10);
+				String note = "AM : " + work.get(i).getAmloc() + " / PM : " + work.get(i).getPmloc();
+
+				System.out.println("default : " + work.get(i).getEmploc() + " / am : " + work.get(i).getAmloc()
+						+ " / pm : " + work.get(i).getPmloc());
+
+				list.add(new CalendarNoteVO(date, note));
+			}
+		}
+		model.addAttribute("myinfo", user);
+		model.addAttribute("works", work);
+		model.addAttribute("lists", list);
+		return list;
+	}
 }
 

@@ -34,13 +34,13 @@
 .dncalendar-header .dncalendar-links .dncalendar-next-month {
 	position: absolute;
     right: -6px;
-    background: url('img/date-next.png') no-repeat ;
+    background: url('../img/date-next.png') no-repeat ;
 }
 
 .dncalendar-header .dncalendar-links .dncalendar-prev-month {
 	position: absolute;
     left: 10px;
-    background: url('img/date-prev.png') no-repeat;
+    background: url('../img/date-prev.png') no-repeat;
 }
 
 .dncalendar-body {

@@ -17,6 +17,7 @@
 
     <!-- Custom styles for this template -->
     <link href="./css/navmenu-push.css" rel="stylesheet">
+    <link href="./css/flatpickr.css" rel="stylesheet">
 
     
     <style>
@@ -42,8 +43,8 @@
       
       <ul class="nav navmenu-nav btns">
       <div class="btns">
-        <li><a href="calendar.jsp" class="btn1" style="color: white;"><img src="img/side-icon1.png"/>나의일정</a></li>
-        <li><a href="intro.jsp" class="btn2" style="color: white;"><img src="img/side-icon2.png"/>로그아웃</a></li>
+        <li><a href="calMove.inc" class="btn1" style="color: white;"><img src="img/side-icon1.png"/>나의일정</a></li>
+        <li><a href="logout.inc" class="btn2" style="color: white;"><img src="img/side-icon2.png"/>로그아웃</a></li>
       </div>
       </ul>
 
@@ -181,61 +182,69 @@
 <!---- Modal ---->
 <!---- Modal ---->
 
-
-<div class="modal fade popup" id="myModal" tabindex="-1" role="dialog"
-	aria-labelledby="myModalLabel" aria-hidden="true">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-					<img src="img/close-icon.png"/></button>
+ <!-- 1207수정:모달팝업 -->
+ 	<form role="form" id='updateForm' action = "update.inc">
+		<div class="modal fade popup" id="myModal" tabindex="-1" role="dialog"
+			aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+							<img src="img/close-icon.png"/></button>
+							
+							<button type="button" class="close" aria-hidden="true" 
+								id="editbtn" style="float: left;" onclick="update()">
+							<img src="img/edit-icon.png"/></button>
+							
+					</div >		
+					<div class="modal-body" >
+					<!---- 모달 내용---->		
 					
-					<button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="float: left;">
-					<img src="img/edit-icon.png"/></button>
-					
-			</div >		
-			<div class="modal-body" >
-			<!---- 모달 내용---->		
-			
-		      <div class="popup-content">
-		        <div class="user-info">
-		          <div class="profile"><img id='empprofile' /></div>
-		          <div class="name" id="empdept"></div>
-		          <div class="name"> 
-		          	<span id="empname"> </span>
-		          	<span id="empgrade"> </span>
-		          </div>
-		        </div>
-		        
-		        <div class="user-contact">
-		          <a href=""><img src="img/contact-icon1.png"/></a>
-		          <a href=""><img src="img/contact-icon2.png"/></a>
-		          <a href=""><img src="img/contact-icon3.png"/></a>
-		        </div>
-		        
-		        <div class="date">
-		          <div class="date-text" style="text-decoration: none; color: black;" id=workdate></div>
-		        </div>
-		        
-		        <div class="ampm">
-		          <div class="am">
-		            <span>AM</span>
-		            <b id="amloc">근무지</b>
-		            <font id="amlocdetail">세부 근무지</font>
-		          </div>
-		          
-		          <div class="pm">
-		            <span>PM</span>
-		            <b id="pmloc">근무지</b>
-		            <font id="pmlocdetail">세부 근무지</font>
-		          </div>
-		        </div>
+				      <div class="popup-content">
+				        <div class="user-info">
+				          <div class="profile"><img id='empprofile' /></div>
+				          <div class="name" id="empdept"></div>
+				          <div class="name"> 
+				          	<span id="empname"></span>
+				          	<span id="empgrade"></span>
+				          </div>
+				        </div>
+				        
+				        <div class="user-contact">
+				          <a href=""><img src="img/contact-icon1.png"/></a>
+				          <a href=""><img src="img/contact-icon2.png"/></a>
+				          <a href=""><img src="img/contact-icon3.png"/></a>
+				        </div>
+				        
+				        <div class="date">
+				          <center><input type="text" name="editable" id="workdate" class="date-text" 
+				          			style="background-color: transparent"></center>
+				        </div>
+				        
+				        <div class="ampm">
+				          <div class="am">
+				            <span>AM</span>
+				            <center><input type="text" name="editable" id="amloc" class="amloc" style="background-color: transparent"></center>
+				            <center><input type="text" name="editable" id="amlocdetail" class="amlocdetail" 
+				            style="background-color: transparent" placeholder="상세일정 입력칸"></center>
+				          </div>
+				          
+				          <div class="pm">
+				            <span>PM</span>
+				            <center><input type="text" name="editable" id="pmloc" class="pmloc" style="background-color: transparent"></center>
+				            <center><input type="text" name="editable" id="pmlocdetail" class="pmlocdetail" 
+				            style="background-color: transparent" placeholder="상세일정 입력칸"></center>
+				          </div>
+				        </div>
+				        
+				      </div>
+		      	</div>
 		      </div>
-      	</div>
-      </div>
-    </div>
-  </div>
+		    </div>
+		  </div>
+	</form>
     
+ <!-- 1207수정:모달팝업 끝-->
 
     
     <!----btn---->
@@ -245,7 +254,7 @@
     <script src="./js/jquery-1.10.2.min.js"></script>
     <script src="./js/bootstrap.min.js"></script>
     <script src="./js/jasny-bootstrap.min.js"></script>
-    
+     <script src="./js/flatpickr.js"></script>
     <script type="text/javascript">
 		var currDate = new Date();
 		var pageDate = currDate;
@@ -262,24 +271,53 @@
 		}
 
 		draw();
-
-		///////////////////////////////////////////// show modal 
+		
+		// 20161207추가
+		
 		function show(id,name,grade,dept,am,amdetail,pm,pmdetail,workdate,img){
+			
+			var strArray = workdate.split('-');
+			var workdateForm = strArray[0]+"년 "+strArray[1]+"월 "+strArray[2]+"일";
+			
 			$("#empname").html(name);
 		    $("#empgrade").html(grade);
 		    $("#empdept").html(dept);
 		    
-		    $("#amloc").html(am);
-		    $("#amlocdetail").html(amdetail);
-		    $("#pmloc").html(pm);
-		    $("#pmlocdetail").html(pmdetail);	
-		    $("#workdate").html(workdate);	
+		    $("#amloc").val(am);
+		    $("#amlocdetail").val(amdetail);
+		    $("#pmloc").val(pm);
+		    $("#pmlocdetail").val(pmdetail);	
+		    $("#workdate").val(workdateForm);	
 		    $("#empprofile").prop("src","img/"+img+".png");	
 
 			$("#myModal").modal('show');
 		    
-		    
+			
+			if(id=="${myinfo.empid}") {
+				document.getElementById("editbtn").style.visibility = "visible";
+				//$("#workdate").removeAttr("disabled");
+				$("#workdate").removeAttr("disabled");
+				$("#amloc").removeAttr("disabled");
+				$("#amlocdetail").removeAttr("disabled");
+				$("#pmloc").removeAttr("disabled");
+				$("#pmlocdetail").removeAttr("disabled");
+				flatpickr('#workdate',{
+					// 팝업달력
+					defaultDate: workdate
+				});
+				
+			}else{
+				document.getElementById("editbtn").style.visibility = "hidden";
+				//$("#workdate").prop("readyonly" , "readonly");
+				$("#workdate").prop("disabled","true");
+				$("#amloc").prop("disabled","true");
+				$("#amlocdetail").prop("disabled","true");
+				$("#pmloc").prop("disabled","true");
+				$("#pmlocdetail").prop("disabled","true");
+			}
 		}
+		
+		
 		
 		function prevDay() {
 			var caleMonth, caleDay, caleYear;

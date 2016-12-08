@@ -48,7 +48,7 @@
       <a class="navbar-brand" href="cardView.jsp" style="color: white; margin-left: 60px">SSG 워크플레이스</a>
       
       <!-- check 버튼 -->      
-      <a id="addBtn" href="#transbtn"><img src="img/check.png" style="width: 42px; height: 36px; float: right; margin-top: 7px; margin-right: 8px"></a>
+      <a id="addBtn" href="#" onclick="favbtn()"><img src="img/check.png" style="width: 42px; height: 36px; float: right; margin-top: 7px; margin-right: 8px"></a>
     </div>
 
     <!--상단-->
@@ -70,7 +70,7 @@
     <section id="list-item">
     <form action="addfavorite.inc" method="post">
 	<div class="path" style="float: right; margin-top: 0px" >    
-		<button type="submit" id="transbtn">전송</button>   
+		<button type="submit" id="transbtn" style="display: none">전송</button>   
         <div><input type="checkbox" id="allChk">전체 선택/해제</div>
       </div> 
     
@@ -117,40 +117,14 @@
 
 	});//allchk
 	
-	
-/*  	
-	$("#addBtn").on("click", function(){	
-		
-		var checkArr = [];
-		
-		$("input[name='chk']:checked").each(function(i){
-			checkArr.push($(this).val());
-		});
-		
-		$.ajax({
-			url: "addfavorite.inc",
-			type: "post",
-			dataType: "json",
-			data: {
-				valueArrTest: checkArr
-			},
-			success : function(json) {
-				alert("success"); 
-				location.href="user.inc" ; 
-			},
-			error : function() {
-				alert("error"); 
-				pageChange();
-			}
-		});	
-		
-	});	
-	
 
-	function pageChange() {
-		alert("forward"); 
-		location.href="user.inc" ;
-	} */
+	 
+	 //transbtn
+	 
+	 function favbtn(){
+		 $("#transbtn").click();
+	 }
+	 
     </script>
   </body>
 </html>

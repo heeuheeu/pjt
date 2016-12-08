@@ -17,6 +17,7 @@
       <div class="sign-form">
         <form action="join.inc" method="post" role="form">
         
+        	<input type="file" name="empimg"><br/>
 	        <input type="text" placeholder="EMPID" name="empid" required/><br>
 	        <input type="password" placeholder="EMPPWD" name="emppwd" required/><br>
 	        <input type="text" placeholder="EMPNAME" name="empname" required/><br>

@@ -6,6 +6,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import model.domain.vo.CalendarVO;
 import model.domain.vo.DeptDivisionVO;
 import model.domain.vo.EmployeeDepartmentVO;
 import model.domain.vo.EmployeeDeptVO;
@@ -75,12 +76,17 @@ public class UserServiceImpl {
 		return dao.selectDeptDivRow();
 	}
 
-	
-	 ////////////////////////search//////////////////
-	 public List<EmployeeDeptVO> searchEmp(EmployeeDeptVO member) {
-	  System.out.println("UserService searchEmp");
-	  return dao.searchEmpRow(member);
-	 }
+	//////////////////////// search//////////////////
+	public List<EmployeeDeptVO> searchEmp(EmployeeDeptVO member) {
+		System.out.println("UserService searchEmp");
+		return dao.searchEmpRow(member);
+	}
 
+	/////////////////////////////////////////////////////// About calendar
+
+	public List<CalendarVO> selectMyWork(CalendarVO user) {
+		System.out.println("UserService selectMyWork");
+		return dao.myWorkRow(user);
+	}
 
 }

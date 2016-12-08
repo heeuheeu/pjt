@@ -2,6 +2,7 @@ package model.sql;
 
 import java.util.List;
 
+import model.domain.vo.CalendarVO;
 import model.domain.vo.DeptDivisionVO;
 import model.domain.vo.EmployeeDepartmentVO;
 import model.domain.vo.EmployeeDeptVO;
@@ -34,7 +35,12 @@ public interface OracleDao {
 
 	 ///////////////////////search////////////////////////////
 	 public List<EmployeeDeptVO> searchEmpRow(EmployeeDeptVO member);
-
+	 
+	 // calendar
+	 public List<CalendarVO> myWorkRow(CalendarVO user);
+	 // modal update
+	 public int updateMyWork(EmployeeWorkDeptVO myinfo);
+	 
 
 }
 
