@@ -36,7 +36,7 @@ input[type=checkbox] {
 */
 
 
-.checkbox:before {
+/* .checkbox:before {
  content: "";
  display: inline-block;
  vertical-align: middle;
@@ -58,4 +58,19 @@ input[type=checkbox]:checked + .checkbox:before {
  vertical-align: middle;
  margin-top: 20px;
 } 
+ */
 
+/*checkbox -> button */
+
+.check a {
+ content: "";
+ display: inline-block;
+ vertical-align: middle;
+ width: 35px;
+ height: 35px;
+ margin-top: 20px;
+ background-size: contain;
+ background: url('../img/grayCheck.PNG');
+ cursor: pointer; 
+}
+ 

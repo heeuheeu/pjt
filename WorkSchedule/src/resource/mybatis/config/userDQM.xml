@@ -6,62 +6,109 @@
 <mapper namespace="member">
 	<!-- get메소드 호출 getID -> 네이밍 룰에 의해 id 소문자를 사용한다. -->
 		
-	<!-- EMP 테이블 -->	
-		
+	<!-- ////////////////////// login, join //////////////////////// -->
 	<select id="selectemp" parameterType="model.domain.vo.EmployeeVO" resultType="model.domain.vo.EmployeeVO">
-		SELECT *
-		FROM EMPLOYEE A
-		JOIN DEPARTMENT B USING (DEPTID)
-		JOIN WORK C USING (EMPID) 
-		WHERE EMPID = #{empid} 
+		SELECT 	*
+		FROM 	EMPLOYEE A
+		JOIN 	DEPARTMENT B USING (DEPTID)
+		JOIN 	WORK C USING (EMPID) 
+		WHERE 	EMPID = #{empid} 
 	</select>
 
 	<select id="loginemp" parameterType="model.domain.vo.EmployeeVO" resultType="model.domain.vo.EmployeeVO">
-		SELECT * FROM EMPLOYEE
-		WHERE EMPID = #{empid} AND EMPPWD = #{emppwd}	
+		SELECT 	* 
+		FROM 	EMPLOYEE
+		WHERE 	EMPID = #{empid} AND EMPPWD = #{emppwd}	
 	</select>
 
+	 <select id="idcheck" parameterType="String" resultType="model.domain.vo.EmployeeDeptVO" > 
+	  	SELECT 	* 
+	  	FROM 	EMPLOYEE 
+	  	JOIN 	DEPARTMENT USING (DEPTID) 
+	  	WHERE 	EMPID = #{empid}
+	 </select>
 
-	<!-- ///////////////////////eunbi eunbi//////////////////////// -->
-	 
 	 <insert id="insertemp" parameterType="model.domain.vo.EmployeeDeptVO" >
-	   
 	   INSERT INTO EMPLOYEE
-	  VALUES ( #{empid}, #{emppwd}, #{empname}, #{empgrade}, #{empphone}, #{empmail}, #{emploc}, 
-	   (SELECT DEPTID
-	     FROM DEPARTMENT
-	     WHERE DEPTNAME = #{deptname}) )
-	     
+	   VALUES 	( #{empid}, #{emppwd}, #{empname}, #{empgrade}, #{empphone}, #{empmail}, #{emploc}, 
+				   (SELECT DEPTID
+				     FROM  DEPARTMENT
+				     WHERE DEPTNAME = #{deptname}) )   
 	 </insert>
 	 
-	 
-	 <select id="pluslist" resultType="model.domain.vo.EmployeeDeptVO">
-	   SELECT * 
-	   FROM EMPLOYEE
-	   JOIN DEPARTMENT USING (DEPTID)
+	 <!-- ////////////////////// searchview //////////////////////// -->
+	 <select id="selectsearchview" parameterType="model.domain.vo.EmployeeDeptDivVO" resultType="model.domain.vo.EmployeeDeptDivVO">
+		SELECT 	* 
+		FROM 	EMPLOYEE A
+		JOIN 	DEPARTMENT B 	USING (DEPTID)
+		JOIN	DIVISION C 		USING (DIVID)
+		WHERE 	EMPID != #{empid}
+		AND		DEPTID = #{deptid}
 	 </select>
 	 
-	 
-	 <insert id="addFavorite" parameterType="model.domain.vo.FavoriteVO">
-	  INSERT INTO FAVORITE
-	  VALUES (#{empid}, #{empidfav})
+	 <insert id="addfavorite" parameterType="model.domain.vo.FavoriteVO">
+	   	INSERT INTO FAVORITE
+	  	VALUES 	( #{empid}, #{empidfav})
 	 </insert>
+
+	 <delete id="deletefavorite" parameterType="model.domain.vo.FavoriteVO">
+	  	DELETE FROM 	FAVORITE
+	  	WHERE  			EMPID = #{empid}
+	  	AND 	 		EMPIDFAV = #{empidfav}
+	 </delete>
 	  
 	 <select id="selectdeptdiv" resultType="model.domain.vo.EmployeeDeptVO">
-	   SELECT * 
-	   FROM DEPARTMENT
-	   JOIN DIVISION USING (DIVID)
+	   SELECT 	* 
+	   FROM 	DEPARTMENT
+	   JOIN 	DIVISION USING (DIVID)
 	 </select>
 	 
-	<!-- ///////////////////////eunbi eunbi//////////////////////// --> 
-
-	<select id="searchemp" parameterType="model.domain.vo.EmployeeDeptVO" resultType="model.domain.vo.EmployeeDeptVO">
-	   SELECT * 
-	   FROM EMPLOYEE
-	   JOIN DEPARTMENT USING (DEPTID)
-	   WHERE EMPNAME LIKE '%'||#{searchKeyword}||'%'
- 	</select>
+	 <select id="searchemp" parameterType="model.domain.vo.EmployeeDeptDivVO" resultType="model.domain.vo.EmployeeDeptDivVO">
+	   SELECT 	* 
+	   FROM 	EMPLOYEE
+	   JOIN 	DEPARTMENT USING (DEPTID)
+	   WHERE 	EMPNAME LIKE '%'||#{searchKeyword}||'%'
+ 	 </select>
+ 	 
+	 <select id="searchdept" parameterType="model.domain.vo.EmployeeDeptDivVO" resultType="model.domain.vo.EmployeeDeptDivVO">
+	   SELECT 	* 
+	   FROM 	EMPLOYEE
+	   JOIN 	DEPARTMENT USING (DEPTID)
+	   WHERE 	DEPTID = #{deptid}
+ 	 </select>	 
  
+	 <select id="searchdiv" parameterType="model.domain.vo.EmployeeDeptDivVO" resultType="model.domain.vo.EmployeeDeptDivVO">
+	   SELECT 	* 
+	   FROM 	EMPLOYEE
+	   JOIN 	DEPARTMENT USING (DEPTID)
+	   JOIN		DIVISION USING (DIVID)
+	   WHERE 	DIVID = (  SELECT DIVID
+						   FROM DIVISION
+						   JOIN DEPARTMENT USING (DIVID)
+						   WHERE DEPTID = #{deptid} )
+ 	 </select>	 
+  
+ 	 	 
+	 <!-- ////////////////////////update/////////////////////// -->
+	  <update id="update" parameterType="model.domain.vo.EmployeeDeptVO">
+	  UPDATE 	EMPLOYEE
+	  SET 		EMPID=#{empid}, 
+	  			EMPPWD=#{emppwd}, 
+	  			EMPNAME=#{empname}, 
+	  			EMPGRADE=#{empgrade}, 
+	  			EMPPHONE=#{empphone},
+	  			EMPMAIL=#{empmail}, 
+	  			EMPLOC=#{emploc}, 
+	  			DEPTID=(SELECT DEPTID FROM DEPARTMENT WHERE DEPTNAME = #{deptname})
+	  WHERE 	EMPID=#{empid}
+	  </update>  
+	  
+	  <update id="updateWork" parameterType="model.domain.vo.EmployeeDeptVO">
+	  UPDATE 	WORK 
+	  SET 		amloc = (select emploc from employee where empid =#{empid}), 
+	   			pmloc = (select emploc from employee where empid =#{empid})
+	  WHERE 	workdate >= (select to_char(sysdate, 'yyyy-MM-DD') from dual) 
+	  </update>
 </mapper>
 
 

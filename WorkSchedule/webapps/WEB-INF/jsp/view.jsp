@@ -38,12 +38,13 @@
       <br>
           <div class="profile"><img src="./img/${myinfo.empid}.gif"/></div>
           <div class="name">${myinfo.deptname}</div>
-          <div class="name">${myinfo.empname} 담당</div>
+          <div class="name">${myinfo.empname} ${myinfo.empgrade}</div>
       </div>
       
       <ul class="nav navmenu-nav btns">
       <div class="btns">
         <li><a href="calMove.inc" class="btn1" style="color: white;"><img src="img/side-icon1.png"/>나의일정</a></li>
+        <li><a href="updateview.inc" class="btn1" style="color: white;"><img src="img/side-icon1.png"/>내 정보수정</a></li>
         <li><a href="logout.inc" class="btn2" style="color: white;"><img src="img/side-icon2.png"/>로그아웃</a></li>
       </div>
       </ul>
@@ -57,7 +58,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="cardView.jsp" style="color: white; margin-left: 60px">SSG 워크플레이스</a>
+      <a class="navbar-brand" href="user.inc" style="color: white; margin-left: 60px">SSG 워크플레이스</a>
     </div>
 
 	<form role="form" method="post" name='dateForm'>
@@ -66,7 +67,7 @@
 			<!----날짜---->
 				<div class="date">
 					<input type="image" src="img/date-prev.png" onclick="prevDay()">
-					 <a href="#" id="currDateView" class="date-text" style="color: black;"></a> 
+					 <a href="calMove.inc" id="currDateView" class="date-text" style="color: black;"></a> 
 					<input type="image" src="img/date-next.png" onclick="nextDay()">
 					<input type="hidden" id="currDate">
 				</div>
@@ -85,7 +86,7 @@
 
 		</section>
 		<!----상단---->
-	</form>
+	
 	
 	<!----카드---->
 
@@ -97,7 +98,8 @@
 			<div class="item-lay">
 				<div class="profile">
 					<img src="./img/${myinfo.empid}.gif" onclick="show('${myinfo.empid}','${myinfo.empname}','${myinfo.empgrade}','${myinfo.deptname}',
-					      '${myinfo.amloc}','${myinfo.amlocdetail}','${myinfo.pmloc}','${myinfo.pmlocdetail}','${myinfo.workdate}','${myinfo.empid}')">
+					      '${myinfo.amloc}','${myinfo.amlocdetail}','${myinfo.pmloc}','${myinfo.pmlocdetail}',
+					      '${myinfo.workdate}','${myinfo.empid}','${myinfo.empphone}','${myinfo.empmail}')">
 				</div>
 				<div class="name">${myinfo.empname} ${myinfo.empgrade}</div>
 				<div class="ampm">
@@ -113,9 +115,10 @@
 		<article>
 			<div class="item-lay">
 				<div class="profile" >
-					<input type="image" src="img/${fav.empid}.png" 
+					<img src="img/${fav.empid}.png" 
 					onclick="show('${fav.empid}','${fav.empname}','${fav.empgrade}','${fav.deptname}',
-					      '${fav.amloc}','${fav.amlocdetail}','${fav.pmloc}','${fav.pmlocdetail}','${fav.workdate}','${fav.empid}')">
+					      '${fav.amloc}','${fav.amlocdetail}','${fav.pmloc}','${fav.pmlocdetail}',
+					      '${fav.workdate}','${fav.empid}','${fav.empphone}','${fav.empmail}')">
 					
 				</div>
 				<div class="name">${fav.empname} ${fav.empgrade}</div>
@@ -141,7 +144,8 @@
 
       <section id="list-item">
        <article onclick="show('${myinfo.empid}','${myinfo.empname}','${myinfo.empgrade}','${myinfo.deptname}',
-					      '${myinfo.amloc}','${myinfo.amlocdetail}','${myinfo.pmloc}','${myinfo.pmlocdetail}','${myinfo.workdate}','${myinfo.empid}')">
+					      '${myinfo.amloc}','${myinfo.amlocdetail}','${myinfo.pmloc}','${myinfo.pmlocdetail}',
+					      '${myinfo.workdate}','${myinfo.empid}','${myinfo.empphone}','${myinfo.empmail}')">
            <div class="item-lay">
              <div class="name"> <b> ${myinfo.empname} ${myinfo.empgrade} </b>
               <br/>신세계아이앤씨<br/>
@@ -155,7 +159,8 @@
 	
 	  <c:forEach items="${myfav}" var="fav">
 		<article onclick="show('${fav.empid}','${fav.empname}','${fav.empgrade}','${fav.deptname}',
-					      '${fav.amloc}','${fav.amlocdetail}','${fav.pmloc}','${fav.pmlocdetail}','${fav.workdate}','${fav.empid}')"> 
+					      '${fav.amloc}','${fav.amlocdetail}','${fav.pmloc}','${fav.pmlocdetail}',
+					      '${fav.workdate}','${fav.empid}','${fav.empphone}','${fav.empmail}')"> 
 			<div class="item-lay">
              <div class="name"> <b> ${fav.empname} ${fav.empgrade} </b>
               <br/>신세계아이앤씨<br/>
@@ -171,6 +176,11 @@
 	</section>
   </div>
 </div>
+
+<input type="hidden" id="view" name="view" value="cardView">
+
+</form>
+
 	<!--btn-->
 	<div class="add-btn" style="position: fixed;">
 		<a href="searchview.inc"><img src="img/add-user-btn-on.png" /></a>
@@ -178,12 +188,11 @@
 	<!----btn---->
 
 
-
 <!---- Modal ---->
 <!---- Modal ---->
 
  <!-- 1207수정:모달팝업 -->
- 	<form role="form" id='updateForm' action = "update.inc">
+ 	<form role="form" id='updateForm'>
 		<div class="modal fade popup" id="myModal" tabindex="-1" role="dialog"
 			aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
@@ -211,32 +220,67 @@
 				        </div>
 				        
 				        <div class="user-contact">
-				          <a href=""><img src="img/contact-icon1.png"/></a>
-				          <a href=""><img src="img/contact-icon2.png"/></a>
-				          <a href=""><img src="img/contact-icon3.png"/></a>
+				          <a href="" id="mail"><img src="img/contact-icon1.png" id="mailImg"/></a>
+				          <a href="" id="tel"><img src="img/contact-icon2.png" id="telImg"/></a>
+				          <a href="" id="sms"><img src="img/contact-icon3.png" id="smsImg"/></a>
 				        </div>
 				        
 				        <div class="date">
-				          <center><input type="text" name="editable" id="workdate" class="date-text" 
+				          <center><input type="text" name="workdate" id="workdateView" class="date-text" readonly="readonly" 
 				          			style="background-color: transparent"></center>
 				        </div>
 				        
 				        <div class="ampm">
 				          <div class="am">
 				            <span>AM</span>
-				            <center><input type="text" name="editable" id="amloc" class="amloc" style="background-color: transparent"></center>
-				            <center><input type="text" name="editable" id="amlocdetail" class="amlocdetail" 
-				            style="background-color: transparent" placeholder="상세일정 입력칸"></center>
+				            <center>
+				            
+				            <!-- <input type="text" name="amloc" id="amloc" class="amloc" style="background-color: transparent"> -->
+				            
+				            <select class="form-control" name="amloc" id="amloc" class="amloc" style="background-color: transparent;">
+								<option value="본사 10F">본사 10F</option>
+								<option value="본사 13F">본사 13F</option>
+								<option value="본사 14F">본사 14F</option>
+								<option value="성수">성수</option>
+								<option value="메사">메사</option>
+								<option value="기타">기타</option>
+								<option value="휴무">휴무</option>
+							</select>
+				            
+				            </center>
+				            <center><input type="text" name="amlocdetail" id="amlocdetail" class="amlocdetail" 
+				            style="background-color: transparent"></center>
 				          </div>
 				          
 				          <div class="pm">
 				            <span>PM</span>
-				            <center><input type="text" name="editable" id="pmloc" class="pmloc" style="background-color: transparent"></center>
-				            <center><input type="text" name="editable" id="pmlocdetail" class="pmlocdetail" 
-				            style="background-color: transparent" placeholder="상세일정 입력칸"></center>
+				            <center>
+				            
+				            <!-- <input type="text" name="pmloc" id="pmloc" class="pmloc" style="background-color: transparent"> -->
+				            
+				            <select class="form-control" name="pmloc" id="pmloc" class="pmloc" style="background-color: transparent;">
+								<option value="본사 10F">본사 10F</option>
+								<option value="본사 13F">본사 13F</option>
+								<option value="본사 14F">본사 14F</option>
+								<option value="성수">성수</option>
+								<option value="메사">메사</option>
+								<option value="기타">기타</option>
+								<option value="휴무">휴무</option>
+							</select>
+				            
+				            </center>
+				            <center><input type="text" name="pmlocdetail" id="pmlocdetail" class="pmlocdetail" 
+				            style="background-color: transparent"></center>
 				          </div>
 				        </div>
 				        
+				        	<!-- 컨트롤러 VO에 넘길 값 -->
+				        
+				        <input type="hidden" name="empid" id="empid">
+				        <input type="hidden" name="currdate" id="currDateUpdate">
+				        	
+				        	<!-- 컨트롤러 VO에 넘길 값 끝 -->
+				        	
 				      </div>
 		      	</div>
 		      </div>
@@ -248,14 +292,15 @@
 
     
     <!----btn---->
-	    <!-- Bootstrap core JavaScript
+	<!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="./js/jquery-1.10.2.min.js"></script>
     <script src="./js/bootstrap.min.js"></script>
     <script src="./js/jasny-bootstrap.min.js"></script>
-     <script src="./js/flatpickr.js"></script>
+    <script src="./js/flatpickr.js"></script>
     <script type="text/javascript">
+    	
 		var currDate = new Date();
 		var pageDate = currDate;
 
@@ -268,13 +313,14 @@
 			var dateView = y + "년 " + (m + 1) + "월 " + d + "일";
 			$("#currDate").html(date);
 			$("#currDateView").html(dateView);
+			$("#currDateUpdate").val(date);
 		}
 
 		draw();
 		
-		// 20161207추가
+// 20161207추가
 		
-		function show(id,name,grade,dept,am,amdetail,pm,pmdetail,workdate,img){
+		function show(id,name,grade,dept,am,amdetail,pm,pmdetail,workdate,img,tel,mail){
 			
 			var strArray = workdate.split('-');
 			var workdateForm = strArray[0]+"년 "+strArray[1]+"월 "+strArray[2]+"일";
@@ -283,37 +329,70 @@
 		    $("#empgrade").html(grade);
 		    $("#empdept").html(dept);
 		    
-		    $("#amloc").val(am);
-		    $("#amlocdetail").val(amdetail);
-		    $("#pmloc").val(pm);
-		    $("#pmlocdetail").val(pmdetail);	
-		    $("#workdate").val(workdateForm);	
-		    $("#empprofile").prop("src","img/"+img+".png");	
-
-			$("#myModal").modal('show');
+		    var amRow = document.getElementById("amloc").options.length;
+		    var pmRow = document.getElementById("pmloc").options.length;
 		    
-			
+		    for(var i=0;i<amRow;i++){
+		    	if (document.getElementById("amloc").options[i].value == am) {
+		            document.getElementById("amloc").options[i].selected = "selected";
+		        }
+		    }
+		    
+		    for(var i=0;i<pmRow;i++){
+		    	if (document.getElementById("pmloc").options[i].value == pm) {
+		            document.getElementById("pmloc").options[i].selected = "selected";
+		        }
+		    }
+		    
+		    $("#amlocdetail").val(amdetail);
+		    $("#pmlocdetail").val(pmdetail);	
+		    $("#workdateView").val(workdateForm);	
+		    $("#empprofile").prop("src","img/"+img+".png");
+		    $("#empid").val(id);
+		    $("#mail").attr("href", "mailto: "+mail);
+		    $("#tel").attr("href", "tel: "+tel);
+		    $("#sms").attr("href", "sms: "+tel);
+
 			if(id=="${myinfo.empid}") {
 				document.getElementById("editbtn").style.visibility = "visible";
-				//$("#workdate").removeAttr("disabled");
-				$("#workdate").removeAttr("disabled");
+				//$("#workdateView").removeAttr("disabled");
 				$("#amloc").removeAttr("disabled");
 				$("#amlocdetail").removeAttr("disabled");
 				$("#pmloc").removeAttr("disabled");
 				$("#pmlocdetail").removeAttr("disabled");
-				flatpickr('#workdate',{
+				/* flatpickr('#workdateView',{
 					// 팝업달력
 					defaultDate: workdate
-				});
+				}); */
+				$("#mail").hide();
+				$("#tel").hide();
+				$("#sms").hide();
+				
 				
 			}else{
 				document.getElementById("editbtn").style.visibility = "hidden";
-				//$("#workdate").prop("readyonly" , "readonly");
-				$("#workdate").prop("disabled","true");
+				//$("#workdateView").prop("disabled","true");
 				$("#amloc").prop("disabled","true");
 				$("#amlocdetail").prop("disabled","true");
 				$("#pmloc").prop("disabled","true");
 				$("#pmlocdetail").prop("disabled","true");
+				$("#mail").show();
+				$("#tel").show();
+				$("#sms").show();
+			}
+		
+			$("#myModal").modal('show');
+		}
+		
+		function update() {
+			var con_test = confirm("일정을 등록/수정 하시겠습니까?");
+			if(con_test==true){
+				$('#updateForm')
+				.prop("action","update.inc")
+				.prop("method","post").submit();
+				
+			}else{
+				// cancel
 			}
 		}
 		
@@ -372,11 +451,13 @@
         function listImgOn(){
             document.getElementById("listIcon").src="img/list-icon-on.png";
             document.getElementById("cardIcon").src="img/card-icon-off.png";
+            $("#view").val("listView");
         }
            
         function cardImgOn(){
             document.getElementById("listIcon").src="img/list-icon-off.png";
             document.getElementById("cardIcon").src="img/card-icon-on.png";
+            $("#view").val("cardView");
         }
              
 	</script>

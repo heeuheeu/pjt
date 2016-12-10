@@ -8,7 +8,8 @@ import org.springframework.stereotype.Service;
 
 import model.domain.vo.CalendarVO;
 import model.domain.vo.DeptDivisionVO;
-import model.domain.vo.EmployeeDepartmentVO;
+import model.domain.vo.EmpIdVO;
+import model.domain.vo.EmployeeDeptDivVO;
 import model.domain.vo.EmployeeDeptVO;
 import model.domain.vo.EmployeeFavWorkDeptVO;
 import model.domain.vo.EmployeeVO;
@@ -33,6 +34,13 @@ public class UserServiceImpl {
 		return dao.insertRow(emp);
 	}
 	
+	 //////////////// idcheck///////////////////////////
+	 public EmployeeDeptVO idCheck(String empid) {
+	  System.out.println("UserService idcheck");
+	  return dao.idCheckRow(empid);
+	 }
+	 
+
 	/////////////////////////////////////////////////////// About user
 	
 	public int selectwork(EmployeeWorkDeptVO user) { // work table�뿉 媛� �엳�뒗吏� 李얘린
@@ -58,30 +66,47 @@ public class UserServiceImpl {
 		System.out.println("UserService selectempfav");
 		return dao.selectFavRow(user);
 	}
-
+	public List<EmpIdVO> selectFavId(String userid) {
+		System.out.println("UserService selectempfav");
+		return dao.selectFavIdRow(userid);	
+	}
+	
 	//////////// eunbieunbi//////////////////////////////
 	///////////////////////// plus button - orga list /////////////////
-	public List<EmployeeDeptVO> list() {
+	public List<EmployeeDeptDivVO> list(EmployeeDeptDivVO user) {
 		System.out.println("USER SERVICE LIST");
-		return dao.listRow();
+		return dao.listRow(user);
 	}
 
-	public int addFav(String loginId, String valueArr) {
+	public int addFav(String loginId, String chkid) {
 		System.out.println("user service addFav");
-		return dao.addFavRow(loginId, valueArr);
+		return dao.addFavRow(loginId, chkid);
 	}
-
+	
+	public int deleteFav(String loginId, String valueArr) {
+		System.out.println("user service addFav");
+		return dao.deleteFavRow(loginId, valueArr);
+	}
+	
 	public List<DeptDivisionVO> selectdeptdiv() {
 		System.out.println("USER SERVICE LIST");
 		return dao.selectDeptDivRow();
 	}
 
-	//////////////////////// search//////////////////
-	public List<EmployeeDeptVO> searchEmp(EmployeeDeptVO member) {
+	//////////////////////// search ////////////////////////
+	public List<EmployeeDeptDivVO> searchEmp(EmployeeDeptDivVO member) {
 		System.out.println("UserService searchEmp");
 		return dao.searchEmpRow(member);
 	}
-
+	public List<EmployeeDeptDivVO> searchDept(EmployeeDeptDivVO member) {
+		System.out.println("UserService searchDept");
+		return dao.searchDeptRow(member);
+	}
+	public List<EmployeeDeptDivVO> searchDiv(EmployeeDeptDivVO member) {
+		System.out.println("UserService searchDept");
+		return dao.searchDivRow(member);
+	}
+	
 	/////////////////////////////////////////////////////// About calendar
 
 	public List<CalendarVO> selectMyWork(CalendarVO user) {
@@ -89,4 +114,28 @@ public class UserServiceImpl {
 		return dao.myWorkRow(user);
 	}
 
+	///////////////// update///////////////////
+	public int update(EmployeeDeptVO member) {
+		System.out.println("user service update");
+		return dao.updateRow(member);
+	}
+
+	public int updateWork(EmployeeDeptVO member) {
+		System.out.println("user service updateWork");
+		return dao.updateWorkRow(member);
+	}
+	
+	/////////////////////////////////////////////////////// Modal info update
+	/////////////////////////////////////////////////////// --sukjin
+
+	public int update(EmployeeWorkDeptVO myinfo) {
+		System.out.println("UserService updateMyWork");
+		return dao.updateMyWork(myinfo);
+	}
+
+	//////////////////////////////////////////////////////// Calendar.jsp modal
+	public EmployeeWorkDeptVO selectCalModal(EmployeeWorkDeptVO myinfo) {
+		System.out.println("UserService calendarModal");
+		return dao.selectCalModal(myinfo);
+	}
 }

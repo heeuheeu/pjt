@@ -30,7 +30,7 @@
 		AND 	WORKDATE = <!-- TO_CHAR(SYSDATE,'YYYY-MM-DD') --> #{currdate}	
 	</select>		
 
-	<select id="selectfav" parameterType="model.domain.vo.EmployeeWorkDeptVO" resultType="model.domain.vo.EmployeeFavWorkDeptVO">
+	<select id="selectfavid" parameterType="String" resultType="model.domain.vo.EmpIdVO">
 		SELECT 	EMPIDFAV
 		FROM 	FAVORITE 			
 		WHERE 	EMPID = #{empid}
@@ -59,13 +59,31 @@
 		AND 	C.WORKDATE = #{currdate}
 	</select>		
 	
-	<!--  /////////////////eunbieunbi///////////////////// -->
 	<insert id="insert" parameterType="model.domain.vo.EmployeeVO">
 	   INSERT INTO EMPLOYEE
 	   VALUES ( #{empid}, #{emppwd}, #{empname}, #{empgrade}, #{empphone}, #{empmail}, #{emploc}, #{deptid} ) 
 	</insert>  
-	<!--  /////////////////eunbieunbi///////////////////// -->
-	 			
+
+	 <update id="updatemywork" parameterType="model.domain.vo.EmployeeWorkDeptVO">
+	   UPDATE 	WORK
+	    SET 	WORKDATE = #{workdate}, 
+	    		AMLOC =#{amloc}, 
+	    		AMLOCDETAIL = #{amlocdetail}, 
+	    		PMLOC = #{pmloc}, 
+	    		PMLOCDETAIL =#{pmlocdetail}
+	    WHERE 	EMPID = #{empid} AND WORKDATE = #{currdate}
+	 </update>    
+   
+	 <select id="selectcalmodal" parameterType="model.domain.vo.EmployeeWorkDeptVO" resultType="model.domain.vo.EmployeeWorkDeptVO">
+	  SELECT  	EMPID, EMPPWD, EMPNAME, EMPGRADE, EMPPHONE, EMPMAIL, EMPLOC, DEPTNAME, 
+	       		TO_CHAR(WORKDATE,'YYYY-MM-DD') AS WORKDATE, AMLOC, AMLOCDETAIL, PMLOC, PMLOCDETAIL
+	  FROM  	EMPLOYEE A
+	  JOIN  	DEPARTMENT B 	USING (DEPTID)
+	  JOIN  	WORK C 			USING (EMPID) 
+	  WHERE  	EMPID = #{empid}
+	  AND  		WORKDATE = <!-- TO_CHAR(SYSDATE,'YYYY-MM-DD') --> #{currdate} 
+	 </select>   
+	 	 			
 </mapper>
 
 

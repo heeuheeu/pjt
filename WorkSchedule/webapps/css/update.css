@@ -13,6 +13,6 @@ section{width:70%; margin:auto; padding:100px 0; position: relative;}
 .sign-form .checkbox-layout input[type="checkbox"]{display: inline-block; vertical-align: middle;width: 20px; height: 20px; border-radius: 0; border: solid 1px #999; background: #fff;}
 .sign-form .checkbox-layout input[type="checkbox"]{-webkit-appearance: none;-moz-appearance: none;appearance: none;}
 .sign-form .checkbox-layout label{display: inline-block; vertical-align: middle;}
-.sign-form input[type="submit"]{display: block; width: 100%; background:#d3492c; border: 0; color: #fff;line-height: 50px;height: 50px;}
 
-
+.sign-form input[type="submit"]{display: block; width: 100%; background:#d3492c; border: 0; color: #fff;line-height: 50px;height: 50px;margin-bottom: 10px;}
+.sign-form input[type="reset"]{display: block; width: 100%; background:#3e3f44; border: 0; color: #fff;line-height: 50px;height: 50px;}

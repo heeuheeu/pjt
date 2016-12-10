@@ -129,6 +129,6 @@ public class EmployeeDeptVO extends SearchVO{ // ���̺� ���Ǿ� �
 		this.divid = divid;
 	}
 	
-	
+
 
 }

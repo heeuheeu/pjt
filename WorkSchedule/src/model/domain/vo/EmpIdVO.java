@@ -3,24 +3,32 @@ package model.domain.vo;
 import java.util.List;
 
 public class EmpIdVO {
-	private List<String> chk ;
+	private String empidfav ;
 
 	public EmpIdVO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public EmpIdVO(List<String> chk) {
+	public EmpIdVO(String empidfav) {
 		super();
-		this.chk = chk;
+		this.empidfav = empidfav;
 	}
 
-	public List<String> getChk() {
-		return chk;
+	public String getEmpidfav() {
+		return empidfav;
 	}
 
-	public void setChk(List<String> chk) {
-		this.chk = chk;
-	} 
+	public void setEmpidfav(String empidfav) {
+		this.empidfav = empidfav;
+	}
+
+	@Override
+	public String toString() {
+		return "EmpIdVO [empidfav=" + empidfav + "]";
+	}
+
+	
+	
 	
 }

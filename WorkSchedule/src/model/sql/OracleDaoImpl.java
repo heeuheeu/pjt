@@ -8,7 +8,8 @@ import org.springframework.stereotype.Repository;
 
 import model.domain.vo.CalendarVO;
 import model.domain.vo.DeptDivisionVO;
-import model.domain.vo.EmployeeDepartmentVO;
+import model.domain.vo.EmpIdVO;
+import model.domain.vo.EmployeeDeptDivVO;
 import model.domain.vo.EmployeeDeptVO;
 import model.domain.vo.EmployeeFavWorkDeptVO;
 import model.domain.vo.EmployeeVO;
@@ -27,10 +28,24 @@ public class OracleDaoImpl implements OracleDao {
 		return sqlSession.selectList("member.selectemp");
 	}
 
+	// sign up
+	@Override
+	public int insertRow(EmployeeDeptVO emp) {
+		System.out.println("Dao insertRow");
+		return sqlSession.insert("member.insertemp", emp);
+	}
+
 	@Override
 	public EmployeeVO loginEmp(EmployeeVO employee) {
 		System.out.println("Dao loginEmp");
 		return sqlSession.selectOne("member.loginemp", employee);
+	}
+
+	////////////////////// idcheck////////////////////////
+	@Override
+	public EmployeeDeptVO idCheckRow(String empid) {
+		System.out.println("Dao idCheckRow");
+		return sqlSession.selectOne("member.idcheck", empid);
 	}
 
 	///////////////////////////////////////////////////////// myDQM > mylist
@@ -56,29 +71,37 @@ public class OracleDaoImpl implements OracleDao {
 	@Override
 	public List<EmployeeFavWorkDeptVO> selectFavRow(EmployeeWorkDeptVO user) {
 		System.out.println("Dao selectFavRow");
-		// sqlSession.selectList("emp.selectfav", user);
+		// sqlSession.selectList("emp.selectfavid", user);
 		return sqlSession.selectList("emp.selectfavlist", user);
 	}
 
+	@Override
+	public List<EmpIdVO> selectFavIdRow(String userid) {
+		System.out.println("Dao selectFavidRow");
+		return sqlSession.selectList("emp.selectfavid", userid);
+	}
+
 	///////////////////////// eunbieunbi/////////////////////////////
-	// sign up
-	@Override
-	public int insertRow(EmployeeDeptVO emp) {
-		System.out.println("Dao insertRow");
-		return sqlSession.insert("member.insertemp", emp);
-	}
 
 	@Override
-	public List<EmployeeDeptVO> listRow() {
+	public List<EmployeeDeptDivVO> listRow(EmployeeDeptDivVO user) {
 		System.out.println("Dao listrow");
-		return sqlSession.selectList("member.pluslist");
+		return sqlSession.selectList("member.selectsearchview", user);
 	}
 
 	@Override
-	public int addFavRow(String loginId, String valueArr) {
+	public int addFavRow(String loginId, String chkid) {
 		System.out.println("dao addFavRow");
+		FavoriteVO fav = new FavoriteVO(loginId, chkid);
+		int flag = sqlSession.insert("member.addfavorite", fav);
+		return flag;
+	}
+
+	@Override
+	public int deleteFavRow(String loginId, String valueArr) {
+		System.out.println("dao deleteFavRow");
 		FavoriteVO fav = new FavoriteVO(loginId, valueArr);
-		int flag = sqlSession.insert("member.addFavorite", fav);
+		int flag = sqlSession.delete("member.deletefavorite", fav);
 		return flag;
 	}
 
@@ -89,14 +112,27 @@ public class OracleDaoImpl implements OracleDao {
 	}
 	///////////////////////// eunbieunbi/////////////////////////////
 
-	////////////////////////// search//////////////////////////
+	/////////////////////////////// search////////////////////////////////////
 	@Override
-	public List<EmployeeDeptVO> searchEmpRow(EmployeeDeptVO member) {
+	public List<EmployeeDeptDivVO> searchEmpRow(EmployeeDeptDivVO member) {
 		System.out.println("Dao searchEmpRow");
 		return sqlSession.selectList("member.searchemp", member);
 	}
-	
-	
+
+	@Override
+	public List<EmployeeDeptDivVO> searchDeptRow(EmployeeDeptDivVO member) {
+		System.out.println("Dao searchDeptRow");
+		return sqlSession.selectList("member.searchdept", member);
+	}
+
+	@Override
+	public List<EmployeeDeptDivVO> searchDivRow(EmployeeDeptDivVO member) {
+		System.out.println("Dao searchDivRow");
+		return sqlSession.selectList("member.searchdiv", member);
+	}
+
+	//////////////////////////////////////////////////////////////////////////
+
 	// calendar
 	@Override
 	public List<CalendarVO> myWorkRow(CalendarVO user) {
@@ -110,5 +146,26 @@ public class OracleDaoImpl implements OracleDao {
 		System.out.println("Dao updateWorkRow");
 		return sqlSession.update("emp.updatemywork", myinfo);
 	}
-	  
+
+	/////////////// updateRow////////////////
+	/////////////////////////////////////////// 2016-12-09/////////////////////////////////
+	@Override
+	public int updateRow(EmployeeDeptVO member) {
+		System.out.println("Dao updateRow");
+		return sqlSession.update("member.update", member);
+	}
+
+	@Override
+	public int updateWorkRow(EmployeeDeptVO member) {
+		System.out.println("Dao updateRow");
+		return sqlSession.update("member.updateWork", member);
+	}
+
+	// calendar modal
+	@Override
+	public EmployeeWorkDeptVO selectCalModal(EmployeeWorkDeptVO myinfo) {
+		System.out.println("Dao selectCalModal");
+		return sqlSession.selectOne("emp.selectcalmodal", myinfo);
+	}
+
 }

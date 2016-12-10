@@ -1,21 +1,21 @@
 package model.domain.vo;
 
-public class EmployeeDepartmentVO { // ���̺� ���Ǿ� �ִ� ��ü�� Ŭ����ȭ
+public class EmployeeDeptDivVO extends SearchVO{ // ���̺� ���Ǿ� �ִ� ��ü�� Ŭ����ȭ
 
 	private String empid, emppwd, empname, empgrade, empphone, empmail, emploc, deptid;
 	private String deptname, divid;
-
+	private String divname;
 	
 	
 	
-	public EmployeeDepartmentVO() {
+	public EmployeeDeptDivVO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
 
-	public EmployeeDepartmentVO(String empid, String emppwd, String empname, String empgrade, String empphone,
-			String empmail, String emploc, String deptid, String deptname, String divid) {
+	public EmployeeDeptDivVO(String empid, String emppwd, String empname, String empgrade, String empphone,
+			String empmail, String emploc, String deptid, String deptname, String divid, String divname) {
 		super();
 		this.empid = empid;
 		this.emppwd = emppwd;
@@ -27,6 +27,7 @@ public class EmployeeDepartmentVO { // ���̺� ���Ǿ� �ִ� �
 		this.deptid = deptid;
 		this.deptname = deptname;
 		this.divid = divid;
+		this.divname = divname;
 	}
 
 
@@ -129,6 +130,14 @@ public class EmployeeDepartmentVO { // ���̺� ���Ǿ� �ִ� �
 		this.divid = divid;
 	}
 	
+	public String getDivname() {
+		return divname;
+	}
+
+
+	public void setDivname(String divname) {
+		this.divname = divname;
+	}
 	
 
 }
