@@ -25,7 +25,7 @@
       <br>
           <div class="profile"><img src="img/profile.png"/></div>
           <div class="name">${myinfo.deptname}</div>
-          <div class="name">${myinfo.empname} ${myinfo.empgrade}</div>
+          <div class="name">${myinfo.empname}<%--  ${myinfo.empgrade} --%></div>
       </div>
       
       <ul class="nav navmenu-nav btns">
@@ -53,18 +53,18 @@
     </div>
 
     <!--상단-->
-    
     <section id="search-bar">
       <form action="search.inc" method="post">
 	      <input type="text" placeholder="이름 검색" name = "searchKeyword"/>
 	      <input type="submit" value="검색"/>
-	      <div class="path">
+<%-- 	      <div class="path">
 	        <div><a href="">신세계아이앤씨</a><span>></span></div>
 	        <div><a href="searchteam.inc">지원담당</a><span>></span></div>
 	        <div><a href="searchdept.inc">${myinfo.deptname}</a></div>
-	      </div>
+	      </div> --%>
       </form>
     </section>
+    
     <!--상단-->
 
     <!--리스트-->
@@ -79,7 +79,7 @@
 		        <div class="item-lay">
 		          <div class="profile"><img src="img/${member.empid}.png"/></div>
 		          <div class="name">
-		            ${member.empname} ${member.empgrade}<br/>
+		            ${member.empname}<%--  ${member.empgrade} --%><br/>
 		            ${member.deptname}<br/>	       
 		          </div>
 		          <div class="check">	          

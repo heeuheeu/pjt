@@ -13,7 +13,7 @@
 	</select>
 
 	<select id="selectemp" parameterType="model.domain.vo.EmployeeWorkDeptVO" resultType="model.domain.vo.EmployeeWorkDeptVO">
-		SELECT 	EMPID, EMPPWD, EMPNAME, EMPGRADE, EMPPHONE, EMPMAIL, EMPLOC, DEPTNAME
+		SELECT 	EMPID, EMPPWD, EMPNAME, EMPPHONE, EMPMAIL, EMPLOC, DEPTNAME
 		FROM 	EMPLOYEE A
 		JOIN 	DEPARTMENT B USING (DEPTID)
 		WHERE 	EMPID = #{empid}
@@ -21,7 +21,7 @@
 	
 	<select id="selectwork" parameterType="model.domain.vo.EmployeeWorkDeptVO" resultType="model.domain.vo.EmployeeWorkDeptVO">
 
-		SELECT 	EMPID, EMPPWD, EMPNAME, EMPGRADE, EMPPHONE, EMPMAIL, EMPLOC, DEPTNAME, 
+		SELECT 	EMPID, EMPPWD, EMPNAME, , EMPPHONE, EMPMAIL, EMPLOC, DEPTNAME, 
 	    		TO_CHAR(WORKDATE,'YYYY-MM-DD') AS WORKDATE, AMLOC, AMLOCDETAIL, PMLOC, PMLOCDETAIL
 		FROM 	EMPLOYEE A
 		JOIN 	DEPARTMENT B USING (DEPTID)
@@ -40,11 +40,12 @@
 		SELECT 	A.EMPID 							AS EMPID, 
 				A.EMPPWD 							AS EMPPWD, 
 				A.EMPNAME 							AS EMPNAME, 
-				A.EMPGRADE							AS EMPGRADE, 
 				A.EMPPHONE							AS EMPPHONE, 
 				A.EMPMAIL							AS EMPMAIL, 
 				A.EMPLOC							AS EMPLOC, 
+				A.DEPTID							AS DEPTID, 
 				B.DEPTNAME							AS DEPTNAME, 
+				B.DIVID								AS DIVID, 
 				TO_CHAR(C.WORKDATE,'YYYY-MM-DD')	AS WORKDATE, 
 				C.AMLOC								AS AMLOC, 
 				C.AMLOCDETAIL						AS AMLOCDETAIL,
@@ -61,7 +62,7 @@
 	
 	<insert id="insert" parameterType="model.domain.vo.EmployeeVO">
 	   INSERT INTO EMPLOYEE
-	   VALUES ( #{empid}, #{emppwd}, #{empname}, #{empgrade}, #{empphone}, #{empmail}, #{emploc}, #{deptid} ) 
+	   VALUES ( #{empid}, #{emppwd}, #{empname}, #{empphone}, #{empmail}, #{emploc}, #{deptid} ) 
 	</insert>  
 
 	 <update id="updatemywork" parameterType="model.domain.vo.EmployeeWorkDeptVO">
@@ -75,7 +76,7 @@
 	 </update>    
    
 	 <select id="selectcalmodal" parameterType="model.domain.vo.EmployeeWorkDeptVO" resultType="model.domain.vo.EmployeeWorkDeptVO">
-	  SELECT  	EMPID, EMPPWD, EMPNAME, EMPGRADE, EMPPHONE, EMPMAIL, EMPLOC, DEPTNAME, 
+	  SELECT  	EMPID, EMPPWD, EMPNAME, EMPPHONE, EMPMAIL, EMPLOC, DEPTNAME, 
 	       		TO_CHAR(WORKDATE,'YYYY-MM-DD') AS WORKDATE, AMLOC, AMLOCDETAIL, PMLOC, PMLOCDETAIL
 	  FROM  	EMPLOYEE A
 	  JOIN  	DEPARTMENT B 	USING (DEPTID)
@@ -83,6 +84,28 @@
 	  WHERE  	EMPID = #{empid}
 	  AND  		WORKDATE = <!-- TO_CHAR(SYSDATE,'YYYY-MM-DD') --> #{currdate} 
 	 </select>   
+	 
+	 <select id="selectdashemp" parameterType="model.domain.vo.EmployeeWorkDeptVO" resultType="model.domain.vo.EmployeeFavWorkDeptVO">
+		SELECT 	A.EMPID 							AS EMPID, 
+				A.EMPPWD 							AS EMPPWD, 
+				A.EMPNAME 							AS EMPNAME, 
+				A.EMPPHONE							AS EMPPHONE, 
+				A.EMPMAIL							AS EMPMAIL, 
+				A.EMPLOC							AS EMPLOC, 
+				A.DEPTID							AS DEPTID, 
+				B.DEPTNAME							AS DEPTNAME, 
+				B.DIVID								AS DIVID, 
+				TO_CHAR(C.WORKDATE,'YYYY-MM-DD')	AS WORKDATE, 
+				C.AMLOC								AS AMLOC, 
+				C.AMLOCDETAIL						AS AMLOCDETAIL,
+				C.PMLOC								AS PMLOC, 
+				C.PMLOCDETAIL						AS PMLOCDETAIL
+		FROM 	EMPLOYEE A 		
+		JOIN 	DEPARTMENT B 	ON (A.DEPTID = B.DEPTID)
+		JOIN 	WORK C 			ON (A.EMPID	 = C.EMPID) 
+		WHERE 	A.DEPTID = #{deptid}					
+		AND 	C.WORKDATE = #{currdate}
+	</select>		
 	 	 			
 </mapper>
 

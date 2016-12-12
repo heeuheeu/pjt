@@ -36,7 +36,7 @@
       <br>
           <div class="profile"><img src="./img/${myinfo.empid}.png"/></div>
           <div class="name">${myinfo.deptname }</div>
-          <div class="name">${myinfo.empname } ${myinfo.empgrade }</div>
+          <div class="name">${myinfo.empname }<%--  ${myinfo.empgrade } --%></div>
       </div>
       
       <ul class="nav navmenu-nav btns">
@@ -87,7 +87,7 @@
 					          <div class="name" id="empdept"></div>
 					          <div class="name"> 
 					          	<span id="empname"></span>
-					          	<span id="empgrade"></span>
+					          <!-- 	<span id="empgrade"></span> -->
 					          </div>
 					        </div>
 					        
@@ -204,7 +204,7 @@
     	                		
     	                		var id = workmodal.empid;
     	                		var name = workmodal.empname;
-    	                		var grade = workmodal.empgrade;
+    	                		/* var grade = workmodal.empgrade; */
     	                		var dept = workmodal.deptname;
     	                		var am = workmodal.amloc;
     	                		var amdetail = workmodal.amlocdetail;
@@ -219,7 +219,7 @@
     	    					var workdateForm = strArray[0]+"년 "+strArray[1]+"월 "+strArray[2]+"일";
     	    					
     	    					$("#empname").html(name);
-    	    				    $("#empgrade").html(grade);
+    	    				    /* $("#empgrade").html(grade); */
     	    				    $("#empdept").html(dept);
     	    				    
     	    				    var amRow = document.getElementById("amloc").options.length;

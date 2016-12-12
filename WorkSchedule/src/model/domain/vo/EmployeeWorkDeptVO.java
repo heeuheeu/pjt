@@ -4,7 +4,7 @@ import java.sql.Date;
 
 public class EmployeeWorkDeptVO { // ���̺� ���Ǿ� �ִ� ��ü�� Ŭ����ȭ 
 
-	private String empid, emppwd, empname, empgrade, empphone, empmail, emploc, deptid;
+	private String empid, emppwd, empname, empphone, empmail, emploc, deptid;
 	private String workdate;
 	private String amloc, amlocdetail, pmloc, pmlocdetail, deptname, divid;
 	private String currdate;
@@ -14,14 +14,13 @@ public class EmployeeWorkDeptVO { // ���̺� ���Ǿ� �ִ� ��
 		// TODO Auto-generated constructor stub
 	}
 
-	public EmployeeWorkDeptVO(String empid, String emppwd, String empname, String empgrade, String empphone,
+	public EmployeeWorkDeptVO(String empid, String emppwd, String empname,String empphone,
 			String empmail, String emploc, String deptid, String workdate, String amloc, String amlocdetail,
 			String pmloc, String pmlocdetail, String deptname, String divid, String currdate) {
 		super();
 		this.empid = empid;
 		this.emppwd = emppwd;
 		this.empname = empname;
-		this.empgrade = empgrade;
 		this.empphone = empphone;
 		this.empmail = empmail;
 		this.emploc = emploc;
@@ -58,14 +57,6 @@ public class EmployeeWorkDeptVO { // ���̺� ���Ǿ� �ִ� ��
 
 	public void setEmpname(String empname) {
 		this.empname = empname;
-	}
-
-	public String getEmpgrade() {
-		return empgrade;
-	}
-
-	public void setEmpgrade(String empgrade) {
-		this.empgrade = empgrade;
 	}
 
 	public String getEmpphone() {

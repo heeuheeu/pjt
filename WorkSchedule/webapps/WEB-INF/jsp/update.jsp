@@ -21,11 +21,11 @@
 	        <input type="password" placeholder="EMPPWD" name="emppwd" value="${myinfo.emppwd}"/><br>
 	        <input type="text" placeholder="EMPNAME" name="empname" value="${myinfo.empname}" readonly/><br>
 	        
-	        <label class="leader">
+	        <!-- <label class="leader">
 	        <input class="form-check-input" type="radio" name="empgrade" value="팀장" >팀장</label>&emsp;&emsp;
 	        
 	        <label class="partner">
-	        <input class="form-check-input" type="radio" name="empgrade" value="담당" checked >담당 </label><br><br>
+	        <input class="form-check-input" type="radio" name="empgrade" value="담당" checked >담당 </label><br><br> -->
 	        
 	        <input type="text" placeholder="EMPPHONE" name="empphone" value="${myinfo.empphone}"/><br>
 	        <input type="text" placeholder="EMPMAIL" name="empmail" value="${myinfo.empmail}"/><br>

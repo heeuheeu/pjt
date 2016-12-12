@@ -14,6 +14,19 @@
 		JOIN 	WORK C USING (EMPID) 
 		WHERE 	EMPID = #{empid} 
 	</select>
+	
+	<select id="selectdiv" resultType="model.domain.vo.DeptDivisionVO">
+	    SELECT  	DISTINCT DIVNAME
+	    FROM  		DEPARTMENT
+	    JOIN  		DIVISION USING (DIVID)
+	    ORDER BY 	DIVNAME
+	</select>
+    <select id="selectdeptdiv" resultType="model.domain.vo.EmployeeDeptVO">
+    	SELECT  	DEPTNAME 
+    	FROM  		DEPARTMENT
+    	JOIN  		DIVISION USING (DIVID)
+    	ORDER BY 	DEPTNAME
+   </select>
 
 	<select id="loginemp" parameterType="model.domain.vo.EmployeeVO" resultType="model.domain.vo.EmployeeVO">
 		SELECT 	* 
@@ -28,13 +41,23 @@
 	  	WHERE 	EMPID = #{empid}
 	 </select>
 
-	 <insert id="insertemp" parameterType="model.domain.vo.EmployeeDeptVO" >
-	   INSERT INTO EMPLOYEE
-	   VALUES 	( #{empid}, #{emppwd}, #{empname}, #{empgrade}, #{empphone}, #{empmail}, #{emploc}, 
-				   (SELECT DEPTID
-				     FROM  DEPARTMENT
-				     WHERE DEPTNAME = #{deptname}) )   
+	 <insert id="insertemp" parameterType="model.domain.vo.EmployeeDeptDivVO" >
+    	INSERT INTO EMPLOYEE
+    	VALUES  	( #{empid}, #{emppwd}, #{empname}, #{empphone}, #{empmail}, #{emploc}, 
+      				( SELECT DEPTID  FROM DEPARTMENT  WHERE DEPTNAME = #{deptname} ) )
+     </insert>
+	 
+	 <insert id="insertdefaultwork" parameterType="model.domain.vo.WorkVO" >
+	   	INSERT INTO WORK
+		VALUES 	  ( #{tempdate}, 
+					#{empid}, 
+					( SELECT EMPLOC FROM EMPLOYEE WHERE EMPID = #{EMPID} ) , 
+					NULL, 
+					( SELECT EMPLOC FROM EMPLOYEE WHERE EMPID = #{EMPID} ), 
+					NULL    )   
 	 </insert>
+	 
+	 	 
 	 
 	 <!-- ////////////////////// searchview //////////////////////// -->
 	 <select id="selectsearchview" parameterType="model.domain.vo.EmployeeDeptDivVO" resultType="model.domain.vo.EmployeeDeptDivVO">
@@ -43,6 +66,7 @@
 		JOIN 	DEPARTMENT B 	USING (DEPTID)
 		JOIN	DIVISION C 		USING (DIVID)
 		WHERE 	EMPID != #{empid}
+		AND 	EMPID != 'hr'
 		AND		DEPTID = #{deptid}
 	 </select>
 	 
@@ -56,18 +80,15 @@
 	  	WHERE  			EMPID = #{empid}
 	  	AND 	 		EMPIDFAV = #{empidfav}
 	 </delete>
-	  
-	 <select id="selectdeptdiv" resultType="model.domain.vo.EmployeeDeptVO">
-	   SELECT 	* 
-	   FROM 	DEPARTMENT
-	   JOIN 	DIVISION USING (DIVID)
-	 </select>
 	 
 	 <select id="searchemp" parameterType="model.domain.vo.EmployeeDeptDivVO" resultType="model.domain.vo.EmployeeDeptDivVO">
 	   SELECT 	* 
 	   FROM 	EMPLOYEE
 	   JOIN 	DEPARTMENT USING (DEPTID)
 	   WHERE 	EMPNAME LIKE '%'||#{searchKeyword}||'%'
+	   OR 		DEPTNAME LIKE '%'||#{searchKeyword}||'%'
+	   AND 		EMPID != 'hr'
+	   AND 		EMPID != #{empid}
  	 </select>
  	 
 	 <select id="searchdept" parameterType="model.domain.vo.EmployeeDeptDivVO" resultType="model.domain.vo.EmployeeDeptDivVO">
@@ -95,7 +116,6 @@
 	  SET 		EMPID=#{empid}, 
 	  			EMPPWD=#{emppwd}, 
 	  			EMPNAME=#{empname}, 
-	  			EMPGRADE=#{empgrade}, 
 	  			EMPPHONE=#{empphone},
 	  			EMPMAIL=#{empmail}, 
 	  			EMPLOC=#{emploc}, 

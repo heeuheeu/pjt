@@ -8,7 +8,9 @@ section{width:70%; margin:auto; padding:100px 0; position: relative;}
 /*sign-form*/
 .sign-form{display: block;}
 .sign-form input[type="text"],
-.sign-form input[type="password"] {display: block; margin-bottom: 5px; width: 100%; line-height: 40px; height: 40px; border:0; border-bottom: solid 2px #929294;}
+.sign-form input[type="password"],
+.sign-form input[type="email"],
+.sign-form input[type="phone"]{display: block; margin-bottom: 5px; width: 100%; line-height: 40px; height: 40px; border:0; border-bottom: solid 2px #929294;}
 .sign-form .checkbox-layout{display: block; margin: 20px 0;}
 .sign-form .checkbox-layout input[type="checkbox"]{display: inline-block; vertical-align: middle;width: 20px; height: 20px; border-radius: 0; border: solid 1px #999; background: #fff;}
 .sign-form .checkbox-layout input[type="checkbox"]{-webkit-appearance: none;-moz-appearance: none;appearance: none;}

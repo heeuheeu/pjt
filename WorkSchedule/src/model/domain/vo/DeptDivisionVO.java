@@ -12,12 +12,12 @@ public class DeptDivisionVO { // ���̺� ���Ǿ� �ִ� ��ü
 	}
 
 	
-	public DeptDivisionVO(String deptid, String deptname, String divid, String divName) {
+	public DeptDivisionVO(String deptid, String deptname, String divid, String divname) {
 		super();
 		this.deptid = deptid;
 		this.deptname = deptname;
 		this.divid = divid;
-		this.divname = divName;
+		this.divname = divname;
 	}
 
 
@@ -45,12 +45,12 @@ public class DeptDivisionVO { // ���̺� ���Ǿ� �ִ� ��ü
 		this.divid = divid;
 	}
 
-	public String getDivName() {
+	public String getDivname() {
 		return divname;
 	}
 
-	public void setDivName(String divName) {
-		this.divname = divName;
+	public void setDivname(String divname) {
+		this.divname = divname;
 	}
 
 	

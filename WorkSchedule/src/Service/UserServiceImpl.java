@@ -29,11 +29,15 @@ public class UserServiceImpl {
 	}
 
 	// sign up
-	public int join(EmployeeDeptVO emp) {
-		System.out.println("UserService join");
-		return dao.insertRow(emp);
+	public int join(EmployeeDeptDivVO emp) {
+		  System.out.println("UserService join");
+		  return dao.insertRow(emp);
 	}
-	
+	 public List<DeptDivisionVO> selectdiv() {
+		  System.out.println("USER SERVICE selectdiv");
+		  return dao.selectDivRow();
+	 }
+	 
 	 //////////////// idcheck///////////////////////////
 	 public EmployeeDeptVO idCheck(String empid) {
 	  System.out.println("UserService idcheck");
@@ -137,5 +141,10 @@ public class UserServiceImpl {
 	public EmployeeWorkDeptVO selectCalModal(EmployeeWorkDeptVO myinfo) {
 		System.out.println("UserService calendarModal");
 		return dao.selectCalModal(myinfo);
+	}
+	
+	public List<EmployeeWorkDeptVO> selectDashEmp(EmployeeWorkDeptVO myinfo) {
+		System.out.println("UserService calendarModal");
+		return dao.selectDashRow(myinfo);
 	}
 }

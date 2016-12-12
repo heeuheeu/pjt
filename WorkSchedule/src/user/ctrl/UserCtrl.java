@@ -135,6 +135,9 @@ public class UserCtrl {
 		EmployeeVO user = (EmployeeVO) session.getAttribute("login");
 		EmployeeWorkDeptVO list = new EmployeeWorkDeptVO();
 		list.setEmpid(user.getEmpid());
+		list.setDeptid(user.getDeptid());
+
+		System.out.println(list.getDeptid()+">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> deptid");
 
 		// Date setting
 		Calendar cal = Calendar.getInstance();
@@ -209,12 +212,8 @@ public class UserCtrl {
 		List<EmployeeDeptDivVO> list = service.list(useremp);
 		List<EmpIdVO> favid = service.selectFavId(user.getEmpid());
 
-		for (int i = 0; i < favid.size(); i++) {
-			System.out.println(favid.get(i).getEmpidfav());
-		}
-
-		model.addAttribute("myfav", favid);
 		model.addAttribute("lists", list);
+		model.addAttribute("myfav", favid);
 		return "searchView";
 	}
 
@@ -285,6 +284,7 @@ public class UserCtrl {
 		System.out.println("UserCtrl search");
 
 		EmployeeVO user = (EmployeeVO) session.getAttribute("login");
+		member.setEmpid(user.getEmpid());
 		List<EmployeeDeptDivVO> list = service.searchEmp(member);
 		List<EmpIdVO> favid = service.selectFavId(user.getEmpid());
 
@@ -313,7 +313,7 @@ public class UserCtrl {
 
 	@RequestMapping(value = "/searchteam.inc")
 	public String searchteam(HttpSession session, Model model) {
-		System.out.println("UserCtrl search");
+		System.out.println("UserCtrl searchteam");
 		EmployeeVO user = (EmployeeVO) session.getAttribute("login");
 		EmployeeDeptDivVO member = new EmployeeDeptDivVO();
 		member.setDeptid(user.getDeptid());
@@ -407,13 +407,25 @@ public class UserCtrl {
 		return "update";
 	}
 
-	///////////////////////////////////////////////////// my info db update
+	///////////////////////////////////////////////////// my info db update///////////////////////////////////////////
 	@RequestMapping(value = "/modify.inc", method = RequestMethod.POST)
 	public String modify(EmployeeDeptVO member, Model model) {
 		System.out.println("userctrl modify");
+		System.out.println("deptid================"+member.getDeptid());
+		
 		service.update(member);
 		System.out.println("update complete!");
 		service.updateWork(member);
+				
+		EmployeeVO user = new EmployeeVO(member.getEmpid(),member.getEmppwd(), member.getEmpname(),  
+					member.getEmpphone(), member.getEmpmail(),member.getEmploc(), member.getDeptid());
+
+		EmployeeVO newuser = service.loginEmp(user);
+
+		System.out.println("deptid================"+newuser.getDeptid());
+		System.out.println(newuser);
+		model.addAttribute("login", newuser);
+		
 		return "redirect:/user.inc";
 	}
 
@@ -513,7 +525,8 @@ public class UserCtrl {
 		EmployeeVO user = (EmployeeVO) session.getAttribute("login");
 		EmployeeWorkDeptVO list = new EmployeeWorkDeptVO();
 		list.setEmpid(user.getEmpid());
-		System.out.println(list.getEmpid());
+		list.setDeptid(user.getDeptid());
+		System.out.println(list.getDeptid()+">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>favoritedash");
 
 		// Date setting
 		Calendar cal = Calendar.getInstance();
@@ -522,8 +535,8 @@ public class UserCtrl {
 		System.out.println("<<<<<<<<<<<<<<<<<<<<<<currdate>>>>>>>>>>>>>>>>>>>>>" + currdate);
 		list.setCurrdate(currdate);
 
-		List<EmployeeFavWorkDeptVO> favlist = new ArrayList<EmployeeFavWorkDeptVO>();
-		favlist = service.selectempfav(list);
+		List<EmployeeWorkDeptVO> favlist = new ArrayList<EmployeeWorkDeptVO>();
+		favlist = service.selectDashEmp(list);
 
 		for (int i = 0; i < favlist.size(); i++) {
 			System.out.println(favlist.get(i));
@@ -569,10 +582,15 @@ public class UserCtrl {
 		///////////////////////////////////////////////////////////////////////////////// reload
 		EmployeeWorkDeptVO list = new EmployeeWorkDeptVO();
 		list.setEmpid(user.getEmpid());
+		list.setDeptid(user.getDeptid());
 		list.setCurrdate(currdate);
 
-		List<EmployeeFavWorkDeptVO> favlist = new ArrayList<EmployeeFavWorkDeptVO>();
-		favlist = service.selectempfav(list);
+		List<EmployeeWorkDeptVO> favlist = new ArrayList<EmployeeWorkDeptVO>();
+		favlist = service.selectDashEmp(list);
+
+		for (int i = 0; i < favlist.size(); i++) {
+			System.out.println(favlist.get(i));
+		}
 
 		/// 현재 시간 가져오기///
 		Date date = new Date();

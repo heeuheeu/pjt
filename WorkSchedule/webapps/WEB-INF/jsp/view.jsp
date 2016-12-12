@@ -29,8 +29,9 @@
 	</style>
     
   </head>
+ <!--  <body OnLoad="restart()"> --> 									<!-- 자동 reloading 추가 -->
   <body>
-	
+		
 	<div class="navmenu navmenu-default navmenu-fixed-left offcanvas">
       
 	  <div class="side-menu-content">
@@ -38,7 +39,7 @@
       <br>
           <div class="profile"><img src="./img/${myinfo.empid}.gif"/></div>
           <div class="name">${myinfo.deptname}</div>
-          <div class="name">${myinfo.empname} ${myinfo.empgrade}</div>
+          <div class="name">${myinfo.empname} <%-- ${myinfo.empgrade} --%></div>
       </div>
       
       <ul class="nav navmenu-nav btns">
@@ -97,11 +98,11 @@
 		<article>
 			<div class="item-lay">
 				<div class="profile">
-					<img src="./img/${myinfo.empid}.gif" onclick="show('${myinfo.empid}','${myinfo.empname}','${myinfo.empgrade}','${myinfo.deptname}',
+					<img src="./img/${myinfo.empid}.gif" onclick="show('${myinfo.empid}','${myinfo.empname}',<%-- '${myinfo.empgrade}', --%>'${myinfo.deptname}',
 					      '${myinfo.amloc}','${myinfo.amlocdetail}','${myinfo.pmloc}','${myinfo.pmlocdetail}',
 					      '${myinfo.workdate}','${myinfo.empid}','${myinfo.empphone}','${myinfo.empmail}')">
 				</div>
-				<div class="name">${myinfo.empname} ${myinfo.empgrade}</div>
+				<div class="name">${myinfo.empname} <%-- ${myinfo.empgrade} --%></div>
 				<div class="ampm">
 					<div class="am">
 						<span>AM</span>${myinfo.amloc}</div>
@@ -116,12 +117,12 @@
 			<div class="item-lay">
 				<div class="profile" >
 					<img src="img/${fav.empid}.png" 
-					onclick="show('${fav.empid}','${fav.empname}','${fav.empgrade}','${fav.deptname}',
+					onclick="show('${fav.empid}','${fav.empname}',<%-- '${fav.empgrade}', --%>'${fav.deptname}',
 					      '${fav.amloc}','${fav.amlocdetail}','${fav.pmloc}','${fav.pmlocdetail}',
 					      '${fav.workdate}','${fav.empid}','${fav.empphone}','${fav.empmail}')">
 					
 				</div>
-				<div class="name">${fav.empname} ${fav.empgrade}</div>
+				<div class="name">${fav.empname} <%-- ${fav.empgrade} --%></div>
 				<div class="ampm">
 					<div class="am">
 						<span>AM</span>${fav.amloc}
@@ -143,11 +144,11 @@
   	<div class="tab-pane fade" id="listView">
 
       <section id="list-item">
-       <article onclick="show('${myinfo.empid}','${myinfo.empname}','${myinfo.empgrade}','${myinfo.deptname}',
+       <article onclick="show('${myinfo.empid}','${myinfo.empname}',<%-- '${myinfo.empgrade}', --%>'${myinfo.deptname}',
 					      '${myinfo.amloc}','${myinfo.amlocdetail}','${myinfo.pmloc}','${myinfo.pmlocdetail}',
 					      '${myinfo.workdate}','${myinfo.empid}','${myinfo.empphone}','${myinfo.empmail}')">
            <div class="item-lay">
-             <div class="name"> <b> ${myinfo.empname} ${myinfo.empgrade} </b>
+             <div class="name"> <b> ${myinfo.empname} <%-- ${myinfo.empgrade}  --%></b>
               <br/>신세계아이앤씨<br/>
               ${myinfo.deptname}</div>
              <div class="ampm">
@@ -158,11 +159,11 @@
          </article>
 	
 	  <c:forEach items="${myfav}" var="fav">
-		<article onclick="show('${fav.empid}','${fav.empname}','${fav.empgrade}','${fav.deptname}',
+		<article onclick="show('${fav.empid}','${fav.empname}',<%-- '${fav.empgrade}', --%>'${fav.deptname}',
 					      '${fav.amloc}','${fav.amlocdetail}','${fav.pmloc}','${fav.pmlocdetail}',
 					      '${fav.workdate}','${fav.empid}','${fav.empphone}','${fav.empmail}')"> 
 			<div class="item-lay">
-             <div class="name"> <b> ${fav.empname} ${fav.empgrade} </b>
+             <div class="name"> <b> ${fav.empname} <%-- ${fav.empgrade} --%> </b>
               <br/>신세계아이앤씨<br/>
               ${fav.deptname}</div>
              <div class="ampm">
@@ -215,7 +216,7 @@
 				          <div class="name" id="empdept"></div>
 				          <div class="name"> 
 				          	<span id="empname"></span>
-				          	<span id="empgrade"></span>
+				          	<!-- <span id="empgrade"></span> -->
 				          </div>
 				        </div>
 				        
@@ -326,7 +327,7 @@
 			var workdateForm = strArray[0]+"년 "+strArray[1]+"월 "+strArray[2]+"일";
 			
 			$("#empname").html(name);
-		    $("#empgrade").html(grade);
+		    /* $("#empgrade").html(grade); */
 		    $("#empdept").html(dept);
 		    
 		    var amRow = document.getElementById("amloc").options.length;
@@ -459,7 +460,13 @@
             document.getElementById("cardIcon").src="img/card-icon-on.png";
             $("#view").val("cardView");
         }
-             
+/*              
+        function restart() { 	<!-- 자동 reloading 추가 -->
+        	 // 페이지 Reloading..처리 현재 30초.
+        	 setTimeout("location.href='user.inc'",7000);
+        } */
+        
+        
 	</script>
     
   </body>

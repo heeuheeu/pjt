@@ -4,7 +4,7 @@ import java.sql.Date;
 
 public class EmployeeFavWorkDeptVO { // 테이블에 명세되어 있는 객체를 클래스화 
 
-	private String empid, emppwd, empname, empgrade, empphone, empmail, emploc, deptid;
+	private String empid, emppwd, empname, empphone, empmail, emploc, deptid;
 	private String workdate;
 	private String amloc, amlocdetail, pmloc, pmlocdetail, deptname, divid, empidfav;
 
@@ -13,14 +13,12 @@ public class EmployeeFavWorkDeptVO { // 테이블에 명세되어 있는 객체를 클래스화
 		// TODO Auto-generated constructor stub
 	}
 
-	public EmployeeFavWorkDeptVO(String empid, String emppwd, String empname, String empgrade, String empphone,
-			String empmail, String emploc, String deptid, String workdate, String amloc, String amlocdetail, String pmloc,
+	public EmployeeFavWorkDeptVO(String empid, String emppwd, String empname,  String amlocdetail, String pmloc,
 			String pmlocdetail, String deptname, String divid, String empidfav) {
 		super();
 		this.empid = empid;
 		this.emppwd = emppwd;
 		this.empname = empname;
-		this.empgrade = empgrade;
 		this.empphone = empphone;
 		this.empmail = empmail;
 		this.emploc = emploc;
@@ -58,15 +56,6 @@ public class EmployeeFavWorkDeptVO { // 테이블에 명세되어 있는 객체를 클래스화
 	public void setEmpname(String empname) {
 		this.empname = empname;
 	}
-
-	public String getEmpgrade() {
-		return empgrade;
-	}
-
-	public void setEmpgrade(String empgrade) {
-		this.empgrade = empgrade;
-	}
-
 	public String getEmpphone() {
 		return empphone;
 	}
@@ -165,8 +154,7 @@ public class EmployeeFavWorkDeptVO { // 테이블에 명세되어 있는 객체를 클래스화
 
 	@Override
 	public String toString() {
-		return "EmployeeFavWorkDeptVO [empid=" + empid + ", emppwd=" + emppwd + ", empname=" + empname + ", empgrade="
-				+ empgrade + ", empphone=" + empphone + ", empmail=" + empmail + ", emploc=" + emploc + ", deptid="
+		return "EmployeeFavWorkDeptVO [empid=" + empid + ", emppwd=" + emppwd + ", empname=" + empname + ", empphone=" + empphone + ", empmail=" + empmail + ", emploc=" + emploc + ", deptid="
 				+ deptid + ", workdate=" + workdate + ", amloc=" + amloc + ", amlocdetail=" + amlocdetail + ", pmloc="
 				+ pmloc + ", pmlocdetail=" + pmlocdetail + ", deptname=" + deptname + ", divid=" + divid + ", empidfav="
 				+ empidfav + "]";

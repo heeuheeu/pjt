@@ -28,11 +28,24 @@ public class OracleDaoImpl implements OracleDao {
 		return sqlSession.selectList("member.selectemp");
 	}
 
-	// sign up
 	@Override
-	public int insertRow(EmployeeDeptVO emp) {
+	public int insertRow(EmployeeDeptDivVO emp) {
 		System.out.println("Dao insertRow");
 		return sqlSession.insert("member.insertemp", emp);
+	}
+
+	// 새로 만든거
+	@Override
+	public List<DeptDivisionVO> selectDivRow() {
+		System.out.println("Dao selectDivRow");
+		return sqlSession.selectList("member.selectdiv");
+	}
+
+	// INSERT DEFAULT WORKDATE
+	@Override
+	public int insertDefWorkRow(EmployeeDeptVO emp) {
+		System.out.println("Dao insertRow");
+		return sqlSession.insert("member.insertdefaultwork", emp);
 	}
 
 	@Override
@@ -166,6 +179,12 @@ public class OracleDaoImpl implements OracleDao {
 	public EmployeeWorkDeptVO selectCalModal(EmployeeWorkDeptVO myinfo) {
 		System.out.println("Dao selectCalModal");
 		return sqlSession.selectOne("emp.selectcalmodal", myinfo);
+	}
+
+	@Override
+	public List<EmployeeWorkDeptVO> selectDashRow(EmployeeWorkDeptVO myinfo) {
+		System.out.println("Dao selectDashRow");
+		return sqlSession.selectList("emp.selectdashemp", myinfo);
 	}
 
 }

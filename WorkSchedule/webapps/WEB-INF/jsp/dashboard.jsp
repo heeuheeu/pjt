@@ -124,7 +124,7 @@
 		<article>		
 			<div class="item-lay status1">
 	          <div class="profile"><img src="img/${fav.empid}.png" /></div>
-	          <div class="name">${fav.empname} ${fav.empgrade}</div>
+	          <div class="name">${fav.empname} <%-- ${fav.empgrade} --%></div>
 	          <div class="status">
 	            <div>
 	             <c:choose>

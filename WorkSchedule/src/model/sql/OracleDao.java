@@ -19,7 +19,10 @@ public interface OracleDao {
 	//////////////////////////////////////////////////////////////////////////////////////
 	public List<EmployeeVO> 	selectEmp();
 	public EmployeeVO			loginEmp(EmployeeVO employee);
-	public int insertRow(EmployeeDeptVO emp); 	// sign up
+	public int insertRow(EmployeeDeptDivVO emp);  // sign up 수정
+	public List<DeptDivisionVO> selectDivRow();
+	public int insertDefWorkRow(EmployeeDeptVO emp); 	// sign up
+	
 	public EmployeeDeptVO idCheckRow(String empid);
 	 
 	// mylist 
@@ -54,6 +57,6 @@ public interface OracleDao {
 
 	  // calendar modal
 	  public EmployeeWorkDeptVO selectCalModal(EmployeeWorkDeptVO myinfo);
-	 
+	  public List<EmployeeWorkDeptVO> selectDashRow(EmployeeWorkDeptVO myinfo);
 }
 
