@@ -52,7 +52,7 @@ public class UserServiceImpl {
 	 
 	/////////////////////////////////////////////////////// About user
 	
-	public int selectwork(EmployeeWorkDeptVO user) { // work table�뿉 媛� �엳�뒗吏� 李얘린
+	public int selectwork(EmployeeWorkDeptVO user) { // work table count
 		System.out.println("UserService mylist");
 		return dao.selectWorkRow(user); 
 	}
@@ -68,6 +68,11 @@ public class UserServiceImpl {
 		return dao.mylistRow2(user); 
 	}
 	
+	public EmployeeDeptDivVO selectEmpInfo(EmployeeDeptDivVO user) { 
+		System.out.println("UserService mylist");
+		return dao.selectEmpRow(user); 
+	}
+	
 	
 	/////////////////////////////////////////////////////// About favorite
 
@@ -80,8 +85,6 @@ public class UserServiceImpl {
 		return dao.selectFavIdRow(userid);	
 	}
 	
-	//////////// eunbieunbi//////////////////////////////
-	///////////////////////// plus button - orga list /////////////////
 	public List<EmployeeDeptDivVO> list(EmployeeDeptDivVO user) {
 		System.out.println("USER SERVICE LIST");
 		return dao.listRow(user);
@@ -102,7 +105,8 @@ public class UserServiceImpl {
 		return dao.selectDeptDivRow();
 	}
 
-	//////////////////////// search ////////////////////////
+	/////////////////////////////////////////////////////// About SEARCH
+	
 	public List<EmployeeDeptDivVO> searchEmp(EmployeeDeptDivVO member) {
 		System.out.println("UserService searchEmp");
 		return dao.searchEmpRow(member);

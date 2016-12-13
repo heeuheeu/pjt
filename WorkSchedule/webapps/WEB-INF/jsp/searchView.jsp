@@ -55,7 +55,7 @@
     <!--상단-->
     <section id="search-bar">
       <form action="search.inc" method="post">
-	      <input type="text" placeholder="이름, 사번 검색" name = "searchKeyword"/>
+	      <input type="text" placeholder="이름 또는 부서 검색" name = "searchKeyword"/>
 	      <input type="submit" value="검색"/>
 <%-- 	      <div class="path">
 	        <div><a href="">신세계아이앤씨</a><span>></span></div>

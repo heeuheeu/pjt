@@ -87,11 +87,16 @@ public class OracleDaoImpl implements OracleDao {
 		System.out.println("Dao mylistrow2");
 		return sqlSession.selectOne("emp.selectwork", user);
 	}
+	
+	@Override
+	public EmployeeDeptDivVO selectEmpRow(EmployeeDeptDivVO user) {
+		System.out.println("Dao mylistrow2");
+		return sqlSession.selectOne("emp.selectempinfo", user);
+	}	
 
 	@Override
 	public List<EmployeeFavWorkDeptVO> selectFavRow(EmployeeWorkDeptVO user) {
 		System.out.println("Dao selectFavRow");
-		// sqlSession.selectList("emp.selectfavid", user);
 		return sqlSession.selectList("emp.selectfavlist", user);
 	}
 
@@ -100,8 +105,6 @@ public class OracleDaoImpl implements OracleDao {
 		System.out.println("Dao selectFavidRow");
 		return sqlSession.selectList("emp.selectfavid", userid);
 	}
-
-	///////////////////////// eunbieunbi/////////////////////////////
 
 	@Override
 	public List<EmployeeDeptDivVO> listRow(EmployeeDeptDivVO user) {
@@ -130,9 +133,9 @@ public class OracleDaoImpl implements OracleDao {
 		System.out.println("Dao selectDeptDivRow");
 		return sqlSession.selectList("member.selectdeptdiv");
 	}
-	///////////////////////// eunbieunbi/////////////////////////////
 
-	/////////////////////////////// search////////////////////////////////////
+
+	////////////////////////////////////////////////////////////////////////// search
 	@Override
 	public List<EmployeeDeptDivVO> searchEmpRow(EmployeeDeptDivVO member) {
 		System.out.println("Dao searchEmpRow");
@@ -151,7 +154,7 @@ public class OracleDaoImpl implements OracleDao {
 		return sqlSession.selectList("member.searchdiv", member);
 	}
 
-	//////////////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////// calendar
 
 	// calendar
 	@Override
@@ -167,8 +170,7 @@ public class OracleDaoImpl implements OracleDao {
 		return sqlSession.update("emp.updatemywork", myinfo);
 	}
 
-	/////////////// updateRow////////////////
-	/////////////////////////////////////////// 2016-12-09/////////////////////////////////
+	//////////////////////////////////////////////////////////////////////////// updateRow
 	@Override
 	public int updateRow(EmployeeDeptDivVO member) {
 		System.out.println("Dao updateRow");

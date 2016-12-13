@@ -17,7 +17,7 @@
       <div class="sign-form">
         <form action="modify.inc" method="post" role="form" enctype="multipart/form-data">
         
-        	<img src="resources/${myinfo.empimg}">
+        	<%--  <img src="resources/${myinfo.empimg}"> --%>
         	<input type="file" placeholder="사진" name="file" id="empimg" value="${myinfo.empimg}"/>
         		
 	        <input type="text" placeholder="EMPID" name="empid" id="empid" value="${myinfo.empid}" readonly/><br>
@@ -33,7 +33,7 @@
 	         <select class="form-control" name="divname" id="divname" required>
 			      <option selected disabled value="">사업부명</option>
 			      <c:forEach items="${divlist}" var="member"> 
-			     <option <%-- <c:if test="${myinfo.divname eq member.divname}"> selected</c:if> --%>> ${member.divname} </option>    
+			     <option <c:if test="${myinfo.divname eq member.divname}"> selected</c:if>> ${member.divname} </option>    
 	         </c:forEach>        
 	       </select><br>               
 

@@ -16,50 +16,52 @@ import model.domain.vo.NfcVO;
 public interface OracleDao {
 
 
-
 	//////////////////////////////////////////////////////////////////////////////////////
-	public List<EmployeeVO> 	selectEmp();
-	public EmployeeVO			loginEmp(EmployeeVO employee);
-	public int insertRow(EmployeeDeptDivVO emp);  // sign up 수정
-	public List<DeptDivisionVO> selectDivRow();
-	public List<String> selectboxDeptRow(String divname);
-	public int insertDefWorkRow(EmployeeDeptVO emp); 	// sign up
-	
-	public EmployeeDeptVO idCheckRow(String empid);
+	public List<EmployeeVO> 			selectEmp();
+	public EmployeeVO					loginEmp(EmployeeVO employee);
+	public int 							insertRow(EmployeeDeptDivVO emp);  // sign up 수정	
+	public List<String> 				selectboxDeptRow(String divname);
+	public int 							insertDefWorkRow(EmployeeDeptVO emp); 	// sign up	
+	public EmployeeDeptVO 				idCheckRow(String empid);
 	 
 	// mylist 
 	public int 							selectWorkRow(EmployeeWorkDeptVO user);	
+	public EmployeeDeptDivVO			selectEmpRow(EmployeeDeptDivVO user);
 	public EmployeeWorkDeptVO 			mylistRow1(EmployeeWorkDeptVO user); 
 	public EmployeeWorkDeptVO 			mylistRow2(EmployeeWorkDeptVO user); 
 	public List<EmpIdVO> 				selectFavIdRow(String userid);
 	public List<EmployeeFavWorkDeptVO> 	selectFavRow(EmployeeWorkDeptVO user);
 	
-	 //////////////////eunbieunbi///////////////////
-	 //plus button 
-	 public List<EmployeeDeptDivVO> listRow(EmployeeDeptDivVO user);
-	 //orga check
-	 public int addFavRow(String loginId, String chkid);
-	 public int deleteFavRow(String loginId, String valueArr);
-	 //select dept
-	 public List<DeptDivisionVO> selectDeptDivRow();
 
-	 ///////////////////////search////////////////////////////
-	 public List<EmployeeDeptDivVO> searchEmpRow(EmployeeDeptDivVO member);
-	 public List<EmployeeDeptDivVO> searchDeptRow(EmployeeDeptDivVO member);
-	 public List<EmployeeDeptDivVO> searchDivRow(EmployeeDeptDivVO member);
+	 // favorite 
+	 public List<EmployeeDeptDivVO> 	listRow(EmployeeDeptDivVO user);	
+	 public int 						addFavRow(String loginId, String chkid);
+	 public int 						deleteFavRow(String loginId, String valueArr);
+	 
+	 // select dept
+	 public List<DeptDivisionVO> 		selectDivRow();
+	 public List<DeptDivisionVO> 		selectDeptDivRow();
+
+	 // search
+	 public List<EmployeeDeptDivVO> 	searchEmpRow(EmployeeDeptDivVO member);
+	 public List<EmployeeDeptDivVO> 	searchDeptRow(EmployeeDeptDivVO member);
+	 public List<EmployeeDeptDivVO> 	searchDivRow(EmployeeDeptDivVO member);
 	 	 
 	 // calendar
-	 public List<CalendarVO> myWorkRow(CalendarVO user);
-	 // modal update
-	 public int updateMyWork(EmployeeWorkDeptVO myinfo);
+	 public List<CalendarVO> 			myWorkRow(CalendarVO user);
 	 
-	 /////////////////// update///////////////
-	 public int updateRow(EmployeeDeptDivVO member);
-	 public int updateWorkRow(EmployeeDeptDivVO member);
+	 // modal update
+	 public int 						updateMyWork(EmployeeWorkDeptVO myinfo);
+	 
+	 // calendar modal	
+	 public EmployeeWorkDeptVO 			selectCalModal(EmployeeWorkDeptVO myinfo);	 
+	 
+	 // update
+	 public int 						updateRow(EmployeeDeptDivVO member);
+	 public int 						updateWorkRow(EmployeeDeptDivVO member);
 
-	 // calendar modal
-	 public EmployeeWorkDeptVO selectCalModal(EmployeeWorkDeptVO myinfo);
-	 public List<EmployeeWorkDeptVO> selectDashRow(EmployeeWorkDeptVO myinfo);
+	 // dashboard
+	 public List<EmployeeWorkDeptVO> 	selectDashRow(EmployeeWorkDeptVO myinfo);
 	  
 	// nfc update
 	 public int updateNfcAm(NfcVO nfc);

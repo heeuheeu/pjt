@@ -17,7 +17,7 @@
       <div class="sign-form">
         <form action="join.inc" method="post" role="form" id="joinBtn" enctype="multipart/form-data">
         
-        	<input type="file" placeholder="사진" name="file" id="empimg" required/><br>
+        	<input type="file" placeholder="사진" name="file" id="empimg"/><br>
 	        <input type="text" placeholder="사번" name="empid" id="empid" required/><br>
 	        <input type="password" placeholder="비밀번호" name="emppwd" required/><br>
 	        <input type="text" placeholder="이름" name="empname" required/><br>

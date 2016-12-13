@@ -18,7 +18,15 @@
 		JOIN 	DEPARTMENT B USING (DEPTID)
 		WHERE 	EMPID = #{empid}
 	</select>
-	
+
+	<select id="selectempinfo" parameterType="model.domain.vo.EmployeeDeptDivVO" resultType="model.domain.vo.EmployeeDeptDivVO">
+		SELECT 	*
+		FROM 	EMPLOYEE A
+		JOIN 	DEPARTMENT B USING (DEPTID)
+		JOIN	DIVISION C USING (DIVID)
+		WHERE 	EMPID = #{empid}
+	</select>
+		
 	<select id="selectwork" parameterType="model.domain.vo.EmployeeWorkDeptVO" resultType="model.domain.vo.EmployeeWorkDeptVO">
 
 		SELECT 	EMPID, EMPPWD, EMPNAME, EMPPHONE, EMPMAIL, EMPLOC, EMPIMG, DEPTNAME, 
@@ -60,11 +68,6 @@
 									WHERE 	EMPID=#{empid} )					
 		AND 	C.WORKDATE = #{currdate}
 	</select>		
-	
-	<insert id="insert" parameterType="model.domain.vo.EmployeeVO">
-	   INSERT INTO EMPLOYEE
-	   VALUES ( #{empid}, #{emppwd}, #{empname}, #{empphone}, #{empmail}, #{emploc}, #{deptid}, #{empimg} ) 
-	</insert>  
 
 	 <update id="updatemywork" parameterType="model.domain.vo.EmployeeWorkDeptVO">
 	   UPDATE 	WORK

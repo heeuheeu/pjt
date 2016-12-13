@@ -51,8 +51,10 @@
 
 	 <insert id="insertemp" parameterType="model.domain.vo.EmployeeDeptDivVO" >
     	INSERT INTO EMPLOYEE (EMPID, EMPPWD, EMPNAME, EMPPHONE, EMPMAIL, EMPLOC, EMPIMG, DEPTID)
-    	VALUES  	( #{empid}, #{emppwd}, #{empname}, #{empphone}, #{empmail}, #{emploc}, 
-    				  #{empimg, jdbcType=VARCHAR}, 
+    	VALUES  	( #{empid}, #{emppwd}, #{empname}, #{empphone}, #{empmail}, #{emploc},
+    					<if test="empimg != null"> 
+    				  	#{empimg, jdbcType=VARCHAR},
+    				    </if> 
       				  ( SELECT DEPTID  FROM DEPARTMENT  WHERE DEPTNAME = #{deptname} ) )
      </insert>
 	 
