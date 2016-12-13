@@ -15,30 +15,29 @@
     <section>
         
       <div class="sign-form">
-        <form action="join.inc" method="post" role="form" id="joinBtn">
+        <form action="join.inc" method="post" role="form" id="joinBtn" enctype="multipart/form-data">
         
+        	<input type="file" placeholder="사진" name="file" id="empimg" required/><br>
 	        <input type="text" placeholder="사번" name="empid" id="empid" required/><br>
 	        <input type="password" placeholder="비밀번호" name="emppwd" required/><br>
 	        <input type="text" placeholder="이름" name="empname" required/><br>
 	        <input type="text" onkeydown="mphon(this);" onkeyup="mphon(this);" placeholder="핸드폰 번호" name="empphone" maxlength="13" required/><br>
 	        <input type="email" placeholder="이메일" name="empmail" required/><br>
 	           
-	           
-	          <!--  /////////////사업부 이름 조회////////////////////// --> 
-	        <select class="form-control" name="divname" required>
-		  		<option selected disabled value="">사업부명</option>
-		  		<c:forEach items="${divlist}" var="member">	
-					<option value="${member.divname}"> ${member.divname}	</option>    
-		      	</c:forEach>	      	
-		     </select><br>	 	            
-	            
-		     <select class="form-control" name="deptname" required>
-		  		<option selected disabled value="">팀명</option>
-		  		<c:forEach items="${lists}" var="member">	
-					<option value="${member.deptname}"> ${member.deptname}	</option>    
-		      	</c:forEach>	      	
-		     </select><br>	      
-	          
+
+	           <!--  /////////////사업부 이름 조회////////////////////// --> 
+	         <select class="form-control" name="divname" id="divname" required>
+			      <option selected disabled value="">사업부명</option>
+			      <c:forEach items="${divlist}" var="member"> 
+			     <option value="${member.divname}"> ${member.divname} </option>    
+	         </c:forEach>        
+	       </select><br>               
+             
+	       <select class="form-control" name="deptname" id="deptname" required>
+	         <option selected disabled value="">팀명</option>
+	       </select><br>       
+       
+       
 			<select class="form-control" name="emploc" required>
 				<option selected disabled value="">근무지</option>
 				<option value="본사 10F">본사 10F</option>
@@ -66,7 +65,6 @@
     	var empid = $('#empid').val();
     	
 		$.ajax({
-
 			url : "idchk.inc",
 			type : "post",
 			data : {
@@ -97,129 +95,127 @@
     
     
     /////////////////phone number format////////////////////
-  
-  function mphon( obj ) { 
-
-	 obj.value =  PhonNumStr( obj.value ); 
-
-  } 
-  function _mphon( val ) { 
-
-	 document.write(PhonNumStr( val )); 
-
-  } 
-
-
-
-
-function PhonNumStr( str ){ 
-
-	 var RegNotNum  = /[^0-9]/g; 
-
-	 var RegPhonNum = ""; 
-
-	 var DataForm   = ""; 
-
-
-	 // return blank     
-
-	 if( str == "" || str == null ) return ""; 
+	function mphon( obj ) { 
+		 obj.value =  PhonNumStr( obj.value ); 
+	  } 
+	function _mphon( val ) { 
+		 document.write(PhonNumStr( val ));
+	  } 
 
 	
-
-	 // delete not number
-
-	 str = str.replace(RegNotNum,''); 
-
-
-	 /* 4자리 이하일 경우 아무런 액션도 취하지 않음. */
-
-	 if( str.length < 4 ) return str; 
-
-	 /* 지역번호 02일 경우 10자리 이상입력 못하도록 제어함. */
-
-	 if(str.substring(0,2)=="02" && str.length > 10){
-		 str = str.substring(0, 10);
-	 } 
-
-	 if( str.length > 3 && str.length < 7 ) { 
-		 if(str.substring(0,2)=="02"){
-			 DataForm = "$1-$2"; 
-
-			 RegPhonNum = /([0-9]{2})([0-9]+)/; 
+	function PhonNumStr( str ){ 
+	
+		 var RegNotNum  = /[^0-9]/g; 
+		 var RegPhonNum = ""; 
+		 var DataForm   = ""; 
+	
+		 // return blank     
+		 if( str == "" || str == null ) return ""; 
+	
+		 // delete not number
+		 str = str.replace(RegNotNum,''); 
+	
+		 /* 4자리 이하일 경우 아무런 액션도 취하지 않음. */
+		 if( str.length < 4 ) return str; 
+	
+		 /* 지역번호 02일 경우 10자리 이상입력 못하도록 제어함. */
+		 if(str.substring(0,2)=="02" && str.length > 10){
+			 str = str.substring(0, 10);
+		 } 
+	
+		 if( str.length > 3 && str.length < 7 ) { 
+			 if(str.substring(0,2)=="02"){
+				 DataForm = "$1-$2"; 
+	
+				 RegPhonNum = /([0-9]{2})([0-9]+)/; 
+			 
+			 } else {
+				 DataForm = "$1-$2"; 
+	
+				 RegPhonNum = /([0-9]{3})([0-9]+)/; 
+			 }
+		 } else if(str.length == 7 ) {
+			 if(str.substring(0,2)=="02"){
+				 DataForm = "$1-$2-$3"; 
+	
+				 RegPhonNum = /([0-9]{2})([0-9]{3})([0-9]+)/; 
+			 } else {
+				 DataForm = "$1-$2"; 
+	
+				 RegPhonNum = /([0-9]{3})([0-9]{4})/; 
+			 }
+		 } else if(str.length == 9 ) {
+			  if(str.substring(0,2)=="02"){
+				 DataForm = "$1-$2-$3"; 
+	
+				 RegPhonNum = /([0-9]{2})([0-9]{3})([0-9]+)/; 
+			 } else {
+				 DataForm = "$1-$2-$3"; 
+	
+				 RegPhonNum = /([0-9]{3})([0-9]{3})([0-9]+)/; 
+			 }
+		 } else if(str.length == 10){ 
+			 if(str.substring(0,2)=="02"){
+				 DataForm = "$1-$2-$3"; 
+	
+				 RegPhonNum = /([0-9]{2})([0-9]{4})([0-9]+)/; 
+			 }else{
+				 DataForm = "$1-$2-$3"; 
+	
+				 RegPhonNum = /([0-9]{3})([0-9]{3})([0-9]+)/;
+			 }
+		 } else if(str.length > 10){ 
+			 if(str.substring(0,2)=="02"){
+				 DataForm = "$1-$2-$3"; 
+	
+				 RegPhonNum = /([0-9]{2})([0-9]{4})([0-9]+)/; 
+			 }else{
+				 DataForm = "$1-$2-$3"; 
+	
+				 RegPhonNum = /([0-9]{3})([0-9]{4})([0-9]+)/; 
+			 }
+		 } else {	 
+			 if(str.substring(0,2)=="02"){
+				 DataForm = "$1-$2-$3"; 
+	
+				 RegPhonNum = /([0-9]{2})([0-9]{3})([0-9]+)/; 
+			 }else{
+				 DataForm = "$1-$2-$3"; 
+	
+				 RegPhonNum = /([0-9]{3})([0-9]{3})([0-9]+)/;
+			 }
+		 }
+	
+		 while( RegPhonNum.test(str) ) {  
+			 str = str.replace(RegPhonNum, DataForm);  
+		 } 
+		 return str; 
+	
+	} 
+	
+	 $("#divname").change(function() {
+		 var divname = $('#divname option:selected').val();
 		 
-		 } else {
-			 DataForm = "$1-$2"; 
+		   $.ajax({
+			    url : "deptSelect.inc",
+			    type : "post",
+			    data : {
+			    	div : divname
+		   		},
+			   dataType : "json",
+			    
+			   success : function(data) { 
+			    	$('#deptname').empty();
+			    	for(var i=0; i<data.length; i++){
+			     		$('#deptname').append("<option>"+data[i]+"</option>")
+			    	}
+			   },   
+			   error : function() {
+			    	alert("error");
+		   		} 
+		   }); 
+		  });
 
-			 RegPhonNum = /([0-9]{3})([0-9]+)/; 
-		 }
-	 } else if(str.length == 7 ) {
-		 if(str.substring(0,2)=="02"){
-			 DataForm = "$1-$2-$3"; 
-
-			 RegPhonNum = /([0-9]{2})([0-9]{3})([0-9]+)/; 
-		 } else {
-			 DataForm = "$1-$2"; 
-
-			 RegPhonNum = /([0-9]{3})([0-9]{4})/; 
-		 }
-	 } else if(str.length == 9 ) {
-		  if(str.substring(0,2)=="02"){
-			 DataForm = "$1-$2-$3"; 
-
-			 RegPhonNum = /([0-9]{2})([0-9]{3})([0-9]+)/; 
-		 } else {
-			 DataForm = "$1-$2-$3"; 
-
-			 RegPhonNum = /([0-9]{3})([0-9]{3})([0-9]+)/; 
-		 }
-	 } else if(str.length == 10){ 
-		 if(str.substring(0,2)=="02"){
-			 DataForm = "$1-$2-$3"; 
-
-			 RegPhonNum = /([0-9]{2})([0-9]{4})([0-9]+)/; 
-		 }else{
-			 DataForm = "$1-$2-$3"; 
-
-			 RegPhonNum = /([0-9]{3})([0-9]{3})([0-9]+)/;
-		 }
-	 } else if(str.length > 10){ 
-		 if(str.substring(0,2)=="02"){
-			 DataForm = "$1-$2-$3"; 
-
-			 RegPhonNum = /([0-9]{2})([0-9]{4})([0-9]+)/; 
-		 }else{
-			 DataForm = "$1-$2-$3"; 
-
-			 RegPhonNum = /([0-9]{3})([0-9]{4})([0-9]+)/; 
-		 }
-	 } else {	 
-		 if(str.substring(0,2)=="02"){
-			 DataForm = "$1-$2-$3"; 
-
-			 RegPhonNum = /([0-9]{2})([0-9]{3})([0-9]+)/; 
-		 }else{
-			 DataForm = "$1-$2-$3"; 
-
-			 RegPhonNum = /([0-9]{3})([0-9]{3})([0-9]+)/;
-		 }
-	 }
-
-
-	 while( RegPhonNum.test(str) ) {  
-
-		 str = str.replace(RegPhonNum, DataForm);  
-
-	 } 
-
-	 return str; 
-
-} 
-
-
-
-        
-    
     </script>
     
     

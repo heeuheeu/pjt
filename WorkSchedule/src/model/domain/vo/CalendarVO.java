@@ -2,17 +2,18 @@ package model.domain.vo;
 
 public class CalendarVO {
 
-	private String empid, emppwd, empname, empphone, empmail, emploc, deptid;
+	private String empimg, empid, emppwd, empname, empphone, empmail, emploc, deptid;
 	private String workdate;
 	private String amloc, amlocdetail, pmloc, pmlocdetail, deptname, divid;
 	public CalendarVO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public CalendarVO(String empid, String emppwd, String empname, String empphone, String empmail,
+	public CalendarVO(String empimg, String empid, String emppwd, String empname, String empphone, String empmail,
 			String emploc, String deptid, String workdate, String amloc, String amlocdetail, String pmloc,
 			String pmlocdetail, String deptname, String divid) {
 		super();
+		this.empimg = empimg;
 		this.empid = empid;
 		this.emppwd = emppwd;
 		this.empname = empname;
@@ -112,6 +113,12 @@ public class CalendarVO {
 	}
 	public void setDivid(String divid) {
 		this.divid = divid;
+	}
+	public String getEmpimg() {
+		return empimg;
+	}
+	public void setEmpimg(String empimg) {
+		this.empimg = empimg;
 	}
 	
 }

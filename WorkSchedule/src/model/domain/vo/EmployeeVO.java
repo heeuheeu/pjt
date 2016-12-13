@@ -3,16 +3,25 @@ package model.domain.vo;
 
 public class EmployeeVO { 
 
-	private String empid, emppwd, empname, empphone, empmail, emploc, deptid;
+	private String empimg, empid, emppwd, empname, empphone, empmail, emploc, deptid;
 	
+	public String getEmpimg() {
+		return empimg;
+	}
+
+	public void setEmpimg(String empimg) {
+		this.empimg = empimg;
+	}
+
 	public EmployeeVO() {
 		super();
 		// TODO Auto-generated constructor stub
 	} 
 	
-	public EmployeeVO(String empid, String emppwd, String empname, String empphone, String empmail,
+	public EmployeeVO(String empimg, String empid, String emppwd, String empname, String empphone, String empmail,
 		String emploc, String deptid) {
 		super();
+		this.empimg = empimg;
 		this.empid = empid;
 		this.emppwd = emppwd;
 		this.empname = empname;

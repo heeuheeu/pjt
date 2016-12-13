@@ -14,6 +14,7 @@ import model.domain.vo.EmployeeDeptVO;
 import model.domain.vo.EmployeeFavWorkDeptVO;
 import model.domain.vo.EmployeeVO;
 import model.domain.vo.EmployeeWorkDeptVO;
+import model.domain.vo.NfcVO;
 import model.sql.OracleDao;
 
 @Service("UserService")
@@ -37,6 +38,11 @@ public class UserServiceImpl {
 		  System.out.println("USER SERVICE selectdiv");
 		  return dao.selectDivRow();
 	 }
+
+	 public List<String> selectboxDept(String divname) {
+		  System.out.println("UserService updateDiv");
+		  return dao.selectboxDeptRow(divname);
+		 }
 	 
 	 //////////////// idcheck///////////////////////////
 	 public EmployeeDeptVO idCheck(String empid) {
@@ -44,7 +50,6 @@ public class UserServiceImpl {
 	  return dao.idCheckRow(empid);
 	 }
 	 
-
 	/////////////////////////////////////////////////////// About user
 	
 	public int selectwork(EmployeeWorkDeptVO user) { // work table�뿉 媛� �엳�뒗吏� 李얘린
@@ -119,12 +124,12 @@ public class UserServiceImpl {
 	}
 
 	///////////////// update///////////////////
-	public int update(EmployeeDeptVO member) {
+	public int update(EmployeeDeptDivVO member) {
 		System.out.println("user service update");
 		return dao.updateRow(member);
 	}
 
-	public int updateWork(EmployeeDeptVO member) {
+	public int updateWork(EmployeeDeptDivVO member) {
 		System.out.println("user service updateWork");
 		return dao.updateWorkRow(member);
 	}
@@ -147,4 +152,16 @@ public class UserServiceImpl {
 		System.out.println("UserService calendarModal");
 		return dao.selectDashRow(myinfo);
 	}
+	
+	//////////////////////////////////////////////////////// nfc
+	// nfc 태그로 업데이트
+	 public int nfcUpdateAm(NfcVO nfc) {
+	  System.out.println("UserService nfcUpdateAm");
+	  return dao.updateNfcAm(nfc);
+	 }
+	 public int nfcUpdatePm(NfcVO nfc) {
+	  System.out.println("UserService nfcUpdatePm");
+	  return dao.updateNfcPm(nfc);
+	  
+	 }
 }

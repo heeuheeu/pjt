@@ -55,7 +55,7 @@
     <!--상단-->
     <section id="search-bar">
       <form action="search.inc" method="post">
-	      <input type="text" placeholder="이름 검색" name = "searchKeyword"/>
+	      <input type="text" placeholder="이름, 사번 검색" name = "searchKeyword"/>
 	      <input type="submit" value="검색"/>
 <%-- 	      <div class="path">
 	        <div><a href="">신세계아이앤씨</a><span>></span></div>
@@ -77,7 +77,7 @@
     <c:forEach items="${lists}" var="member">	   
 		   <article>	        
 		        <div class="item-lay">
-		          <div class="profile"><img src="img/${member.empid}.png"/></div>
+		          <div class="profile"><img src="resources/${member.empimg}"/></div>
 		          <div class="name">
 		            ${member.empname}<%--  ${member.empgrade} --%><br/>
 		            ${member.deptname}<br/>	       

@@ -37,7 +37,7 @@
 	  <div class="side-menu-content">
       <div class="user-info">
       <br>
-          <div class="profile"><img src="./img/${myinfo.empid}.gif"/></div>
+          <div class="profile"><img src="resources/${myinfo.empimg}"/></div>
           <div class="name">${myinfo.deptname}</div>
           <div class="name">${myinfo.empname} <%-- ${myinfo.empgrade} --%></div>
       </div>
@@ -98,9 +98,10 @@
 		<article>
 			<div class="item-lay">
 				<div class="profile">
-					<img src="./img/${myinfo.empid}.gif" onclick="show('${myinfo.empid}','${myinfo.empname}',<%-- '${myinfo.empgrade}', --%>'${myinfo.deptname}',
+					<img src="resources/${myinfo.empimg}" 
+					onclick="show('${myinfo.empimg}', '${myinfo.empid}','${myinfo.empname}','${myinfo.deptname}',
 					      '${myinfo.amloc}','${myinfo.amlocdetail}','${myinfo.pmloc}','${myinfo.pmlocdetail}',
-					      '${myinfo.workdate}','${myinfo.empid}','${myinfo.empphone}','${myinfo.empmail}')">
+					      '${myinfo.workdate}','${myinfo.empphone}','${myinfo.empmail}')">
 				</div>
 				<div class="name">${myinfo.empname} <%-- ${myinfo.empgrade} --%></div>
 				<div class="ampm">
@@ -116,10 +117,10 @@
 		<article>
 			<div class="item-lay">
 				<div class="profile" >
-					<img src="img/${fav.empid}.png" 
-					onclick="show('${fav.empid}','${fav.empname}',<%-- '${fav.empgrade}', --%>'${fav.deptname}',
+					<img src="resources/${fav.empimg}" 
+					onclick="show('${fav.empimg}', '${fav.empid}','${fav.empname}','${fav.deptname}',
 					      '${fav.amloc}','${fav.amlocdetail}','${fav.pmloc}','${fav.pmlocdetail}',
-					      '${fav.workdate}','${fav.empid}','${fav.empphone}','${fav.empmail}')">
+					      '${fav.workdate}','${fav.empphone}','${fav.empmail}')">
 					
 				</div>
 				<div class="name">${fav.empname} <%-- ${fav.empgrade} --%></div>
@@ -144,9 +145,9 @@
   	<div class="tab-pane fade" id="listView">
 
       <section id="list-item">
-       <article onclick="show('${myinfo.empid}','${myinfo.empname}',<%-- '${myinfo.empgrade}', --%>'${myinfo.deptname}',
+       <article onclick="show('${myinfo.empimg}','${myinfo.empid}','${myinfo.empname}','${myinfo.deptname}',
 					      '${myinfo.amloc}','${myinfo.amlocdetail}','${myinfo.pmloc}','${myinfo.pmlocdetail}',
-					      '${myinfo.workdate}','${myinfo.empid}','${myinfo.empphone}','${myinfo.empmail}')">
+					      '${myinfo.workdate}','${myinfo.empphone}','${myinfo.empmail}')">
            <div class="item-lay">
              <div class="name"> <b> ${myinfo.empname} <%-- ${myinfo.empgrade}  --%></b>
               <br/>신세계아이앤씨<br/>
@@ -159,9 +160,9 @@
          </article>
 	
 	  <c:forEach items="${myfav}" var="fav">
-		<article onclick="show('${fav.empid}','${fav.empname}',<%-- '${fav.empgrade}', --%>'${fav.deptname}',
+		<article onclick="show('${fav.empimg}', '${fav.empid}','${fav.empname}','${fav.deptname}',
 					      '${fav.amloc}','${fav.amlocdetail}','${fav.pmloc}','${fav.pmlocdetail}',
-					      '${fav.workdate}','${fav.empid}','${fav.empphone}','${fav.empmail}')"> 
+					      '${fav.workdate}','${fav.empphone}','${fav.empmail}')"> 
 			<div class="item-lay">
              <div class="name"> <b> ${fav.empname} <%-- ${fav.empgrade} --%> </b>
               <br/>신세계아이앤씨<br/>
@@ -212,7 +213,7 @@
 					
 				      <div class="popup-content">
 				        <div class="user-info">
-				          <div class="profile"><img id='empprofile' /></div>
+				          <div class="profile"><img id='empimg' /></div>
 				          <div class="name" id="empdept"></div>
 				          <div class="name"> 
 				          	<span id="empname"></span>
@@ -319,9 +320,18 @@
 
 		draw();
 		
-// 20161207추가
+		// 스크립트 시작 지점에(draw() 있는 곳에 추가하면 됨) 추가해주고,
+
+		nfc();
+
+		// function 추가해주삼
+
+		function nfc(){
+		       window.inc.nfc(${myinfo.empid});
+		      }
 		
-		function show(id,name,grade,dept,am,amdetail,pm,pmdetail,workdate,img,tel,mail){
+		
+		function show(img, id,name,dept,am,amdetail,pm,pmdetail,workdate,tel,mail){
 			
 			var strArray = workdate.split('-');
 			var workdateForm = strArray[0]+"년 "+strArray[1]+"월 "+strArray[2]+"일";
@@ -348,7 +358,7 @@
 		    $("#amlocdetail").val(amdetail);
 		    $("#pmlocdetail").val(pmdetail);	
 		    $("#workdateView").val(workdateForm);	
-		    $("#empprofile").prop("src","img/"+img+".png");
+		    $("#empimg").prop("src","resources/"+img); //////////////////////////////////////////// 이미지 삽입
 		    $("#empid").val(id);
 		    $("#mail").attr("href", "mailto: "+mail);
 		    $("#tel").attr("href", "tel: "+tel);

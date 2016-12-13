@@ -15,29 +15,36 @@
     <section>
         
       <div class="sign-form">
-        <form action="modify.inc" method="post" role="form">
+        <form action="modify.inc" method="post" role="form" enctype="multipart/form-data">
         
+        	<img src="resources/${myinfo.empimg}">
+        	<input type="file" placeholder="사진" name="file" id="empimg" value="${myinfo.empimg}"/>
+        		
 	        <input type="text" placeholder="EMPID" name="empid" id="empid" value="${myinfo.empid}" readonly/><br>
 	        <input type="password" placeholder="EMPPWD" name="emppwd" value="${myinfo.emppwd}"/><br>
 	        <input type="text" placeholder="EMPNAME" name="empname" value="${myinfo.empname}" readonly/><br>
-	        
-	        <!-- <label class="leader">
-	        <input class="form-check-input" type="radio" name="empgrade" value="팀장" >팀장</label>&emsp;&emsp;
-	        
-	        <label class="partner">
-	        <input class="form-check-input" type="radio" name="empgrade" value="담당" checked >담당 </label><br><br> -->
-	        
+
+	  
 	        <input type="text" placeholder="EMPPHONE" name="empphone" value="${myinfo.empphone}"/><br>
 	        <input type="text" placeholder="EMPMAIL" name="empmail" value="${myinfo.empmail}"/><br>
 	            
-		     <select class="form-control" name="deptname" >
+
+		              <!--  /////////////사업부 이름 조회////////////////////// --> 
+	         <select class="form-control" name="divname" id="divname" required>
+			      <option selected disabled value="">사업부명</option>
+			      <c:forEach items="${divlist}" var="member"> 
+			     <option <%-- <c:if test="${myinfo.divname eq member.divname}"> selected</c:if> --%>> ${member.divname} </option>    
+	         </c:forEach>        
+	       </select><br>               
+
+       		     <select class="form-control" name="deptname" id="deptname">
 		  		<c:forEach items="${lists}" var="member">	
 					<option <c:if test="${myinfo.deptname eq member.deptname}"> selected</c:if>> ${member.deptname}	</option>    
 		      	</c:forEach>	      	
 		     </select><br>	      
+		     
 	          
-			<select class="form-control" name="emploc">
-								
+			<select class="form-control" name="emploc">			
 				<option <c:if test="${myinfo.emploc eq '본사 10F'}"> selected</c:if>>본사 10F</option>
 				<option <c:if test="${myinfo.emploc eq '본사 13F'}"> selected</c:if>>본사 13F</option>
 				<option <c:if test="${myinfo.emploc eq '본사 14F'}"> selected</c:if>>본사 14F</option>
@@ -93,7 +100,29 @@
 		});//ajax
 	});
     
-    
+	 $("#divname").change(function() {
+		 var divname = $('#divname option:selected').val();
+		 //alert("divname ajax 들어옴");
+		 
+		   $.ajax({
+			    url : "deptSelect.inc",
+			    type : "post",
+			    data : {
+			    	div : divname
+		   		},
+			   dataType : "json",
+			    
+			   success : function(data) { 
+			    	$('#deptname').empty();
+			    	for(var i=0; i<data.length; i++){
+			     		$('#deptname').append("<option>"+data[i]+"</option>")
+			    	}
+			   },   
+			   error : function() {
+			    	alert("error");
+		   		} 
+		   }); 
+		  });
         
     
     </script>

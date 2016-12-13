@@ -2,9 +2,9 @@ package model.domain.vo;
 
 import java.sql.Date;
 
-public class EmployeeWorkDeptVO { // ���̺� ���Ǿ� �ִ� ��ü�� Ŭ����ȭ 
+public class EmployeeWorkDeptVO {
 
-	private String empid, emppwd, empname, empphone, empmail, emploc, deptid;
+	private String empimg, empid, emppwd, empname, empphone, empmail, emploc, deptid;
 	private String workdate;
 	private String amloc, amlocdetail, pmloc, pmlocdetail, deptname, divid;
 	private String currdate;
@@ -14,10 +14,19 @@ public class EmployeeWorkDeptVO { // ���̺� ���Ǿ� �ִ� ��
 		// TODO Auto-generated constructor stub
 	}
 
-	public EmployeeWorkDeptVO(String empid, String emppwd, String empname,String empphone,
+	public String getEmpimg() {
+		return empimg;
+	}
+
+	public void setEmpimg(String empimg) {
+		this.empimg = empimg;
+	}
+
+	public EmployeeWorkDeptVO(String empimg, String empid, String emppwd, String empname,String empphone,
 			String empmail, String emploc, String deptid, String workdate, String amloc, String amlocdetail,
 			String pmloc, String pmlocdetail, String deptname, String divid, String currdate) {
 		super();
+		this.empimg = empimg;
 		this.empid = empid;
 		this.emppwd = emppwd;
 		this.empname = empname;

@@ -15,6 +15,7 @@ import model.domain.vo.EmployeeFavWorkDeptVO;
 import model.domain.vo.EmployeeVO;
 import model.domain.vo.EmployeeWorkDeptVO;
 import model.domain.vo.FavoriteVO;
+import model.domain.vo.NfcVO;
 
 @Repository("UserDao")
 public class OracleDaoImpl implements OracleDao {
@@ -40,6 +41,12 @@ public class OracleDaoImpl implements OracleDao {
 		System.out.println("Dao selectDivRow");
 		return sqlSession.selectList("member.selectdiv");
 	}
+	
+	@Override
+	 public List<String> selectboxDeptRow(String divname) {
+	  System.out.println("Dao selectboxDeptRow");
+	  return sqlSession.selectList("member.selectboxdept", divname);
+	 }
 
 	// INSERT DEFAULT WORKDATE
 	@Override
@@ -163,13 +170,13 @@ public class OracleDaoImpl implements OracleDao {
 	/////////////// updateRow////////////////
 	/////////////////////////////////////////// 2016-12-09/////////////////////////////////
 	@Override
-	public int updateRow(EmployeeDeptVO member) {
+	public int updateRow(EmployeeDeptDivVO member) {
 		System.out.println("Dao updateRow");
 		return sqlSession.update("member.update", member);
 	}
 
 	@Override
-	public int updateWorkRow(EmployeeDeptVO member) {
+	public int updateWorkRow(EmployeeDeptDivVO member) {
 		System.out.println("Dao updateRow");
 		return sqlSession.update("member.updateWork", member);
 	}
@@ -186,5 +193,20 @@ public class OracleDaoImpl implements OracleDao {
 		System.out.println("Dao selectDashRow");
 		return sqlSession.selectList("emp.selectdashemp", myinfo);
 	}
+	
+	// nfc update
+	 @Override
+	 public int updateNfcAm(NfcVO nfc) {
+	  System.out.println("Dao nfcUpdate");
+	  return sqlSession.update("member.nfcupdateam", nfc);
+	 }
+	 
+	 @Override
+	 public int updateNfcPm(NfcVO nfc) {
+	  System.out.println("Dao nfcUpdate");
+	  return sqlSession.update("member.nfcupdatepm", nfc);
+	 }
+
+
 
 }

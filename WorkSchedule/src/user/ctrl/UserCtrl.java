@@ -1,5 +1,6 @@
 package user.ctrl;
 
+import java.io.FileOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -7,6 +8,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -18,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.context.ServletContextAware;
+import org.springframework.web.multipart.MultipartFile;
 
 import Service.UserServiceImpl;
 import model.domain.vo.CalendarNoteVO;
@@ -30,6 +34,7 @@ import model.domain.vo.EmployeeFavWorkDeptVO;
 import model.domain.vo.EmployeeVO;
 import model.domain.vo.EmployeeWorkDeptVO;
 import model.domain.vo.FavoriteVO;
+import model.domain.vo.NfcVO;
 
 @Controller
 @SessionAttributes({ "login", "myinfo" })
@@ -61,23 +66,19 @@ public class UserCtrl {
 
 		//// 로그인 정보 일치시////
 		else {
-
 			////////////////////// 인사팀 로그인////////////////////////
 			if (user.getEmpid().equals("hr")) {
 				System.out.println("인사팀" + user.getEmpid());
 				model.addAttribute("login", user);
 				return "redirect:/dashboard.inc";
 			}
-
 			/////////// 로그인 정보 일치시///////////
 			else {
 				System.out.println("인사팀 아니에요" + user.getEmpid());
 				model.addAttribute("login", user);
 				return "redirect:/user.inc";
 			}
-
 		}
-
 	}
 
 	@RequestMapping(value = "/logout.inc")
@@ -136,8 +137,6 @@ public class UserCtrl {
 		EmployeeWorkDeptVO list = new EmployeeWorkDeptVO();
 		list.setEmpid(user.getEmpid());
 		list.setDeptid(user.getDeptid());
-
-		System.out.println(list.getDeptid()+">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> deptid");
 
 		// Date setting
 		Calendar cal = Calendar.getInstance();
@@ -212,6 +211,9 @@ public class UserCtrl {
 		List<EmployeeDeptDivVO> list = service.list(useremp);
 		List<EmpIdVO> favid = service.selectFavId(user.getEmpid());
 
+		for(int i=0 ; i<list.size() ; i++) {
+			System.out.println(list.get(i));
+		}
 		model.addAttribute("lists", list);
 		model.addAttribute("myfav", favid);
 		return "searchView";
@@ -287,7 +289,11 @@ public class UserCtrl {
 		member.setEmpid(user.getEmpid());
 		List<EmployeeDeptDivVO> list = service.searchEmp(member);
 		List<EmpIdVO> favid = service.selectFavId(user.getEmpid());
-
+		
+		for(int i=0 ; i<list.size() ; i++) {
+			System.out.println(list.get(i));
+		}
+		
 		model.addAttribute("myfav", favid);
 		model.addAttribute("lists", list);
 
@@ -399,8 +405,11 @@ public class UserCtrl {
 			mylist = service.mylist2(mylist);
 			System.out.println("amloc, pmloc : " + mylist.getAmloc() + mylist.getPmloc());
 		}
-
+		
+		List<DeptDivisionVO> divList = service.selectdiv(); 	
 		List<DeptDivisionVO> list = service.selectdeptdiv();
+		
+		model.addAttribute("divlist", divList);
 		model2.addAttribute("lists", list);
 		model.addAttribute("myinfo", mylist);
 
@@ -408,23 +417,42 @@ public class UserCtrl {
 	}
 
 	///////////////////////////////////////////////////// my info db update///////////////////////////////////////////
-	@RequestMapping(value = "/modify.inc", method = RequestMethod.POST)
-	public String modify(EmployeeDeptVO member, Model model) {
+	@RequestMapping(value = "/modify.inc", method = RequestMethod.POST ) 
+	public String modify(EmployeeDeptDivVO member, HttpServletRequest request, Model model) throws Exception {
 		System.out.println("userctrl modify");
-		System.out.println("deptid================"+member.getDeptid());
+		System.out.println("deptid================"+member.getEmpimg());
+		
+		MultipartFile f = member.getFile();
+
+		System.out.println(">>>>>>>>>>>>.... file name : "+f.getOriginalFilename() );
+		
+		if(f.getOriginalFilename() != null) {
+			member.setEmpimg(f.getOriginalFilename());
+		}
+			
+		if( f != null ) {
+			String path = request.getSession().getServletContext().getRealPath("/resources");
+			System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>> path : "+path); 
+				 
+			byte [] data = f.getBytes() ; 
+				
+			FileOutputStream out = new FileOutputStream(path+"/"+f.getOriginalFilename()) ;
+			out.write(data) ; 
+		}
 		
 		service.update(member);
 		System.out.println("update complete!");
 		service.updateWork(member);
 				
-		EmployeeVO user = new EmployeeVO(member.getEmpid(),member.getEmppwd(), member.getEmpname(),  
+	
+		EmployeeVO user = new EmployeeVO(member.getEmpimg(), member.getEmpid(),member.getEmppwd(), member.getEmpname(),  
 					member.getEmpphone(), member.getEmpmail(),member.getEmploc(), member.getDeptid());
 
-		EmployeeVO newuser = service.loginEmp(user);
+		user = service.loginEmp(user);
 
-		System.out.println("deptid================"+newuser.getDeptid());
-		System.out.println(newuser);
-		model.addAttribute("login", newuser);
+		System.out.println("empimg================"+user.getEmpimg());
+		System.out.println(user);
+		model.addAttribute("login", user);
 		
 		return "redirect:/user.inc";
 	}
@@ -603,4 +631,34 @@ public class UserCtrl {
 		return "dashboardOtherDay";
 	}
 
+	////////////////////////////// NFC Ctrl
+
+	@RequestMapping(value = "/nfc.inc")
+	@ResponseBody
+	public String nfc(@RequestParam(value = "loc") String loc, @RequestParam(value = "empid") String empid) {
+		System.out.println("UserCtrl nfc");
+
+		System.out.println("!!!!!!!!!!!!!!!!! NFC 태그  !!!!!!!!!!!!!!!!!");
+
+		System.out.println("loc : " + loc);
+		System.out.println("empid : " + empid);
+
+		NfcVO nfc = new NfcVO();
+		nfc.setLoc(loc);
+		nfc.setEmpid(empid);
+
+		Date date = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("kk");
+
+		String currentHour = sdf.format(date).toString();
+		int Hour = Integer.parseInt(currentHour);
+
+		if (Hour < 12) {
+			service.nfcUpdateAm(nfc);
+		} else {
+			service.nfcUpdatePm(nfc);
+		}
+
+		return null;
+	}
 }

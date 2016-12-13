@@ -4,7 +4,7 @@ import java.sql.Date;
 
 public class EmployeeFavWorkDeptVO { // 테이블에 명세되어 있는 객체를 클래스화 
 
-	private String empid, emppwd, empname, empphone, empmail, emploc, deptid;
+	private String empimg, empid, emppwd, empname, empphone, empmail, emploc, deptid;
 	private String workdate;
 	private String amloc, amlocdetail, pmloc, pmlocdetail, deptname, divid, empidfav;
 
@@ -13,9 +13,10 @@ public class EmployeeFavWorkDeptVO { // 테이블에 명세되어 있는 객체를 클래스화
 		// TODO Auto-generated constructor stub
 	}
 
-	public EmployeeFavWorkDeptVO(String empid, String emppwd, String empname,  String amlocdetail, String pmloc,
+	public EmployeeFavWorkDeptVO(String empimg, String empid, String emppwd, String empname,  String amlocdetail, String pmloc,
 			String pmlocdetail, String deptname, String divid, String empidfav) {
 		super();
+		this.empimg = empimg;
 		this.empid = empid;
 		this.emppwd = emppwd;
 		this.empname = empname;
@@ -31,6 +32,14 @@ public class EmployeeFavWorkDeptVO { // 테이블에 명세되어 있는 객체를 클래스화
 		this.deptname = deptname;
 		this.divid = divid;
 		this.empidfav = empidfav;
+	}
+
+	public String getEmpimg() {
+		return empimg;
+	}
+
+	public void setEmpimg(String empimg) {
+		this.empimg = empimg;
 	}
 
 	public String getEmpid() {

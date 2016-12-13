@@ -2,7 +2,7 @@ package model.domain.vo;
 
 public class EmployeeDeptVO extends SearchVO{ 
 
-	private String empid, emppwd, empname, empphone, empmail, emploc, deptid;
+	private String empimg, empid, emppwd, empname, empphone, empmail, emploc, deptid;
 	private String deptname, divid;
 
 	
@@ -14,9 +14,10 @@ public class EmployeeDeptVO extends SearchVO{
 	}
 
 
-	public EmployeeDeptVO(String empid, String emppwd, String empname, String empphone,
+	public EmployeeDeptVO(String empimg, String empid, String emppwd, String empname, String empphone,
 			String empmail, String emploc, String deptid, String deptname, String divid) {
 		super();
+		this.empimg = empimg;
 		this.empid = empid;
 		this.emppwd = emppwd;
 		this.empname = empname;
@@ -26,6 +27,16 @@ public class EmployeeDeptVO extends SearchVO{
 		this.deptid = deptid;
 		this.deptname = deptname;
 		this.divid = divid;
+	}
+
+
+	public String getEmpimg() {
+		return empimg;
+	}
+
+
+	public void setEmpimg(String empimg) {
+		this.empimg = empimg;
 	}
 
 

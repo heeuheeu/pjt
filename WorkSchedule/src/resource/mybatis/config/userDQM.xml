@@ -21,13 +21,21 @@
 	    JOIN  		DIVISION USING (DIVID)
 	    ORDER BY 	DIVNAME
 	</select>
+	
     <select id="selectdeptdiv" resultType="model.domain.vo.EmployeeDeptVO">
     	SELECT  	DEPTNAME 
     	FROM  		DEPARTMENT
     	JOIN  		DIVISION USING (DIVID)
     	ORDER BY 	DEPTNAME
-   </select>
+    </select>
 
+	<select id="selectboxdept" parameterType="String" resultType="String">
+	  	SELECT 	DEPTNAME
+	  	FROM 	DEPARTMENT
+	  	JOIN 	DIVISION USING (DIVID)
+	  	WHERE 	DIVNAME = #{divname}
+	 </select>
+	 
 	<select id="loginemp" parameterType="model.domain.vo.EmployeeVO" resultType="model.domain.vo.EmployeeVO">
 		SELECT 	* 
 		FROM 	EMPLOYEE
@@ -42,9 +50,10 @@
 	 </select>
 
 	 <insert id="insertemp" parameterType="model.domain.vo.EmployeeDeptDivVO" >
-    	INSERT INTO EMPLOYEE
+    	INSERT INTO EMPLOYEE (EMPID, EMPPWD, EMPNAME, EMPPHONE, EMPMAIL, EMPLOC, EMPIMG, DEPTID)
     	VALUES  	( #{empid}, #{emppwd}, #{empname}, #{empphone}, #{empmail}, #{emploc}, 
-      				( SELECT DEPTID  FROM DEPARTMENT  WHERE DEPTNAME = #{deptname} ) )
+    				  #{empimg, jdbcType=VARCHAR}, 
+      				  ( SELECT DEPTID  FROM DEPARTMENT  WHERE DEPTNAME = #{deptname} ) )
      </insert>
 	 
 	 <insert id="insertdefaultwork" parameterType="model.domain.vo.WorkVO" >
@@ -111,7 +120,7 @@
   
  	 	 
 	 <!-- ////////////////////////update/////////////////////// -->
-	  <update id="update" parameterType="model.domain.vo.EmployeeDeptVO">
+	  <update id="update" parameterType="model.domain.vo.EmployeeDeptDivVO">
 	  UPDATE 	EMPLOYEE
 	  SET 		EMPID=#{empid}, 
 	  			EMPPWD=#{emppwd}, 
@@ -119,16 +128,33 @@
 	  			EMPPHONE=#{empphone},
 	  			EMPMAIL=#{empmail}, 
 	  			EMPLOC=#{emploc}, 
+	  			<if test="empimg != null">
+	  			EMPIMG=#{empimg, jdbcType=VARCHAR}, 
+	  			</if>
 	  			DEPTID=(SELECT DEPTID FROM DEPARTMENT WHERE DEPTNAME = #{deptname})
 	  WHERE 	EMPID=#{empid}
 	  </update>  
 	  
-	  <update id="updateWork" parameterType="model.domain.vo.EmployeeDeptVO">
+	  <update id="updateWork" parameterType="model.domain.vo.EmployeeDeptDivVO">
 	  UPDATE 	WORK 
 	  SET 		amloc = (select emploc from employee where empid =#{empid}), 
 	   			pmloc = (select emploc from employee where empid =#{empid})
 	  WHERE 	workdate >= (select to_char(sysdate, 'yyyy-MM-DD') from dual) 
 	  </update>
+	  
+	  <update id="nfcupdateam" parameterType="model.domain.vo.NfcVO">
+		UPDATE 	WORK 
+		SET		AMLOC = #{loc} , PMLOC = #{loc}
+		WHERE 	EMPID = #{empid} AND WORKDATE=(SELECT TO_CHAR(SYSDATE, 'yyyy-MM-DD') FROM DUAL)
+	  </update>
+
+	  <update id="nfcupdatepm" parameterType="model.domain.vo.NfcVO">
+		UPDATE 	WORK 
+		SET		PMLOC = #{loc}
+				WHERE EMPID = #{empid} AND WORKDATE=(SELECT TO_CHAR(SYSDATE, 'yyyy-MM-DD') FROM DUAL)
+	  </update>
+
+	  
 </mapper>
 
 

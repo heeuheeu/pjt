@@ -37,7 +37,7 @@
 			<div class="user-info">
 				<br>
 				<div class="profile">
-					<img src="./img/${myinfo.empid}.gif" />
+					<img src="resources/${myinfo.empimg}" />
 				</div>
 				<div class="name">${myinfo.deptname}</div>
 				<div class="name">${myinfo.empname} <%-- ${myinfo.empgrade} --%></div>
@@ -101,9 +101,9 @@
 		<article>
 			<div class="item-lay">
 				<div class="profile">
-					<img src="./img/${myinfo.empid}.gif" onclick="show('${myinfo.empid}','${myinfo.empname}',<%-- '${myinfo.empgrade}', --%>'${myinfo.deptname}',
+					<img src="resources/${myinfo.empimg}" onclick="show('${myinfo.empimg}','${myinfo.empid}','${myinfo.empname}','${myinfo.deptname}',
 					      '${myinfo.amloc}','${myinfo.amlocdetail}','${myinfo.pmloc}','${myinfo.pmlocdetail}',
-					      '${myinfo.workdate}','${myinfo.empid}','${myinfo.empphone}','${myinfo.empmail}')">
+					      '${myinfo.workdate}','${myinfo.empphone}','${myinfo.empmail}')">
 				</div>
 				<div class="name">${myinfo.empname} <%-- ${myinfo.empgrade} --%></div>
 				<div class="ampm">
@@ -119,10 +119,10 @@
 		<article>
 			<div class="item-lay">
 				<div class="profile" >
-					<img src="img/${fav.empid}.png" 
-					onclick="show('${fav.empid}','${fav.empname}',<%-- '${fav.empgrade}', --%>'${fav.deptname}',
+					<img src="resources/${fav.empimg}" 
+					onclick="show('${fav.empimg}','${fav.empid}','${fav.empname}','${fav.deptname}',
 					      '${fav.amloc}','${fav.amlocdetail}','${fav.pmloc}','${fav.pmlocdetail}',
-					      '${fav.workdate}','${fav.empid}','${fav.empphone}','${fav.empmail}')">
+					      '${fav.workdate}','${fav.empphone}','${fav.empmail}')">
 					
 				</div>
 				<div class="name">${fav.empname} <%-- ${fav.empgrade} --%></div>
@@ -147,9 +147,9 @@
   	<div class="tab-pane fade" id="listView">
 
       <section id="list-item">
-       <article onclick="show('${myinfo.empid}','${myinfo.empname}',<%-- '${myinfo.empgrade}', --%>'${myinfo.deptname}',
+       <article onclick="show('${myinfo.empimg}','${myinfo.empid}','${myinfo.empname}','${myinfo.deptname}',
 					      '${myinfo.amloc}','${myinfo.amlocdetail}','${myinfo.pmloc}','${myinfo.pmlocdetail}',
-					      '${myinfo.workdate}','${myinfo.empid}','${myinfo.empphone}','${myinfo.empmail}')">
+					      '${myinfo.workdate}','${myinfo.empphone}','${myinfo.empmail}')">
            <div class="item-lay">
              <div class="name"> <b> ${myinfo.empname}<%--  ${myinfo.empgrade}  --%></b>
               <br/>신세계아이앤씨<br/>
@@ -162,9 +162,9 @@
          </article>
 	
 	  <c:forEach items="${myfav}" var="fav">
-		<article onclick="show('${fav.empid}','${fav.empname}',<%-- '${fav.empgrade}', --%>'${fav.deptname}',
+		<article onclick="show('${fav.empimg}','${fav.empid}','${fav.empname}','${fav.deptname}',
 					      '${fav.amloc}','${fav.amlocdetail}','${fav.pmloc}','${fav.pmlocdetail}',
-					      '${fav.workdate}','${fav.empid}','${fav.empphone}','${fav.empmail}')"> 
+					      '${fav.workdate}','${fav.empphone}','${fav.empmail}')"> 
 			<div class="item-lay">
              <div class="name"> <b> ${fav.empname}<%--  ${fav.empgrade} --%> </b>
               <br/>신세계아이앤씨<br/>
@@ -334,7 +334,7 @@
 		///////////////////////////////////////////// show modal 
 		// 20161207추가
 		
-		function show(id,name,grade,dept,am,amdetail,pm,pmdetail,workdate,img,tel,mail){
+		function show(img, id,name,dept,am,amdetail,pm,pmdetail,workdate,tel,mail){
 			
 			var strArray = workdate.split('-');
 			var workdateForm = strArray[0]+"년 "+strArray[1]+"월 "+strArray[2]+"일";
@@ -361,7 +361,7 @@
 		    $("#amlocdetail").val(amdetail);
 		    $("#pmlocdetail").val(pmdetail);	
 		    $("#workdateView").val(pageDateView);	
-		    $("#empprofile").prop("src","img/"+img+".png");
+		    $("#empprofile").prop("src","resources/"+img);
 		    $("#empid").val(id);
 		    $("#currDateUpdate").val(pageDate);
 		    $("#mail").attr("href", "mailto: "+mail);

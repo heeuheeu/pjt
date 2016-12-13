@@ -13,7 +13,7 @@
 	</select>
 
 	<select id="selectemp" parameterType="model.domain.vo.EmployeeWorkDeptVO" resultType="model.domain.vo.EmployeeWorkDeptVO">
-		SELECT 	EMPID, EMPPWD, EMPNAME, EMPPHONE, EMPMAIL, EMPLOC, DEPTNAME
+		SELECT 	*
 		FROM 	EMPLOYEE A
 		JOIN 	DEPARTMENT B USING (DEPTID)
 		WHERE 	EMPID = #{empid}
@@ -21,7 +21,7 @@
 	
 	<select id="selectwork" parameterType="model.domain.vo.EmployeeWorkDeptVO" resultType="model.domain.vo.EmployeeWorkDeptVO">
 
-		SELECT 	EMPID, EMPPWD, EMPNAME, , EMPPHONE, EMPMAIL, EMPLOC, DEPTNAME, 
+		SELECT 	EMPID, EMPPWD, EMPNAME, EMPPHONE, EMPMAIL, EMPLOC, EMPIMG, DEPTNAME, 
 	    		TO_CHAR(WORKDATE,'YYYY-MM-DD') AS WORKDATE, AMLOC, AMLOCDETAIL, PMLOC, PMLOCDETAIL
 		FROM 	EMPLOYEE A
 		JOIN 	DEPARTMENT B USING (DEPTID)
@@ -42,7 +42,8 @@
 				A.EMPNAME 							AS EMPNAME, 
 				A.EMPPHONE							AS EMPPHONE, 
 				A.EMPMAIL							AS EMPMAIL, 
-				A.EMPLOC							AS EMPLOC, 
+				A.EMPLOC							AS EMPLOC,
+				A.EMPIMG							AS EMPIMG, 
 				A.DEPTID							AS DEPTID, 
 				B.DEPTNAME							AS DEPTNAME, 
 				B.DIVID								AS DIVID, 
@@ -62,7 +63,7 @@
 	
 	<insert id="insert" parameterType="model.domain.vo.EmployeeVO">
 	   INSERT INTO EMPLOYEE
-	   VALUES ( #{empid}, #{emppwd}, #{empname}, #{empphone}, #{empmail}, #{emploc}, #{deptid} ) 
+	   VALUES ( #{empid}, #{emppwd}, #{empname}, #{empphone}, #{empmail}, #{emploc}, #{deptid}, #{empimg} ) 
 	</insert>  
 
 	 <update id="updatemywork" parameterType="model.domain.vo.EmployeeWorkDeptVO">
@@ -76,7 +77,7 @@
 	 </update>    
    
 	 <select id="selectcalmodal" parameterType="model.domain.vo.EmployeeWorkDeptVO" resultType="model.domain.vo.EmployeeWorkDeptVO">
-	  SELECT  	EMPID, EMPPWD, EMPNAME, EMPPHONE, EMPMAIL, EMPLOC, DEPTNAME, 
+	  SELECT  	EMPID, EMPPWD, EMPNAME, EMPPHONE, EMPMAIL, EMPLOC, EMPIMG, DEPTNAME, 
 	       		TO_CHAR(WORKDATE,'YYYY-MM-DD') AS WORKDATE, AMLOC, AMLOCDETAIL, PMLOC, PMLOCDETAIL
 	  FROM  	EMPLOYEE A
 	  JOIN  	DEPARTMENT B 	USING (DEPTID)
@@ -92,6 +93,7 @@
 				A.EMPPHONE							AS EMPPHONE, 
 				A.EMPMAIL							AS EMPMAIL, 
 				A.EMPLOC							AS EMPLOC, 
+				A.EMPIMG							AS EMPIMG,
 				A.DEPTID							AS DEPTID, 
 				B.DEPTNAME							AS DEPTNAME, 
 				B.DIVID								AS DIVID, 

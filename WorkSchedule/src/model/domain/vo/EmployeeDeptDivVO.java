@@ -1,22 +1,27 @@
 package model.domain.vo;
 
-public class EmployeeDeptDivVO extends SearchVO{ // ���̺� ���Ǿ� �ִ� ��ü�� Ŭ����ȭ
+import org.springframework.web.multipart.MultipartFile;
 
-	private String empid, emppwd, empname, empphone, empmail, emploc, deptid;
+public class EmployeeDeptDivVO extends SearchVO{ 
+
+	private String empimg, empid, emppwd, empname, empphone, empmail, emploc, deptid;
 	private String deptname, divid;
 	private String divname;
 	
-	
-	
+	private MultipartFile file;
+
+
+
 	public EmployeeDeptDivVO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
 
-	public EmployeeDeptDivVO(String empid, String emppwd, String empname, String empphone,
+	public EmployeeDeptDivVO(MultipartFile file, String empimg, String empid, String emppwd, String empname, String empphone,
 			String empmail, String emploc, String deptid, String deptname, String divid, String divname) {
 		super();
+		this.empimg = empimg;
 		this.empid = empid;
 		this.emppwd = emppwd;
 		this.empname = empname;
@@ -27,6 +32,17 @@ public class EmployeeDeptDivVO extends SearchVO{ // ���̺� ���Ǿ�
 		this.deptname = deptname;
 		this.divid = divid;
 		this.divname = divname;
+		this.file = file;
+	}
+
+
+	public String getEmpimg() {
+		return empimg;
+	}
+
+
+	public void setEmpimg(String empimg) {
+		this.empimg = empimg;
 	}
 
 
@@ -129,5 +145,23 @@ public class EmployeeDeptDivVO extends SearchVO{ // ���̺� ���Ǿ�
 		this.divname = divname;
 	}
 	
+	
+	public MultipartFile getFile() {
+		return file;
+	}
+
+
+	public void setFile(MultipartFile file) {
+		this.file = file;
+	}
+
+
+	@Override
+	public String toString() {
+		return "EmployeeDeptDivVO [empimg=" + empimg + ", empid=" + empid + ", emppwd=" + emppwd + ", empname="
+				+ empname + ", empphone=" + empphone + ", empmail=" + empmail + ", emploc=" + emploc + ", deptid="
+				+ deptid + ", deptname=" + deptname + ", divid=" + divid + ", divname=" + divname + "]";
+	}
+
 
 }
