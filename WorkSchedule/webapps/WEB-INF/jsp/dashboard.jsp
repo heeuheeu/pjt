@@ -220,7 +220,7 @@
 	            
     function restart() {  
     
-      setTimeout("location.href='dashboard.inc'",7000);
+      setTimeout("location.href='dashboard.inc'",700000);
     } 
   
     

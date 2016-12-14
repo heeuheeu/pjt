@@ -116,9 +116,8 @@ public class UserCtrl {
 		} else { // 2. work table exist
 			mylist = service.mylist2(mylist);
 		}
-		//System.out.println(mylist.getWorkdate() + " >>>>>" + mylist.getEmpmail() + " " + mylist.getEmpphone());
-
-		model.addAttribute("myinfo", mylist);
+		
+		model.addAttribute("myinfo", mylist); ////////////////////////////////////////// * my work -EmployeeWorkDeptVO *
 
 		return "redirect:/favorite.inc";
 	}
@@ -142,7 +141,8 @@ public class UserCtrl {
 		List<EmployeeFavWorkDeptVO> favlist = new ArrayList<EmployeeFavWorkDeptVO>();
 		favlist = service.selectempfav(list);
 
-		model.addAttribute("myfav", favlist);
+		model.addAttribute("myfav", favlist); // fav work - EmployeeFavWorkDeptVO
+
 		return "view";
 	}
 
@@ -348,22 +348,37 @@ public class UserCtrl {
 	public String update(HttpSession session, Model model) {
 		System.out.println("UserCtrl update");
 
-		EmployeeVO user = (EmployeeVO) session.getAttribute("login");
+		EmployeeVO user = (EmployeeVO) session.getAttribute("login"); 
 		
 		EmployeeDeptDivVO mylist = new EmployeeDeptDivVO();
 		mylist.setEmpid(user.getEmpid());
 		mylist = service.selectEmpInfo(mylist);
 		
 		List<DeptDivisionVO> divList = service.selectdiv(); 	
-		List<DeptDivisionVO> list = service.selectdeptdiv();
-		
-		model.addAttribute("divlist", divList);
-		model.addAttribute("lists", list);
-		model.addAttribute("myinfo", mylist);
+		List<DeptDivisionVO> deptlist = service.selectdeptdiv();
+
+		/*List<String> deptlist = new ArrayList<String>();
+		deptlist = service.selectboxDept(divname);*//////////////////////////////////////////////////// 고치기
+
+
+		model.addAttribute("divlist", divList); // divlist 조회
+		model.addAttribute("deptlist", deptlist); // deptlist 조회
+		model.addAttribute("mydeptdiv", mylist); // EmployeeDeptDivVO 
 
 		return "update";
 	}
 
+	@RequestMapping(value = "/deptSelect.inc")
+	@ResponseBody
+	public List<String> deptSelect(@RequestParam(value = "div") String divname) {
+		System.out.println("userCtrl deptSelect");
+
+		List<String> deptlist = new ArrayList<String>();
+		deptlist = service.selectboxDept(divname);
+
+		return deptlist;
+	}
+	
 	// my info db update
 	@RequestMapping(value = "/modify.inc", method = RequestMethod.POST ) 
 	public String modify(EmployeeDeptDivVO member, HttpServletRequest request, Model model) throws Exception {

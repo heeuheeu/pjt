@@ -52,7 +52,7 @@ public class UserServiceImpl {
 	 
 	/////////////////////////////////////////////////////// About user
 	
-	public int selectwork(EmployeeWorkDeptVO user) { // work table count
+	public int selectwork(EmployeeWorkDeptVO user) { // 
 		System.out.println("UserService mylist");
 		return dao.selectWorkRow(user); 
 	}
@@ -68,9 +68,9 @@ public class UserServiceImpl {
 		return dao.mylistRow2(user); 
 	}
 	
-	public EmployeeDeptDivVO selectEmpInfo(EmployeeDeptDivVO user) { 
-		System.out.println("UserService mylist");
-		return dao.selectEmpRow(user); 
+	public EmployeeDeptDivVO selectEmpInfo(EmployeeDeptDivVO user) {
+		System.out.println("UserService mylist2");
+		return dao.selectEmpRow(user); 	
 	}
 	
 	
@@ -85,6 +85,7 @@ public class UserServiceImpl {
 		return dao.selectFavIdRow(userid);	
 	}
 	
+
 	public List<EmployeeDeptDivVO> list(EmployeeDeptDivVO user) {
 		System.out.println("USER SERVICE LIST");
 		return dao.listRow(user);
@@ -105,8 +106,7 @@ public class UserServiceImpl {
 		return dao.selectDeptDivRow();
 	}
 
-	/////////////////////////////////////////////////////// About SEARCH
-	
+	//////////////////////// search ////////////////////////
 	public List<EmployeeDeptDivVO> searchEmp(EmployeeDeptDivVO member) {
 		System.out.println("UserService searchEmp");
 		return dao.searchEmpRow(member);
@@ -158,7 +158,7 @@ public class UserServiceImpl {
 	}
 	
 	//////////////////////////////////////////////////////// nfc
-	// nfc 태그로 업데이트
+	// nfc 
 	 public int nfcUpdateAm(NfcVO nfc) {
 	  System.out.println("UserService nfcUpdateAm");
 	  return dao.updateNfcAm(nfc);

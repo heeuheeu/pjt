@@ -30,7 +30,7 @@
       
       <ul class="nav navmenu-nav btns">
       <div class="btns">
-        <li><a href="calendar.jsp" class="btn1" style="color: white;"><img src="img/side-icon1.png"/>나의일정</a></li>
+        <li><a href="calMove.inc" class="btn1" style="color: white;"><img src="img/side-icon1.png"/>나의일정</a></li>
          <li><a href="updateview.inc" class="btn1" style="color: white;"><img src="img/side-icon1.png"/>내 정보수정</a></li>
         <li><a href="logout.inc" class="btn2" style="color: white;"><img src="img/side-icon2.png"/>로그아웃</a></li>
       </div>
@@ -49,7 +49,7 @@
       <a class="navbar-brand" href="user.inc" style="color: white; margin-left: 60px">SSG 워크플레이스</a>
       
       <!-- check 버튼 -->      
-      <a id="addBtn" href="user.inc"><img src="img/check.png" style="width: 42px; height: 36px; float: right; margin-top: 7px; margin-right: 8px"></a>
+      <a id="addBtn" href="user.inc"><img src="img/check.png" style="width: 30px; height: 30px; float: right; margin-top: 10px; margin-bottom: 8px; margin-right: 12px"></a>
     </div>
 
     <!--상단-->

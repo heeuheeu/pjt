@@ -242,7 +242,7 @@
 				            
 				            <!-- <input type="text" name="amloc" id="amloc" class="amloc" style="background-color: transparent"> -->
 				            
-				            <select class="form-control" name="amloc" id="amloc" class="amloc" style="background-color: transparent">
+				            <select name="amloc" id="amloc" class="amloc" style="background-color: transparent">
 								<option value="본사 10F">본사 10F</option>
 								<option value="본사 13F">본사 13F</option>
 								<option value="본사 14F">본사 14F</option>
@@ -263,7 +263,7 @@
 				            
 				            <!-- <input type="text" name="pmloc" id="pmloc" class="pmloc" style="background-color: transparent"> -->
 				            
-				            <select class="form-control" name="pmloc" id="pmloc" class="pmloc" style="background-color: transparent;">
+				            <select name="pmloc" id="pmloc" class="pmloc" style="background-color: transparent;">
 								<option value="본사 10F">본사 10F</option>
 								<option value="본사 13F">본사 13F</option>
 								<option value="본사 14F">본사 14F</option>

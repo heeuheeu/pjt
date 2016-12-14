@@ -84,15 +84,5 @@ public class JoinCtrl {
 	}
 
 	
-	@RequestMapping(value = "/deptSelect.inc")
-	@ResponseBody
-	public List<String> deptSelect(@RequestParam(value = "div") String divname) {
-		System.out.println("Join Ctrl deptSelect");
-
-		List<String> deptlist = new ArrayList<String>();
-		deptlist = service.selectboxDept(divname);
-
-		return deptlist;
-	}
 
 }
