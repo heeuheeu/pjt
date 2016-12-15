@@ -1,4 +1,4 @@
-body{background: #ebebeb; position: relative;} 
+body{background: #ebebeb; position: relative;}
 
 /*상단*/
 img{width: 128px;
@@ -11,16 +11,19 @@ section#top-bar{background: #fff;}
 
 .group-title{margin-top: 10px; font-weight: bold; font-size: 20px;}
 .group-title input[type="image"]{margin-top: 10px;}
-/*아이템*/
-section#card-item{background: #ebebeb; padding:30px 15px; overflow: auto;}
+/*내용*/
+section#card-item{padding:30px 15px; overflow: auto;}
 #card-item article{float: left;   width: 20%; border-radius: 3px;  margin-bottom: 20px;}
 #card-item article .item-lay{padding: 20px; margin-right: 10px;}
-#card-item article .item-lay.status1{background: #fff;}
+#card-item article .item-lay.status1{background: #dadada;}
 #card-item article .item-lay.status2{background: #c5d1e8;}
-#card-item article .item-lay.status3{background: #eccece;}
+#card-item article .item-lay.status3{background: #e8b6a9;}
+#card-item article .item-lay.status4{background: #ffffff;}
+#card-item article .item-lay.status5{background: #888888;}
+#card-item article .item-lay.status6{background: #e6a0a0;}
 #card-item article .profile{text-align: center; margin-bottom: 10px;}
 #card-item article .profile img{width: 80%; border-radius: 50%; border: solid 1px #ddd}
-#card-item article .name{text-align: center; padding:5px 0; margin-bottom: 10px;border-bottomolid 1px #cd4c2c;}
+#card-item article .name{text-align: center; padding:5px 0; margin-bottom: 10px;border-bottom:solid 1px #cd4c2c;}
 #card-item article .status{text-align: center;}
 #card-item article .status div{margin-bottom: 5px;}
  
@@ -28,4 +31,3 @@ section#card-item{background: #ebebeb; padding:30px 15px; overflow: auto;}
 #card-item article .am span{background: #3e3f44; color: #fff; margin-right: 15px; border-radius: 3px; font-size: 12px; padding: 2px 10px;}
 #card-item article .pm{margin-bottom: 5px;}
 #card-item article .pm span{background: #c94c30; color: #fff; margin-right: 15px; border-radius: 3px; font-size: 12px; padding: 2px 10px;}
-

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="adm">
+
+
+	 <insert id="addDiv" parameterType="model.domain.vo.DivisionVO">
+	   	INSERT INTO DIVISION
+	  	VALUES 	( concat('D',LOCSEQ.nextval), #{divname}, 'Y')
+	 </insert>	
+	 
+		 
+	  <insert id="addDept" parameterType="model.domain.vo.DeptDivisionVO">
+	   	INSERT INTO DEPARTMENT
+	  	VALUES 	( concat('T',LOCSEQ.nextval), #{deptname}, (SELECT DIVID FROM DIVISION WHERE DIVNAME = #{divname}) , 'Y')
+	 </insert>	
+	 
+	 <insert id="addLoc" parameterType="model.domain.vo.LocationVO">
+	   	INSERT INTO LOCATION
+	  	VALUES 	( concat('L',LOCSEQ.nextval), #{locname}, 'Y')
+	 </insert>	
+	 
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

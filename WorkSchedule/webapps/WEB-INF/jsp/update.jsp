@@ -44,12 +44,17 @@
 		     
 	          
 			<select class="form-control" name="emploc">			
+				<option <c:if test="${mydeptdiv.emploc eq '본사 10F'}"> selected</c:if>>본사 9F</option>
 				<option <c:if test="${mydeptdiv.emploc eq '본사 10F'}"> selected</c:if>>본사 10F</option>
 				<option <c:if test="${mydeptdiv.emploc eq '본사 13F'}"> selected</c:if>>본사 13F</option>
 				<option <c:if test="${mydeptdiv.emploc eq '본사 14F'}"> selected</c:if>>본사 14F</option>
 				<option <c:if test="${mydeptdiv.emploc eq '성수'}"> selected</c:if>>성수</option>
 				<option <c:if test="${mydeptdiv.emploc eq '메사'}"> selected</c:if>>메사</option>
-				
+				<option <c:if test="${mydeptdiv.emploc eq '인터내셔날 본사'}"> selected</c:if>>인터내셔날 본사</option>
+				<option <c:if test="${mydeptdiv.emploc eq '스타벅스 본사'}"> selected</c:if>>스타벅스 본사</option>
+				<option <c:if test="${mydeptdiv.emploc eq '건설 본사'}"> selected</c:if>>건설 본사</option>
+				<option <c:if test="${mydeptdiv.emploc eq '기타'}"> selected</c:if>>기타</option>
+				<option <c:if test="${mydeptdiv.emploc eq '휴무'}"> selected</c:if>>휴무</option>
 			</select><br>   
 			                   
 	        <input type="submit" value="UPDATE" id="join">

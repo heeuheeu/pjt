@@ -63,11 +63,18 @@ public class UserCtrl {
 			return "intro";
 		}
 		
+		
+		   
 		else { // 로그인 정보 일치시
 			// dashboard - 인사팀 로그인
 			if (user.getEmpid().equals("hr")) {
 				model.addAttribute("login", user);
 				return "redirect:/dashboard.inc";
+			}
+			else if (user.getEmpid().equals("admin")) {
+				System.out.println("admin" + user.getEmpid());
+				model.addAttribute("login", user);
+				return "redirect:/adminForm.inc";
 			}
 			else {
 				model.addAttribute("login", user);
@@ -613,5 +620,6 @@ public class UserCtrl {
 
 		return null;
 	}
+
 }
 

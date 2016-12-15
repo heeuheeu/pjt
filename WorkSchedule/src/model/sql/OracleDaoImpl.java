@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import model.domain.vo.CalendarVO;
 import model.domain.vo.DeptDivisionVO;
+import model.domain.vo.DivisionVO;
 import model.domain.vo.EmpIdVO;
 import model.domain.vo.EmployeeDeptDivVO;
 import model.domain.vo.EmployeeDeptVO;
@@ -15,6 +16,7 @@ import model.domain.vo.EmployeeFavWorkDeptVO;
 import model.domain.vo.EmployeeVO;
 import model.domain.vo.EmployeeWorkDeptVO;
 import model.domain.vo.FavoriteVO;
+import model.domain.vo.LocationVO;
 import model.domain.vo.NfcVO;
 
 @Repository("UserDao")
@@ -41,12 +43,12 @@ public class OracleDaoImpl implements OracleDao {
 		System.out.println("Dao selectDivRow");
 		return sqlSession.selectList("member.selectdiv");
 	}
-	
+
 	@Override
-	 public List<String> selectboxDeptRow(String divname) {
-	  System.out.println("Dao selectboxDeptRow");
-	  return sqlSession.selectList("member.selectboxdept", divname);
-	 }
+	public List<String> selectboxDeptRow(String divname) {
+		System.out.println("Dao selectboxDeptRow");
+		return sqlSession.selectList("member.selectboxdept", divname);
+	}
 
 	// INSERT DEFAULT WORKDATE
 	@Override
@@ -87,12 +89,12 @@ public class OracleDaoImpl implements OracleDao {
 		System.out.println("Dao mylistrow2");
 		return sqlSession.selectOne("emp.selectwork", user);
 	}
-	
+
 	@Override
 	public EmployeeDeptDivVO selectEmpRow(EmployeeDeptDivVO user) {
 		System.out.println("Dao mylistrow2");
 		return sqlSession.selectOne("emp.selectempinfo", user);
-	}	
+	}
 
 	@Override
 	public List<EmployeeFavWorkDeptVO> selectFavRow(EmployeeWorkDeptVO user) {
@@ -133,7 +135,6 @@ public class OracleDaoImpl implements OracleDao {
 		System.out.println("Dao selectDeptDivRow");
 		return sqlSession.selectList("member.selectdeptdiv");
 	}
-
 
 	////////////////////////////////////////////////////////////////////////// search
 	@Override
@@ -195,20 +196,43 @@ public class OracleDaoImpl implements OracleDao {
 		System.out.println("Dao selectDashRow");
 		return sqlSession.selectList("emp.selectdashemp", myinfo);
 	}
-	
+
 	// nfc update
-	 @Override
-	 public int updateNfcAm(NfcVO nfc) {
-	  System.out.println("Dao nfcUpdate");
-	  return sqlSession.update("member.nfcupdateam", nfc);
-	 }
-	 
-	 @Override
-	 public int updateNfcPm(NfcVO nfc) {
-	  System.out.println("Dao nfcUpdate");
-	  return sqlSession.update("member.nfcupdatepm", nfc);
-	 }
+	@Override
+	public int updateNfcAm(NfcVO nfc) {
+		System.out.println("Dao nfcUpdate");
+		return sqlSession.update("member.nfcupdateam", nfc);
+	}
 
+	@Override
+	public int updateNfcPm(NfcVO nfc) {
+		System.out.println("Dao nfcUpdate");
+		return sqlSession.update("member.nfcupdatepm", nfc);
+	}
 
+	//////////////////////////////////////////////////////////////////////////// updateRow
 
+	@Override
+	public List<LocationVO> selectlocRow() {
+		System.out.println("Dao selectDashRow");
+		return sqlSession.selectList("member.selectloc");
+	}
+
+	@Override
+	public int addDivRow(DivisionVO div) {
+		System.out.println("Dao addDivRow");
+		return sqlSession.insert("adm.addDiv", div);
+	}
+
+	@Override
+	public int addLocRow(LocationVO div) {
+		System.out.println("Dao addLocRow");
+		return sqlSession.insert("adm.addLoc", div);
+	}
+
+	@Override
+	public int addDeptRow(DeptDivisionVO div) {
+		System.out.println("Dao addDivRow");
+		return sqlSession.insert("adm.addDept", div);
+	}
 }

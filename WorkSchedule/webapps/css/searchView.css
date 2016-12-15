@@ -1,8 +1,3 @@
-img {
-	width:128px;
-	height: 128px;
-}
-
 
 section#search-bar{padding: 15px; word-spacing: -6px;}
 section#search-bar input[type="text"]{display:inline-block; border-right: 0;vertical-align: top;margin-bottom: 5px; width: 80%; line-height: 35px; height: 35px; border:solid 1px #ddd;;}
@@ -14,14 +9,7 @@ input[type="submit"]{display: inline-block; width: 20%; vertical-align: top;back
 .path div a{font-size: 13px; display: inline-block; border: solid 1px #ddd; color: #222; padding: 5px 8px;}
 
 
-
 section#list-item{background: #ebebeb; padding:20px 15px; overflow: auto;}
-/*
-#list-item input[type="checkbox"]{-webkit-appearance:none ;-moz-appearance: none;appearance: none;}
-#list-item .all-check{display:block; text-align: right; margin-bottom: 10px; }
-#list-item .all-check input[type="checkbox"]{display: inline-block; vertical-align: middle;width: 20px; height: 20px; border-radius: 0; border: solid 1px #999; background: #fff;} 
-#list-item .all-check label{vertical-align: middle;margin-left: 5px;} 
- */
 
 #list-item article{float: left; width: 100%; background: #fff; border-radius: 3px;margin-bottom: 20px;}
 #list-item article .item-lay{display: table; width: 100%; padding: 20px; -webkit-box-shadow: 2px 2px 10px 0px rgba(0,0,0,0.2);
@@ -29,10 +17,10 @@ section#list-item{background: #ebebeb; padding:20px 15px; overflow: auto;}
 box-shadow: 2px 2px 10px 0px rgba(0,0,0,0.2);}
 #list-item article .profile{display: table-cell; width: 20%;text-align: left; margin-bottom: 10px;vertical-align: middle;
 }
-#list-item article .profile img{width: 100%; border-radius: 50%; border: solid 1px #ddd}
-#list-item article .name{display: table-cell;width: 70%; text-align: left; padding-left: 20px;vertical-align: middle;}
-
-
+#list-item article .profile img{width: 100px; height: 100px; border-radius: 50%; border: solid 1px #ddd}
+#list-item article .name{display: table-cell;width: 58%; text-align: left; padding-left: 20px;vertical-align: middle;}
+#list-item article b{font-size: 15px;}
+#list-item article font{font-size: 13px; color: #868686}
 /*checkbox -> button */
 
 #list-item article .check {

@@ -36,7 +36,7 @@
 	    <!--상단-->
 	</form>
 	
-	  <div class="container"> 
+	  <div class="container" style="width: 90%"> 
 	        <div id="carousel-example-generic" class="carousel slide">
 	                 
 	             <div class="carousel-inner" id="carouselinner">     
@@ -65,22 +65,85 @@
 		  	var	empname = "${fav.empname}";
 		  	var	amloc = "${fav.amloc}";
 		  	var	pmloc = "${fav.pmloc}";
-		  	var obj = {empid : empid , empname : empname , amloc : amloc , pmloc : pmloc };
+		  	var amlocdetail = "${fav.amlocdetail}"
+		  	var pmlocdetail = "${fav.pmlocdetail}"
+		  	var empimg = "${fav.empimg}"
+		  	var obj = {empid : empid , empname : empname , amloc : amloc , pmloc : pmloc, amlocdetail : amlocdetail, pmlocdetail : pmlocdetail, empimg : empimg};
 		  	lists.push(obj);
 		  </c:forEach>
 		  console.log(lists);
+
 		  
-		  
+		  //AM PM
+		  	var now = new Date();
+		  	var nowHour = now.getHours();
+		  	var AMPM = ""; 
+		  	
+		  	if(nowHour <12){
+		  		AMPM = "AM"
+		  	}else{
+		  		AMPM = "PM"
+		  	}
+
 		  var txt="<div class='item active'>";
-		  txt +="<section id='card-item'>";
+		 	  txt +="<section id='card-item'>";
 		  for(var i=0 ; i < lists.length ; i++) {
+			 
 			   
-			    if(i<10) {
-			    	
-			    	txt +="<article><div class='item-lay status1'>";
-			    	txt +="<div class='profile'><img src='img/"+lists[i].empid+".png' /></div>";
+			  //background color
+			    if(i<10) {		    	
+			  		
+			     	var color = "status6";
+			  		
+			  		//now: AM
+			  		if(AMPM == "AM"){
+				    	if(lists[i].amloc=='본사 10F' || lists[i].amloc=='본사 14F' || lists[i].amloc=='본사 13F'){
+				    		color = "status1";
+				    	}else if(lists[i].amloc=='메사'){
+				    		color = "status2";
+				    	}else if(lists[i].amloc=='성수'){
+				    		color = "status3";
+				    	}else if(lists[i].amloc=='하남'){
+				    		color = "status4";
+				    	}else{
+				    		color = "status5"
+				    	}
+				    
+			  		}
+			  		//now: PM
+			  		else{
+			  			if(lists[i].pmloc=='본사 10F' || lists[i].pmloc=='본사 14F' || lists[i].pmloc=='본사 13F'){
+				    		color = "status1";
+				    	}else if(lists[i].pmloc=='메사'){
+				    		color = "status2";
+				    	}else if(lists[i].pmloc=='성수'){
+				    		color = "status3";
+				    	}else if(lists[i].amloc=='하남'){
+				    		color = "status4";
+				    	}else{
+				    		color = "status5"
+				    	}
+			  		}		
+			  		
+			    	txt +="<article><div class='item-lay "+color+ "'>";
+			    	//txt +="<article><div class='item-lay status2'>";
+			    	txt +="<div class='profile'><img src='resources/"+lists[i].empimg+"'></div>";
 			    	txt +="<div class='name'>"+lists[i].empname+"</div>";
-			    	txt +="<div class='ampm'><div class='am'><span>AM</span>"+lists[i].amloc+"</div><div class='pm'><span>PM</span>"+lists[i].pmloc+"</div>";
+			    	
+			    	
+			    	if(lists[i].amloc == "기타"){
+			    		txt +="<div class='ampm'><div class='am'><span>AM</span>"+lists[i].amlocdetail+"</div>"; 
+			    	}else{
+			    		txt +="<div class='ampm'><div class='am'><span>AM</span>"+lists[i].amloc+"</div>"; 
+			    	}
+			    	
+			    	
+			    	if(lists[i].pmloc == "기타"){
+			    		txt +="<div class='ampm'><div class='pm'><span>PM</span>"+lists[i].pmlocdetail+"</div>"; 
+			    	}else{
+			    		txt +="<div class='ampm'><div class='pm'><span>PM</span>"+lists[i].pmloc+"</div>"; 
+			    	}
+			    	
 			    	txt +="</div></div></article>";
 			    }
       			
@@ -89,14 +152,66 @@
       	   
       	   $("#carouselinner").append(txt);
       	   
+      	   
+      	   
       	   if(lists.length > 9 && lists.length < 20) {
+      		   
       		 var txt="<div class='item'>"; 
       			 txt +="<section id='card-item'>";
-      		 for(var i=10 ; i < lists.length ; i++) {      			
-		    	txt +="<article><div class='item-lay status1'>";
+      		 for(var i=10 ; i < lists.length ; i++) {   
+      			 
+      			 
+      			var color = "status6";
+		  		
+		  		//now: AM
+		  		if(AMPM == "AM"){
+			    	if(lists[i].amloc=='본사 10F' || lists[i].amloc=='본사 14F' || lists[i].amloc=='본사 13F'){
+			    		color = "status1";
+			    	}else if(lists[i].amloc=='메사'){
+			    		color = "status2";
+			    	}else if(lists[i].amloc=='성수'){
+			    		color = "status3";
+			    	}else if(lists[i].amloc=='하남'){
+			    		color = "status4";
+			    	}else{
+			    		color = "status5"
+			    	}
+			    
+		  		}
+		  		//now: PM
+		  		else{
+		  			if(lists[i].pmloc=='본사 10F' || lists[i].pmloc=='본사 14F' || lists[i].pmloc=='본사 13F'){
+			    		color = "status1";
+			    	}else if(lists[i].pmloc=='메사'){
+			    		color = "status2";
+			    	}else if(lists[i].pmloc=='성수'){
+			    		color = "status3";
+			    	}else if(lists[i].amloc=='하남'){
+			    		color = "status4";
+			    	}else{
+			    		color = "status5"
+			    	}
+		  		}		
+		  		
+		    	txt +="<article><div class='item-lay "+color+ "'>";
+		    	//txt +="<article><div class='item-lay status1'>";
 		    	txt +="<div class='profile'><img src='img/"+lists[i].empid+".png' /></div>";
 		    	txt +="<div class='name'>"+lists[i].empname+"</div>";
-		    	txt +="<div class='ampm'><div class='am'><span>AM</span>"+lists[i].amloc+"</div><div class='pm'><span>PM</span>"+lists[i].pmloc+"</div>";
+		    	
+		    	
+		    	if(lists[i].amloc == "기타"){
+		    		txt +="<div class='ampm'><div class='am'><span>AM</span>"+lists[i].amlocdetail+"</div>"; 
+		    	}else{
+		    		txt +="<div class='ampm'><div class='am'><span>AM</span>"+lists[i].amloc+"</div>"; 
+		    	}
+		    	
+		    	
+		    	if(lists[i].pmloc == "기타"){
+		    		txt +="<div class='ampm'><div class='pm'><span>PM</span>"+lists[i].pmlocdetail+"</div>"; 
+		    	}else{
+		    		txt +="<div class='ampm'><div class='pm'><span>PM</span>"+lists[i].pmloc+"</div>"; 
+		    	}
+		    	
 		    	txt +="</div></div></article>";
       		 }
       		 txt +="</section></div>" ;
@@ -107,10 +222,60 @@
       		 var txt="<div class='item'>"; 
       			 txt +="<section id='card-item'>";
       		 for(var i=20 ; i < lists.length ; i++) {      			
-		    	txt +="<article><div class='item-lay status1'>";
+      			
+      			 
+       			var color = "status6";
+ 		  		
+ 		  		//now: AM
+ 		  		if(AMPM == "AM"){
+ 			    	if(lists[i].amloc=='본사 10F' || lists[i].amloc=='본사 14F' || lists[i].amloc=='본사 13F'){
+ 			    		color = "status1";
+ 			    	}else if(lists[i].amloc=='메사'){
+ 			    		color = "status2";
+ 			    	}else if(lists[i].amloc=='성수'){
+ 			    		color = "status3";
+ 			    	}else if(lists[i].amloc=='하남'){
+ 			    		color = "status4";
+ 			    	}else{
+ 			    		color = "status5"
+ 			    	}
+ 			    
+ 		  		}
+ 		  		//now: PM
+ 		  		else{
+ 		  			if(lists[i].pmloc=='본사 10F' || lists[i].pmloc=='본사 14F' || lists[i].pmloc=='본사 13F'){
+ 			    		color = "status1";
+ 			    	}else if(lists[i].pmloc=='메사'){
+ 			    		color = "status2";
+ 			    	}else if(lists[i].pmloc=='성수'){
+ 			    		color = "status3";
+ 			    	}else if(lists[i].amloc=='하남'){
+ 			    		color = "status4";
+ 			    	}else{
+ 			    		color = "status5"
+ 			    	}
+ 		  		}		
+ 		  		
+ 		    	txt +="<article><div class='item-lay "+color+ "'>";
+ 		    	//txt +="<article><div class='item-lay status1'>";
+      		
 		    	txt +="<div class='profile'><img src='img/"+lists[i].empid+".png' /></div>";
 		    	txt +="<div class='name'>"+lists[i].empname+"</div>";
-		    	txt +="<div class='ampm'><div class='am'><span>AM</span>"+lists[i].amloc+"</div><div class='pm'><span>PM</span>"+lists[i].pmloc+"</div>";
+		    	
+		    	
+		    	if(lists[i].amloc == "기타"){
+		    		txt +="<div class='ampm'><div class='am'><span>AM</span>"+lists[i].amlocdetail+"</div>"; 
+		    	}else{
+		    		txt +="<div class='ampm'><div class='am'><span>AM</span>"+lists[i].amloc+"</div>"; 
+		    	}
+		    	
+		    	
+		    	if(lists[i].pmloc == "기타"){
+		    		txt +="<div class='ampm'><div class='pm'><span>PM</span>"+lists[i].pmlocdetail+"</div>"; 
+		    	}else{
+		    		txt +="<div class='ampm'><div class='pm'><span>PM</span>"+lists[i].pmloc+"</div>"; 
+		    	}
+		    	
 		    	txt +="</div></div></article>";
       		 }
       		 txt +="</section></div>" ;
@@ -121,11 +286,60 @@
         		 var txt="<div class='item'>"; 
         			 txt +="<section id='card-item'>";
           		 for(var i=30 ; i < lists.length ; i++) {          			
-    		    	txt +="<article><div class='item-lay status1'>";
+          			 
+           			var color = "status6";
+     		  		
+     		  		//now: AM
+     		  		if(AMPM == "AM"){
+     			    	if(lists[i].amloc=='본사 10F' || lists[i].amloc=='본사 14F' || lists[i].amloc=='본사 13F'){
+     			    		color = "status1";
+     			    	}else if(lists[i].amloc=='메사'){
+     			    		color = "status2";
+     			    	}else if(lists[i].amloc=='성수'){
+     			    		color = "status3";
+     			    	}else if(lists[i].amloc=='하남'){
+     			    		color = "status4";
+     			    	}else{
+     			    		color = "status5"
+     			    	}
+     			    
+     		  		}
+     		  		//now: PM
+     		  		else{
+     		  			if(lists[i].pmloc=='본사 10F' || lists[i].pmloc=='본사 14F' || lists[i].pmloc=='본사 13F'){
+     			    		color = "status1";
+     			    	}else if(lists[i].pmloc=='메사'){
+     			    		color = "status2";
+     			    	}else if(lists[i].pmloc=='성수'){
+     			    		color = "status3";
+     			    	}else if(lists[i].amloc=='하남'){
+     			    		color = "status4";
+     			    	}else{
+     			    		color = "status5"
+     			    	}
+     		  		}		
+     		  		
+     		    	txt +="<article><div class='item-lay "+color+ "'>";
+     		    	//txt +="<article><div class='item-lay status1'>";
+          			 
     		    	txt +="<div class='profile'><img src='img/"+lists[i].empid+".png' /></div>";
-    		    	txt +="<div class='name'>"+lists[i].empname+"</div>";
-    		    	txt +="<div class='ampm'><div class='am'><span>AM</span>"+lists[i].amloc+"</div><div class='pm'><span>PM</span>"+lists[i].pmloc+"</div>";
-    		    	txt +="</div></div></article>";
+			    	txt +="<div class='name'>"+lists[i].empname+"</div>";
+			    	
+			    	
+			    	if(lists[i].amloc == "기타"){
+			    		txt +="<div class='ampm'><div class='am'><span>AM</span>"+lists[i].amlocdetail+"</div>"; 
+			    	}else{
+			    		txt +="<div class='ampm'><div class='am'><span>AM</span>"+lists[i].amloc+"</div>"; 
+			    	}
+			    	
+			    	
+			    	if(lists[i].pmloc == "기타"){
+			    		txt +="<div class='ampm'><div class='pm'><span>PM</span>"+lists[i].pmlocdetail+"</div>"; 
+			    	}else{
+			    		txt +="<div class='ampm'><div class='pm'><span>PM</span>"+lists[i].pmloc+"</div>"; 
+			    	}
+			    	
+			    	txt +="</div></div></article>";
           		 }
           		 txt +="</section></div>" ;
            	    
@@ -135,9 +349,6 @@
       }) 
     	  
   
-      
-      
-      
       
     </script> 
 
@@ -223,6 +434,9 @@
       setTimeout("location.href='dashboard.inc'",700000);
     } 
   
+    function colorchange(){
+    	$("#currDate").style.backgroundColor="#010101"
+    }
     
 </script> 
   </body>

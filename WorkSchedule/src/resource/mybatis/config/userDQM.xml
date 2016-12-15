@@ -14,20 +14,23 @@
 		JOIN 	WORK C USING (EMPID) 
 		WHERE 	EMPID = #{empid} 
 	</select>
-	
-	<select id="selectdiv" resultType="model.domain.vo.DeptDivisionVO">
-	    SELECT  	DISTINCT DIVNAME
-	    FROM  		DEPARTMENT
-	    JOIN  		DIVISION USING (DIVID)
-	    ORDER BY 	DIVNAME
-	</select>
-	
+
+    <select id="selectdiv" resultType="model.domain.vo.DeptDivisionVO">
+     SELECT   DISTINCT DIVNAME
+     FROM    DEPARTMENT
+     FULL JOIN   DIVISION A USING (DIVID)
+ 	 WHERE  A.CHECKYN = 'Y'
+     ORDER BY  DIVNAME
+ </select>
+
+
     <select id="selectdeptdiv" resultType="model.domain.vo.EmployeeDeptVO">
-    	SELECT  	DEPTNAME 
-    	FROM  		DEPARTMENT
-    	JOIN  		DIVISION USING (DIVID)
-    	ORDER BY 	DEPTNAME
-    </select>
+     SELECT   DEPTNAME 
+     FROM    DEPARTMENT
+     JOIN    DIVISION A USING (DIVID)
+     WHERE  A.CHECKYN = 'Y'
+     ORDER BY  DEPTNAME
+   </select>
 
 	<select id="selectboxdept" parameterType="String" resultType="String">
 	  	SELECT 	DEPTNAME
@@ -48,7 +51,14 @@
 	  	JOIN 	DEPARTMENT USING (DEPTID) 
 	  	WHERE 	EMPID = #{empid}
 	 </select>
-
+	 
+	 <select id="selectloc" resultType="model.domain.vo.LocationVO">
+	     SELECT   	DISTINCT LOCNAME 
+	     FROM    	LOCATION
+	  	 WHERE  	CHECKYN = 'Y' 
+	     ORDER BY 	LOCNAME
+	 </select>
+	 
 	 <insert id="insertemp" parameterType="model.domain.vo.EmployeeDeptDivVO" >
     	INSERT INTO EMPLOYEE (EMPID, EMPPWD, EMPNAME, EMPPHONE, EMPMAIL, EMPLOC, EMPIMG, DEPTID)
     	VALUES  	( #{empid}, #{emppwd}, #{empname}, #{empphone}, #{empmail}, #{emploc},

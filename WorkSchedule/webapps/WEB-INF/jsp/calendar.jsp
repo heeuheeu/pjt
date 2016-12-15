@@ -57,7 +57,9 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="user.inc" style="color: white; margin-left: 60px">SSG 워크플레이스</a>
+	 <div id="workplace">
+	       <a class="navbar-brand" href="user.inc" style="color: white;">SSG워크플레이스</a>
+	 </div>
     </div>
     
     <!-- Modal -->

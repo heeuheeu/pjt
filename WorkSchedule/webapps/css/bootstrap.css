@@ -3880,8 +3880,8 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .navbar-brand {
   float: left;
   height: 50px;
-  padding: 15px 15px;
-  font-size: 18px;
+  padding: 15px 0px;
+  font-size: 16px;
   line-height: 20px;
 }
 .navbar-brand:hover,
@@ -6201,3 +6201,6 @@ button.close {
   }
 }
 /*# sourceMappingURL=bootstrap.css.map */
+
+
+#workplace{display: inline-block; width:48%; height: auto; margin: 0 auto;}

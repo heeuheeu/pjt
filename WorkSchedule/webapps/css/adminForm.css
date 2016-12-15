@@ -1,0 +1,5 @@
+.form {width:60%; padding:50px 0;margin:auto;}
+.form .title{margin:auto; margin-bottom: 20px; width: 80%; text-align: center; line-height: 45px;color: #fff; background:#d3492c;}
+.form table{width:100%;text-align: center;margin-top: 20px;}
+.form table thead{background:#f9f9f9; font-weight: bold;}
+.form table tr td{border: solid 1px #ddd; line-height: 35px; height: 35px;}

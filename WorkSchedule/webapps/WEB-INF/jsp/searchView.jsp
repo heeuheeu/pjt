@@ -23,7 +23,7 @@
 	  <div class="side-menu-content">
       <div class="user-info">
       <br>
-          <div class="profile"><img src="img/profile.png"/></div>
+          <div class="profile"><img src="resources/${myinfo.empimg}"/></div>
           <div class="name">${myinfo.deptname}</div>
           <div class="name">${myinfo.empname}<%--  ${myinfo.empgrade} --%></div>
       </div>
@@ -46,8 +46,9 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="user.inc" style="color: white; margin-left: 60px">SSG 워크플레이스</a>
-      
+	 <div id="workplace">
+	       <a class="navbar-brand" href="user.inc" style="color: white;">SSG워크플레이스</a>
+	 </div>
       <!-- check 버튼 -->      
       <a id="addBtn" href="user.inc"><img src="img/check.png" style="width: 30px; height: 30px; float: right; margin-top: 10px; margin-bottom: 8px; margin-right: 12px"></a>
     </div>
@@ -79,8 +80,8 @@
 		        <div class="item-lay">
 		          <div class="profile"><img src="resources/${member.empimg}"/></div>
 		          <div class="name">
-		            ${member.empname}<%--  ${member.empgrade} --%><br/>
-		            ${member.deptname}<br/>	       
+		            <b>${member.empname}</b><br/>
+		            <font>${member.deptname}</font><br/>	       
 		          </div>
 		          <div class="check">	          
 		          		<a onclick="onCheck('${member.empid}')" id="${member.empid}" name="onchk"></a>

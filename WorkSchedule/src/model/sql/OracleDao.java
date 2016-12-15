@@ -4,12 +4,14 @@ import java.util.List;
 
 import model.domain.vo.CalendarVO;
 import model.domain.vo.DeptDivisionVO;
+import model.domain.vo.DivisionVO;
 import model.domain.vo.EmpIdVO;
 import model.domain.vo.EmployeeDeptDivVO;
 import model.domain.vo.EmployeeDeptVO;
 import model.domain.vo.EmployeeFavWorkDeptVO;
 import model.domain.vo.EmployeeVO;
 import model.domain.vo.EmployeeWorkDeptVO;
+import model.domain.vo.LocationVO;
 import model.domain.vo.NfcVO;
 
 
@@ -62,6 +64,12 @@ public interface OracleDao {
 
 	 // dashboard
 	 public List<EmployeeWorkDeptVO> 	selectDashRow(EmployeeWorkDeptVO myinfo);
+	 
+	 // admin
+	 public List<LocationVO> selectlocRow();
+	 public int addDivRow(DivisionVO div);
+	 public int addDeptRow(DeptDivisionVO div);
+	 public int addLocRow(LocationVO div);
 	  
 	// nfc update
 	 public int updateNfcAm(NfcVO nfc);
