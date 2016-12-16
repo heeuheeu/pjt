@@ -1,0 +1,14 @@
+
+.navbar-toggle {	
+	margin-left: 15px;
+}
+.actionbar {height: 50px;}
+.actionbar .workplace {float: left; width: 50%;}
+.actionbar .workplace a {color: white;}
+.actionbar .refresh { float: right; margin: 7px 10px;}
+.actionbar .refresh a img {
+	width: 36px;
+	right: 36px;
+	float: right; 
+
+}

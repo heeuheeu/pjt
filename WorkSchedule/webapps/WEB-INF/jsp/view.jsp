@@ -18,6 +18,7 @@
     <!-- Custom styles for this template -->
     <link href="./css/navmenu-push.css" rel="stylesheet">
     <link href="./css/flatpickr.css" rel="stylesheet">
+    <link href="./css/view.css" rel="stylesheet">
 
     
     <style>
@@ -60,8 +61,9 @@
         <span class="icon-bar"></span>
       </button>
 	 
-	 <div id="workplace">
-	       <a class="navbar-brand" href="user.inc" style="color: white;">SSG워크플레이스</a>
+	 <div class="actionbar">
+	       <div class="workplace"><a class="navbar-brand" href="user.inc" style="color: white;">SSG워크플레이스</a></div>
+	       <div class="refresh"><a href="#" onclick="refresh()"><img src="img/refresh.png" ></a></div>
 	 </div>
     </div>
 
@@ -108,12 +110,12 @@
 					      '${myinfo.amloc}','${myinfo.amlocdetail}','${myinfo.pmloc}','${myinfo.pmlocdetail}',
 					      '${myinfo.workdate}','${myinfo.empphone}','${myinfo.empmail}')">
 				</div>
-				<div class="name">${myinfo.empname} <%-- ${myinfo.empgrade} --%></div>
+				<div class="name">${myinfo.empname}</div>
 				<div class="ampm">
 					<div class="am">
-						<span>AM</span>${myinfo.amloc}</div>
+						<span>AM</span><font>${myinfo.amloc}</font></div>
 					<div class="pm">
-						<span>PM</span>${myinfo.pmloc}</div>
+						<span>PM</span><font>${myinfo.pmloc}</font></div>
 				</div>
 			</div>
 		</article>
@@ -128,13 +130,13 @@
 					      '${fav.workdate}','${fav.empphone}','${fav.empmail}')">
 					
 				</div>
-				<div class="name">${fav.empname} <%-- ${fav.empgrade} --%></div>
+				<div class="name">${fav.empname}</div>
 				<div class="ampm">
 					<div class="am">
-						<span>AM</span>${fav.amloc}
+						<span>AM</span><font>${fav.amloc}</font>
 					</div>
 					<div class="pm">
-						<span>PM</span>${fav.pmloc}
+						<span>PM</span><font>${fav.pmloc}</font>
 					</div>
 				</div>
 			</div>
@@ -198,104 +200,96 @@
 <!---- Modal ---->
 <!---- Modal ---->
 
- <!-- 1207수정:모달팝업 -->
- 	<form role="form" id='updateForm'>
-		<div class="modal fade popup" id="myModal" tabindex="-1" role="dialog"
-			aria-labelledby="myModalLabel" aria-hidden="true">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-							<img src="img/close-icon.png"/></button>
-							
-							<button type="button" class="close" aria-hidden="true" 
-								id="editbtn" style="float: left;" onclick="update()">
-							<img src="img/edit-icon.png"/></button>
-							
-					</div >		
-					<div class="modal-body" >
-					<!---- 모달 내용---->		
-					
-				      <div class="popup-content">
-				        <div class="user-info">
-				          <div class="profile"><img id='empimg' /></div>
-				          <div class="name" id="empdept"></div>
-				          <div class="name"> 
-				          	<span id="empname"></span>
-				          	<!-- <span id="empgrade"></span> -->
-				          </div>
-				        </div>
-				        
-				        <div class="user-contact">
-				          <a href="" id="mail"><img src="img/contact-icon1.png" id="mailImg"/></a>
-				          <a href="" id="tel"><img src="img/contact-icon2.png" id="telImg"/></a>
-				          <a href="" id="sms"><img src="img/contact-icon3.png" id="smsImg"/></a>
-				        </div>
-				        
-				        <div class="date">
-				          <center><input type="text" name="workdate" id="workdateView" class="date-text" readonly="readonly" 
-				          			style="background-color: transparent"></center>
-				        </div>
-				        
-				        <div class="ampm">
-				          <div class="am">
-				            <span>AM</span>
-				            <center>
-				            
-				            <!-- <input type="text" name="amloc" id="amloc" class="amloc" style="background-color: transparent"> -->
-				            
-				            <select name="amloc" id="amloc" class="amloc" style="background-color: transparent;">
-								<option value="본사 10F">본사 10F</option>
-								<option value="본사 13F">본사 13F</option>
-								<option value="본사 14F">본사 14F</option>
-								<option value="성수">성수</option>
-								<option value="메사">메사</option>
-								<option value="기타">기타</option>
-								<option value="휴무">휴무</option>
-							</select>
-				            
-				            </center>
-				            <center><input type="text" name="amlocdetail" id="amlocdetail" class="amlocdetail" 
-				            style="background-color: transparent"></center>
-				          </div>
-				          
-				          <div class="pm">
-				            <span>PM</span>
-				            <center>
-				            
-				            <!-- <input type="text" name="pmloc" id="pmloc" class="pmloc" style="background-color: transparent"> -->
-				            
-				            <select name="pmloc" id="pmloc" class="pmloc" style="background-color: transparent;">
-								<option value="본사 10F">본사 10F</option>
-								<option value="본사 13F">본사 13F</option>
-								<option value="본사 14F">본사 14F</option>
-								<option value="성수">성수</option>
-								<option value="메사">메사</option>
-								<option value="기타">기타</option>
-								<option value="휴무">휴무</option>
-							</select>
-				            
-				            </center>
-				            <center><input type="text" name="pmlocdetail" id="pmlocdetail" class="pmlocdetail" 
-				            style="background-color: transparent"></center>
-				          </div>
-				        </div>
-				        
-				        	<!-- 컨트롤러 VO에 넘길 값 -->
-				        
-				        <input type="hidden" name="empid" id="empid">
-				        <input type="hidden" name="currdate" id="currDateUpdate">
-				        	
-				        	<!-- 컨트롤러 VO에 넘길 값 끝 -->
-				        	
-				      </div>
-		      	</div>
-		      </div>
-		    </div>
-		  </div>
-	</form>
+
+<!-- 1207수정:모달팝업 -->
+  <form role="form" id='updateForm'>
+  <div class="modal fade popup" id="myModal" tabindex="-1" role="dialog"
+   aria-labelledby="myModalLabel" aria-hidden="true">
+   <div class="modal-dialog">
+    <div class="modal-content">
+     <div class="modal-header">
+       <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+       <img src="img/close-icon.png"/></button>
+       
+       <button type="button" class="close" aria-hidden="true" 
+        id="editbtn" style="float: left;" onclick="update()">
+       <img src="img/edit-icon.png"/>—</button>
+       
+     </div >  
+     <div class="modal-body" >
+     <!---- 모달 내용---->  
+     
+          <div class="popup-content">
+            <div class="user-info">
+              <div class="profile"><img id='empimg' /></div>
+              <div class="name" id="empdept"></div>
+              <div class="name"> 
+               <span id="empname"></span>
+               <!-- <span id="empgrade"></span> -->
+              </div>
+            </div>
+            
+            <div class="user-contact">
+              <a href="" id="mail"><img src="img/contact-icon1.png" id="mailImg"/></a>
+              <a href="" id="tel"><img src="img/contact-icon2.png" id="telImg"/></a>
+              <a href="" id="sms"><img src="img/contact-icon3.png" id="smsImg"/></a>
+            </div>
+            
+            <div class="date">
+              <center><input type="text" name="workdate" id="workdateView" class="date-text" readonly="readonly" 
+                 style="background-color: transparent"></center>
+            </div>
+            
+            <div class="ampm">
+              <div class="am">
+                <span>AM</span>
+                <center>
+                
+                <!-- <input type="text" name="amloc" id="amloc" class="amloc" style="background-color: transparent"> -->
+                
+                <select name="amloc" id="amloc" class="amloc" style="background-color: transparent;">
+        <c:forEach items="${locList}" var="locList"> 
+         <option value="${locList.locname}">${locList.locname}</option>
+        </c:forEach>
+       </select>
+                
+                </center>
+                <center><input type="text" name="amlocdetail" id="amlocdetail" class="amlocdetail" 
+                style="background-color: transparent"></center>
+              </div>
+              
+              <div class="pm">
+                <span>PM</span>
+                <center>
+                
+                <select name="pmloc" id="pmloc" class="pmloc" style="background-color: transparent;">
+        <c:forEach items="${locList}" var="locList"> 
+         <option value="${locList.locname}">${locList.locname}</option>
+        </c:forEach>
+       </select>
+                
+                </center>
+                <center><input type="text" name="pmlocdetail" id="pmlocdetail" class="pmlocdetail" 
+                style="background-color: transparent"></center>
+              </div>
+            </div>
+            
+             <!-- 컨트롤러 VO에 넘길 값 -->
+            
+            <input type="hidden" name="empid" id="empid">
+            <input type="hidden" name="currdate" id="currDateUpdate">
+             
+             <!-- 컨트롤러 VO에 넘길 값 끝 -->
+             
+          </div>
+         </div>
+        </div>
+      </div>
+    </div>
+ </form>
     
  <!-- 1207수정:모달팝업 끝-->
+
 
     
     <!----btn---->
@@ -323,19 +317,11 @@
 			$("#currDateUpdate").val(date);
 		}
 
-		draw();
-		
-		// 스크립트 시작 지점에(draw() 있는 곳에 추가하면 됨) 추가해주고,
-
+		draw();		
 		nfc();
 
-		// function 추가해주삼
 
-		function nfc(){
-		       window.inc.nfc(${myinfo.empid});
-		      }
-		
-		
+
 		function show(img, id,name,dept,am,amdetail,pm,pmdetail,workdate,tel,mail){
 			
 			var strArray = workdate.split('-');
@@ -399,19 +385,6 @@
 		
 			$("#myModal").modal('show');
 		}
-		
-		function update() {
-			var con_test = confirm("일정을 등록/수정 하시겠습니까?");
-			if(con_test==true){
-				$('#updateForm')
-				.prop("action","update.inc")
-				.prop("method","post").submit();
-				
-			}else{
-				// cancel
-			}
-		}
-		
 		
 		
 		function prevDay() {
@@ -480,8 +453,34 @@
         	 // 페이지 Reloading..처리 현재 30초.
         	 setTimeout("location.href='user.inc'",7000);
         } */
-        
-        
+
+   	 	function refresh() {
+   		 	location.reload();
+   		}
+
+		function update() {
+			   var con_test = confirm("일정을 등록/수정 하시겠습니까?");
+			   if(con_test){
+			    
+			    if( ($("#amloc").val() == "기타" && $("#amlocdetail").val() == "") 
+			    		|| ($("#pmloc").val() == "기타" && $("#pmlocdetail").val() == "")){
+			     	alert("기타 입력칸의 상세 일정을 입력해주세요."); 
+			     	return false ;
+			    }
+			    
+			    $('#updateForm')
+			    .prop("action","update.inc")
+			    .prop("method","post").submit();
+			    
+			   }else{
+			    // cancel
+			   }
+		}
+
+		function nfc(){
+		    window.inc.nfc(${myinfo.empid});
+		}	
+		
 	</script>
     
   </body>

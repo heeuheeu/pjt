@@ -15,7 +15,7 @@
     <section>
         
       <div class="sign-form">
-        <form action="modify.inc" method="post" role="form" enctype="multipart/form-data">
+        <form id="modify" role="form" enctype="multipart/form-data">
         
         	<%--  <img src="resources/${myinfo.empimg}"> --%>
         	<input type="file" placeholder="사진" name="file" id="empimg" value="${mydeptdiv.empimg}"/>
@@ -57,9 +57,9 @@
 				<option <c:if test="${mydeptdiv.emploc eq '휴무'}"> selected</c:if>>휴무</option>
 			</select><br>   
 			                   
-	        <input type="submit" value="UPDATE" id="join">
-        </form>
-        
+	        <button type="button" value="UPDATE" onclick="updateEmp()" style="display: block; width: 100%; background:#d3492c; border: 0; color: #fff;line-height: 50px;height: 50px;margin-bottom: 10px;"> UPDATE </button>
+	        <button type="button" value="DELETE" onclick="deleteEmp()" style="display: block; width: 100%; background:#3e3f44; border: 0; color: #fff;line-height: 50px;height: 50px;margin-bottom: 10px;"> DELETE </button>
+		</form>        
       </div>
       
     </section>
@@ -127,6 +127,23 @@
 		   		} 
 		   }); 
 		  });
+	 
+	 
+	 function updateEmp(){
+		 $('#modify')
+			.prop("action","modify.inc")
+			.prop("method","post").submit();
+	 }
+	 
+	 function deleteEmp(){
+		 
+		 var con_test = confirm("회원정보를 모두 삭제하시겠습니까?");
+			if(con_test){
+					$('#modify')
+					.prop("action","delete.inc")
+					.prop("method","post").submit();
+				}
+	 }
         
     
     </script>

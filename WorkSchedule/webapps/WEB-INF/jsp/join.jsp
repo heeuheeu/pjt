@@ -18,7 +18,7 @@
         <form action="join.inc" method="post" role="form" id="joinBtn" enctype="multipart/form-data">
         
         	<input type="file" placeholder="사진" name="file" id="empimg"/><br>
-	        <input type="text" placeholder="사번" name="empid" id="empid" required/><br>
+	        <input type="text" placeholder="사번" name="empid" id="empid" required maxlength='10'/><br>
 	        <input type="password" placeholder="비밀번호" name="emppwd" required/><br>
 	        <input type="text" placeholder="이름" name="empname" required/><br>
 	        <input type="text" onkeydown="mphon(this);" onkeyup="mphon(this);" placeholder="핸드폰 번호" name="empphone" maxlength="13" required/><br>

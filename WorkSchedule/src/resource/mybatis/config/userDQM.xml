@@ -70,11 +70,11 @@
 	 
 	 <insert id="insertdefaultwork" parameterType="model.domain.vo.WorkVO" >
 	   	INSERT INTO WORK
-		VALUES 	  ( #{tempdate}, 
+		VALUES 	  ( TO_DATE(#{workdate},'YYYY-MM-DD') ,
 					#{empid}, 
-					( SELECT EMPLOC FROM EMPLOYEE WHERE EMPID = #{EMPID} ) , 
+					( SELECT EMPLOC FROM EMPLOYEE WHERE EMPID = #{empid} ) , 
 					NULL, 
-					( SELECT EMPLOC FROM EMPLOYEE WHERE EMPID = #{EMPID} ), 
+					( SELECT EMPLOC FROM EMPLOYEE WHERE EMPID = #{empid} ), 
 					NULL    )   
 	 </insert>
 	 
@@ -88,6 +88,7 @@
 		JOIN	DIVISION C 		USING (DIVID)
 		WHERE 	EMPID != #{empid}
 		AND 	EMPID != 'hr'
+		AND		EMPID != 'admin'
 		AND		DEPTID = #{deptid}
 	 </select>
 	 
@@ -109,6 +110,7 @@
 	   WHERE 	EMPNAME LIKE '%'||#{searchKeyword}||'%'
 	   OR 		DEPTNAME LIKE '%'||#{searchKeyword}||'%'
 	   AND 		EMPID != 'hr'
+	   AND		EMPID != 'admin'
 	   AND 		EMPID != #{empid}
  	 </select>
  	 
@@ -166,7 +168,15 @@
 				WHERE EMPID = #{empid} AND WORKDATE=(SELECT TO_CHAR(SYSDATE, 'yyyy-MM-DD') FROM DUAL)
 	  </update>
 
-	  
+	  <delete id="deletework" parameterType="model.domain.vo.EmployeeDeptDivVO" >
+  		DELETE   FROM WORK
+  		WHERE    EMPID = #{empid}
+      </delete>
+      
+      <delete id="deleteemp" parameterType="model.domain.vo.EmployeeDeptDivVO" >
+  		DELETE   FROM EMPLOYEE
+  		WHERE    EMPID = #{empid}
+      </delete>  
 </mapper>
 
 

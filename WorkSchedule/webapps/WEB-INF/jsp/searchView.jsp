@@ -46,17 +46,16 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-	 <div id="workplace">
-	       <a class="navbar-brand" href="user.inc" style="color: white;">SSG워크플레이스</a>
-	 </div>
-      <!-- check 버튼 -->      
-      <a id="addBtn" href="user.inc"><img src="img/check.png" style="width: 30px; height: 30px; float: right; margin-top: 10px; margin-bottom: 8px; margin-right: 12px"></a>
+	 <div class="actionbar">
+	      <div class="workplace"><a class="navbar-brand" href="user.inc">SSG워크플레이스</a></div>    
+	      <div class="refresh"><a id="addBtn" href="user.inc"><img src="img/check.png"></a></div>
+      </div>
     </div>
 
     <!--상단-->
     <section id="search-bar">
       <form action="search.inc" method="post">
-	      <input type="text" placeholder="이름 또는 부서 검색" name = "searchKeyword"/>
+	      <input type="text" placeholder=" 이름 또는 부서 검색 " name = "searchKeyword"/>
 	      <input type="submit" value="검색"/>
 <%-- 	      <div class="path">
 	        <div><a href="">신세계아이앤씨</a><span>></span></div>

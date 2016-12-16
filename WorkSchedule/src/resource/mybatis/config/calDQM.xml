@@ -5,9 +5,8 @@
   
 <mapper namespace="cal">
 
-	<select id="selectmywork" parameterType="model.domain.vo.CalendarVO" resultType="model.domain.vo.CalendarVO">
-
-		SELECT 	EMPID, EMPPWD, EMPNAME, EMPPHONE, EMPMAIL, EMPLOC, EMPIMG, DEPTNAME, 
+	<select id="selectmywork" parameterType="model.domain.vo.EmployeeWorkDeptVO" resultType="model.domain.vo.EmployeeWorkDeptVO">
+		SELECT 	EMPID, EMPPWD, EMPNAME, EMPPHONE, EMPMAIL, EMPLOC, EMPIMG, DEPTNAME, DEPTID, 
 	    		TO_CHAR(WORKDATE,'YYYY-MM-DD') AS WORKDATE, AMLOC, AMLOCDETAIL, PMLOC, PMLOCDETAIL
 		FROM 	EMPLOYEE A
 		JOIN 	DEPARTMENT B USING (DEPTID)

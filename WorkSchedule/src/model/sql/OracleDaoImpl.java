@@ -18,6 +18,7 @@ import model.domain.vo.EmployeeWorkDeptVO;
 import model.domain.vo.FavoriteVO;
 import model.domain.vo.LocationVO;
 import model.domain.vo.NfcVO;
+import model.domain.vo.WorkVO;
 
 @Repository("UserDao")
 public class OracleDaoImpl implements OracleDao {
@@ -52,9 +53,9 @@ public class OracleDaoImpl implements OracleDao {
 
 	// INSERT DEFAULT WORKDATE
 	@Override
-	public int insertDefWorkRow(EmployeeDeptVO emp) {
-		System.out.println("Dao insertRow");
-		return sqlSession.insert("member.insertdefaultwork", emp);
+	public int insertDefWorkRow(WorkVO work) {
+		System.out.println("Dao insertDefWorkRow");
+		return sqlSession.insert("member.insertdefaultwork", work);
 	}
 
 	@Override
@@ -159,7 +160,7 @@ public class OracleDaoImpl implements OracleDao {
 
 	// calendar
 	@Override
-	public List<CalendarVO> myWorkRow(CalendarVO user) {
+	public List<EmployeeWorkDeptVO> myWorkRow(EmployeeWorkDeptVO user) {
 		System.out.println("Dao myWorkRow");
 		return sqlSession.selectList("cal.selectmywork", user);
 	}
@@ -234,5 +235,17 @@ public class OracleDaoImpl implements OracleDao {
 	public int addDeptRow(DeptDivisionVO div) {
 		System.out.println("Dao addDivRow");
 		return sqlSession.insert("adm.addDept", div);
+	}
+
+	@Override
+	public int deleteWork(EmployeeDeptDivVO member) {
+		System.out.println("Dao deleteWork");
+		return sqlSession.delete("member.deletework", member);
+	}
+
+	@Override
+	public int deleteEmp(EmployeeDeptDivVO member) {
+		System.out.println("Dao deleteEmp");
+		return sqlSession.delete("member.deleteemp", member);
 	}
 }

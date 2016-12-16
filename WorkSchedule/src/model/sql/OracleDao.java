@@ -13,6 +13,7 @@ import model.domain.vo.EmployeeVO;
 import model.domain.vo.EmployeeWorkDeptVO;
 import model.domain.vo.LocationVO;
 import model.domain.vo.NfcVO;
+import model.domain.vo.WorkVO;
 
 
 public interface OracleDao {
@@ -23,7 +24,7 @@ public interface OracleDao {
 	public EmployeeVO					loginEmp(EmployeeVO employee);
 	public int 							insertRow(EmployeeDeptDivVO emp);  // sign up 수정	
 	public List<String> 				selectboxDeptRow(String divname);
-	public int 							insertDefWorkRow(EmployeeDeptVO emp); 	// sign up	
+	public int 							insertDefWorkRow(WorkVO emp); 	// sign up	
 	public EmployeeDeptVO 				idCheckRow(String empid);
 	 
 	// mylist 
@@ -50,7 +51,7 @@ public interface OracleDao {
 	 public List<EmployeeDeptDivVO> 	searchDivRow(EmployeeDeptDivVO member);
 	 	 
 	 // calendar
-	 public List<CalendarVO> 			myWorkRow(CalendarVO user);
+	 public List<EmployeeWorkDeptVO> 	myWorkRow(EmployeeWorkDeptVO user);
 	 
 	 // modal update
 	 public int 						updateMyWork(EmployeeWorkDeptVO myinfo);
@@ -66,14 +67,20 @@ public interface OracleDao {
 	 public List<EmployeeWorkDeptVO> 	selectDashRow(EmployeeWorkDeptVO myinfo);
 	 
 	 // admin
-	 public List<LocationVO> selectlocRow();
-	 public int addDivRow(DivisionVO div);
-	 public int addDeptRow(DeptDivisionVO div);
-	 public int addLocRow(LocationVO div);
+	 public List<LocationVO> 			selectlocRow();
+	 public int 						addDivRow(DivisionVO div);
+	 public int 						addDeptRow(DeptDivisionVO div);
+	 public int 						addLocRow(LocationVO div);
 	  
 	// nfc update
-	 public int updateNfcAm(NfcVO nfc);
-	 public int updateNfcPm(NfcVO nfc);
+	 public int 						updateNfcAm(NfcVO nfc);
+	 public int 						updateNfcPm(NfcVO nfc);
+
+	// delete work, emp
+	 public int 						deleteWork(EmployeeDeptDivVO member);
+	 public int 						deleteEmp(EmployeeDeptDivVO member);
+
+
 
 }
 

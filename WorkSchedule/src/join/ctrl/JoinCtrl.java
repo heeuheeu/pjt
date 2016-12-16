@@ -2,6 +2,8 @@ package join.ctrl;
 
 import java.io.FileOutputStream;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -19,6 +21,7 @@ import Service.UserServiceImpl;
 import model.domain.vo.DeptDivisionVO;
 import model.domain.vo.EmployeeDeptDivVO;
 import model.domain.vo.EmployeeDeptVO;
+import model.domain.vo.WorkVO;
 
 @Controller
 public class JoinCtrl {
@@ -62,6 +65,42 @@ public class JoinCtrl {
 		}
 		
 		service.join(emp);
+
+		///////////////////////////////////////////// workdate Å×ÀÌºí insert
+		WorkVO work = new WorkVO();
+		work.setEmpid(emp.getEmpid());
+		
+		System.out.println(work.getEmpid()+"////////////////////////////////");
+		
+		for(int i=-10; i<=30; i++){
+			
+			Calendar cal = new GregorianCalendar();
+			//////////////////////////////////////////////////////////////////////////
+			cal.add(Calendar.DATE, i);
+			int month  = cal.get(Calendar.MONTH) + 1 ; 
+			int day  = cal.get(Calendar.DAY_OF_MONTH) ;
+			String mm = "";
+			String dd = "";
+			if(month <=9 ) {
+				mm += "0"+month ; 
+			}else {
+				mm = String.valueOf(month) ; 
+			}
+			
+			if(day < 10 ) {
+				dd += "0"+day ; 
+			}else {
+				dd = String.valueOf(day) ; 
+			}
+			
+			String workdate = String.valueOf(cal.get(Calendar.YEAR)) + mm + dd;
+			
+			work.setWorkdate(workdate);
+			
+			//System.out.println(i+"ë²ˆì§¸ "+workdate);
+			
+			service.insertDefWorkRow(work);
+		}
 
 		return "redirect:/main.inc";
 	}

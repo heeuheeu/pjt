@@ -295,17 +295,31 @@
 			
 			
 		});
-		
-		function update() {
-			var con_test = confirm("일정을 등록/수정 하시겠습니까?");
-			if(con_test==true){
-				$('#updateForm')
-				.prop("action","updateCal.inc")
-				.prop("method","post").submit();
-			}else{
-				// cancel
-			}
-		}
+
+
+ 		function update() {
+ 			   var con_test = confirm("일정을 등록/수정 하시겠습니까?");
+ 			   if(con_test){
+ 			    
+ 			    if( ($("#amloc").val() == "기타" && $("#amlocdetail").val() == "") 
+ 			    		|| ($("#pmloc").val() == "기타" && $("#pmlocdetail").val() == "")){
+ 			     	alert("기타 입력칸의 상세 일정을 입력해주세요.");   
+ 			     return false ;
+ 			    }
+ 			    
+ 			    $('#updateForm')
+ 			    .prop("action","update.inc")
+ 			    .prop("method","post").submit();
+ 			    
+ 			   }else{
+ 			    // cancel
+ 			   }
+ 		}
+ 		
+
+		function nfc(){
+		    window.inc.nfc(${myinfo.empid});
+		}	
 		
 		</script>
 		<!-- Placed at the end of the document so the pages load faster -->

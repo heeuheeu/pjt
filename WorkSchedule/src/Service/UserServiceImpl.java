@@ -17,6 +17,7 @@ import model.domain.vo.EmployeeVO;
 import model.domain.vo.EmployeeWorkDeptVO;
 import model.domain.vo.LocationVO;
 import model.domain.vo.NfcVO;
+import model.domain.vo.WorkVO;
 import model.sql.OracleDao;
 
 @Service("UserService")
@@ -45,6 +46,11 @@ public class UserServiceImpl {
 	public List<String> selectboxDept(String divname) {
 		System.out.println("UserService updateDiv");
 		return dao.selectboxDeptRow(divname);
+	}
+	
+	public int insertDefWorkRow(WorkVO work) {
+		System.out.println("UserService updateDiv");
+		return dao.insertDefWorkRow(work);
 	}
 
 	//////////////// idcheck///////////////////////////
@@ -125,7 +131,7 @@ public class UserServiceImpl {
 
 	/////////////////////////////////////////////////////// About calendar
 
-	public List<CalendarVO> selectMyWork(CalendarVO user) {
+	public List<EmployeeWorkDeptVO> selectMyWork(EmployeeWorkDeptVO user) {
 		System.out.println("UserService selectMyWork");
 		return dao.myWorkRow(user);
 	}
@@ -191,6 +197,18 @@ public class UserServiceImpl {
 	public int addLoc(LocationVO div) {
 		System.out.println("UserService addLoc");
 		return dao.addLocRow(div);
+	}
+
+	////////////////////////////////// delete work
+	public int deletework(EmployeeDeptDivVO member) {
+		System.out.println("UserService deleteWork");
+		return dao.deleteWork(member);
+	}
+
+	///////////////////////////////// delete emp
+	public int deleteemp(EmployeeDeptDivVO member) {
+		System.out.println("UserService deleteEmp");
+		return dao.deleteEmp(member);
 	}
 
 }
