@@ -24,7 +24,7 @@
       <div class="user-info">
       <br>
           <div class="profile"><img src="resources/${myinfo.empimg}"/></div>
-          <div class="name">${myinfo.deptname}</div>
+          <div class="dept">${myinfo.deptname}</div>
           <div class="name">${myinfo.empname}<%--  ${myinfo.empgrade} --%></div>
       </div>
       
@@ -101,6 +101,10 @@
     		var favid = new Array();
     		var list = new Array();
 
+    		
+    		
+    		
+    		
 	    	function onCheck(chk) {
 		    	
 	    		var chkid = chk;
@@ -192,7 +196,7 @@
     	$(document).ready(function() {
 
 	 		// 내 즐겨찾기 리스트
-    		<c:forEach items="${myfav}" var="item">
+    		<c:forEach items="${myfavid}" var="item">
 	    		favid.push("${item.empidfav}");
     		</c:forEach>
 

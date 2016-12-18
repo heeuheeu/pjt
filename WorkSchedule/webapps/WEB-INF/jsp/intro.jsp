@@ -10,11 +10,13 @@
   </head>
   <body>
     <section>
-      <div class="logo"><img src="./img/logo.jpg" style="width: 250px; height: 160px"/></div>
+      <div class="logo">
+      	<img src="./img/logo.jpg" />
+      </div>
+      
       
       <div class="sign-form">
-        
-        
+     
        <!--  ////////////login//////////// -->
         <form action="login.inc" method="post">
         <input type="text" placeholder="사번" name="empid" id="empid" required/>
@@ -31,7 +33,7 @@
         </div>
         <!--  //////////////////remember id/////////////////// -->
         
-        
+        <br><br>
              
         
         <input type="submit" value="LOGIN" id="login" style="margin-bottom: 10px">
@@ -42,7 +44,7 @@
 	   	  <input type="submit" value="SIGN UP" style="background-color: #3e3f44">
 	      </form>
    </div>
-    </section>
+  </section>
   
   	<script src="./js/jquery-1.10.2.min.js"></script>
     <script src="./js/bootstrap.min.js"></script>

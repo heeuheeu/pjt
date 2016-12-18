@@ -13,30 +13,30 @@
     
     <!-- Bootstrap -->
     <link href="./css/bootstrap.min.css" rel="stylesheet">
+    <link href="./css/font-awesome.min.css" rel="stylesheet" type="text/css" media="screen">
+    <link href="./css/font-awesome.css" rel="stylesheet" type="text/css" media="screen">
   </head>
-  <body OnLoad="restart()"> 
-
-
   
-	
-	<form role="form" name='dateForm' method="post">
-	    <!--상단-->
-	    <section id="top-bar">
-	      <!--날짜-->
-	      <div class="date">
-	        <!-- <div>팀원 현재 상태보기</div> -->
-	        <div class="group-title">${myinfo.deptname}</div>
-	        <input type="image" src="img/date-prev.png" onclick="prevDay()">
-	        <a id="currDateView" class="date-text" style="color: black;"></a>
-			<input type="image" src="img/date-next.png" onclick="nextDay()">
+  <body OnLoad="restart()"> 
+	<div class="dash-container"> 
+	  
+	<!--상단-->
+	<section id="top-bar">
+		<div class="group-title">${myinfo.deptname}</div>
+	    <!--날짜-->
+	    <div class="date">
+	    	<a class="prev-text" onclick="prevDay()"> < </a> 
+	        <a class="date-text" id="currDateView"></a>
+	        <a class="next-text" onclick="nextDay()"> > </a> 
 			<input type="hidden" id="currDate">
-	      </div>
-	      <!--날짜-->
-	    </section>
-	    <!--상단-->
-	</form>
+	    </div>
+	    <!--날짜-->
+	</section>
+	<!--상단-->
 	
-	  <div class="container" style="width: 90%"> 
+	
+	
+	<div id="dash-carousel">
 	        <div id="carousel-example-generic" class="carousel slide">
 	                 
 	             <div class="carousel-inner" id="carouselinner">     
@@ -51,13 +51,21 @@
 	        </div> 
 	  </div>
 	  
-<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+	  
+	</div>
+	
+	
+	  
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="./js/bootstrap.min.js"></script>
     <script>
-      $('.carousel').carousel();
 
+      $('.carousel').carousel({
+    	  interval: 15000
+    	});
+      
       $(document).ready(function(){
 		  var lists = [] ; 
 		  <c:forEach items="${myfav}" var="fav">	
@@ -79,25 +87,20 @@
 		  	var nowHour = now.getHours();
 		  	var AMPM = ""; 
 		  	
-		  	if(nowHour <12){
-		  		AMPM = "AM"
-		  	}else{
-		  		AMPM = "PM"
-		  	}
+		  	if(nowHour <12) { AMPM = "AM"; }
+		  	else { AMPM = "PM"; }
 
 		  var txt="<div class='item active'>";
 		 	  txt +="<section id='card-item'>";
 		  for(var i=0 ; i < lists.length ; i++) {
 			 
-			   
 			  //background color
-			    if(i<10) {		    	
-			  		
+			    if(i<10) {		    			  		
 			     	var color = "status6";
 			  		
 			  		//now: AM
 			  		if(AMPM == "AM"){
-				    	if(lists[i].amloc=='본사 10F' || lists[i].amloc=='본사 14F' || lists[i].amloc=='본사 13F'){
+				    	if(lists[i].amloc=='본사 9F' || lists[i].amloc=='본사 10F' || lists[i].amloc=='본사 14F' || lists[i].amloc=='본사 13F'){
 				    		color = "status1";
 				    	}else if(lists[i].amloc=='메사'){
 				    		color = "status2";
@@ -106,13 +109,13 @@
 				    	}else if(lists[i].amloc=='하남'){
 				    		color = "status4";
 				    	}else{
-				    		color = "status5"
+				    		color = "status5";
 				    	}
 				    
 			  		}
 			  		//now: PM
 			  		else{
-			  			if(lists[i].pmloc=='본사 10F' || lists[i].pmloc=='본사 14F' || lists[i].pmloc=='본사 13F'){
+			  			if(lists[i].pmloc=='본사 9F' || lists[i].pmloc=='본사 10F' || lists[i].pmloc=='본사 14F' || lists[i].pmloc=='본사 13F'){
 				    		color = "status1";
 				    	}else if(lists[i].pmloc=='메사'){
 				    		color = "status2";
@@ -121,29 +124,29 @@
 				    	}else if(lists[i].amloc=='하남'){
 				    		color = "status4";
 				    	}else{
-				    		color = "status5"
+				    		color = "status5";
 				    	}
 			  		}		
 			  		
 			    	txt +="<article><div class='item-lay "+color+ "'>";
 			    	//txt +="<article><div class='item-lay status2'>";
 			    	txt +="<div class='profile'><img src='resources/"+lists[i].empimg+"'></div>";
-			    	txt +="<div class='name'>"+lists[i].empname+"</div>";
+			    	/* txt +="<div class='name'>"+lists[i].empname+"</div>"; */
 			    	
 			    	
 			    	if(lists[i].amloc == "기타"){
-			    		txt +="<div class='ampm'><div class='am'><span>AM</span>"+lists[i].amlocdetail+"</div>"; 
+			    		txt +="<div class='ampm'><div class='am'><span>AM</span><div class='loc-text'>"+lists[i].amlocdetail+"</div></div>"; 
 			    	}else{
-			    		txt +="<div class='ampm'><div class='am'><span>AM</span>"+lists[i].amloc+"</div>"; 
+			    		txt +="<div class='ampm'><div class='am'><span>AM</span><div class='loc-text'>"+lists[i].amloc+"</div></div>"; 
 			    	}
 			    	
-			    	
+			    	/* 
 			    	if(lists[i].pmloc == "기타"){
-			    		txt +="<div class='ampm'><div class='pm'><span>PM</span>"+lists[i].pmlocdetail+"</div>"; 
+			    		txt +="<div class='pm'><span>PM</span><div class='loc-text'>"+lists[i].pmlocdetail+"</div></div>"; 
 			    	}else{
-			    		txt +="<div class='ampm'><div class='pm'><span>PM</span>"+lists[i].pmloc+"</div>"; 
+			    		txt +="<div class='pm'><span>PM</span><div class='loc-text'>"+lists[i].pmloc+"</div></div>"; 
 			    	}
-			    	
+			    	 */
 			    	txt +="</div></div></article>";
 			    }
       			
@@ -165,7 +168,7 @@
 		  		
 		  		//now: AM
 		  		if(AMPM == "AM"){
-			    	if(lists[i].amloc=='본사 10F' || lists[i].amloc=='본사 14F' || lists[i].amloc=='본사 13F'){
+			    	if(lists[i].amloc=='본사 9F' || lists[i].amloc=='본사 10F' || lists[i].amloc=='본사 14F' || lists[i].amloc=='본사 13F'){
 			    		color = "status1";
 			    	}else if(lists[i].amloc=='메사'){
 			    		color = "status2";
@@ -180,7 +183,7 @@
 		  		}
 		  		//now: PM
 		  		else{
-		  			if(lists[i].pmloc=='본사 10F' || lists[i].pmloc=='본사 14F' || lists[i].pmloc=='본사 13F'){
+		  			if(lists[i].pmloc=='본사 9F' || lists[i].pmloc=='본사 10F' || lists[i].pmloc=='본사 14F' || lists[i].pmloc=='본사 13F'){
 			    		color = "status1";
 			    	}else if(lists[i].pmloc=='메사'){
 			    		color = "status2";
@@ -196,21 +199,21 @@
 		    	txt +="<article><div class='item-lay "+color+ "'>";
 		    	//txt +="<article><div class='item-lay status1'>";
 		    	txt +="<div class='profile'><img src='img/"+lists[i].empid+".png' /></div>";
-		    	txt +="<div class='name'>"+lists[i].empname+"</div>";
+		    	/* txt +="<div class='name'>"+lists[i].empname+"</div>"; */
 		    	
 		    	
 		    	if(lists[i].amloc == "기타"){
-		    		txt +="<div class='ampm'><div class='am'><span>AM</span>"+lists[i].amlocdetail+"</div>"; 
+		    		txt +="<div class='ampm'><div class='am'><span>AM</span><div class='loc-text'>"+lists[i].amlocdetail+"</div></div>"; 
 		    	}else{
-		    		txt +="<div class='ampm'><div class='am'><span>AM</span>"+lists[i].amloc+"</div>"; 
+		    		txt +="<div class='ampm'><div class='am'><span>AM</span><div class='loc-text'>"+lists[i].amloc+"</div></div>"; 
 		    	}
-		    	
+		    	/* 
 		    	
 		    	if(lists[i].pmloc == "기타"){
-		    		txt +="<div class='ampm'><div class='pm'><span>PM</span>"+lists[i].pmlocdetail+"</div>"; 
+		    		txt +="<div class='pm'><span>PM</span><div class='loc-text'>"+lists[i].pmlocdetail+"</div></div>"; 
 		    	}else{
-		    		txt +="<div class='ampm'><div class='pm'><span>PM</span>"+lists[i].pmloc+"</div>"; 
-		    	}
+		    		txt +="<div class='pm'><span>PM</span><div class='loc-text'>"+lists[i].pmloc+"</div></div>"; 
+		    	} */
 		    	
 		    	txt +="</div></div></article>";
       		 }
@@ -228,7 +231,7 @@
  		  		
  		  		//now: AM
  		  		if(AMPM == "AM"){
- 			    	if(lists[i].amloc=='본사 10F' || lists[i].amloc=='본사 14F' || lists[i].amloc=='본사 13F'){
+ 			    	if(lists[i].amloc=='본사 9F' || lists[i].amloc=='본사 10F' || lists[i].amloc=='본사 14F' || lists[i].amloc=='본사 13F'){
  			    		color = "status1";
  			    	}else if(lists[i].amloc=='메사'){
  			    		color = "status2";
@@ -243,7 +246,7 @@
  		  		}
  		  		//now: PM
  		  		else{
- 		  			if(lists[i].pmloc=='본사 10F' || lists[i].pmloc=='본사 14F' || lists[i].pmloc=='본사 13F'){
+ 		  			if(lists[i].pmloc=='본사 9F' || lists[i].pmloc=='본사 10F' || lists[i].pmloc=='본사 14F' || lists[i].pmloc=='본사 13F'){
  			    		color = "status1";
  			    	}else if(lists[i].pmloc=='메사'){
  			    		color = "status2";
@@ -260,22 +263,22 @@
  		    	//txt +="<article><div class='item-lay status1'>";
       		
 		    	txt +="<div class='profile'><img src='img/"+lists[i].empid+".png' /></div>";
-		    	txt +="<div class='name'>"+lists[i].empname+"</div>";
+		    	/* txt +="<div class='name'>"+lists[i].empname+"</div>"; */
 		    	
 		    	
 		    	if(lists[i].amloc == "기타"){
-		    		txt +="<div class='ampm'><div class='am'><span>AM</span>"+lists[i].amlocdetail+"</div>"; 
+		    		txt +="<div class='ampm'><div class='am'><span>AM</span><div class='loc-text'>"+lists[i].amlocdetail+"</div></div>"; 
 		    	}else{
-		    		txt +="<div class='ampm'><div class='am'><span>AM</span>"+lists[i].amloc+"</div>"; 
+		    		txt +="<div class='ampm'><div class='am'><span>AM</span><div class='loc-text'>"+lists[i].amloc+"</div></div>"; 
 		    	}
 		    	
-		    	
+		    	/* 
 		    	if(lists[i].pmloc == "기타"){
-		    		txt +="<div class='ampm'><div class='pm'><span>PM</span>"+lists[i].pmlocdetail+"</div>"; 
+		    		txt +="<div class='pm'><span>PM</span><div class='loc-text'>"+lists[i].pmlocdetail+"</div></div>"; 
 		    	}else{
-		    		txt +="<div class='ampm'><div class='pm'><span>PM</span>"+lists[i].pmloc+"</div>"; 
+		    		txt +="<div class='pm'><span>PM</span><div class='loc-text'>"+lists[i].pmloc+"</div></div>"; 
 		    	}
-		    	
+		    	 */
 		    	txt +="</div></div></article>";
       		 }
       		 txt +="</section></div>" ;
@@ -291,7 +294,7 @@
      		  		
      		  		//now: AM
      		  		if(AMPM == "AM"){
-     			    	if(lists[i].amloc=='본사 10F' || lists[i].amloc=='본사 14F' || lists[i].amloc=='본사 13F'){
+     			    	if(lists[i].amloc=='본사 9F' || lists[i].amloc=='본사 10F' || lists[i].amloc=='본사 14F' || lists[i].amloc=='본사 13F'){
      			    		color = "status1";
      			    	}else if(lists[i].amloc=='메사'){
      			    		color = "status2";
@@ -306,7 +309,7 @@
      		  		}
      		  		//now: PM
      		  		else{
-     		  			if(lists[i].pmloc=='본사 10F' || lists[i].pmloc=='본사 14F' || lists[i].pmloc=='본사 13F'){
+     		  			if(lists[i].pmloc=='본사 9F' || lists[i].pmloc=='본사 10F' || lists[i].pmloc=='본사 14F' || lists[i].pmloc=='본사 13F'){
      			    		color = "status1";
      			    	}else if(lists[i].pmloc=='메사'){
      			    		color = "status2";
@@ -323,21 +326,21 @@
      		    	//txt +="<article><div class='item-lay status1'>";
           			 
     		    	txt +="<div class='profile'><img src='img/"+lists[i].empid+".png' /></div>";
-			    	txt +="<div class='name'>"+lists[i].empname+"</div>";
+			    	/* txt +="<div class='name'>"+lists[i].empname+"</div>"; */
 			    	
 			    	
 			    	if(lists[i].amloc == "기타"){
-			    		txt +="<div class='ampm'><div class='am'><span>AM</span>"+lists[i].amlocdetail+"</div>"; 
+			    		txt +="<div class='ampm'><div class='am'><span>AM</span><div class='loc-text'>"+lists[i].amlocdetail+"</div></div>"; 
 			    	}else{
-			    		txt +="<div class='ampm'><div class='am'><span>AM</span>"+lists[i].amloc+"</div>"; 
+			    		txt +="<div class='ampm'><div class='am'><span>AM</span><div class='loc-text'>"+lists[i].amloc+"</div></div>"; 
 			    	}
-			    	
+			    	/* 
 			    	
 			    	if(lists[i].pmloc == "기타"){
-			    		txt +="<div class='ampm'><div class='pm'><span>PM</span>"+lists[i].pmlocdetail+"</div>"; 
+			    		txt +="<div class='pm'><span>PM</span><div class='loc-text'>"+lists[i].pmlocdetail+"</div></div>"; 
 			    	}else{
-			    		txt +="<div class='ampm'><div class='pm'><span>PM</span>"+lists[i].pmloc+"</div>"; 
-			    	}
+			    		txt +="<div class='pm'><span>PM</span><div class='loc-text'>"+lists[i].pmloc+"</div></div>"; 
+			    	} */
 			    	
 			    	txt +="</div></div></article>";
           		 }
@@ -352,7 +355,8 @@
       
     </script> 
 
-
+	<script src="https://use.fontawesome.com/492f5222e8.js"></script>
+	
 	<script src="./js/jquery-1.10.2.min.js"></script>
     <script src="./js/bootstrap.min.js"></script>
     <script src="./js/jasny-bootstrap.min.js"></script>
@@ -397,10 +401,10 @@
 		var date = caleYear + "-" + caleMonth + "-" + caleDay;
 		$("#currDate").html(date);
 		
-		document.dateForm.action = 'calDayDash.inc?currDate='
-				+ $("#currDate").text();
-		document.submit();
+		location.href='calDayDash.inc?currDate='
+			+ $("#currDate").text();
 	}
+	
 
 	function nextDay() {
 		var caleMonth, caleDay, caleYear;
@@ -422,12 +426,14 @@
 		var date = caleYear + "-" + caleMonth + "-" + caleDay;
 		$("#currDate").html(date);
 		
-		document.dateForm.action = 'calDayDash.inc?currDate='
+/* 		document.dateForm.action = 'calDayDash.inc?currDate='
 				+ $("#currDate").text();
 		document.submit();
+		 */
+		location.href='calDayDash.inc?currDate='
+			+ $("#currDate").text();
 	}
-	
-	
+
 	            
     function restart() {  
     
@@ -438,6 +444,8 @@
     	$("#currDate").style.backgroundColor="#010101"
     }
     
+
+    	
 </script> 
   </body>
 </html>

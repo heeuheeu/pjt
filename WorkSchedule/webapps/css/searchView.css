@@ -10,6 +10,7 @@ input[type="submit"]{display: inline-block; width: 20%; vertical-align: top;back
 
 .actionbar {height: 50px;}
 .actionbar .workplace {float: left; width: 50%;}
+.actionbar .workplace a {color: white;}
 .actionbar .refresh { float: right; margin: 9px;}
 .actionbar .refresh a img {
 	width: 32px;

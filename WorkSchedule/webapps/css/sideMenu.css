@@ -4,8 +4,9 @@
 
 .side-menu-content .user-info{border-bottom: solid 1px #ddd; padding-bottom: 10px;}
 .side-menu-content .user-info .profile{text-align: center; margin-bottom: 10px; }
-.side-menu-content .user-info .profile img{width: 128px; height: 128px;}
-.side-menu-content .user-info .name{text-align: center; margin-bottom: 10px;}
+.side-menu-content .user-info .profile img{width: 1`px; height: 128px;}
+.side-menu-content .user-info .dept{text-align: center; margin-bottom: 5px; font-size: 1em; }
+.side-menu-content .user-info .name{text-align: center; margin-bottom: 10px; font-weight: bold; letter-spacing: 2px; font-size: 1.2em;}
 .side-menu-content .btns{ margin-top: 20px;}
 .side-menu-content .btns a{display: block; text-align: center; margin-bottom:10px; text-decoration: none; color: #fff;line-height: 50px;height: 50px;}
 .side-menu-content .btns a img{margin-right: 5px;}

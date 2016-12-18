@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -83,8 +84,8 @@ public class UserCtrl {
 			return "intro";
 		}
 		
-		else { // login 일치시
-			// dashboard - 인사팀 login
+		else { // login 
+			// dashboard - hr
 			if (user.getEmpid().equals("hr")) {
 				model.addAttribute("login", user);
 				return "redirect:/dashboard.inc";
@@ -157,42 +158,14 @@ public class UserCtrl {
 		//return "redirect:/favorite.inc";
 	}
 
-	/*
-	@RequestMapping(value = "/favorite.inc")
-	public String favoritelist(HttpSession session, Model model) {
-		System.out.println("UserCtrl favorite.inc");
-
-		EmployeeVO user = (EmployeeVO) session.getAttribute("login");
-		EmployeeWorkDeptVO list = new EmployeeWorkDeptVO();
-		list.setEmpid(user.getEmpid());
-		list.setDeptid(user.getDeptid());
-
-		// Date setting
-		Calendar cal = Calendar.getInstance();
-		SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
-		String currdate = sdf1.format(cal.getTime());
-		list.setCurrdate(currdate);
-
-		List<EmployeeFavWorkDeptVO> favlist = service.selectempfav(list);
-
-		model.addAttribute("myfav", favlist); // fav work - EmployeeFavWorkDeptVO
-		
-		List<LocationVO> locList = service.selectloc();
-		model.addAttribute("locList", locList);
-		
-		return null;
-		return "view";
-	}
-
-	*/
 	
 	///////////////////////////////////////////////////////////////////////////////////////// viewOtherDay.jsp
 	
-	// �궇吏� 蹂�寃쏀븯湲�
+
 	@RequestMapping(value = "/calDay.inc")
 	public String userlist2(@RequestParam(value = "currDate") String currdate,
 			@RequestParam(value = "view") String view, HttpSession session, Model model) {
-		System.out.println("===================================페이지 변경=====================================");
+		System.out.println("===================================�럹�씠吏� 蹂�寃�=====================================");
 		System.out.println("UserCtrl userlist2 calDay.inc / " + currdate);
 
 		// mylist reload
@@ -223,8 +196,8 @@ public class UserCtrl {
 		List<EmployeeFavWorkDeptVO> favlist = new ArrayList<EmployeeFavWorkDeptVO>();
 		favlist = service.selectempfav(useremp);
 
-		model.addAttribute("myinfo", useremp); // EmployeeWorkDeptVO -날짜 변경 work 다시 심기
-		model.addAttribute("myfav", favlist); // List<EmployeeFavWorkDeptVO> - fav 날짜 변경 work 다시 심기
+		model.addAttribute("myinfo", useremp); // EmployeeWorkDeptVO -�궇吏� 蹂�寃� work �떎�떆 �떖湲�
+		model.addAttribute("myfav", favlist); // List<EmployeeFavWorkDeptVO> - fav �궇吏� 蹂�寃� work �떎�떆 �떖湲�
 		model.addAttribute("day", currdate); /////////////////////////////////////////////////////// * String currdate *
 		model.addAttribute("view", view); ////////////////////////////////////////////////////////// * String view * 
 		
@@ -293,8 +266,8 @@ public class UserCtrl {
 			System.out.println(list.get(i));
 		}
 		
-		model.addAttribute("myfavid", favid); // List<EmpIdVO> 검색 결과
-		model.addAttribute("lists", list); // List<EmployeeDeptDivVO> 검색 결과
+		model.addAttribute("myfavid", favid); // List<EmpIdVO> 검색결과
+		model.addAttribute("lists", list); // List<EmployeeDeptDivVO> 검색결과
 
 		return "searchView";
 	}
@@ -353,7 +326,7 @@ public class UserCtrl {
 	public List<CalendarNoteVO> main(Model model, HttpSession session) {
 		System.out.println("calendar에 VO 받아온 후 호출");
 		
-		// �굹�쓽 �씪�젙 �쟾泥� select
+		
 		EmployeeVO user = (EmployeeVO) session.getAttribute("login");
 		EmployeeWorkDeptVO cal = new EmployeeWorkDeptVO();
 		cal.setEmpid(user.getEmpid());
@@ -364,7 +337,7 @@ public class UserCtrl {
 		for (int i = 0; i < work.size(); i++) {
 			if (work.get(i).getEmploc().equals(work.get(i).getAmloc())
 					&& work.get(i).getEmploc().equals(work.get(i).getPmloc())) {
-				// default lo와 ampm loc가 같을 때는 list에 저장 안함
+				// // default lo와 ampm loc가 같을 때는 list에 저장 안함
 			} else {
 				String date = work.get(i).getWorkdate().substring(0, 10);
 				String note = "AM : " + work.get(i).getAmloc() + " / PM : " + work.get(i).getPmloc();
@@ -396,7 +369,7 @@ public class UserCtrl {
 		mylist = service.selectEmpInfo(mylist);
 		
 		List<DeptDivisionVO> divList = service.selectdiv(); 	
-		List<DeptDivisionVO> deptlist = service.selectdeptdiv();
+		List<DeptDivisionVO> deptlist = service.selecteddept(mylist);
 
 		/*List<String> deptlist = new ArrayList<String>();
 		deptlist = service.selectboxDept(divname);*//////////////////////////////////////////////////// 고치기!!!
@@ -427,11 +400,11 @@ public class UserCtrl {
 
 		MultipartFile f = member.getFile();
 
-		// 수정사항 있을 때만 filename set
+		// �닔�젙�궗�빆 �엳�쓣 �븣留� filename set
 		if ( f.getOriginalFilename() != null && f.getOriginalFilename() != "") {
 			member.setEmpimg(f.getOriginalFilename());
 			String path = request.getSession().getServletContext().getRealPath("/resources");
-			/*System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>> path : " + path);*/
+			System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>> path : " + path);
 
 			byte[] data = f.getBytes();
 
@@ -532,51 +505,79 @@ public class UserCtrl {
 		List<EmployeeWorkDeptVO> favlist = new ArrayList<EmployeeWorkDeptVO>();
 		favlist = service.selectDashEmp(mylist);
 
-		// �쁽�옱 �떆媛� 媛��졇�삤湲�
+		// work table validation
+		int work = service.selectwork(mylist);
+
+		if (work == 0) { // 1. table empty,
+			mylist = service.mylist1(mylist);
+			mylist.setWorkdate(currdate);
+			mylist.setAmloc(mylist.getEmploc());
+			mylist.setPmloc(mylist.getEmploc());
+		} else { // 2. work table exist
+			mylist = service.mylist2(mylist);
+		}
+		
+		//mylist = service.mylist2(mylist);
+		mylist.setCurrdate(currdate);
+		System.out.println(mylist.toString());
+
+	
 		Date date = new Date();
 		
+		model.addAttribute("myinfo", mylist); ////////////////////////////////////////// * EmployeeWorkDeptVO *
 		model.addAttribute("date", date);
 		model.addAttribute("myfav", favlist);/////////// * fav work - EmployeeFavWorkDeptVO *
+		
+		
+		
+		//////////////////////// Work Table �깮�꽦 �떆�옉
+		
+		List<String> emplist = new ArrayList<String>();
+		emplist = service.selectEmpList();
+		
+		Calendar calendar = new GregorianCalendar();
+		calendar.add(Calendar.DATE, 31);
+		int month  = calendar.get(Calendar.MONTH) + 1 ; 
+		int day  = calendar.get(Calendar.DAY_OF_MONTH) ;
+		String mm = "";
+		String dd = "";
+		if(month <=9 ) {
+			mm += "0"+month ; 
+		}else {
+			mm = String.valueOf(month) ; 
+		}
+		
+		if(day < 10 ) {
+			dd += "0"+day ; 
+		}else {
+			dd = String.valueOf(day) ; 
+		}
+		
+		String workdate = String.valueOf(calendar.get(Calendar.YEAR)) + mm + dd;
+		mylist.setCurrdate(workdate);
+		
+		for(int i=0;i<emplist.size();i++){
+
+			mylist.setEmpid(emplist.get(i)); 
+			int cnt = service.selectwork(mylist);
+			
+			if(cnt == 0){
+				service.insertWork(mylist);
+			}
+			
+		}
+		
+		//////////////////////// Work Table �깮�꽦 �걹
 		
 		return "dashboard";
 	}
 
-	/*
-	@RequestMapping(value = "/favoritedash.inc")
-	public String favoritedash(HttpSession session, Model model) {
-		System.out.println("UserCtrl favoritedash");
-
-		// login session (empid)
-		EmployeeVO user = (EmployeeVO) session.getAttribute("login");
-		EmployeeWorkDeptVO list = new EmployeeWorkDeptVO();
-		list.setEmpid(user.getEmpid());
-		list.setDeptid(user.getDeptid());
-
-		// Date setting
-		Calendar cal = Calendar.getInstance();
-		SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
-		String currdate = sdf1.format(cal.getTime());
-		list.setCurrdate(currdate);
-
-		List<EmployeeWorkDeptVO> favlist = new ArrayList<EmployeeWorkDeptVO>();
-		favlist = service.selectDashEmp(list);
-
-		// �쁽�옱 �떆媛� 媛��졇�삤湲�
-		Date date = new Date();
-		
-		model.addAttribute("date", date);
-		model.addAttribute("myfav", favlist);/////////// * fav work - EmployeeFavWorkDeptVO *
-		
-		return "dashboard";
-	}*/
-
-	
 	
 	////////////////////////////////////////////////////////////////////////////////////////////// dashboardOtherDay.jsp
 	
 	@RequestMapping(value = "/calDayDash.inc")
 	public String favoritedash2(@RequestParam(value = "currDate") String currdate, HttpSession session, Model model) {
-		System.out.println("===================================페이지 변경====================================");
+		System.out.println("=================================페이지 변경====================================");
 		System.out.println("UserCtrl favoritedash2 calDayDash.inc");
 		System.out.println(currdate);
 
@@ -590,14 +591,25 @@ public class UserCtrl {
 		List<EmployeeWorkDeptVO> favlist = new ArrayList<EmployeeWorkDeptVO>();
 		favlist = service.selectDashEmp(mylist);
 		
-		// 현재 시간 가져오기
+		
 		Date date = new Date();
 
 		model.addAttribute("day", currdate); 
 		model.addAttribute("date", date);
 		model.addAttribute("myfav", favlist);
 
-		return "dashboardOtherDay";
+		
+		Calendar cal2 = Calendar.getInstance();
+		SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
+		String currdate2 = sdf1.format(cal2.getTime());
+		
+		System.out.println(currdate2+"?????????????????????????????????????");
+		
+		if(currdate.equals(currdate2)){
+			return "redirect:dashboard.inc";
+		}else{
+			return "dashboardOtherDay";
+		}
 	}
 	
 	
@@ -607,7 +619,7 @@ public class UserCtrl {
 	@ResponseBody
 	public String nfc(@RequestParam(value = "loc") String loc, @RequestParam(value = "empid") String empid) {
 		System.out.println("UserCtrl nfc");
-		System.out.println("NFC 태그 !!!!");
+		System.out.println("NFC �깭洹� !!!!");
 		System.out.println("loc : " + loc + "empid : " + empid);
 
 		NfcVO nfc = new NfcVO();

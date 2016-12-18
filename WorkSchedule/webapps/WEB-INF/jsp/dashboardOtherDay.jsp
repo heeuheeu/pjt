@@ -14,25 +14,24 @@
   </head>
  <body OnLoad="restart()"> 
 
-	 <div class="container" style="width: 2000px; height: 1200px;">   
+	<div class="dash-container"> 
+	  
+	<!--상단-->
+	<section id="top-bar">
+		<div class="group-title">${myinfo.deptname}</div>
+	    <!--날짜-->
+	    <div class="date">
+	    	<a class="prev-text" onclick="prevDay()"> < </a> 
+	        <a class="date-text" id="currDateView"></a>
+	        <a class="next-text" onclick="nextDay()"> > </a> 
+			<input type="hidden" id="currDate">
+	    </div>
+	    <!--날짜-->
+	</section>
+	<!--상단-->
 	
-<form role="form" name='dateForm' method="post">
-    <!--상단-->
-    <section id="top-bar">
-      <!--날짜-->
-      <div class="date">
-        <div class="group-title">${myinfo.deptname}</div>
-        <input type="image" src="img/date-prev.png" onclick="prevDay()">
-        <a id="currDateView" class="date-text" style="color: black;"></a>
-		<input type="image" src="img/date-next.png" onclick="nextDay()">
-		<input type="hidden" id="currDate">
-      </div>
-      <!--날짜-->
-    </section>
-    <!--상단-->
-</form>
-
-
+	
+	<div id="dash-carousel">
 	        <div id="carousel-example-generic" class="carousel slide">
 	                 
 	             <div class="carousel-inner" id="carouselinner">     
@@ -46,6 +45,10 @@
 	          	
 	        </div> 
 	  </div>
+	  
+	  
+	</div>
+	
 	  
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
@@ -101,9 +104,10 @@
 
 		var date2 = caleYear + "-" + caleMonth + "-" + caleDay;
 		$("#currDate").html(date2);
-		document.dateForm.action = 'calDayDash.inc?currDate='
-				+ $("#currDate").text();
-		document.submit();
+
+		location.href='calDayDash.inc?currDate='
+			+ $("#currDate").text();
+		
 	}
 
 	function nextDay() {
@@ -125,13 +129,19 @@
 
 		var date = caleYear + "-" + caleMonth + "-" + caleDay;
 		$("#currDate").html(date);
-		document.dateForm.action = 'calDayDash.inc?currDate='
-				+ $("#currDate").text();
-		document.submit();
+
+
+		location.href='calDayDash.inc?currDate='
+			+ $("#currDate").text();
 	}
 	
-	  $('.carousel').carousel();
 
+	//////////////////////////////////////////////////////////////////////// carousel
+	
+    $('.carousel').carousel({
+  	  interval: 15000
+  	}); 
+    
       $(document).ready(function(){
 		  var lists = [] ; 
 		  <c:forEach items="${myfav}" var="fav">	
@@ -151,30 +161,20 @@
 		  	var nowHour = now.getHours();
 		  	var AMPM = ""; 
 		  	
-		  	if(nowHour <12){
-		  		AMPM = "AM"
-		  	}else{
-		  		AMPM = "PM"
-		  	}
-		  	
-		  	//TODAY
-		  	 var nowYear = now.getFullYear();
-		     var nowMonth = now.getMonth() + 1;
-		     var nowDate = now.getDate();
+		  	if(nowHour <12) { AMPM = "AM"; }
+		  	else { AMPM = "PM"; }
 
-		  
-		  
 		  var txt="<div class='item active'>";
-		  txt +="<section id='card-item'>";
+		 	  txt +="<section id='card-item'>";
 		  for(var i=0 ; i < lists.length ; i++) {
-			   
-			    if(i<10) {
-			    	
-					var color = "status6";
+			 
+			  //background color
+			    if(i<10) {		    			  		
+			     	var color = "status6";
 			  		
 			  		//now: AM
 			  		if(AMPM == "AM"){
-				    	if(lists[i].amloc=='본사 10F' || lists[i].amloc=='본사 14F' || lists[i].amloc=='본사 13F'){
+				    	if(lists[i].amloc=='본사 9F' || lists[i].amloc=='본사 10F' || lists[i].amloc=='본사 14F' || lists[i].amloc=='본사 13F'){
 				    		color = "status1";
 				    	}else if(lists[i].amloc=='메사'){
 				    		color = "status2";
@@ -183,13 +183,13 @@
 				    	}else if(lists[i].amloc=='하남'){
 				    		color = "status4";
 				    	}else{
-				    	
+				    		color = "status5";
 				    	}
 				    
 			  		}
 			  		//now: PM
 			  		else{
-			  			if(lists[i].pmloc=='본사 10F' || lists[i].pmloc=='본사 14F' || lists[i].pmloc=='본사 13F'){
+			  			if(lists[i].pmloc=='본사 9F' || lists[i].pmloc=='본사 10F' || lists[i].pmloc=='본사 14F' || lists[i].pmloc=='본사 13F'){
 				    		color = "status1";
 				    	}else if(lists[i].pmloc=='메사'){
 				    		color = "status2";
@@ -197,35 +197,52 @@
 				    		color = "status3";
 				    	}else if(lists[i].amloc=='하남'){
 				    		color = "status4";
+				    	}else{
+				    		color = "status5";
 				    	}
 			  		}		
 			  		
-			  	     if(y==nowYear && m==nowMonth && d==nowDate){
-			  	       txt +="<article><div class='item-lay "+color+ "'>";      
-			  	      }else{
-			  	        txt +="<article><div class='item-lay status2'>";
-			  	      }
+			    	txt +="<article><div class='item-lay "+color+ "'>";
+			    	//txt +="<article><div class='item-lay status2'>";
+			    	txt +="<div class='profile'><img src='resources/"+lists[i].empimg+"'></div>";
+			    	/* txt +="<div class='name'>"+lists[i].empname+"</div>"; */
 			    	
-			    	txt +="<div class='profile'><img src='resources/"+lists[i].empimg+"' /></div>";
-			    	txt +="<div class='name'>"+lists[i].empname+"</div>";
-			    	txt +="<div class='ampm'><div class='am'><span>AM</span>"+lists[i].amloc+"</div><div class='pm'><span>PM</span>"+lists[i].pmloc+"</div>";
+			    	
+			    	if(lists[i].amloc == "기타"){
+			    		txt +="<div class='ampm'><div class='am'><span>AM</span><div class='loc-text'>"+lists[i].amlocdetail+"</div></div>"; 
+			    	}else{
+			    		txt +="<div class='ampm'><div class='am'><span>AM</span><div class='loc-text'>"+lists[i].amloc+"</div></div>"; 
+			    	}
+			    	
+			    	
+			    	if(lists[i].pmloc == "기타"){
+			    		txt +="<div class='pm'><span>PM</span><div class='loc-text'>"+lists[i].pmlocdetail+"</div></div>"; 
+			    	}else{
+			    		txt +="<div class='pm'><span>PM</span><div class='loc-text'>"+lists[i].pmloc+"</div></div>"; 
+			    	}
+			    	
 			    	txt +="</div></div></article>";
 			    }
-      			
-      	   }
+    			
+    	   }
 		   txt +="</section></div>" ;
-      	   
-      	   $("#carouselinner").append(txt);
-      	   
-      	   if(lists.length > 9 && lists.length < 20) {
-      		 var txt="<div class='item'>"; 
-      			 txt +="<section id='card-item'>";
-      		 for(var i=10 ; i < lists.length ; i++) {
-      			var color = "status6";
+    	   
+    	   $("#carouselinner").append(txt);
+    	   
+    	   
+    	   
+    	   if(lists.length > 9 && lists.length < 20) {
+    		   
+    		 var txt="<div class='item'>"; 
+    			 txt +="<section id='card-item'>";
+    		 for(var i=10 ; i < lists.length ; i++) {   
+    			 
+    			 
+    			var color = "status6";
 		  		
 		  		//now: AM
 		  		if(AMPM == "AM"){
-			    	if(lists[i].amloc=='본사 10F' || lists[i].amloc=='본사 14F' || lists[i].amloc=='본사 13F'){
+			    	if(lists[i].amloc=='본사 9F' || lists[i].amloc=='본사 10F' || lists[i].amloc=='본사 14F' || lists[i].amloc=='본사 13F'){
 			    		color = "status1";
 			    	}else if(lists[i].amloc=='메사'){
 			    		color = "status2";
@@ -234,13 +251,13 @@
 			    	}else if(lists[i].amloc=='하남'){
 			    		color = "status4";
 			    	}else{
-			    	
+			    		color = "status5"
 			    	}
 			    
 		  		}
 		  		//now: PM
 		  		else{
-		  			if(lists[i].pmloc=='본사 10F' || lists[i].pmloc=='본사 14F' || lists[i].pmloc=='본사 13F'){
+		  			if(lists[i].pmloc=='본사 9F' || lists[i].pmloc=='본사 10F' || lists[i].pmloc=='본사 14F' || lists[i].pmloc=='본사 13F'){
 			    		color = "status1";
 			    	}else if(lists[i].pmloc=='메사'){
 			    		color = "status2";
@@ -248,121 +265,163 @@
 			    		color = "status3";
 			    	}else if(lists[i].amloc=='하남'){
 			    		color = "status4";
+			    	}else{
+			    		color = "status5"
 			    	}
 		  		}		
 		  		
-		  	     if(y==nowYear && m==nowMonth && d==nowDate){
-		  	       txt +="<article><div class='item-lay "+color+ "'>";      
-		  	      }else{
-		  	        txt +="<article><div class='item-lay status2'>";
-		  	      }
+		    	txt +="<article><div class='item-lay "+color+ "'>";
+		    	//txt +="<article><div class='item-lay status1'>";
 		    	txt +="<div class='profile'><img src='img/"+lists[i].empid+".png' /></div>";
-		    	txt +="<div class='name'>"+lists[i].empname+"</div>";
-		    	txt +="<div class='ampm'><div class='am'><span>AM</span>"+lists[i].amloc+"</div><div class='pm'><span>PM</span>"+lists[i].pmloc+"</div>";
-		    	txt +="</div></div></article>";
-      		 }
-      		 txt +="</section></div>" ;
-       	    
-       	     $("#carouselinner").append(txt);
-       	    
-      	   }else if(lists.length > 19 && lists.length < 30) {
-      		 var txt="<div class='item'>"; 
-      			 txt +="<section id='card-item'>";
-      		 for(var i=20 ; i < lists.length ; i++) {  
-      			var color = "status6";
-		  		
-		  		//now: AM
-		  		if(AMPM == "AM"){
-			    	if(lists[i].amloc=='본사 10F' || lists[i].amloc=='본사 14F' || lists[i].amloc=='본사 13F'){
-			    		color = "status1";
-			    	}else if(lists[i].amloc=='메사'){
-			    		color = "status2";
-			    	}else if(lists[i].amloc=='성수'){
-			    		color = "status3";
-			    	}else if(lists[i].amloc=='하남'){
-			    		color = "status4";
-			    	}else{
-			    	
-			    	}
-			    
-		  		}
-		  		//now: PM
-		  		else{
-		  			if(lists[i].pmloc=='본사 10F' || lists[i].pmloc=='본사 14F' || lists[i].pmloc=='본사 13F'){
-			    		color = "status1";
-			    	}else if(lists[i].pmloc=='메사'){
-			    		color = "status2";
-			    	}else if(lists[i].pmloc=='성수'){
-			    		color = "status3";
-			    	}else if(lists[i].amloc=='하남'){
-			    		color = "status4";
-			    	}
-		  		}		
-		  		
-		  	     if(y==nowYear && m==nowMonth && d==nowDate){
-		  	       txt +="<article><div class='item-lay "+color+ "'>";      
-		  	      }else{
-		  	        txt +="<article><div class='item-lay status2'>";
-		  	      }
+		    	/* txt +="<div class='name'>"+lists[i].empname+"</div>"; */
 		    	
-		    	txt +="<div class='profile'><img src='img/"+lists[i].empid+".png' /></div>";
-		    	txt +="<div class='name'>"+lists[i].empname+"</div>";
-		    	txt +="<div class='ampm'><div class='am'><span>AM</span>"+lists[i].amloc+"</div><div class='pm'><span>PM</span>"+lists[i].pmloc+"</div>";
+		    	
+		    	if(lists[i].amloc == "기타"){
+		    		txt +="<div class='ampm'><div class='am'><span>AM</span><div class='loc-text'>"+lists[i].amlocdetail+"</div></div>"; 
+		    	}else{
+		    		txt +="<div class='ampm'><div class='am'><span>AM</span><div class='loc-text'>"+lists[i].amloc+"</div></div>"; 
+		    	}
+		    	
+		    	
+		    	if(lists[i].pmloc == "기타"){
+		    		txt +="<div class='pm'><span>PM</span><div class='loc-text'>"+lists[i].pmlocdetail+"</div></div>"; 
+		    	}else{
+		    		txt +="<div class='pm'><span>PM</span><div class='loc-text'>"+lists[i].pmloc+"</div></div>"; 
+		    	}
+		    	
 		    	txt +="</div></div></article>";
-      		 }
-      		 txt +="</section></div>" ;
-       	    
-       	     $("#carouselinner").append(txt);
-       	     
-      	   }else if(lists.length > 29 && lists.length < 40) {
-        		 var txt="<div class='item'>"; 
-        			 txt +="<section id='card-item'>";
-          		 for(var i=30 ; i < lists.length ; i++) {  
-var color = "status6";
-			  		
-			  		//now: AM
-			  		if(AMPM == "AM"){
-				    	if(lists[i].amloc=='본사 10F' || lists[i].amloc=='본사 14F' || lists[i].amloc=='본사 13F'){
-				    		color = "status1";
-				    	}else if(lists[i].amloc=='메사'){
-				    		color = "status2";
-				    	}else if(lists[i].amloc=='성수'){
-				    		color = "status3";
-				    	}else if(lists[i].amloc=='하남'){
-				    		color = "status4";
-				    	}else{
-				    	
-				    	}
-				    
-			  		}
-			  		//now: PM
-			  		else{
-			  			if(lists[i].pmloc=='본사 10F' || lists[i].pmloc=='본사 14F' || lists[i].pmloc=='본사 13F'){
-				    		color = "status1";
-				    	}else if(lists[i].pmloc=='메사'){
-				    		color = "status2";
-				    	}else if(lists[i].pmloc=='성수'){
-				    		color = "status3";
-				    	}else if(lists[i].amloc=='하남'){
-				    		color = "status4";
-				    	}
-			  		}		
-			  		
-			  	     if(y==nowYear && m==nowMonth && d==nowDate){
-			  	       txt +="<article><div class='item-lay "+color+ "'>";      
-			  	      }else{
-			  	        txt +="<article><div class='item-lay status2'>";
-			  	      }
-    		    	
-    		    	txt +="<div class='profile'><img src='img/"+lists[i].empid+".png' /></div>";
-    		    	txt +="<div class='name'>"+lists[i].empname+"</div>";
-    		    	txt +="<div class='ampm'><div class='am'><span>AM</span>"+lists[i].amloc+"</div><div class='pm'><span>PM</span>"+lists[i].pmloc+"</div>";
-    		    	txt +="</div></div></article>";
-          		 }
-          		 txt +="</section></div>" ;
-           	    
-           	     $("#carouselinner").append(txt);
-          	   }
+    		 }
+    		 txt +="</section></div>" ;
+     	    
+     	     $("#carouselinner").append(txt);
+     	    
+    	   }else if(lists.length > 19 && lists.length < 30) {
+    		 var txt="<div class='item'>"; 
+    			 txt +="<section id='card-item'>";
+    		 for(var i=20 ; i < lists.length ; i++) {      			
+    			
+    			 
+     			var color = "status6";
+		  		
+		  		//now: AM
+		  		if(AMPM == "AM"){
+			    	if(lists[i].amloc=='본사 9F' || lists[i].amloc=='본사 10F' || lists[i].amloc=='본사 14F' || lists[i].amloc=='본사 13F'){
+			    		color = "status1";
+			    	}else if(lists[i].amloc=='메사'){
+			    		color = "status2";
+			    	}else if(lists[i].amloc=='성수'){
+			    		color = "status3";
+			    	}else if(lists[i].amloc=='하남'){
+			    		color = "status4";
+			    	}else{
+			    		color = "status5"
+			    	}
+			    
+		  		}
+		  		//now: PM
+		  		else{
+		  			if(lists[i].pmloc=='본사 9F' || lists[i].pmloc=='본사 10F' || lists[i].pmloc=='본사 14F' || lists[i].pmloc=='본사 13F'){
+			    		color = "status1";
+			    	}else if(lists[i].pmloc=='메사'){
+			    		color = "status2";
+			    	}else if(lists[i].pmloc=='성수'){
+			    		color = "status3";
+			    	}else if(lists[i].amloc=='하남'){
+			    		color = "status4";
+			    	}else{
+			    		color = "status5"
+			    	}
+		  		}		
+		  		
+		    	txt +="<article><div class='item-lay "+color+ "'>";
+		    	//txt +="<article><div class='item-lay status1'>";
+    		
+		    	txt +="<div class='profile'><img src='img/"+lists[i].empid+".png' /></div>";
+		    	/* txt +="<div class='name'>"+lists[i].empname+"</div>"; */
+		    	
+		    	
+		    	if(lists[i].amloc == "기타"){
+		    		txt +="<div class='ampm'><div class='am'><span>AM</span><div class='loc-text'>"+lists[i].amlocdetail+"</div></div>"; 
+		    	}else{
+		    		txt +="<div class='ampm'><div class='am'><span>AM</span><div class='loc-text'>"+lists[i].amloc+"</div></div>"; 
+		    	}
+		    	
+		    	
+		    	if(lists[i].pmloc == "기타"){
+		    		txt +="<div class='pm'><span>PM</span><div class='loc-text'>"+lists[i].pmlocdetail+"</div></div>"; 
+		    	}else{
+		    		txt +="<div class='pm'><span>PM</span><div class='loc-text'>"+lists[i].pmloc+"</div></div>"; 
+		    	}
+		    	
+		    	txt +="</div></div></article>";
+    		 }
+    		 txt +="</section></div>" ;
+     	    
+     	     $("#carouselinner").append(txt);
+     	     
+    	   }else if(lists.length > 29 && lists.length < 40) {
+      		 var txt="<div class='item'>"; 
+      			 txt +="<section id='card-item'>";
+        		 for(var i=30 ; i < lists.length ; i++) {          			
+        			 
+         			var color = "status6";
+   		  		
+   		  		//now: AM
+   		  		if(AMPM == "AM"){
+   			    	if(lists[i].amloc=='본사 9F' || lists[i].amloc=='본사 10F' || lists[i].amloc=='본사 14F' || lists[i].amloc=='본사 13F'){
+   			    		color = "status1";
+   			    	}else if(lists[i].amloc=='메사'){
+   			    		color = "status2";
+   			    	}else if(lists[i].amloc=='성수'){
+   			    		color = "status3";
+   			    	}else if(lists[i].amloc=='하남'){
+   			    		color = "status4";
+   			    	}else{
+   			    		color = "status5"
+   			    	}
+   			    
+   		  		}
+   		  		//now: PM
+   		  		else{
+   		  			if(lists[i].pmloc=='본사 9F' || lists[i].pmloc=='본사 10F' || lists[i].pmloc=='본사 14F' || lists[i].pmloc=='본사 13F'){
+   			    		color = "status1";
+   			    	}else if(lists[i].pmloc=='메사'){
+   			    		color = "status2";
+   			    	}else if(lists[i].pmloc=='성수'){
+   			    		color = "status3";
+   			    	}else if(lists[i].amloc=='하남'){
+   			    		color = "status4";
+   			    	}else{
+   			    		color = "status5"
+   			    	}
+   		  		}		
+   		  		
+   		    	txt +="<article><div class='item-lay "+color+ "'>";
+   		    	//txt +="<article><div class='item-lay status1'>";
+        			 
+  		    	txt +="<div class='profile'><img src='img/"+lists[i].empid+".png' /></div>";
+			    	/* txt +="<div class='name'>"+lists[i].empname+"</div>"; */
+			    	
+			    	
+			    	if(lists[i].amloc == "기타"){
+			    		txt +="<div class='ampm'><div class='am'><span>AM</span><div class='loc-text'>"+lists[i].amlocdetail+"</div></div>"; 
+			    	}else{
+			    		txt +="<div class='ampm'><div class='am'><span>AM</span><div class='loc-text'>"+lists[i].amloc+"</div></div>"; 
+			    	}
+			    	
+			    	
+			    	if(lists[i].pmloc == "기타"){
+			    		txt +="<div class='pm'><span>PM</span><div class='loc-text'>"+lists[i].pmlocdetail+"</div></div>"; 
+			    	}else{
+			    		txt +="<div class='pm'><span>PM</span><div class='loc-text'>"+lists[i].pmloc+"</div></div>"; 
+			    	}
+			    	
+			    	txt +="</div></div></article>";
+        		 }
+        		 txt +="</section></div>" ;
+         	    
+         	     $("#carouselinner").append(txt);
+        	   }
     	
       }) 
 

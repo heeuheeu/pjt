@@ -35,7 +35,7 @@
       <div class="user-info">
       <br>
           <div class="profile"><img src="./img/${myinfo.empid}.png"/></div>
-          <div class="name">${myinfo.deptname }</div>
+          <div class="dept">${myinfo.deptname }</div>
           <div class="name">${myinfo.empname }<%--  ${myinfo.empgrade } --%></div>
       </div>
       
@@ -310,6 +310,7 @@
  			    $('#updateForm')
  			    .prop("action","update.inc")
  			    .prop("method","post").submit();
+ 			   alert("일정이 등록되었습니다.");
  			    
  			   }else{
  			    // cancel

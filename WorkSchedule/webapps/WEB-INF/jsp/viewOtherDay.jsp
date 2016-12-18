@@ -10,6 +10,9 @@
     <link href="./css/listView.css" rel="stylesheet" type="text/css">
     <link href="./css/cardView.css" rel="stylesheet" type="text/css">
     <link href="./css/popup.css" rel="stylesheet" type="text/css">
+    <link href="./css/view.css" rel="stylesheet">
+    
+    
         <!-- Bootstrap core CSS -->
     <link href="./css/bootstrap.css" rel="stylesheet">
     <link href="./css/jasny-bootstrap.min.css" rel="stylesheet">
@@ -19,7 +22,6 @@
     <link href="./css/navmenu-push.css" rel="stylesheet">
     <link href="./css/flatpickr.css" rel="stylesheet">
 
-    
     <style>
 
 		.modal-header {
@@ -30,20 +32,19 @@
     
   </head>
   <body>
-
+ 	<div class="view-container">
+ 
 	<div class="navmenu navmenu-default navmenu-fixed-left offcanvas">
 
 		<div class="side-menu-content">
-			<div class="user-info">
-				<br>
-				<div class="profile">
-					<img src="resources/${myinfo.empimg}" />
-				</div>
-				<div class="name">${myinfo.deptname}</div>
-				<div class="name">${myinfo.empname} <%-- ${myinfo.empgrade} --%></div>
-			</div>
-
-
+		
+		  <div class="user-info">
+     		<br>
+          	<div class="profile"><img src="resources/${myinfo.empimg}"/></div>
+          	<div class="dept">${myinfo.deptname}</div>
+          	<div class="name">${myinfo.empname}</div>
+     	 </div>
+  
 	      <ul class="nav navmenu-nav btns">
 		      <div class="btns">
 		        <li><a href="calMove.inc" class="btn1" style="color: white;"><img src="img/side-icon1.png"/>나의일정</a></li>
@@ -51,6 +52,7 @@
 		        <li><a href="logout.inc" class="btn2" style="color: white;"><img src="img/side-icon2.png"/>로그아웃</a></li>
 		      </div>
 	      </ul>
+	      
 		</div>
 	</div>
 
@@ -61,22 +63,27 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-	<div id="workplace">
-	       <a class="navbar-brand" href="user.inc" style="color: white;">SSG워크플레이스</a>
+      
+	 <div class="actionbar">
+	       <div class="workplace"><a class="navbar-brand" href="user.inc">SSG워크플레이스</a></div>
+	       <div class="refresh"><a href="#" onclick="refresh()"><img src="img/refresh.png" ></a></div>
 	 </div>
+	 
     </div>
 
-	<form role="form" method="post" name='dateForm'>
+	<form role="form" method="post" id='dateForm'>
 		<!--상단-->
-		<section id="top-bar"> <!--날짜-->
-		<div class="date">
-			<input type="image" src="img/date-prev.png" onclick="prevDay()">
-			<a href="calMove.inc" id="currDateView" class="date-text" style="color: black;"></a>
-			<input type="image" src="img/date-next.png" onclick="nextDay()">
-			<input type="hidden" id="currDate">
-		</div>
-		<!--날짜--> 
-			
+		<section id="top-bar">
+		
+		<!----날짜---->
+				<div class="date">
+					<a class="prev-text" onclick="prevDayclick()"> < </a> <input type="hidden" id="prevbtn" onclick="prevDay()"> 
+					<a class="date-text" href="calMove.inc" id="currDateView"></a> 
+					<a class="next-text" onclick="nextDayclick()"> > </a> <input type="hidden" id="nextbtn" onclick="nextDay()"> 
+					<input type="hidden" id="currDate">
+				</div>
+		<!----날짜----> 	
+		
 		<!----view 버튼---->
 			<div class="view-btn">
 				<ul>
@@ -106,6 +113,9 @@
 					      '${myinfo.amloc}','${myinfo.amlocdetail}','${myinfo.pmloc}','${myinfo.pmlocdetail}',
 					      '${myinfo.workdate}','${myinfo.empphone}','${myinfo.empmail}')">
 				</div>
+				
+				
+				
 				<div class="name">${myinfo.empname}</div>
 				<div class="ampm">
 					<div class="am">
@@ -152,29 +162,27 @@
 					      '${myinfo.amloc}','${myinfo.amlocdetail}','${myinfo.pmloc}','${myinfo.pmlocdetail}',
 					      '${myinfo.workdate}','${myinfo.empphone}','${myinfo.empmail}')">
            <div class="item-lay">
-             <div class="name"> <b> ${myinfo.empname}</b>
-              <br/>신세계아이앤씨<br/>
-              ${myinfo.deptname}</div>
-             <div class="ampm">
-               <div class="am"><span>AM</span>${myinfo.amloc}</div>
-               <div class="pm"><span>PM</span>${myinfo.pmloc}</div>
-             </div>
-           </div>
+	             <div class="name"> <b> ${myinfo.empname} </b> <div class="dept"> 신세계아이앤씨<br/>  ${myinfo.deptname}</div>
+	       		 </div>
+	             <div class="ampm">
+	               <div class="am"><span>AM</span><font>${myinfo.amloc}</font></div>
+	               <div class="pm"><span>PM</span><font>${myinfo.pmloc}</font></div>
+	             </div>
+	       </div>
          </article>
 	
 	  <c:forEach items="${myfav}" var="fav">
 		<article onclick="show('${fav.empimg}','${fav.empid}','${fav.empname}','${fav.deptname}',
 					      '${fav.amloc}','${fav.amlocdetail}','${fav.pmloc}','${fav.pmlocdetail}',
 					      '${fav.workdate}','${fav.empphone}','${fav.empmail}')"> 
-			<div class="item-lay">
-             <div class="name"> <b> ${fav.empname}</b>
-              <br/>신세계아이앤씨<br/>
-              ${fav.deptname}</div>
-             <div class="ampm">
-               <div class="am"><span>AM</span>${fav.amloc}</div>
-               <div class="pm"><span>PM</span>${fav.pmloc}</div>
-             </div>
-           </div>
+			<div class="item-lay">		      
+				<div class="name"> <b> ${fav.empname} </b>
+	            <div class="dept"> 신세계아이앤씨<br/>  ${fav.deptname}</div></div>
+	            <div class="ampm">
+	               <div class="am"><span>AM</span><font>${fav.amloc}</font></div>
+	               <div class="pm"><span>PM</span><font>${fav.pmloc}</font></div>
+	            </div>
+	        </div>
 		</article>
 	  </c:forEach>
         
@@ -287,12 +295,13 @@
     
  <!-- 1207수정:모달팝업 끝-->
 
+</div>
 
 
 
 
-	<!--btn-->
-	<!-- Bootstrap core JavaScript ================================================== -->
+
+	<!-- Bootstrap core JavaScript =========================================================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
 	<script src="./js/jquery-1.10.2.min.js"></script>
 	<script src="./js/bootstrap.min.js"></script>
@@ -411,9 +420,11 @@
 
 			var date = caleYear + "-" + caleMonth + "-" + caleDay;
 			$("#currDate").html(date);
-			document.dateForm.action = 'calDay.inc?currDate='
-					+ $("#currDate").text();
-			document.submit();
+
+			document.getElementById("dateForm").action = 'calDay.inc?currDate='
+				+ $("#currDate").text();
+			document.getElementById("dateForm").submit(); 
+
 		}
 
 		function nextDay() {
@@ -435,11 +446,19 @@
 
 			var date = caleYear + "-" + caleMonth + "-" + caleDay;
 			$("#currDate").html(date);
-			document.dateForm.action = 'calDay.inc?currDate='
-					+ $("#currDate").text();
-			document.submit();
+
+			document.getElementById("dateForm").action = 'calDay.inc?currDate='
+				+ $("#currDate").text();
+			document.getElementById("dateForm").submit(); 
+
 		}
 		
+		function prevDayclick() {
+			$('#prevbtn').click();
+		}
+		function nextDayclick() {
+			$('#nextbtn').click();
+		}
 		
 		//$("#cardView").addClass("in active");
 		//$("#listView").removeClass("in active");
@@ -491,6 +510,7 @@
  			    $('#updateForm')
  			    .prop("action","update.inc")
  			    .prop("method","post").submit();
+ 			   alert("일정이 등록되었습니다.");
  			    
  			   }else{
  			    // cancel

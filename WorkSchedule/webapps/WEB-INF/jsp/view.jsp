@@ -32,20 +32,21 @@
   </head>
  <!--  <body OnLoad="restart()"> --> 									<!-- 자동 reloading 추가 -->
   <body>
-		
+	<div class="view-container">
+ 	
 	<div class="navmenu navmenu-default navmenu-fixed-left offcanvas">
       
 	  <div class="side-menu-content">
       <div class="user-info">
       <br>
           <div class="profile"><img src="resources/${myinfo.empimg}"/></div>
-          <div class="name">${myinfo.deptname}</div>
+          <div class="dept">${myinfo.deptname}</div>
           <div class="name">${myinfo.empname} <%-- ${myinfo.empgrade} --%></div>
       </div>
       
       <ul class="nav navmenu-nav btns">
       <div class="btns">
-        <li><a href="calMove.inc" class="btn1" style="color: white;"><img src="img/side-icon1.png"/>나의일정</a></li>
+        <li><a href="calMove.inc" class="btn1" style="color: white;"><img src="img/side-icon1.png"/>나의 일정</a></li>
         <li><a href="updateview.inc" class="btn1" style="color: white;"><img src="img/side-icon1.png"/>내 정보수정</a></li>
         <li><a href="logout.inc" class="btn2" style="color: white;"><img src="img/side-icon2.png"/>로그아웃</a></li>
       </div>
@@ -62,21 +63,21 @@
       </button>
 	 
 	 <div class="actionbar">
-	       <div class="workplace"><a class="navbar-brand" href="user.inc" style="color: white;">SSG워크플레이스</a></div>
+	       <div class="workplace"><a class="navbar-brand" href="user.inc">SSG워크플레이스</a></div>
 	       <div class="refresh"><a href="#" onclick="refresh()"><img src="img/refresh.png" ></a></div>
 	 </div>
     </div>
 
+	<div class="user-body">
 
-
-	<form role="form" method="post" name='dateForm'>
+ 	<form role="form" method="post" id="dateForm">
 	    <!----상단---->
 		<section id="top-bar">
 			<!----날짜---->
 				<div class="date">
-					<input type="image" src="img/date-prev.png" onclick="prevDay()">
-					 <a href="calMove.inc" id="currDateView" class="date-text" style="color: black;"></a> 
-					<input type="image" src="img/date-next.png" onclick="nextDay()">
+					<a class="prev-text" onclick="prevDayclick()"> < </a> <input type="hidden" id="prevbtn" onclick="prevDay()"> 
+					<a class="date-text" href="calMove.inc" id="currDateView"></a> 
+					<a class="next-text" onclick="nextDayclick()"> > </a> <input type="hidden" id="nextbtn" onclick="nextDay()"> 
 					<input type="hidden" id="currDate">
 				</div>
 			<!----날짜----> 
@@ -98,97 +99,96 @@
 	
 	<!----카드---->
 
-<div class="tab-content"> 
- 	<div class="tab-pane fade in active" id="cardView"> 
-	<section id="card-item">
-	
-		<article>
-			<div class="item-lay">
-				<div class="profile">
-					<img src="resources/${myinfo.empimg}" 
-					onclick="show('${myinfo.empimg}', '${myinfo.empid}','${myinfo.empname}','${myinfo.deptname}',
-					      '${myinfo.amloc}','${myinfo.amlocdetail}','${myinfo.pmloc}','${myinfo.pmlocdetail}',
-					      '${myinfo.workdate}','${myinfo.empphone}','${myinfo.empmail}')">
-				</div>
-				<div class="name">${myinfo.empname}</div>
-				<div class="ampm">
-					<div class="am">
-						<span>AM</span><font>${myinfo.amloc}</font></div>
-					<div class="pm">
-						<span>PM</span><font>${myinfo.pmloc}</font></div>
-				</div>
-			</div>
-		</article>
-	
-	  <c:forEach items="${myfav}" var="fav">
-		<article>
-			<div class="item-lay">
-				<div class="profile" >
-					<img src="resources/${fav.empimg}" 
-					onclick="show('${fav.empimg}', '${fav.empid}','${fav.empname}','${fav.deptname}',
-					      '${fav.amloc}','${fav.amlocdetail}','${fav.pmloc}','${fav.pmlocdetail}',
-					      '${fav.workdate}','${fav.empphone}','${fav.empmail}')">
-					
-				</div>
-				<div class="name">${fav.empname}</div>
-				<div class="ampm">
-					<div class="am">
-						<span>AM</span><font>${fav.amloc}</font>
+	<div class="tab-content"> 
+	 	<div class="tab-pane fade in active" id="cardView"> 
+		<section id="card-item">
+		
+			<article>
+				<div class="item-lay">
+					<div class="profile">
+						<img src="resources/${myinfo.empimg}" 
+						onclick="show('${myinfo.empimg}', '${myinfo.empid}','${myinfo.empname}','${myinfo.deptname}',
+						      '${myinfo.amloc}','${myinfo.amlocdetail}','${myinfo.pmloc}','${myinfo.pmlocdetail}',
+						      '${myinfo.workdate}','${myinfo.empphone}','${myinfo.empmail}')">
 					</div>
-					<div class="pm">
-						<span>PM</span><font>${fav.pmloc}</font>
+					<div class="name">${myinfo.empname}</div>
+					<div class="ampm">
+						<div class="am">
+							<span>AM</span><font>${myinfo.amloc}</font></div>
+						<div class="pm">
+							<span>PM</span><font>${myinfo.pmloc}</font></div>
 					</div>
 				</div>
-			</div>
-		</article>
-	  </c:forEach>
-	  
-	</section>
- 	</div>
-
-	<!----카드---->
-
-	<!-- 리스트 뷰 -->
-  	<div class="tab-pane fade" id="listView">
-
-      <section id="list-item">
-       <article onclick="show('${myinfo.empimg}','${myinfo.empid}','${myinfo.empname}','${myinfo.deptname}',
-					      '${myinfo.amloc}','${myinfo.amlocdetail}','${myinfo.pmloc}','${myinfo.pmlocdetail}',
-					      '${myinfo.workdate}','${myinfo.empphone}','${myinfo.empmail}')">
-           <div class="item-lay">
-             <div class="name"> <b> ${myinfo.empname} <%-- ${myinfo.empgrade}  --%></b>
-              <br/>신세계아이앤씨<br/>
-              ${myinfo.deptname}</div>
-             <div class="ampm">
-               <div class="am"><span>AM</span>${myinfo.amloc}</div>
-               <div class="pm"><span>PM</span>${myinfo.pmloc}</div>
-             </div>
-           </div>
-         </article>
+			</article>
+		
+		  <c:forEach items="${myfav}" var="fav">
+			<article>
+				<div class="item-lay">
+					<div class="profile" >
+						<img src="resources/${fav.empimg}" 
+						onclick="show('${fav.empimg}', '${fav.empid}','${fav.empname}','${fav.deptname}',
+						      '${fav.amloc}','${fav.amlocdetail}','${fav.pmloc}','${fav.pmlocdetail}',
+						      '${fav.workdate}','${fav.empphone}','${fav.empmail}')">
+						
+					</div>
+					<div class="name">${fav.empname}</div>
+					<div class="ampm">
+						<div class="am">
+							<span>AM</span><font>${fav.amloc}</font>
+						</div>
+						<div class="pm">
+							<span>PM</span><font>${fav.pmloc}</font>
+						</div>
+					</div>
+				</div>
+			</article>
+		  </c:forEach>
+		  
+		</section>
+	 	</div>
 	
-	  <c:forEach items="${myfav}" var="fav">
-		<article onclick="show('${fav.empimg}', '${fav.empid}','${fav.empname}','${fav.deptname}',
-					      '${fav.amloc}','${fav.amlocdetail}','${fav.pmloc}','${fav.pmlocdetail}',
-					      '${fav.workdate}','${fav.empphone}','${fav.empmail}')"> 
-			<div class="item-lay">
-             <div class="name"> <b> ${fav.empname} <%-- ${fav.empgrade} --%> </b>
-              <br/>신세계아이앤씨<br/>
-              ${fav.deptname}</div>
-             <div class="ampm">
-               <div class="am"><span>AM</span>${fav.amloc}</div>
-               <div class="pm"><span>PM</span>${fav.pmloc}</div>
-             </div>
-           </div>
-		</article>
-	  </c:forEach>
-        
-	</section>
-  </div>
-</div>
+		<!----카드---->
+	
+		<!-- 리스트 뷰 -->
+	  	<div class="tab-pane fade" id="listView">
+	
+	      <section id="list-item">
+	       <article onclick="show('${myinfo.empimg}','${myinfo.empid}','${myinfo.empname}','${myinfo.deptname}',
+						      '${myinfo.amloc}','${myinfo.amlocdetail}','${myinfo.pmloc}','${myinfo.pmlocdetail}',
+						      '${myinfo.workdate}','${myinfo.empphone}','${myinfo.empmail}')">
+	           <div class="item-lay">
+	             <div class="name"> <b> ${myinfo.empname} </b>
+	              <div class="dept"> 신세계아이앤씨<br/>  ${myinfo.deptname}</div>
+	             </div>
+	             <div class="ampm">
+	               <div class="am"><span>AM</span><font>${myinfo.amloc}</font></div>
+	               <div class="pm"><span>PM</span><font>${myinfo.pmloc}</font></div>
+	             </div>
+	           </div>
+	         </article>
+		
+		  <c:forEach items="${myfav}" var="fav">
+			<article onclick="show('${fav.empimg}', '${fav.empid}','${fav.empname}','${fav.deptname}',
+						      '${fav.amloc}','${fav.amlocdetail}','${fav.pmloc}','${fav.pmlocdetail}',
+						      '${fav.workdate}','${fav.empphone}','${fav.empmail}')"> 
+			   <div class="item-lay">
+	             <div class="name"> <b> ${fav.empname} </b>
+	             <div class="dept"> 신세계아이앤씨<br/>  ${fav.deptname}</div></div>
+	             <div class="ampm">
+	               <div class="am"><span>AM</span><font>${fav.amloc}</font></div>
+	               <div class="pm"><span>PM</span><font>${fav.pmloc}</font></div>
+	             </div>
+	           </div>		      
+			</article>
+		  </c:forEach>
+	        
+		</section>
+	  </div>
+	</div>
+	
+ 	<input type="hidden" id="view" name="view" value="cardView">
 
-<input type="hidden" id="view" name="view" value="cardView">
-
-</form>
+ </form> 
 
 	<!--btn-->
 	<div class="add-btn" style="position: fixed;">
@@ -202,10 +202,9 @@
 
 
 <!-- 1207수정:모달팝업 -->
-  <form role="form" id='updateForm'>
-  <div class="modal fade popup" id="myModal" tabindex="-1" role="dialog"
-   aria-labelledby="myModalLabel" aria-hidden="true">
-   <div class="modal-dialog">
+	<form role="form" id='updateForm'>
+  	<div class="modal fade popup" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+   	<div class="modal-dialog">
     <div class="modal-content">
      <div class="modal-header">
        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
@@ -213,7 +212,7 @@
        
        <button type="button" class="close" aria-hidden="true" 
         id="editbtn" style="float: left;" onclick="update()">
-       <img src="img/edit-icon.png"/>—</button>
+       <img src="img/edit-icon.png"/></button>
        
      </div >  
      <div class="modal-body" >
@@ -244,33 +243,27 @@
               <div class="am">
                 <span>AM</span>
                 <center>
-                
                 <!-- <input type="text" name="amloc" id="amloc" class="amloc" style="background-color: transparent"> -->
-                
                 <select name="amloc" id="amloc" class="amloc" style="background-color: transparent;">
-        <c:forEach items="${locList}" var="locList"> 
-         <option value="${locList.locname}">${locList.locname}</option>
-        </c:forEach>
-       </select>
-                
+			        <c:forEach items="${locList}" var="locList"> 
+			         <option value="${locList.locname}">${locList.locname}</option>
+			        </c:forEach>
+		       	</select>
                 </center>
-                <center><input type="text" name="amlocdetail" id="amlocdetail" class="amlocdetail" 
-                style="background-color: transparent"></center>
+                <center>
+                <input type="text" name="amlocdetail" id="amlocdetail" class="amlocdetail" style="background-color: transparent"></center>
               </div>
               
               <div class="pm">
                 <span>PM</span>
                 <center>
-                
                 <select name="pmloc" id="pmloc" class="pmloc" style="background-color: transparent;">
-        <c:forEach items="${locList}" var="locList"> 
-         <option value="${locList.locname}">${locList.locname}</option>
-        </c:forEach>
-       </select>
-                
+			        <c:forEach items="${locList}" var="locList"> 
+			         <option value="${locList.locname}">${locList.locname}</option>
+			        </c:forEach>
+		       	</select>   
                 </center>
-                <center><input type="text" name="pmlocdetail" id="pmlocdetail" class="pmlocdetail" 
-                style="background-color: transparent"></center>
+                <center><input type="text" name="pmlocdetail" id="pmlocdetail" class="pmlocdetail" style="background-color: transparent"></center>
               </div>
             </div>
             
@@ -286,11 +279,12 @@
         </div>
       </div>
     </div>
- </form>
+ 	</form>
     
  <!-- 1207수정:모달팝업 끝-->
 
-
+	</div> <!-- user body 끝 -->
+</div> <!-- view container 끝 -->
     
     <!----btn---->
 	<!-- Bootstrap core JavaScript
@@ -403,13 +397,14 @@
 			} else {
 				caleDay = v.getDate();
 			}
-
+	
 			var date = caleYear + "-" + caleMonth + "-" + caleDay;
 			$("#currDate").html(date);
 			
-			document.dateForm.action = 'calDay.inc?currDate='
+			document.getElementById("dateForm").action = 'calDay.inc?currDate='
 					+ $("#currDate").text();
-			document.submit();
+			document.getElementById("dateForm").submit(); 
+
 		}
 
 		function nextDay() {
@@ -432,9 +427,10 @@
 			var date = caleYear + "-" + caleMonth + "-" + caleDay;
 			$("#currDate").html(date);
 			
-			document.dateForm.action = 'calDay.inc?currDate='
-					+ $("#currDate").text();
-			document.submit();
+			document.getElementById("dateForm").action = 'calDay.inc?currDate='
+				+ $("#currDate").text();
+			document.getElementById("dateForm").submit(); 
+
 		}
 		
         function listImgOn(){
@@ -471,12 +467,20 @@
 			    $('#updateForm')
 			    .prop("action","update.inc")
 			    .prop("method","post").submit();
+			    alert("일정이 등록되었습니다.");
 			    
 			   }else{
 			    // cancel
 			   }
 		}
 
+		function prevDayclick() {
+			$('#prevbtn').click();
+		}
+		function nextDayclick() {
+			$('#nextbtn').click();
+		}
+		
 		function nfc(){
 		    window.inc.nfc(${myinfo.empid});
 		}	

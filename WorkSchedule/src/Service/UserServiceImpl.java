@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 
 import model.domain.vo.CalendarVO;
 import model.domain.vo.DeptDivisionVO;
+import model.domain.vo.DivDeptCheckVO;
+import model.domain.vo.DivisionCheckYnVO;
 import model.domain.vo.DivisionVO;
 import model.domain.vo.EmpIdVO;
 import model.domain.vo.EmployeeDeptDivVO;
@@ -47,7 +49,7 @@ public class UserServiceImpl {
 		System.out.println("UserService updateDiv");
 		return dao.selectboxDeptRow(divname);
 	}
-	
+
 	public int insertDefWorkRow(WorkVO work) {
 		System.out.println("UserService updateDiv");
 		return dao.insertDefWorkRow(work);
@@ -209,6 +211,95 @@ public class UserServiceImpl {
 	public int deleteemp(EmployeeDeptDivVO member) {
 		System.out.println("UserService deleteEmp");
 		return dao.deleteEmp(member);
+	}
+
+	////////////////////////////////// selected dept --update.jsp
+	public List<DeptDivisionVO> selecteddept(EmployeeDeptDivVO mylist) {
+		System.out.println("UserService selectedDept");
+		return dao.selectedDept(mylist);
+	}
+
+	////////////////////////////////////////////////////// dashboard에서 새로고침시
+	////////////////////////////////////////////////////// worktable 검사
+	public List<String> selectEmpList() {
+		System.out.println("UserService select emp list");
+		return dao.selectEmpList();
+	}
+
+	////////////////////////////////////////////////////// dashboard에서 30일 이후 항목
+	////////////////////////////////////////////////////// 없으면 insert
+	public int insertWork(EmployeeWorkDeptVO mylist) {
+		System.out.println("UserService insert work");
+		return dao.insertWork(mylist);
+	}
+
+	////////////// admin list up//////////////////
+	public List<DivisionCheckYnVO> admSelectDiv() {
+		System.out.println("USER SERVICE admSelectDiv");
+		return dao.admSelectDivRow();
+	}
+
+	public List<DivDeptCheckVO> admSelectDeptDiv() {
+		System.out.println("USER SERVICE admSelectDeptDiv");
+		return dao.admSelectDeptDivRow();
+	}
+
+	public List<LocationVO> admSelectLoc() {
+		System.out.println("UserService admSelectLoc");
+		return dao.admSelectLocRow();
+	}
+
+	///////////////// admin update: DIV/////////////
+	public String admDivCheckYN(String divid) {
+		System.out.println("UserService select div");
+		return dao.admDivCheckYNRow(divid);
+	}
+
+	public int adminDivAdd(String divid) {
+		System.out.println("UserService updateDiv");
+		return dao.adminDivAddRow(divid);
+	}
+
+	public int adminDivDel(String divid) {
+		System.out.println("UserService updateDiv");
+		return dao.adminDivDelRow(divid);
+	}
+
+	////////////////// admin update: LOC//////////////////
+	public String admLocCheckYN(String locid) {
+		System.out.println("UserService admLocCheckYN");
+		return dao.admLocCheckYNRow(locid);
+	}
+
+	public int adminLocAdd(String locid) {
+		System.out.println("UserService adminLocAdd");
+		return dao.adminLocAddRow(locid);
+	}
+
+	public int adminLocDel(String locid) {
+		System.out.println("UserService adminLocDel");
+		return dao.adminLocDelRow(locid);
+	}
+
+	////////////////// admin update: DEPT//////////////////
+	public String admDeptCheckYN(String deptid) {
+		System.out.println("UserService admDeptCheckYN");
+		return dao.admDeptCheckYNRow(deptid);
+	}
+
+	public int adminDeptAdd(String deptid) {
+		System.out.println("UserService adminDeptAdd");
+		return dao.adminDeptAddRow(deptid);
+	}
+
+	public int adminDeptDel(String deptid) {
+		System.out.println("UserService adminDeptDel");
+		return dao.adminDeptDelRow(deptid);
+	}
+
+	public List<DivisionCheckYnVO> admSelectDivY() {
+		System.out.println("USER SERVICE admSelectDivY");
+		return dao.admSelectDivYRow();
 	}
 
 }

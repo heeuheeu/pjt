@@ -1,4 +1,6 @@
 
+body{background: #ebebeb; position: relative;}
+
 .navbar-toggle {	
 	margin-left: 15px;
 }
@@ -12,3 +14,47 @@
 	float: right; 
 
 }
+
+.view-container #top-bar{background: #fff;}
+.view-container .date{padding: 20px 0;  text-align: center;}
+
+.view-container .date .prev-text{ font-size: 1.9em; color: #d3492c; text-decoration: none; }
+.view-container .date .prev-text:hover {cursor:pointer; }
+.view-container .date .prev-text:active {color: #3e3f44;}
+.view-container .date .next-text{ font-size: 1.9em; color: #d3492c; text-decoration: none; }
+.view-container .date .next-text:hover {cursor:pointer; }
+.view-container .date .next-text:active {color: #3e3f44; }
+.view-container .date .date-text{display: inline-block; vertical-align: middle; font-size: 1.3em; color: #3e3f44;  margin:0 7px; text-decoration: none;}
+
+.view-btn{text-align: right;padding:0 15px 10px 15px;} 
+.view-btn a{display: inline-block; margin-right: 5px;vertical-align: middle;}
+.view-btn a img{width: 30px;}
+
+
+section#card-item{background: #ebebeb; padding:30px 15px; overflow: auto;}
+#card-item article{float: left; width: 49%; background: #fff; border-radius: 3px; margin-right: 2%; margin-bottom: 20px;}
+#card-item article:nth-child(2n){margin-right: 0;}
+#card-item article .item-lay{padding: 20px;
+-webkit-box-shadow: 2px 2px 10px 0px rgba(0,0,0,0.2);
+-moz-box-shadow: 2px 2px 10px 0px rgba(0,0,0,0.2);
+box-shadow: 2px 2px 10px 0px rgba(0,0,0,0.2);} 
+#card-item article .profile{text-align: center; margin-bottom: 5px; } 
+#card-item article .profile img{width: 80%; border-radius: 50%; border: solid 1px #ddd}
+#card-item article .name{text-align: center; padding:5px 0; font-size: 1.3em; margin-bottom: 10px; border-bottom:solid 1px #cd4c2c;}
+#card-item article .am{margin-bottom: 5px;} 
+#card-item article .am span{background: #3e3f44; color: #fff; margin-right: 5px; border-radius: 3px; font-size: 0.9em; padding: 3px 10px;}
+#card-item article .am font{font-size: 1.1em; padding: 2px;}
+#card-item article .pm{margin-bottom: 5px;}
+#card-item article .pm span{background: #c94c30; color: #fff; margin-right: 5px; border-radius: 3px; font-size: 0.9em;  padding: 3px 10px;}
+#card-item article .pm font{font-size: 1.1em; padding: 2px;}
+
+
+.add-btn{position: absolute; bottom:20px; right: 20px;}
+.add-btn img{width: 60px;}
+
+
+
+
+
+
+

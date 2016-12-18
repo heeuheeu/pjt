@@ -8,6 +8,8 @@ import org.springframework.stereotype.Repository;
 
 import model.domain.vo.CalendarVO;
 import model.domain.vo.DeptDivisionVO;
+import model.domain.vo.DivDeptCheckVO;
+import model.domain.vo.DivisionCheckYnVO;
 import model.domain.vo.DivisionVO;
 import model.domain.vo.EmpIdVO;
 import model.domain.vo.EmployeeDeptDivVO;
@@ -247,5 +249,115 @@ public class OracleDaoImpl implements OracleDao {
 	public int deleteEmp(EmployeeDeptDivVO member) {
 		System.out.println("Dao deleteEmp");
 		return sqlSession.delete("member.deleteemp", member);
+	}
+
+	@Override
+	public List<DeptDivisionVO> selectedDept(EmployeeDeptDivVO mylist) {
+		System.out.println("Dao selectedDept");
+		return sqlSession.selectList("member.selecteddept", mylist);
+	}
+
+	@Override
+	public List<String> selectEmpList() {
+		System.out.println("Dao selectedEmpList");
+		return sqlSession.selectList("insertwork.selectemplist");
+	}
+
+	@Override
+	public int insertWork(EmployeeWorkDeptVO mylist) {
+		System.out.println("Dao insertWork");
+		return sqlSession.insert("insertwork.insertworktable", mylist);
+	}
+
+	/////////////////// admin list up//////////////////
+	@Override
+	public List<DivisionCheckYnVO> admSelectDivRow() {
+		System.out.println("Dao admSelectDivRow");
+		return sqlSession.selectList("adm.admSelectDiv");
+	}
+
+	@Override
+	public List<DivDeptCheckVO> admSelectDeptDivRow() {
+		System.out.println("Dao admSelectDeptDivRow");
+		return sqlSession.selectList("adm.admSelectDeptDiv");
+	}
+
+	@Override
+	public List<LocationVO> admSelectLocRow() {
+		System.out.println("Dao admSelectLocRow");
+		return sqlSession.selectList("adm.admSelectLoc");
+	}
+
+	///////////////////// admin modify DIV////////////////////
+
+	@Override
+	public String admDivCheckYNRow(String divid) {
+		System.out.println("Dao admDivCheckYNRow");
+		return sqlSession.selectOne("adm.admDivCheckYN", divid);
+	}
+
+	@Override
+	public int adminDivAddRow(String divid) {
+		System.out.println("Dao adminDivAddRow");
+		System.out.println("Y로 바꾸는거  " + divid);
+		return sqlSession.update("adm.adminDivAdd", divid);
+	}
+
+	@Override
+	public int adminDivDelRow(String divid) {
+		System.out.println("Dao adminDivDelRow");
+		System.out.println("N로 바꾸는거  " + divid);
+		return sqlSession.update("adm.adminDivDelete", divid);
+	}
+
+	///////////////////// admin modify LOC////////////////////
+
+	@Override
+	public String admLocCheckYNRow(String locid) {
+		System.out.println("Dao admLocCheckYNRow");
+		return sqlSession.selectOne("adm.admLocCheckYN", locid);
+	}
+
+	@Override
+	public int adminLocAddRow(String locid) {
+		System.out.println("Dao adminLocAddRow");
+		System.out.println("Y로 바꾸는거  " + locid);
+		return sqlSession.update("adm.adminLocAdd", locid);
+	}
+
+	@Override
+	public int adminLocDelRow(String locid) {
+		System.out.println("Dao adminLocDelRow");
+		System.out.println("N로 바꾸는거  " + locid);
+		return sqlSession.update("adm.adminLocDelete", locid);
+	}
+
+	///////////////////// admin modify DEPT////////////////////
+
+	@Override
+	public String admDeptCheckYNRow(String deptid) {
+		System.out.println("Dao admDeptCheckYNRow");
+		return sqlSession.selectOne("adm.admDeptCheckYN", deptid);
+	}
+
+	@Override
+	public int adminDeptAddRow(String deptid) {
+		System.out.println("Dao adminDeptAddRow");
+		System.out.println("Y로 바꾸는거  " + deptid);
+		return sqlSession.update("adm.adminDeptAdd", deptid);
+	}
+
+	@Override
+	public int adminDeptDelRow(String deptid) {
+		System.out.println("Dao adminDeptDelRow");
+		System.out.println("N로 바꾸는거  " + deptid);
+		return sqlSession.update("adm.adminDeptDelete", deptid);
+	}
+
+	////////////// oracledaoimp//////////////
+	@Override
+	public List<DivisionCheckYnVO> admSelectDivYRow() {
+		System.out.println("Dao admSelectDivYRow");
+		return sqlSession.selectList("adm.admSelectDivY");
 	}
 }

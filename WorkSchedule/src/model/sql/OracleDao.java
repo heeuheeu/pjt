@@ -4,6 +4,8 @@ import java.util.List;
 
 import model.domain.vo.CalendarVO;
 import model.domain.vo.DeptDivisionVO;
+import model.domain.vo.DivDeptCheckVO;
+import model.domain.vo.DivisionCheckYnVO;
 import model.domain.vo.DivisionVO;
 import model.domain.vo.EmpIdVO;
 import model.domain.vo.EmployeeDeptDivVO;
@@ -80,6 +82,39 @@ public interface OracleDao {
 	 public int 						deleteWork(EmployeeDeptDivVO member);
 	 public int 						deleteEmp(EmployeeDeptDivVO member);
 
+
+	 // selected dept --update.jsp
+	 public List<DeptDivisionVO> 		selectedDept(EmployeeDeptDivVO mylist);
+	 
+	 // work table insert
+	 public List<String> 				selectEmpList();
+	 public int 						insertWork(EmployeeWorkDeptVO mylist);
+
+
+
+	  /////////////////admin list up///////////////
+	  public List<DivisionCheckYnVO> admSelectDivRow();
+	  public List<DivDeptCheckVO> admSelectDeptDivRow();
+	  public List<LocationVO> admSelectLocRow();
+	  
+	  /////////////////admin update: division/////////////
+	  public String admDivCheckYNRow(String divid);
+	  public int adminDivAddRow(String divid);
+	  public int adminDivDelRow(String divid);
+	 
+	  
+	  /////////////admin update : location////////////
+	  public String admLocCheckYNRow(String locid);
+	  public int adminLocAddRow(String divid);
+	  public int adminLocDelRow(String divid);
+	  
+	  /////////////admin update : department////////////
+	  public String admDeptCheckYNRow(String deptid);
+	  public int adminDeptAddRow(String deptid);
+	  public int adminDeptDelRow(String deptid);
+
+	  ////////////////// oracledao//////////////////
+	  public List<DivisionCheckYnVO> admSelectDivYRow();
 
 
 }

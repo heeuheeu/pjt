@@ -6,15 +6,50 @@
 <mapper namespace="adm">
 
 
+		<!-- ///////////List UP///////////////// -->
+		
+		
+	    <select id="admSelectDiv" resultType="model.domain.vo.DivisionCheckYnVO">
+	     SELECT   	DISTINCT DIVNAME, DIVID, A.CHECKYN
+	     FROM    	DEPARTMENT
+	     FULL JOIN  DIVISION A USING (DIVID)
+	     ORDER BY  	DIVNAME
+	 	</select>
+	
+	
+	    <select id="admSelectDeptDiv" resultType="model.domain.vo.DivDeptCheckVO">
+	     SELECT   	DEPTNAME, DEPTID, B.CHECKYN, DIVNAME 
+	     FROM    	DEPARTMENT B
+	     JOIN    	DIVISION A USING (DIVID)
+	     ORDER BY  	DEPTNAME
+	   </select>
+	   
+	   	<select id="admSelectLoc" resultType="model.domain.vo.LocationVO">
+		 SELECT   	DISTINCT LOCNAME, LOCID, CHECKYN 
+		 FROM    	LOCATION
+		 ORDER BY 	LOCNAME
+		</select>
+
+	    <select id="admSelectDivY" resultType="model.domain.vo.DivisionCheckYnVO">
+	     SELECT   	DISTINCT DIVNAME, DIVID, A.CHECKYN
+	     FROM    	DEPARTMENT
+	     FULL JOIN  DIVISION A USING (DIVID)
+	     WHERE		A.CHECKYN = 'Y'
+	     ORDER BY  	DIVNAME
+	 	</select>
+	
+
+		<!-- ///////////ADD///////////////// -->
+
+
 	 <insert id="addDiv" parameterType="model.domain.vo.DivisionVO">
 	   	INSERT INTO DIVISION
-	  	VALUES 	( concat('D',LOCSEQ.nextval), #{divname}, 'Y')
+	  	VALUES 	( concat('D',DIVSEQ.nextval), #{divname}, 'Y')
 	 </insert>	
 	 
-		 
 	  <insert id="addDept" parameterType="model.domain.vo.DeptDivisionVO">
 	   	INSERT INTO DEPARTMENT
-	  	VALUES 	( concat('T',LOCSEQ.nextval), #{deptname}, (SELECT DIVID FROM DIVISION WHERE DIVNAME = #{divname}) , 'Y')
+	  	VALUES 	( concat('T',DEPTSEQ.nextval), #{deptname}, (SELECT DIVID FROM DIVISION WHERE DIVNAME = #{divname}) , 'Y')
 	 </insert>	
 	 
 	 <insert id="addLoc" parameterType="model.domain.vo.LocationVO">
@@ -22,28 +57,70 @@
 	  	VALUES 	( concat('L',LOCSEQ.nextval), #{locname}, 'Y')
 	 </insert>	
 	 
+	 
+	 <!-- ///////////UPDATE: DIV///////////////// -->	 	
+	 
+	 <select id="admDivCheckYN" parameterType="String" resultType="String">
+		 SELECT   	CHECKYN
+		 FROM    	DIVISION
+		 WHERE 	    DIVID = #{divid}
+	</select>
+	 
+	 <update id="adminDivAdd" parameterType="String">
+	   	UPDATE 	DIVISION
+	    SET 	CHECKYN = 'Y'	    		
+	    WHERE 	DIVID = #{divid}
+	 </update>  
+	 
+	 <update id="adminDivDelete" parameterType="String">
+	   	UPDATE 	DIVISION
+	    SET 	CHECKYN = 'N'	    		
+	    WHERE 	DIVID = #{divid}
+	 </update>  
+	 
+	 <!-- ///////////UPDATE: LOC///////////////// -->	 	
+	 
+	<select id="admLocCheckYN" parameterType="String" resultType="String">
+		 SELECT   	CHECKYN
+		 FROM    	LOCATION
+		 WHERE 	    LOCID = #{locid}
+	</select>	
 
+	 <update id="adminLocAdd" parameterType="String">
+	   	UPDATE 		LOCATION
+	    SET 		CHECKYN = 'Y'	    		
+	    WHERE 		LOCID = #{locid}
+	 </update>  
+	 
+	 <update id="adminLocDelete" parameterType="String">
+	   	UPDATE 		LOCATION
+	    SET 		CHECKYN = 'N'	    		
+	    WHERE 		LOCID = #{locid}
+	 </update>  
+	
+	 
+ 	<!-- ///////////UPDATE: DEPT///////////////// -->	
+ 	 
+	<select id="admDeptCheckYN" parameterType="String" resultType="String">
+		 SELECT   	CHECKYN
+		 FROM    	DEPARTMENT
+		 WHERE 	    DEPTID = #{deptid}
+	</select>
+	
+	<update id="adminDeptAdd" parameterType="String">
+	   	UPDATE 		DEPARTMENT
+	    SET 		CHECKYN = 'Y'	    		
+	    WHERE 		DEPTID = #{deptid}
+	 </update>  
+	 
+	 <update id="adminDeptDelete" parameterType="String">
+	   	UPDATE 		DEPARTMENT
+	    SET 		CHECKYN = 'N'	    		
+	    WHERE 		DEPTID = #{deptid}
+	 </update>  
+ 	
+ 	
 </mapper>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

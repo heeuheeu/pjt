@@ -28,7 +28,7 @@
      SELECT   DEPTNAME 
      FROM    DEPARTMENT
      JOIN    DIVISION A USING (DIVID)
-     WHERE  A.CHECKYN = 'Y'
+     WHERE   A.CHECKYN = 'Y'
      ORDER BY  DEPTNAME
    </select>
 
@@ -65,7 +65,9 @@
     					<if test="empimg != null"> 
     				  	#{empimg, jdbcType=VARCHAR},
     				    </if> 
-      				  ( SELECT DEPTID  FROM DEPARTMENT  WHERE DEPTNAME = #{deptname} ) )
+      				  ( SELECT DEPTID  FROM DEPARTMENT  
+      				    WHERE DEPTNAME = #{deptname} 
+      				    AND DIVID = (SELECT DIVID FROM DIVISION WHERE DIVNAME = #{divname} AND CHECKYN = 'Y')) )
      </insert>
 	 
 	 <insert id="insertdefaultwork" parameterType="model.domain.vo.WorkVO" >
@@ -177,6 +179,17 @@
   		DELETE   FROM EMPLOYEE
   		WHERE    EMPID = #{empid}
       </delete>  
+      
+      <select id="selecteddept" resultType="model.domain.vo.EmployeeDeptVO">
+    	SELECT       DISTINCT DEPTNAME
+        FROM         DEPARTMENT
+        FULL JOIN    DIVISION A USING (DIVID)
+        FULL JOIN    EMPLOYEE B USING (DEPTID)
+        WHERE        A.CHECKYN = 'Y' AND DIVID = #{divid}
+        ORDER BY     DEPTNAME
+      </select>
+      
+      
 </mapper>
 
 

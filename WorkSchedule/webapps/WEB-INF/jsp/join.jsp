@@ -8,7 +8,8 @@
     <link href="css/reset.css" rel="stylesheet" type="text/css">
     <link href="css/join.css" rel="stylesheet" type="text/css">
     <link href="./css/bootstrap.min.css" rel="stylesheet">
-	<link href="./css/custom2.css" rel="stylesheet">    
+	<link href="./css/custom2.css" rel="stylesheet">   
+	<link href="./css/jasny-bootstrap.min.css " rel="stylesheet">
  
   </head>
   <body>
@@ -16,8 +17,15 @@
         
       <div class="sign-form">
         <form action="join.inc" method="post" role="form" id="joinBtn" enctype="multipart/form-data">
-        
-        	<input type="file" placeholder="사진" name="file" id="empimg"/><br>
+        	
+        	<div class="fileinput fileinput-new" data-provides="fileinput">
+			  <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 200px; height: 150px;"></div>
+			  <div>
+			    <span class="btn btn-default btn-file"><span class="fileinput-new">사진 등록</span><span class="fileinput-exists">사진 변경</span><input type="file" name="file" id="empimg"></span>
+			    <a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">사진 삭제</a>
+			  </div>
+			</div>
+        	
 	        <input type="text" placeholder="사번" name="empid" id="empid" required maxlength='10'/><br>
 	        <input type="password" placeholder="비밀번호" name="emppwd" required/><br>
 	        <input type="text" placeholder="이름" name="empname" required/><br>
