@@ -5,27 +5,28 @@
 .popup-content .btn .close-btn{float: right;}
 .popup-content .user-info{}
 .popup-content .user-info .profile{text-align: center; margin-bottom: 10px;} 
-.popup-content .user-info .profile img{width: 50%; border-radius: 50%; border: solid 1px #ddd}
-.popup-content .user-info .name{text-align: center; margin-bottom: 10px;}
+.popup-content .user-info .profile img{width: 216px; height: 216px; border-radius: 50%; border: solid 1px #ddd}
+.popup-content .user-info .dept{text-align: center; margin-bottom: 5px; font-size: 1.1em; }
+.popup-content .user-info .name{text-align: center; margin-bottom: 10px; font-size: 1.4em; }
 .popup-content .user-contact{padding: 10px;border-bottom:solid 1px #ddd;text-align: center;}
-.popup-content .user-contact a{display: inline-block;margin:0 10px;}
+.popup-content .user-contact a{display: inline-block;margin:0 10px;} 
 
 .popup-content .date{padding: 10px 0; margin-bottom: 10px;text-align: center;}
 .popup-content .date a{display: inline-block; margin:0 10px; vertical-align: middle;}
 .popup-content .date a img{width:10px; vertical-align: middle;}
 
 
-.popup-content .ampm{display: table;width: 100%; padding-bottom: 20px;border-bottom:solid 1px #ddd;}
+.popup-content .ampm{display: table;width: 100%; padding-bottom: 20px;border-bottom:solid 1px #ddd; }
 .popup-content .am{display: table-cell;width: 50%; border-right: solid 1px #ddd; padding: 0 10px; text-align: center;}
 .popup-content .am span{display: inline-block; background: #3e3f44; color: #fff; margin-bottom: 10px;border-radius: 3px; font-size: 12px; padding: 2px 20px;}
 .popup-content .am b{display: block; font-weight: bold; font-size: 16px;}
 .popup-content .am font{display: block; font-size: 12px; color: #888;}
 
 /* modal input text */
-.popup-content .am .amloc{display: block; font-weight: bold; font-size: 16px; width: 5em; text-align: center; }
-.popup-content .am .amlocdetail{display: block; font-size: 12px; color: #888; width: 10em; text-align: center;}
-.popup-content .pm .pmloc{display: block; font-weight: bold; font-size: 16px; width: 5em; text-align: center; }
-.popup-content .pm .pmlocdetail{display: block; font-size: 12px; color: #888; width: 10em; text-align: center;}
+.popup-content .am .amloc{display: block; font-weight: bold; font-size: 1.5em; width: 5em; text-align: center; }
+.popup-content .am .amlocdetail{display: block; font-size: 1.0em; color: #888; width: 10em; text-align: center;}
+.popup-content .pm .pmloc{display: block; font-weight: bold; font-size: 1.5em; width: 5em; text-align: center; }
+.popup-content .pm .pmlocdetail{display: block; font-size: 1.0em; color: #888; width: 10em; text-align: center;}
 .popup-content .date .date-text{display: inline-block;vertical-align: middle; font-size: 14px; text-align: center;}
 .popup-content input{border:none}
 .popup-content select{border:none; display: block; font-weight: bold; font-size: 16px; width: 8em; 

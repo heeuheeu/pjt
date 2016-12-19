@@ -31,7 +31,7 @@
 	<!--상단-->
 	
 	
-	<div id="dash-carousel">
+	<div id="dash-carousel" class="dashoth-carousel">
 	        <div id="carousel-example-generic" class="carousel slide">
 	                 
 	             <div class="carousel-inner" id="carouselinner">     
@@ -216,9 +216,9 @@
 			    	
 			    	
 			    	if(lists[i].pmloc == "기타"){
-			    		txt +="<div class='pm'><span>PM</span><div class='loc-text'>"+lists[i].pmlocdetail+"</div></div>"; 
+			    		txt +="<div class='pm' style='border-left: solid 1px #ddd;'><span>PM</span><div class='loc-text'>"+lists[i].pmlocdetail+"</div></div>"; 
 			    	}else{
-			    		txt +="<div class='pm'><span>PM</span><div class='loc-text'>"+lists[i].pmloc+"</div></div>"; 
+			    		txt +="<div class='pm' style='border-left: solid 1px #ddd;'><span>PM</span><div class='loc-text'>"+lists[i].pmloc+"</div></div>"; 
 			    	}
 			    	
 			    	txt +="</div></div></article>";
@@ -272,7 +272,7 @@
 		  		
 		    	txt +="<article><div class='item-lay "+color+ "'>";
 		    	//txt +="<article><div class='item-lay status1'>";
-		    	txt +="<div class='profile'><img src='img/"+lists[i].empid+".png' /></div>";
+		    	txt +="<div class='profile'><img src='resources/"+lists[i].empimg+"' /></div>";
 		    	/* txt +="<div class='name'>"+lists[i].empname+"</div>"; */
 		    	
 		    	
@@ -284,9 +284,9 @@
 		    	
 		    	
 		    	if(lists[i].pmloc == "기타"){
-		    		txt +="<div class='pm'><span>PM</span><div class='loc-text'>"+lists[i].pmlocdetail+"</div></div>"; 
+		    		txt +="<div class='pm' style='border-left: solid 1px #ddd;'><span>PM</span><div class='loc-text'>"+lists[i].pmlocdetail+"</div></div>"; 
 		    	}else{
-		    		txt +="<div class='pm'><span>PM</span><div class='loc-text'>"+lists[i].pmloc+"</div></div>"; 
+		    		txt +="<div class='pm' style='border-left: solid 1px #ddd;'><span>PM</span><div class='loc-text'>"+lists[i].pmloc+"</div></div>"; 
 		    	}
 		    	
 		    	txt +="</div></div></article>";
@@ -336,7 +336,7 @@
 		    	txt +="<article><div class='item-lay "+color+ "'>";
 		    	//txt +="<article><div class='item-lay status1'>";
     		
-		    	txt +="<div class='profile'><img src='img/"+lists[i].empid+".png' /></div>";
+		    	txt +="<div class='profile'><img src='resources/"+lists[i].empimg+"' /></div>";
 		    	/* txt +="<div class='name'>"+lists[i].empname+"</div>"; */
 		    	
 		    	
@@ -348,9 +348,9 @@
 		    	
 		    	
 		    	if(lists[i].pmloc == "기타"){
-		    		txt +="<div class='pm'><span>PM</span><div class='loc-text'>"+lists[i].pmlocdetail+"</div></div>"; 
+		    		txt +="<div class='pm' style='border-left: solid 1px #ddd;'><span>PM</span><div class='loc-text'>"+lists[i].pmlocdetail+"</div></div>"; 
 		    	}else{
-		    		txt +="<div class='pm'><span>PM</span><div class='loc-text'>"+lists[i].pmloc+"</div></div>"; 
+		    		txt +="<div class='pm' style='border-left: solid 1px #ddd;'><span>PM</span><div class='loc-text'>"+lists[i].pmloc+"</div></div>"; 
 		    	}
 		    	
 		    	txt +="</div></div></article>";
@@ -399,7 +399,7 @@
    		    	txt +="<article><div class='item-lay "+color+ "'>";
    		    	//txt +="<article><div class='item-lay status1'>";
         			 
-  		    	txt +="<div class='profile'><img src='img/"+lists[i].empid+".png' /></div>";
+  		    	txt +="<div class='profile'><img src='resources/"+lists[i].empimg+"' /></div>";
 			    	/* txt +="<div class='name'>"+lists[i].empname+"</div>"; */
 			    	
 			    	
@@ -411,9 +411,9 @@
 			    	
 			    	
 			    	if(lists[i].pmloc == "기타"){
-			    		txt +="<div class='pm'><span>PM</span><div class='loc-text'>"+lists[i].pmlocdetail+"</div></div>"; 
+			    		txt +="<div class='pm' style='border-left: solid 1px #ddd;'><span>PM</span><div class='loc-text'>"+lists[i].pmlocdetail+"</div></div>"; 
 			    	}else{
-			    		txt +="<div class='pm'><span>PM</span><div class='loc-text'>"+lists[i].pmloc+"</div></div>"; 
+			    		txt +="<div class='pm' style='border-left: solid 1px #ddd;'><span>PM</span><div class='loc-text'>"+lists[i].pmloc+"</div></div>"; 
 			    	}
 			    	
 			    	txt +="</div></div></article>";

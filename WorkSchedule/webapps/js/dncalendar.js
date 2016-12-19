@@ -632,12 +632,12 @@
                             var noteList = notes[i].notes;
                             var noteListLength = noteList.length;
 
-                            var list = "";
+                            var list = date+"일의 주요 일정";
                             list += "<li class='date'>";
-                            list += "<span>"+ date +"</span> ";
+                            /*list += "<span>"+ date +"</span>";*/
 
                             if (noteListLength > 0) {
-                                  list += " : ";
+                                  /*list += " 일 ";*/
 
                                   for (var j = 0; j < noteListLength; j++) {
                                         list += noteList[j];
@@ -647,7 +647,7 @@
                                   }
                             }
                             
-                            list += "</li>";
+                            list += "</li><br>";
 
                             notesGroup.append(list);
                       }

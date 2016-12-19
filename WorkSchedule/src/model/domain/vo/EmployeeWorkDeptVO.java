@@ -164,6 +164,15 @@ public class EmployeeWorkDeptVO {
 		this.currdate = currdate;
 	}
 
+	@Override
+	public String toString() {
+		return "EmployeeWorkDeptVO [empimg=" + empimg + ", empid=" + empid + ", emppwd=" + emppwd + ", empname="
+				+ empname + ", empphone=" + empphone + ", empmail=" + empmail + ", emploc=" + emploc + ", deptid="
+				+ deptid + ", workdate=" + workdate + ", amloc=" + amloc + ", amlocdetail=" + amlocdetail + ", pmloc="
+				+ pmloc + ", pmlocdetail=" + pmlocdetail + ", deptname=" + deptname + ", divid=" + divid + ", currdate="
+				+ currdate + "]";
+	}
+
 	
 	
 	

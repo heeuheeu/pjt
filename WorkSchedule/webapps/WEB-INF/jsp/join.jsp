@@ -47,12 +47,9 @@
        
        
 			<select class="form-control" name="emploc" required>
-				<option selected disabled value="">근무지</option>
-				<option value="본사 10F">본사 10F</option>
-				<option value="본사 13F">본사 13F</option>
-				<option value="본사 14F">본사 14F</option>
-				<option value="성수">성수</option>
-				<option value="메사">메사</option>
+				<c:forEach items="${locList}" var="locList"> 
+     				<option <c:if test="${locList.locname eq mydeptdiv.emploc}"> selected</c:if>> ${locList.locname} </option>    
+         		</c:forEach>
 			</select><br>   
 			                   
 	        <input type="submit" value="JOIN" id="join">

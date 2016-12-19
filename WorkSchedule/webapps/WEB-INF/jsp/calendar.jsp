@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 	<head>
@@ -34,7 +36,7 @@
 	  <div class="side-menu-content">
       <div class="user-info">
       <br>
-          <div class="profile"><img src="./img/${myinfo.empid}.png"/></div>
+          <div class="profile"><img src="resources/${myinfo.empimg}"/></div>
           <div class="dept">${myinfo.deptname }</div>
           <div class="name">${myinfo.empname }<%--  ${myinfo.empgrade } --%></div>
       </div>
@@ -85,8 +87,8 @@
 						
 					      <div class="popup-content">
 					        <div class="user-info">
-					          <div class="profile"><img id='empprofile' /></div>
-					          <div class="name" id="empdept"></div>
+					          <div class="profile"><img id='empimg' /></div>
+					          <div class="dept" id="empdept"></div>
 					          <div class="name"> 
 					          	<span id="empname"></span>
 					          <!-- 	<span id="empgrade"></span> -->
@@ -111,14 +113,10 @@
 					            
 					            <!-- <input type="text" name="amloc" id="amloc" class="amloc" style="background-color: transparent"> -->
 					            
-					            <select class="form-control" name="amloc" id="amloc" class="amloc" style="background-color: transparent">
-									<option value="본사 10F">본사 10F</option>
-									<option value="본사 13F">본사 13F</option>
-									<option value="본사 14F">본사 14F</option>
-									<option value="성수">성수</option>
-									<option value="메사">메사</option>
-									<option value="기타">기타</option>
-									<option value="휴무">휴무</option>
+					            <select name="amloc" id="amloc" class="amloc" style="background-color: transparent">
+									<c:forEach items="${locList}" var="locList"> 
+							         <option value="${locList.locname}">${locList.locname}</option>
+							        </c:forEach>
 								</select>
 					            
 					            </center>
@@ -132,14 +130,10 @@
 					            
 					            <!-- <input type="text" name="pmloc" id="pmloc" class="pmloc" style="background-color: transparent"> -->
 					            
-					            <select class="form-control" name="pmloc" id="pmloc" class="pmloc" style="background-color: transparent;">
-									<option value="본사 10F">본사 10F</option>
-									<option value="본사 13F">본사 13F</option>
-									<option value="본사 14F">본사 14F</option>
-									<option value="성수">성수</option>
-									<option value="메사">메사</option>
-									<option value="기타">기타</option>
-									<option value="휴무">휴무</option>
+					            <select name="pmloc" id="pmloc" class="pmloc" style="background-color: transparent;">
+									<c:forEach items="${locList}" var="locList"> 
+							         <option value="${locList.locname}">${locList.locname}</option>
+							        </c:forEach>
 								</select>
 					            
 					            </center>
@@ -213,7 +207,7 @@
     	                		var pm = workmodal.pmloc;
     	                		var pmdetail = workmodal.pmlocdetail;
     	                		var workdate = workmodal.workdate;
-    	                		var img = workmodal.empid;
+    	                		var img = workmodal.empimg;
     	                			
     	                		// 모달에 값 심기
     	                		
@@ -241,8 +235,8 @@
     	    				    
     	    				    $("#amlocdetail").val(amdetail);
     	    				    $("#pmlocdetail").val(pmdetail);	
-    	    				    $("#workdateView").val(workdateForm);	
-    	    				    $("#empprofile").prop("src","img/"+img+".png");
+    	    				    $("#workdateView").val(workdateForm);
+    	    				    $("#empimg").prop("src","resources/"+img); //////////////////////////////////////////// 이미지 삽입
     	    				    $("#empid").val(id);
     	    				    $("#currDateUpdate").val(clickedDay);
     	    		
@@ -284,7 +278,7 @@
 		    		
 		    		var notes = {
 		    				notes : scheduleAry,
-		    				showNotes : false
+		    				showNotes : true
 		    		}
 		    		
     				my_calendar.update(notes);
@@ -317,11 +311,6 @@
  			   }
  		}
  		
-
-		function nfc(){
-		    window.inc.nfc(${myinfo.empid});
-		}	
-		
 		</script>
 		<!-- Placed at the end of the document so the pages load faster -->
     <script src="./js/bootstrap.min.js"></script>

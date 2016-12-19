@@ -136,26 +136,30 @@
   
  	 	 
 	 <!-- ////////////////////////update/////////////////////// -->
+	  
 	  <update id="update" parameterType="model.domain.vo.EmployeeDeptDivVO">
-	  UPDATE 	EMPLOYEE
-	  SET 		EMPID=#{empid}, 
-	  			EMPPWD=#{emppwd}, 
-	  			EMPNAME=#{empname}, 
-	  			EMPPHONE=#{empphone},
-	  			EMPMAIL=#{empmail}, 
-	  			EMPLOC=#{emploc}, 
-	  			<if test="empimg != null">
-	  			EMPIMG=#{empimg, jdbcType=VARCHAR}, 
-	  			</if>
-	  			DEPTID=(SELECT DEPTID FROM DEPARTMENT WHERE DEPTNAME = #{deptname})
-	  WHERE 	EMPID=#{empid}
-	  </update>  
+	   UPDATE EMPLOYEE
+	   SET    EMPID=#{empid}, 
+		      EMPPWD=#{emppwd}, 
+		      EMPNAME=#{empname}, 
+		      EMPPHONE=#{empphone},
+		      EMPMAIL=#{empmail}, 
+		      EMPLOC=#{emploc}, 
+		      <if test="empimg != null">
+		      EMPIMG=#{empimg, jdbcType=VARCHAR}, 
+		      </if>
+		      DEPTID=(SELECT DEPTID  FROM DEPARTMENT  
+		              WHERE DEPTNAME = #{deptname} 
+		              AND DIVID = (SELECT DIVID FROM DIVISION WHERE DIVNAME = #{divname} AND CHECKYN = 'Y'))
+	   WHERE  EMPID=#{empid}
+   	  </update>  
+	  
 	  
 	  <update id="updateWork" parameterType="model.domain.vo.EmployeeDeptDivVO">
 	  UPDATE 	WORK 
-	  SET 		amloc = (select emploc from employee where empid =#{empid}), 
-	   			pmloc = (select emploc from employee where empid =#{empid})
-	  WHERE 	workdate >= (select to_char(sysdate, 'yyyy-MM-DD') from dual) 
+	  SET 		AMPLOC = (select emploc from employee where empid =#{empid}), 
+	   			PMLOC = (select emploc from employee where empid =#{empid})
+	  WHERE 	WORKDATE >= (select to_char(sysdate, 'yyyy-MM-DD') from dual) AND EMPID=#{empid}
 	  </update>
 	  
 	  <update id="nfcupdateam" parameterType="model.domain.vo.NfcVO">
@@ -170,6 +174,11 @@
 				WHERE EMPID = #{empid} AND WORKDATE=(SELECT TO_CHAR(SYSDATE, 'yyyy-MM-DD') FROM DUAL)
 	  </update>
 
+	  <delete id="deletefav" parameterType="model.domain.vo.EmployeeDeptDivVO" >
+  		DELETE   FROM FAVORITE
+  		WHERE    EMPID = #{empid} 	OR 	FAVID = #{empid}
+      </delete>
+      
 	  <delete id="deletework" parameterType="model.domain.vo.EmployeeDeptDivVO" >
   		DELETE   FROM WORK
   		WHERE    EMPID = #{empid}

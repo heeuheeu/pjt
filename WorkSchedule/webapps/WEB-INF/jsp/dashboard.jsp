@@ -22,6 +22,7 @@
 	  
 	<!--상단-->
 	<section id="top-bar">
+	
 		<div class="group-title">${myinfo.deptname}</div>
 	    <!--날짜-->
 	    <div class="date">
@@ -31,6 +32,8 @@
 			<input type="hidden" id="currDate">
 	    </div>
 	    <!--날짜-->
+	
+
 	</section>
 	<!--상단-->
 	
@@ -133,20 +136,27 @@
 			    	txt +="<div class='profile'><img src='resources/"+lists[i].empimg+"'></div>";
 			    	/* txt +="<div class='name'>"+lists[i].empname+"</div>"; */
 			    	
+			    	/* txt +="<div class='ampm'><div class='am'><span>AM</span><div class='loc-text'>"+lists[i].amlocdetail+"</div></div>";  */
 			    	
-			    	if(lists[i].amloc == "기타"){
-			    		txt +="<div class='ampm'><div class='am'><span>AM</span><div class='loc-text'>"+lists[i].amlocdetail+"</div></div>"; 
-			    	}else{
-			    		txt +="<div class='ampm'><div class='am'><span>AM</span><div class='loc-text'>"+lists[i].amloc+"</div></div>"; 
+					///////////////////////////수정 은비///////////////////
+			    	if(AMPM == "AM"){
+				    	if(lists[i].amloc == "기타"){
+				    		txt +="<div class='ampm'><div class='am'><span>AM</span><div class='loc-text'>"+lists[i].amlocdetail+"</div></div>"; 
+				    	}else{
+				    		txt +="<div class='ampm'><div class='am'><span>AM</span><div class='loc-text'>"+lists[i].amloc+"</div></div>";
+				    	}
 			    	}
 			    	
-			    	/* 
-			    	if(lists[i].pmloc == "기타"){
-			    		txt +="<div class='pm'><span>PM</span><div class='loc-text'>"+lists[i].pmlocdetail+"</div></div>"; 
-			    	}else{
-			    		txt +="<div class='pm'><span>PM</span><div class='loc-text'>"+lists[i].pmloc+"</div></div>"; 
+			    	if(AMPM == "PM"){
+				    	if(lists[i].pmloc == "기타"){
+				    		txt +="<div class='ampm'><div class='pm'><span>PM</span><div class='loc-text'>"+lists[i].pmlocdetail+"</div></div>"; 
+				    	}else{
+				    		txt +="<div class='ampm'><div class='pm'><span>PM</span><div class='loc-text'>"+lists[i].pmloc+"</div></div>"; 
+				    	}
 			    	}
-			    	 */
+			    	/////////////////////수정 은비////////////////////////
+
+			    	 
 			    	txt +="</div></div></article>";
 			    }
       			
@@ -198,22 +208,25 @@
 		  		
 		    	txt +="<article><div class='item-lay "+color+ "'>";
 		    	//txt +="<article><div class='item-lay status1'>";
-		    	txt +="<div class='profile'><img src='img/"+lists[i].empid+".png' /></div>";
+		    	txt +="<div class='profile'><img src='resources/"+lists[i].empimg+"' /></div>";
 		    	/* txt +="<div class='name'>"+lists[i].empname+"</div>"; */
 		    	
-		    	
-		    	if(lists[i].amloc == "기타"){
-		    		txt +="<div class='ampm'><div class='am'><span>AM</span><div class='loc-text'>"+lists[i].amlocdetail+"</div></div>"; 
-		    	}else{
-		    		txt +="<div class='ampm'><div class='am'><span>AM</span><div class='loc-text'>"+lists[i].amloc+"</div></div>"; 
+				
+		    	if(AMPM == "AM"){
+			    	if(lists[i].amloc == "기타"){
+			    		txt +="<div class='ampm'><div class='am'><span>AM</span><div class='loc-text'>"+lists[i].amlocdetail+"</div></div>"; 
+			    	}else{
+			    		txt +="<div class='ampm'><div class='am'><span>AM</span><div class='loc-text'>"+lists[i].amloc+"</div></div>";
+			    	}
 		    	}
-		    	/* 
 		    	
-		    	if(lists[i].pmloc == "기타"){
-		    		txt +="<div class='pm'><span>PM</span><div class='loc-text'>"+lists[i].pmlocdetail+"</div></div>"; 
-		    	}else{
-		    		txt +="<div class='pm'><span>PM</span><div class='loc-text'>"+lists[i].pmloc+"</div></div>"; 
-		    	} */
+		    	if(AMPM == "PM"){
+			    	if(lists[i].pmloc == "기타"){
+			    		txt +="<div class='ampm'><div class='pm'><span>PM</span><div class='loc-text'>"+lists[i].pmlocdetail+"</div></div>"; 
+			    	}else{
+			    		txt +="<div class='ampm'><div class='pm'><span>PM</span><div class='loc-text'>"+lists[i].pmloc+"</div></div>"; 
+			    	}
+		    	}
 		    	
 		    	txt +="</div></div></article>";
       		 }
@@ -262,23 +275,26 @@
  		    	txt +="<article><div class='item-lay "+color+ "'>";
  		    	//txt +="<article><div class='item-lay status1'>";
       		
-		    	txt +="<div class='profile'><img src='img/"+lists[i].empid+".png' /></div>";
-		    	/* txt +="<div class='name'>"+lists[i].empname+"</div>"; */
+		    	txt +="<div class='profile'><img src='resources/"+lists[i].empimg+"' /></div>";
+		    	/* txt +="<div class='name'>"+lists[i].empname+"</div>";  */
 		    	
 		    	
-		    	if(lists[i].amloc == "기타"){
-		    		txt +="<div class='ampm'><div class='am'><span>AM</span><div class='loc-text'>"+lists[i].amlocdetail+"</div></div>"; 
-		    	}else{
-		    		txt +="<div class='ampm'><div class='am'><span>AM</span><div class='loc-text'>"+lists[i].amloc+"</div></div>"; 
+		    	if(AMPM == "AM"){
+			    	if(lists[i].amloc == "기타"){
+			    		txt +="<div class='ampm'><div class='am'><span>AM</span><div class='loc-text'>"+lists[i].amlocdetail+"</div></div>"; 
+			    	}else{
+			    		txt +="<div class='ampm'><div class='am'><span>AM</span><div class='loc-text'>"+lists[i].amloc+"</div></div>";
+			    	}
 		    	}
 		    	
-		    	/* 
-		    	if(lists[i].pmloc == "기타"){
-		    		txt +="<div class='pm'><span>PM</span><div class='loc-text'>"+lists[i].pmlocdetail+"</div></div>"; 
-		    	}else{
-		    		txt +="<div class='pm'><span>PM</span><div class='loc-text'>"+lists[i].pmloc+"</div></div>"; 
+		    	if(AMPM == "PM"){
+			    	if(lists[i].pmloc == "기타"){
+			    		txt +="<div class='ampm'><div class='pm'><span>PM</span><div class='loc-text'>"+lists[i].pmlocdetail+"</div></div>"; 
+			    	}else{
+			    		txt +="<div class='ampm'><div class='pm'><span>PM</span><div class='loc-text'>"+lists[i].pmloc+"</div></div>"; 
+			    	}
 		    	}
-		    	 */
+		    	
 		    	txt +="</div></div></article>";
       		 }
       		 txt +="</section></div>" ;
@@ -325,22 +341,25 @@
      		    	txt +="<article><div class='item-lay "+color+ "'>";
      		    	//txt +="<article><div class='item-lay status1'>";
           			 
-    		    	txt +="<div class='profile'><img src='img/"+lists[i].empid+".png' /></div>";
+    		    	txt +="<div class='profile'><img src='resources/"+lists[i].empimg+"' /></div>";
 			    	/* txt +="<div class='name'>"+lists[i].empname+"</div>"; */
 			    	
 			    	
-			    	if(lists[i].amloc == "기타"){
-			    		txt +="<div class='ampm'><div class='am'><span>AM</span><div class='loc-text'>"+lists[i].amlocdetail+"</div></div>"; 
-			    	}else{
-			    		txt +="<div class='ampm'><div class='am'><span>AM</span><div class='loc-text'>"+lists[i].amloc+"</div></div>"; 
+			    	if(AMPM == "AM"){
+				    	if(lists[i].amloc == "기타"){
+				    		txt +="<div class='ampm'><div class='am'><span>AM</span><div class='loc-text'>"+lists[i].amlocdetail+"</div></div>"; 
+				    	}else{
+				    		txt +="<div class='ampm'><div class='am'><span>AM</span><div class='loc-text'>"+lists[i].amloc+"</div></div>";
+				    	}
 			    	}
-			    	/* 
 			    	
-			    	if(lists[i].pmloc == "기타"){
-			    		txt +="<div class='pm'><span>PM</span><div class='loc-text'>"+lists[i].pmlocdetail+"</div></div>"; 
-			    	}else{
-			    		txt +="<div class='pm'><span>PM</span><div class='loc-text'>"+lists[i].pmloc+"</div></div>"; 
-			    	} */
+			    	if(AMPM == "PM"){
+				    	if(lists[i].pmloc == "기타"){
+				    		txt +="<div class='ampm'><div class='pm'><span>PM</span><div class='loc-text'>"+lists[i].pmlocdetail+"</div></div>"; 
+				    	}else{
+				    		txt +="<div class='ampm'><div class='pm'><span>PM</span><div class='loc-text'>"+lists[i].pmloc+"</div></div>"; 
+				    	}
+			    	}
 			    	
 			    	txt +="</div></div></article>";
           		 }

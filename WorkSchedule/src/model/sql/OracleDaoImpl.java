@@ -242,6 +242,7 @@ public class OracleDaoImpl implements OracleDao {
 	@Override
 	public int deleteWork(EmployeeDeptDivVO member) {
 		System.out.println("Dao deleteWork");
+		sqlSession.delete("member.deletefav", member);
 		return sqlSession.delete("member.deletework", member);
 	}
 

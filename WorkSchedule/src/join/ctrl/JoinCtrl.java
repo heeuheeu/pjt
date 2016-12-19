@@ -21,6 +21,7 @@ import Service.UserServiceImpl;
 import model.domain.vo.DeptDivisionVO;
 import model.domain.vo.EmployeeDeptDivVO;
 import model.domain.vo.EmployeeDeptVO;
+import model.domain.vo.LocationVO;
 import model.domain.vo.WorkVO;
 
 @Controller
@@ -38,9 +39,12 @@ public class JoinCtrl {
 
 		List<DeptDivisionVO> divList = service.selectdiv();
 		List<DeptDivisionVO> list = service.selectdeptdiv();
+		List<LocationVO> locList = service.selectloc();
 		
 		model.addAttribute("divlist", divList);
 		model.addAttribute("lists", list);
+		model.addAttribute("locList", locList); 
+		
 		return "join";
 	}
 

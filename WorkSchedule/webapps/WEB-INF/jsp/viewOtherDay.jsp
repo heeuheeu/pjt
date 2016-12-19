@@ -12,7 +12,6 @@
     <link href="./css/popup.css" rel="stylesheet" type="text/css">
     <link href="./css/view.css" rel="stylesheet">
     
-    
         <!-- Bootstrap core CSS -->
     <link href="./css/bootstrap.css" rel="stylesheet">
     <link href="./css/jasny-bootstrap.min.css" rel="stylesheet">
@@ -77,9 +76,13 @@
 		
 		<!----날짜---->
 				<div class="date">
-					<a class="prev-text" onclick="prevDayclick()"> < </a> <input type="hidden" id="prevbtn" onclick="prevDay()"> 
-					<a class="date-text" href="calMove.inc" id="currDateView"></a> 
-					<a class="next-text" onclick="nextDayclick()"> > </a> <input type="hidden" id="nextbtn" onclick="nextDay()"> 
+				  	<table class="mytable">
+				      <tr>
+				       <th><a class="prev-text" onclick="prevDayclick()"> < </a> <input type="hidden" id="prevbtn" onclick="prevDay()"></th>
+				       <th><a class="date-text" href="calMove.inc" id="currDateView"></a> </th>
+				       <th><a class="next-text" onclick="nextDayclick()"> > </a> <input type="hidden" id="nextbtn" onclick="nextDay()"> </th>
+				      </tr>
+				     </table>
 					<input type="hidden" id="currDate">
 				</div>
 		<!----날짜----> 	
@@ -218,7 +221,7 @@
        
        <button type="button" class="close" aria-hidden="true" 
         id="editbtn" style="float: left;" onclick="update()">
-       <img src="img/edit-icon.png"/>—</button>
+       <img src="img/edit-icon.png"/></button>
        
      </div >  
      <div class="modal-body" >
@@ -227,7 +230,7 @@
           <div class="popup-content">
             <div class="user-info">
               <div class="profile"><img id='empimg' /></div>
-              <div class="name" id="empdept"></div>
+              <div class="dept" id="empdept"></div>
               <div class="name"> 
                <span id="empname"></span>
                <!-- <span id="empgrade"></span> -->
@@ -362,7 +365,7 @@
 		    $("#amlocdetail").val(amdetail);
 		    $("#pmlocdetail").val(pmdetail);	
 		    $("#workdateView").val(pageDateView);	
-		    $("#empprofile").prop("src","resources/"+img);
+		    $("#empimg").prop("src","resources/"+img);
 		    $("#empid").val(id);
 		    $("#currDateUpdate").val(pageDate);
 		    $("#mail").attr("href", "mailto: "+mail);

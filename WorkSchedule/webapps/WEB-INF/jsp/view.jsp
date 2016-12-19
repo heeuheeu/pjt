@@ -10,6 +10,8 @@
     <link href="./css/listView.css" rel="stylesheet" type="text/css">
     <link href="./css/cardView.css" rel="stylesheet" type="text/css">
     <link href="./css/popup.css" rel="stylesheet" type="text/css">
+    <link href="./css/view.css" rel="stylesheet">
+    
         <!-- Bootstrap core CSS -->
     <link href="./css/bootstrap.css" rel="stylesheet">
     <link href="./css/jasny-bootstrap.min.css" rel="stylesheet">
@@ -18,7 +20,7 @@
     <!-- Custom styles for this template -->
     <link href="./css/navmenu-push.css" rel="stylesheet">
     <link href="./css/flatpickr.css" rel="stylesheet">
-    <link href="./css/view.css" rel="stylesheet">
+    <link href="./css/font-awesome.css" rel="stylesheet" type="text/css" media="screen">
 
     
     <style>
@@ -44,11 +46,13 @@
           <div class="name">${myinfo.empname} <%-- ${myinfo.empgrade} --%></div>
       </div>
       
+      <!-- <i class="fa fa-pencil fa-lg" aria-hidden="true"> -->
+      
       <ul class="nav navmenu-nav btns">
       <div class="btns">
-        <li><a href="calMove.inc" class="btn1" style="color: white;"><img src="img/side-icon1.png"/>나의 일정</a></li>
-        <li><a href="updateview.inc" class="btn1" style="color: white;"><img src="img/side-icon1.png"/>내 정보수정</a></li>
-        <li><a href="logout.inc" class="btn2" style="color: white;"><img src="img/side-icon2.png"/>로그아웃</a></li>
+        <li><a href="calMove.inc" class="btn1" style="color: white;"><img src="img/side-icon1.png"/><span>나의 일정</span></a></li>
+        <li><a href="updateview.inc" class="btn1" style="color: white;"><img src="img/side-icon1.png"/><span>내 정보수정</span></a></li>
+        <li><a href="logout.inc" class="btn2" style="color: white;"><img src="img/side-icon2.png"/><span>로그아웃</span></a></li>
       </div>
       </ul>
 
@@ -75,12 +79,18 @@
 		<section id="top-bar">
 			<!----날짜---->
 				<div class="date">
-					<a class="prev-text" onclick="prevDayclick()"> < </a> <input type="hidden" id="prevbtn" onclick="prevDay()"> 
-					<a class="date-text" href="calMove.inc" id="currDateView"></a> 
-					<a class="next-text" onclick="nextDayclick()"> > </a> <input type="hidden" id="nextbtn" onclick="nextDay()"> 
+				
+				  	<table class="mytable">
+				      <tr>
+				       <th><a class="prev-text" onclick="prevDayclick()"> < </a> <input type="hidden" id="prevbtn" onclick="prevDay()"></th>
+				       <th><a class="date-text" href="calMove.inc" id="currDateView"></a> </th>
+				       <th><a class="next-text" onclick="nextDayclick()"> > </a> <input type="hidden" id="nextbtn" onclick="nextDay()"> </th>
+				      </tr>
+				     </table>
 					<input type="hidden" id="currDate">
 				</div>
 			<!----날짜----> 
+			
 				
 			<!----view 버튼---->
 			<div class="view-btn">
@@ -216,12 +226,12 @@
        
      </div >  
      <div class="modal-body" >
-     <!---- 모달 내용---->  
+     <!---- 모달 내용---->   
      
           <div class="popup-content">
             <div class="user-info">
               <div class="profile"><img id='empimg' /></div>
-              <div class="name" id="empdept"></div>
+              <div class="dept" id="empdept"></div>
               <div class="name"> 
                <span id="empname"></span>
                <!-- <span id="empgrade"></span> -->
@@ -294,6 +304,7 @@
     <script src="./js/bootstrap.min.js"></script>
     <script src="./js/jasny-bootstrap.min.js"></script>
     <script src="./js/flatpickr.js"></script>
+    <script src="https://use.fontawesome.com/492f5222e8.js"></script>
     <script type="text/javascript">
     	
 		var currDate = new Date();
@@ -312,9 +323,6 @@
 		}
 
 		draw();		
-		nfc();
-
-
 
 		function show(img, id,name,dept,am,amdetail,pm,pmdetail,workdate,tel,mail){
 			
@@ -481,10 +489,14 @@
 			$('#nextbtn').click();
 		}
 		
+
 		function nfc(){
-		    window.inc.nfc(${myinfo.empid});
-		}	
-		
+		      window.inc.nfc("${myinfo.empid}");
+		  } 
+		  
+		  nfc();
+		  
+		  
 	</script>
     
   </body>

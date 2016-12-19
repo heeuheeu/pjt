@@ -26,6 +26,7 @@ font-family: 'Noto Sans KR', sans-serif;
 .date .date-text{display: inline-block; vertical-align: middle; font-size: 1.8em; color: #3e3f44;  margin:0 10px; text-decoration: none;}
 
 #dash-carousel { width: 100%; height: 86%} 
+
 #dash-carousel .carousel-control { background: transparent;}
  
 /*내용*/   
@@ -40,15 +41,19 @@ section#card-item{padding:10px 10px; overflow: auto; height: 100%; margin-left: 
 #card-item article .item-lay.status5{background: rgba(255,60,38,0.3);} /* #c1175a, 빨강 */
 #card-item article .item-lay.status6{background: #d34900;} /* #d34900, 주황 */  
    
-#card-item article .profile{height: 55%; text-align: center; }
-#card-item article .profile img{ height:100%; border-radius: 50%; border: solid 1px #ddd; margin-top: 8px; margin-bottom: 5px;}   
-#card-item article .name{height:13%; text-align: center; font-size: 1.5em; color: #222222; letter-spacing: 2px; padding-top: 10px; margin-bottom: 5px; border-bottom:solid 1px #cd4c2c;  }
+#card-item article .profile{ height: 65%; text-align: center; } 
+#card-item article .profile img{ width:210px; height: 210px; border-radius: 50%; border: solid 1px #ddd; margin-top: 13px; margin-bottom: 5px;}   
+#card-item article .name{height: 10%; text-align: center; font-size: 1.2em; font-weight: light; color: #333333; letter-spacing: 2px; margin-top: 5px; }
 
-#card-item article .ampm{height: 44%; display: table; width: 100%;}  
-#card-item article .am{display: table-cell; width: 48%; border-right: solid 1px #ddd; padding-right: 8px; text-align: center;}
-#card-item article .am span{display: inline-block; color: 0b4d6d; font-weight: light; border-radius: 3px; font-size: 1.2em; padding: 0px 15px; margin-bottom: 5px;} 
-  
-#card-item article .pm{display: table-cell; width: 48%;  padding-left: 8px; text-align: center;}   
-#card-item article .pm span{display: inline-block; color: #c94c30; font-weight: light; border-radius: 3px; font-size: 1.2em; padding: 0px 15px; margin-bottom: 5px;} 
+#card-item article .ampm{height: 30%; display: table; width: 100%; }  
+#card-item article .am{display: table-cell; width: 48%;  text-align: center;}
+#card-item article .am span{display: inline-block; color: #0b4d6d; font-weight: light; border-radius: 3px; font-size: 1.2em; padding: 0px 15px; margin-bottom: 8px; } 
+#card-item article .pm{display: table-cell; width: 48%;  text-align: center; }   
+#card-item article .pm span{display: inline-block; color: #c94c30; font-weight: light; border-radius: 3px; font-size: 1.2em; padding: 0px 15px; margin-bottom: 8px;} 
  
-#card-item article .loc-text { display: block; font-size: 3.6em; color:#343538; line-height: 100%; font-weight:bold; letter-spacing: -1px; }  
+#card-item article .loc-text { display: block; font-size: 3.6em; color:#343538; line-height: 100%; font-weight:bold; letter-spacing: -1px; } 
+ 
+.dashoth-carousel #card-item article .loc-text {font-size: 2.8em}
+.dashoth-carousel #card-item article .am{padding-right: 5px; }   
+.dashoth-carousel #card-item article .pm{padding-left: 5px; }   
+
