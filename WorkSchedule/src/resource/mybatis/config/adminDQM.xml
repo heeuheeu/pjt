@@ -13,7 +13,7 @@
 	     SELECT   	DISTINCT DIVNAME, DIVID, A.CHECKYN
 	     FROM    	DEPARTMENT
 	     FULL JOIN  DIVISION A USING (DIVID)
-	     ORDER BY  	DIVNAME
+	     ORDER BY  	DIVID
 	 	</select>
 	
 	
@@ -21,13 +21,13 @@
 	     SELECT   	DEPTNAME, DEPTID, B.CHECKYN, DIVNAME 
 	     FROM    	DEPARTMENT B
 	     JOIN    	DIVISION A USING (DIVID)
-	     ORDER BY  	DEPTNAME
+	     ORDER BY  	DEPTID
 	   </select>
 	   
 	   	<select id="admSelectLoc" resultType="model.domain.vo.LocationVO">
 		 SELECT   	DISTINCT LOCNAME, LOCID, CHECKYN 
 		 FROM    	LOCATION
-		 ORDER BY 	LOCNAME
+		 ORDER BY 	LOCID
 		</select>
 
 	    <select id="admSelectDivY" resultType="model.domain.vo.DivisionCheckYnVO">
@@ -35,7 +35,7 @@
 	     FROM    	DEPARTMENT
 	     FULL JOIN  DIVISION A USING (DIVID)
 	     WHERE		A.CHECKYN = 'Y'
-	     ORDER BY  	DIVNAME
+	     ORDER BY  	DIVID
 	 	</select>
 	
 

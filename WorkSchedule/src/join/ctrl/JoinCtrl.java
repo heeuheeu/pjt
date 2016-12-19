@@ -75,7 +75,9 @@ public class JoinCtrl {
 		work.setEmpid(emp.getEmpid());
 		
 		System.out.println(work.getEmpid()+"////////////////////////////////");
+		service.insertDefWorkRow(work);
 		
+		/*
 		for(int i=-10; i<=30; i++){
 			
 			Calendar cal = new GregorianCalendar();
@@ -104,7 +106,7 @@ public class JoinCtrl {
 			//System.out.println(i+"번째 "+workdate);
 			
 			service.insertDefWorkRow(work);
-		}
+		}*/
 
 		return "redirect:/main.inc";
 	}

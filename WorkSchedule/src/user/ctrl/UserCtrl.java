@@ -62,12 +62,12 @@ public class UserCtrl {
 	private UserServiceImpl service;
 
 	
-	
 	///////////////////////////////////////////////////////////////////////////////////////// main
 	
 	@RequestMapping("/main.inc")
 	public String main() {
 		System.out.println("MainCrl main");
+		
 		return "intro";
 	}
 	
@@ -400,7 +400,7 @@ public class UserCtrl {
 
 		MultipartFile f = member.getFile();
 
-		// �닔�젙�궗�빆 �엳�쓣 �븣留� filename set
+		// filename set
 		if ( f.getOriginalFilename() != null && f.getOriginalFilename() != "") {
 			member.setEmpimg(f.getOriginalFilename());
 			String path = request.getSession().getServletContext().getRealPath("/resources");
@@ -502,9 +502,6 @@ public class UserCtrl {
 		String currdate = sdf1.format(cal.getTime());
 		mylist.setCurrdate(currdate);
 
-		List<EmployeeWorkDeptVO> favlist = new ArrayList<EmployeeWorkDeptVO>();
-		favlist = service.selectDashEmp(mylist);
-
 		// work table validation
 		int work = service.selectwork(mylist);
 
@@ -521,6 +518,9 @@ public class UserCtrl {
 		mylist.setCurrdate(currdate);
 		System.out.println(mylist.toString());
 
+		List<EmployeeWorkDeptVO> favlist = new ArrayList<EmployeeWorkDeptVO>();
+		favlist = service.selectDashEmp(mylist);
+
 	
 		Date date = new Date();
 		
@@ -530,7 +530,7 @@ public class UserCtrl {
 		
 		
 		
-		//////////////////////// Work Table �깮�꽦 �떆�옉
+		/*//////////////////////// Work Table �깮�꽦 �떆�옉
 		
 		List<String> emplist = new ArrayList<String>();
 		emplist = service.selectEmpList();
@@ -568,7 +568,7 @@ public class UserCtrl {
 		}
 		
 		//////////////////////// Work Table �깮�꽦 �걹
-		
+*/		
 		return "dashboard";
 	}
 

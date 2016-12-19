@@ -83,7 +83,7 @@
 				  	<table class="mytable">
 				      <tr>
 				       <th><a class="prev-text" onclick="prevDayclick()"> < </a> <input type="hidden" id="prevbtn" onclick="prevDay()"></th>
-				       <th><a class="date-text" href="calMove.inc" id="currDateView"></a> </th>
+				       <th style="width: 60%"><a class="date-text" href="calMove.inc" id="currDateView"></a> </th>
 				       <th><a class="next-text" onclick="nextDayclick()"> > </a> <input type="hidden" id="nextbtn" onclick="nextDay()"> </th>
 				      </tr>
 				     </table>
@@ -258,6 +258,7 @@
 			        <c:forEach items="${locList}" var="locList"> 
 			         <option value="${locList.locname}">${locList.locname}</option>
 			        </c:forEach>
+			        <option value="휴무">휴무</option>
 		       	</select>
                 </center>
                 <center>
@@ -271,6 +272,7 @@
 			        <c:forEach items="${locList}" var="locList"> 
 			         <option value="${locList.locname}">${locList.locname}</option>
 			        </c:forEach>
+			        <option value="휴무">휴무</option>
 		       	</select>   
                 </center>
                 <center><input type="text" name="pmlocdetail" id="pmlocdetail" class="pmlocdetail" style="background-color: transparent"></center>

@@ -21,8 +21,8 @@
         <form id="modify" role="form" enctype="multipart/form-data">
         	
         	<div class="fileinput fileinput-new" data-provides="fileinput">
-			  <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 200px; height: 150px;">
-			  	<img src="resources/${myinfo.empimg}" id="srcimg">
+			  <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 200px; height: 170px;">
+			  	<img src="resources/${myinfo.empimg}" id="srcimg" style="width: 200px; height: 150px;">
 			  </div>
 			  <div>
 			    <span class="btn btn-default btn-file">
@@ -68,7 +68,7 @@
 	          
 			<select class="form-control" name="emploc">			
 				<c:forEach items="${locList}" var="locList">	
-					<option <c:if test="${locList.locname eq member.deptname}"> selected</c:if>> ${locList.locname}	</option>    
+					<option <c:if test="${locList.locname eq mydeptdiv.emploc}"> selected</c:if>> ${locList.locname}	</option>    
 		      	</c:forEach>
 			</select><br>   
 			                   

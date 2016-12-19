@@ -10,9 +10,9 @@
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
 		<property name="driverClass" value="oracle.jdbc.driver.OracleDriver" />
-		<property name="url" value="jdbc:oracle:thin:@127.0.0.1:1521:XE" />
-		<property name="username" value="hr" />
-		<property name="password" value="hr" />
+		<property name="url" value="jdbc:oracle:thin:@10.253.41.246:1536:DCDBDEV" />
+		<property name="username" value="dc_inf2_dev" />
+		<property name="password" value="dc_inf2_dev123" />
 	</bean>
 
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">

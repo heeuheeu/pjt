@@ -108,7 +108,8 @@
 		FROM 	EMPLOYEE A 		
 		JOIN 	DEPARTMENT B 	ON (A.DEPTID = B.DEPTID)
 		JOIN 	WORK C 			ON (A.EMPID	 = C.EMPID) 
-		WHERE 	A.DEPTID = #{deptid}					
+		WHERE 	A.DEPTID = #{deptid}	
+		AND		A.EMPID != 'hr'				
 		AND 	C.WORKDATE = #{currdate}
 	</select>		
 	 	 			

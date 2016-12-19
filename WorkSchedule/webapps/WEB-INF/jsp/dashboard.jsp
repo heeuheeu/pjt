@@ -76,9 +76,9 @@
 		  	var	empname = "${fav.empname}";
 		  	var	amloc = "${fav.amloc}";
 		  	var	pmloc = "${fav.pmloc}";
-		  	var amlocdetail = "${fav.amlocdetail}"
-		  	var pmlocdetail = "${fav.pmlocdetail}"
-		  	var empimg = "${fav.empimg}"
+		  	var amlocdetail = "${fav.amlocdetail}";
+		  	var pmlocdetail = "${fav.pmlocdetail}";
+		  	var empimg = "${fav.empimg}";
 		  	var obj = {empid : empid , empname : empname , amloc : amloc , pmloc : pmloc, amlocdetail : amlocdetail, pmlocdetail : pmlocdetail, empimg : empimg};
 		  	lists.push(obj);
 		  </c:forEach>

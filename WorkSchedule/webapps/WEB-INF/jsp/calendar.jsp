@@ -63,6 +63,7 @@
 	       <a class="navbar-brand" href="user.inc" style="color: white;">SSG워크플레이스</a>
 	 </div>
     </div>
+  
     
     <!-- Modal -->
 	<!-- Modal -->
@@ -161,6 +162,9 @@
 	<br>
 		<div id="dncalendar-container" data-toggle="modal" data-target="#myModal">
 		</div>
+		
+		
+		
 		<script type="text/javascript" src="./js/jquery-1.11.3.min.js"></script>
 		<script type="text/javascript" src="./js/dncalendar.js"></script>
 		<script src="./js/flatpickr.js"></script>

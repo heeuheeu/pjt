@@ -69,7 +69,8 @@
       				    WHERE DEPTNAME = #{deptname} 
       				    AND DIVID = (SELECT DIVID FROM DIVISION WHERE DIVNAME = #{divname} AND CHECKYN = 'Y')) )
      </insert>
-	 
+     
+	 <!-- 
 	 <insert id="insertdefaultwork" parameterType="model.domain.vo.WorkVO" >
 	   	INSERT INTO WORK
 		VALUES 	  ( TO_DATE(#{workdate},'YYYY-MM-DD') ,
@@ -79,8 +80,24 @@
 					( SELECT EMPLOC FROM EMPLOYEE WHERE EMPID = #{empid} ), 
 					NULL    )   
 	 </insert>
-	 
+	  -->
 	 	 
+	 <insert id="insertdefaultwork" parameterType="model.domain.vo.WorkVO" >
+	 <![CDATA[ 
+	   	INSERT INTO WORK
+  	 	SELECT 	trunc(sysdate-mday) workdate, 
+  	 			#{empid} empid, 
+  	 			(select emploc from employee where empid=#{empid}) amloc, 
+  	 		 	'' amlocdetail, 
+  	 			(select emploc from employee where empid=#{empid}) pmloc, 
+  	 		 	'' pmlocdetail
+  	 	FROM (
+      			select level-46 mday from dual connect by level <= 91
+  		     ) 
+  	 ]]>
+	 </insert>
+	 
+	 
 	 
 	 <!-- ////////////////////// searchview //////////////////////// -->
 	 <select id="selectsearchview" parameterType="model.domain.vo.EmployeeDeptDivVO" resultType="model.domain.vo.EmployeeDeptDivVO">
@@ -157,7 +174,7 @@
 	  
 	  <update id="updateWork" parameterType="model.domain.vo.EmployeeDeptDivVO">
 	  UPDATE 	WORK 
-	  SET 		AMPLOC = (select emploc from employee where empid =#{empid}), 
+	  SET 		AMLOC = (select emploc from employee where empid =#{empid}), 
 	   			PMLOC = (select emploc from employee where empid =#{empid})
 	  WHERE 	WORKDATE >= (select to_char(sysdate, 'yyyy-MM-DD') from dual) AND EMPID=#{empid}
 	  </update>

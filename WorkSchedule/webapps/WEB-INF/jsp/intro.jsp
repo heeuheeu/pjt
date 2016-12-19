@@ -36,7 +36,7 @@
         <br><br>
              
         
-        <input type="submit" value="LOGIN" id="login" style="margin-bottom: 10px">
+        <input type="submit" value="LOGIN" onClick="javascript:saveid(document.new_user_session);" id="login" style="margin-bottom: 10px">
         </form> 
           
         
@@ -44,7 +44,7 @@
 	   	  <input type="submit" value="SIGN UP" style="background-color: #3e3f44">
 	      </form>
    </div>
-  </section>
+  </section> 
   
   	<script src="./js/jquery-1.10.2.min.js"></script>
     <script src="./js/bootstrap.min.js"></script>

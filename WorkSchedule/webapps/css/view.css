@@ -24,7 +24,7 @@ body{background: #ebebeb; position: relative;}
 .view-container .date .next-text{ font-size: 1.9em; color: #d3492c; text-decoration: none; }
 .view-container .date .next-text:hover {cursor:pointer; }
 .view-container .date .next-text:active {color: #3e3f44; }
-.view-container .date .date-text{display: inline-block; vertical-align: middle; font-size: 1.3em; color: #3e3f44;  margin:0 7px; text-decoration: none;}
+.view-container .date .date-text{display: inline-block; vertical-align: middle; font-size: 1.0em; color: #3e3f44; text-decoration: none;}
 
 .view-btn{text-align: right;padding:0 15px 10px 15px;} 
 .view-btn a{display: inline-block; margin-right: 5px;vertical-align: middle;}
@@ -57,14 +57,10 @@ box-shadow: 2px 2px 10px 0px rgba(0,0,0,0.2);}
  
   .mytable {
    border-collapse: collapse;
-   border-top: 1px solid black;
-   border-left: 1px solid black;
    width: 60%;
    margin: auto;
   }  
   .mytable th, .mytable td {
-   border-bottom: 1px solid black;
-   border-right: 1px solid black;
    text-align:center;
   }
 
