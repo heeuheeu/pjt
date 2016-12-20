@@ -35,7 +35,7 @@ import model.domain.vo.LocationVO;
 import model.domain.vo.NfcVO;
 
 @Controller
-@SessionAttributes({ "login", "myinfo", "locList" })
+@SessionAttributes({ "login", "myinfo", "locList", "lists", "myfavid", "myfav", "mydeptdev" })
 
 /*
  * model 종류 정리
@@ -154,7 +154,7 @@ public class UserCtrl {
 		model.addAttribute("myfav", favlist); ////////////////////////////////////////// * List<EmployeeFavWorkDeptVO> *
 		model.addAttribute("locList", locList); //////////////////////////////////////// * LocationVO *
 			
-		return "view";	
+		return "redirect:/view.jsp";	
 		//return "redirect:/favorite.inc";
 	}
 
@@ -222,7 +222,7 @@ public class UserCtrl {
 
 		model.addAttribute("lists", list); ////////////////////////////////// *List<EmployeeDeptDivVO>*
 		model.addAttribute("myfavid", favid); /////////////////////////////// *List<EmpIdVO>*
-		return "searchView";
+		return "redirect:/searchView.jsp";
 	}
 	
 	@RequestMapping(value = "/addfavorite.inc")
