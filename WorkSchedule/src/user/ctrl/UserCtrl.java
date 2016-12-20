@@ -79,7 +79,7 @@ public class UserCtrl {
 		EmployeeVO user = service.loginEmp(employee);
 		String idchk = "noneId";
 	
-		if (user == null) { // login info 불일치시
+		if (user == null) { // login info 
 			model.addAttribute("chk", idchk);
 			return "intro";
 		}
@@ -266,8 +266,8 @@ public class UserCtrl {
 			System.out.println(list.get(i));
 		}
 		
-		model.addAttribute("myfavid", favid); // List<EmpIdVO> 검색결과
-		model.addAttribute("lists", list); // List<EmployeeDeptDivVO> 검색결과
+		model.addAttribute("myfavid", favid); // List<EmpIdVO> 
+		model.addAttribute("lists", list); // List<EmployeeDeptDivVO> 
 
 		return "searchView";
 	}
@@ -324,7 +324,7 @@ public class UserCtrl {
 	@RequestMapping("/calendar.inc")
 	@ResponseBody
 	public List<CalendarNoteVO> main(Model model, HttpSession session) {
-		System.out.println("calendar에 VO 받아온 후 호출");
+		System.out.println("calendar");
 		
 		
 		EmployeeVO user = (EmployeeVO) session.getAttribute("login");
@@ -340,7 +340,7 @@ public class UserCtrl {
 				// // default lo와 ampm loc가 같을 때는 list에 저장 안함
 			} else {
 				String date = work.get(i).getWorkdate().substring(0, 10);
-				String note = "AM : " + work.get(i).getAmloc() + " / PM : " + work.get(i).getPmloc();
+				String note = work.get(i).getAmloc()+ "/" +work.get(i).getPmloc();
 
 				/*System.out.println("default : " + work.get(i).getEmploc() + " / am : " + work.get(i).getAmloc()
 						+ " / pm : " + work.get(i).getPmloc());*/
@@ -372,7 +372,7 @@ public class UserCtrl {
 		List<DeptDivisionVO> deptlist = service.selecteddept(mylist);
 
 		/*List<String> deptlist = new ArrayList<String>();
-		deptlist = service.selectboxDept(divname);*//////////////////////////////////////////////////// 고치기!!!
+		deptlist = service.selectboxDept(divname);*/////////////////////////////////////////////////// 고치기 !!!
 
 		model.addAttribute("mydeptdiv", mylist); //////////////////////////////////////////// * EmployeeDeptDivVO *
 		model.addAttribute("divlist", divList); ///////////////////////////////////////////// * DeptDivisionVO *
@@ -419,7 +419,7 @@ public class UserCtrl {
 					member.getEmpphone(), member.getEmpmail(),member.getEmploc(), member.getDeptid());
 		user = service.loginEmp(user);
 
-		model.addAttribute("login", user); // login 정보 다시 바꾸기
+		model.addAttribute("login", user); // login 
 		
 		return "redirect:/user.inc";
 	}
@@ -530,7 +530,7 @@ public class UserCtrl {
 		
 		
 		
-		/*//////////////////////// Work Table �깮�꽦 �떆�옉
+		//////////////////////// Work Table 
 		
 		List<String> emplist = new ArrayList<String>();
 		emplist = service.selectEmpList();
@@ -562,13 +562,19 @@ public class UserCtrl {
 			int cnt = service.selectwork(mylist);
 			
 			if(cnt == 0){
-				service.insertWork(mylist);
+				try {
+					Thread.sleep(200);
+					service.insertWork(mylist);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 			
 		}
 		
-		//////////////////////// Work Table �깮�꽦 �걹
-*/		
+		//////////////////////// Work Table 
+		
 		return "dashboard";
 	}
 
@@ -577,7 +583,7 @@ public class UserCtrl {
 	
 	@RequestMapping(value = "/calDayDash.inc")
 	public String favoritedash2(@RequestParam(value = "currDate") String currdate, HttpSession session, Model model) {
-		System.out.println("=================================페이지 변경====================================");
+		System.out.println("=============================== page change ===================================");
 		System.out.println("UserCtrl favoritedash2 calDayDash.inc");
 		System.out.println(currdate);
 
@@ -619,7 +625,7 @@ public class UserCtrl {
 	@ResponseBody
 	public String nfc(@RequestParam(value = "loc") String loc, @RequestParam(value = "empid") String empid) {
 		System.out.println("UserCtrl nfc");
-		System.out.println("NFC �깭洹� !!!!");
+		System.out.println("NFC tag !!!!");
 		System.out.println("loc : " + loc + "empid : " + empid);
 
 		NfcVO nfc = new NfcVO();
@@ -643,7 +649,7 @@ public class UserCtrl {
 
 	@RequestMapping(value = "/delete.inc")
 	 public String delete(EmployeeDeptDivVO member) {
-	  System.out.println("===================================임직원 삭제=====================================");
+	  System.out.println("=================================== delete emp ====================================");
 	  System.out.println("UserCtrl delete.inc");
 	  
 	  service.deletework(member);

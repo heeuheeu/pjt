@@ -9,6 +9,9 @@
     <link href="css/update.css" rel="stylesheet" type="text/css">
     <link href="./css/bootstrap.min.css" rel="stylesheet">
     
+    <script  src="https://use.fontawesome.com/b7a0d3c992.js"></script>
+    
+    
     <style type="text/css">
 		#empimg { display:none; } 
 	</style>
@@ -19,7 +22,8 @@
         
       <div class="sign-form">
         <form id="modify" role="form" enctype="multipart/form-data">
-        	
+        	<div style="font-size: 20px;"><i class="fa fa-cog fa-spin fa-3x fa-fw" style="color:#d3492c; font-size: 20px" aria-hidden="true"></i>
+        	회원정보 수정</div>
         	<div class="fileinput fileinput-new" data-provides="fileinput">
 			  <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 200px; height: 170px;">
 			  	<img src="resources/${myinfo.empimg}" id="srcimg" style="width: 200px; height: 150px;">
@@ -44,7 +48,7 @@
         	<input type="file" placeholder="사진" name="file" id="empimg" value="${mydeptdiv.empimg}"/> --%>
         		
 	        <input type="text" placeholder="EMPID" name="empid" id="empid" value="${mydeptdiv.empid}" readonly/><br>
-	        <input type="password" placeholder="EMPPWD" name="emppwd" value="${mydeptdiv.emppwd}"/><br>
+	        <input type="password" placeholder="EMPPWD" name="emppwd" value="${mydeptdiv.emppwd}" maxlength='10'/><br>
 	        <input type="text" placeholder="EMPNAME" name="empname" value="${mydeptdiv.empname}" readonly/><br>
 
 	  
@@ -72,8 +76,8 @@
 		      	</c:forEach>
 			</select><br>   
 			                   
-	        <button type="button" value="UPDATE" onclick="updateEmp()" style="display: block; width: 100%; background:#d3492c; border: 0; color: #fff;line-height: 50px;height: 50px;margin-bottom: 10px;"> UPDATE </button>
-	        <button type="button" value="DELETE" onclick="deleteEmp()" style="display: block; width: 100%; background:#3e3f44; border: 0; color: #fff;line-height: 50px;height: 50px;margin-bottom: 10px;"> DELETE </button>
+	        <button type="button" value="UPDATE" onclick="updateEmp()" style="display: block; width: 100%; background:#d3492c; border: 0; color: #fff;line-height: 50px;height: 50px;margin-bottom: 10px;"> 정보 수정 </button>
+	        <button type="button" value="DELETE" onclick="deleteEmp()" style="display: block; width: 100%; background:#3e3f44; border: 0; color: #fff;line-height: 50px;height: 50px;margin-bottom: 10px;"> 회원 탈퇴 </button>
 		</form>        
       </div>
       

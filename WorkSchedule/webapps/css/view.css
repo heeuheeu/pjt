@@ -4,16 +4,18 @@ body{background: #ebebeb; position: relative;}
 .navbar-toggle {	
 	margin-left: 15px;
 }
-.actionbar {height: 50px;}
-.actionbar .workplace {float: left; width: 50%;}
-.actionbar .workplace a {color: white;}
-.actionbar .refresh { float: right; margin: 7px 10px;}
+.actionbar {height: 50px; width: 100%}  
+.actionbar .workplace {float: left; width: 70%; position: relative;}   
+.actionbar .workplace a.navbar-brand {color: white;  width: 100%; margin-left: auto; margin-right: auto;}
+.actionbar .refresh { float: right; margin: 7px 8px;}
 .actionbar .refresh a img {
 	width: 36px;
 	right: 36px;
 	float: right; 
 
 }
+
+
 
 .view-container #top-bar{background: #fff;}
 .view-container .date{padding: 20px 0;  text-align: center;}
@@ -51,7 +53,7 @@ box-shadow: 2px 2px 10px 0px rgba(0,0,0,0.2);}
 
 
 .add-btn{position: absolute; bottom:20px; right: 20px;}
-.add-btn img{width: 60px;}
+.add-btn img{width: 60px;} 
 
 
  
@@ -65,6 +67,7 @@ box-shadow: 2px 2px 10px 0px rgba(0,0,0,0.2);}
   }
 
 
-
+.dncalendar-note-list .date .am span{background: #3e3f44; color: #fff; margin-right: 5px; border-radius: 3px; font-size: 0.9em; padding: 3px 10px;}
+.dncalendar-note-list .date .pm span{background: #c94c30; color: #fff; margin-right: 5px; border-radius: 3px; font-size: 0.9em;  padding: 3px 10px;}
 
 

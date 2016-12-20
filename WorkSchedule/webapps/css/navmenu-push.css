@@ -11,6 +11,7 @@ body {
   margin-left: 15px;
 }
 
+
 @media (min-width: 0) {
   .navbar-toggle {
     display: block; /* force showing the toggle */

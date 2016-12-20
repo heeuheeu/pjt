@@ -10,6 +10,7 @@
 		
 		<link href="./css/dncalendar-skin.css" rel="stylesheet" type="text/css" >
 		<link href="./css/popup.css" rel="stylesheet" type="text/css">
+		<link href="./css/view.css" rel="stylesheet">
 		
 			      <!-- Bootstrap core CSS -->
 	    <link href="./css/bootstrap.css" rel="stylesheet">
@@ -19,6 +20,8 @@
 	    <!-- Custom styles for this template -->
 	    <link href="./css/navmenu-push.css" rel="stylesheet">
 	    <link href="./css/flatpickr.css" rel="stylesheet">
+	    <link href="./css/font-awesome.css" rel="stylesheet" type="text/css" media="screen">
+	
 	    
 	     <style>
 
@@ -42,11 +45,11 @@
       </div>
       
       <ul class="nav navmenu-nav btns">
-      <div class="btns">
-        <li><a href="calMove.inc" class="btn1" style="color: white;"><img src="img/side-icon1.png"/>나의일정</a></li>
-        <li><a href="updateview.inc" class="btn1" style="color: white;"><img src="img/side-icon1.png"/>내 정보수정</a></li>
-        <li><a href="logout.inc" class="btn2" style="color: white;"><img src="img/side-icon2.png"/>로그아웃</a></li>
-      </div>
+      	<div class="btns">
+		        <li><a href="calMove.inc" class="btn1" style="color: white;"><i class="fa fa-user-circle" style="font-size: 25px;  margin-right:15px"></i><span style="font-size: 1.1em">나의일정</span></a></li>
+		        <li><a href="updateview.inc" class="btn1" style="color: white"><i class="fa fa-calendar-check-o" aria-hidden="true" style="font-size: 25px;margin-right:15px"></i><span style="font-size: 1.1em">정보수정</span></a></li>
+		        <li><a href="logout.inc" class="btn2" style="color: white"><i class="fa fa-sign-out" aria-hidden="true" style="font-size: 25px; margin-right:15px"></i><span style="font-size: 1.1em">로그아웃</span></a></li>
+		 </div>
       </ul>
 
       </div>
@@ -59,8 +62,9 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-	 <div id="workplace">
-	       <a class="navbar-brand" href="user.inc" style="color: white;">SSG워크플레이스</a>
+	 <div class="actionbar">
+	       <div class="workplace"><a class="navbar-brand" href="user.inc" style="color: white;">SSG워크플레이스</a></div>
+	       <div class="refresh"><a href="#" onclick="refresh()"><i class="fa fa-refresh fa-spin fa-3x fa-fw" style="color:gray; font-size: 25px; margin-top:5px"></i></a></div>
 	 </div>
     </div>
   
@@ -76,11 +80,11 @@
 					<div class="modal-content">
 						<div class="modal-header">
 								<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-								<img src="img/close-icon.png"/></button>
+								<i class="fa fa-times" aria-hidden="true"></i></button>
 								
 								<button type="button" class="close" aria-hidden="true" 
 									id="editbtn" style="float: left;" onclick="update()">
-								<img src="img/edit-icon.png"/></button>
+								<i class="fa fa-check" aria-hidden="true"></i></button>
 								
 						</div >		
 						<div class="modal-body" >
@@ -118,6 +122,8 @@
 									<c:forEach items="${locList}" var="locList"> 
 							         <option value="${locList.locname}">${locList.locname}</option>
 							        </c:forEach>
+							        <option value="교육">교육</option>
+			        				<option value="DAY-OFF">DAY-OFF</option>
 								</select>
 					            
 					            </center>
@@ -135,6 +141,8 @@
 									<c:forEach items="${locList}" var="locList"> 
 							         <option value="${locList.locname}">${locList.locname}</option>
 							        </c:forEach>
+							        <option value="교육">교육</option>
+			        				<option value="DAY-OFF">DAY-OFF</option>
 								</select>
 					            
 					            </center>
@@ -160,7 +168,8 @@
 	 <!-- 1207수정:모달팝업 끝-->
 	
 	<br>
-		<div id="dncalendar-container" data-toggle="modal" data-target="#myModal">
+		<div id="dncalendar-container" data-toggle="modal" >
+		
 		</div>
 		
 		
@@ -168,7 +177,9 @@
 		<script type="text/javascript" src="./js/jquery-1.11.3.min.js"></script>
 		<script type="text/javascript" src="./js/dncalendar.js"></script>
 		<script src="./js/flatpickr.js"></script>
+		<script src="https://use.fontawesome.com/492f5222e8.js"></script>
 		<script type="text/javascript">
+		
 		$(document).ready(function() {
 			$.ajax({
     			url : "calendar.inc",

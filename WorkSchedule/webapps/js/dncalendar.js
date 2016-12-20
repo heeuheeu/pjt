@@ -625,11 +625,14 @@
                 var notesLength = notes.length;
 
                 if (notesLength > 0) {
-                      notesGroup = $("<ul class='dncalendar-note-list'></ul>");
+                      notesGroup = $("<ul class='dncalendar-note-list' disabled='true'></ul>");
 
                       for (var i = 0; i < notesLength; i++) {
                             var date = notes[i].date;
                             var noteList = notes[i].notes;
+                            
+                            var noteampm = noteList.split('/');
+                            
                             var noteListLength = noteList.length;
 
                             var list = date+"일의 주요 일정";
@@ -638,16 +641,14 @@
 
                             if (noteListLength > 0) {
                                   /*list += " 일 ";*/
-
-                                  for (var j = 0; j < noteListLength; j++) {
-                                        list += noteList[j];
-                                        if (noteListLength <= j) {
-                                              list += ", ";
-                                        }
-                                  }
+                            	
+                            	list += "<div><div class='am' style='display:inline-block;margin-top: 0.5em;width: 45%'><span id='amnote'>AM </span>"
+                            	list += noteampm[0]+"</div>";
+                            	list += "<div class='pm'style='display:inline-block;margin-top: 0.5em;width: 50%'><span id='pmnote'>PM </span>"
+                            	list += noteampm[1]+"</div></div>";
                             }
                             
-                            list += "</li><br>";
+                            list += "</li><hr style='margin: 0.75em auto;'>";
 
                             notesGroup.append(list);
                       }
@@ -727,6 +728,10 @@
 				settings.dayClick.call(this, new Date(selectedYear, selectedMonth - 1, selectedDate), self);
 
                   });
+		    
+		    	$("#calendarClick").on("click",function() {
+		    		$("#myModal").modal('show');
+		    	});
 
 		    $('body').on('click', '#dncalendar-prev-month', function() {
 		    	prevMonth();
@@ -735,6 +740,9 @@
 		    $('body').on('click', '#dncalendar-next-month', function() {
 		    	nextMonth();
 		    });
+		    
+		    $("")
+		    
 		}
 
 		return {

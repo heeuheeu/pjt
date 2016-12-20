@@ -46,13 +46,11 @@
           <div class="name">${myinfo.empname} <%-- ${myinfo.empgrade} --%></div>
       </div>
       
-      <!-- <i class="fa fa-pencil fa-lg" aria-hidden="true"> -->
-      
       <ul class="nav navmenu-nav btns">
       <div class="btns">
-        <li><a href="calMove.inc" class="btn1" style="color: white;"><img src="img/side-icon1.png"/><span>나의 일정</span></a></li>
-        <li><a href="updateview.inc" class="btn1" style="color: white;"><img src="img/side-icon1.png"/><span>내 정보수정</span></a></li>
-        <li><a href="logout.inc" class="btn2" style="color: white;"><img src="img/side-icon2.png"/><span>로그아웃</span></a></li>
+        <li><a href="calMove.inc" class="btn1" style="color: white;"><i class="fa fa-user-circle" style="font-size: 25px;  margin-right:15px"></i><span style="font-size: 1.1em">나의일정</span></a></li>
+        <li><a href="updateview.inc" class="btn1" style="color: white"><i class="fa fa-calendar-check-o" aria-hidden="true" style="font-size: 25px;margin-right:15px"></i><span style="font-size: 1.1em">정보수정</span></a></li>
+        <li><a href="logout.inc" class="btn2" style="color: white"><i class="fa fa-sign-out" aria-hidden="true" style="font-size: 25px; margin-right:15px"></i><span style="font-size: 1.1em">로그아웃</span></a></li>
       </div>
       </ul>
 
@@ -68,7 +66,7 @@
 	 
 	 <div class="actionbar">
 	       <div class="workplace"><a class="navbar-brand" href="user.inc">SSG워크플레이스</a></div>
-	       <div class="refresh"><a href="#" onclick="refresh()"><img src="img/refresh.png" ></a></div>
+	       <div class="refresh"><a href="#" onclick="refresh()"><i class="fa fa-refresh fa-spin fa-3x fa-fw" style="color:gray; font-size: 25px; margin-top:5px"></i></a></div>
 	 </div>
     </div>
 
@@ -218,11 +216,11 @@
     <div class="modal-content">
      <div class="modal-header">
        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-       <img src="img/close-icon.png"/></button>
+       <i class="fa fa-times" aria-hidden="true"></i></button>
        
        <button type="button" class="close" aria-hidden="true" 
         id="editbtn" style="float: left;" onclick="update()">
-       <img src="img/edit-icon.png"/></button>
+      <i class="fa fa-check" aria-hidden="true"></i></button>
        
      </div >  
      <div class="modal-body" >
@@ -258,7 +256,8 @@
 			        <c:forEach items="${locList}" var="locList"> 
 			         <option value="${locList.locname}">${locList.locname}</option>
 			        </c:forEach>
-			        <option value="휴무">휴무</option>
+			        <option value="교육">교육</option>
+			        <option value="DAY-OFF">DAY-OFF</option>
 		       	</select>
                 </center>
                 <center>
@@ -272,7 +271,8 @@
 			        <c:forEach items="${locList}" var="locList"> 
 			         <option value="${locList.locname}">${locList.locname}</option>
 			        </c:forEach>
-			        <option value="휴무">휴무</option>
+			        <option value="교육">교육</option>
+			        <option value="DAY-OFF">DAY-OFF</option>
 		       	</select>   
                 </center>
                 <center><input type="text" name="pmlocdetail" id="pmlocdetail" class="pmlocdetail" style="background-color: transparent"></center>

@@ -16,20 +16,20 @@
 	</select>
 
     <select id="selectdiv" resultType="model.domain.vo.DeptDivisionVO">
-     SELECT   DISTINCT DIVNAME
-     FROM    DEPARTMENT
-     FULL JOIN   DIVISION A USING (DIVID)
- 	 WHERE  A.CHECKYN = 'Y'
-     ORDER BY  DIVNAME
+     SELECT   DISTINCT DIVNAME, DIVID
+     FROM     DEPARTMENT
+     FULL 	  JOIN   DIVISION A USING (DIVID)
+ 	 WHERE    A.CHECKYN = 'Y'
+     ORDER BY DIVID
  </select>
 
 
     <select id="selectdeptdiv" resultType="model.domain.vo.EmployeeDeptVO">
-     SELECT   DEPTNAME 
+     SELECT   DEPTNAME, DEPTID 
      FROM    DEPARTMENT
      JOIN    DIVISION A USING (DIVID)
      WHERE   A.CHECKYN = 'Y'
-     ORDER BY  DEPTNAME
+     ORDER BY  DEPTID
    </select>
 
 	<select id="selectboxdept" parameterType="String" resultType="String">
@@ -37,6 +37,13 @@
 	  	FROM 	DEPARTMENT
 	  	JOIN 	DIVISION USING (DIVID)
 	  	WHERE 	DIVNAME = #{divname}
+	 </select>
+	 
+	 <select id="selectloc" resultType="model.domain.vo.LocationVO">
+	     SELECT   	DISTINCT LOCNAME, LOCID 
+	     FROM    	LOCATION
+	  	 WHERE  	CHECKYN = 'Y' 
+	     ORDER BY 	LOCID
 	 </select>
 	 
 	<select id="loginemp" parameterType="model.domain.vo.EmployeeVO" resultType="model.domain.vo.EmployeeVO">
@@ -50,13 +57,6 @@
 	  	FROM 	EMPLOYEE 
 	  	JOIN 	DEPARTMENT USING (DEPTID) 
 	  	WHERE 	EMPID = #{empid}
-	 </select>
-	 
-	 <select id="selectloc" resultType="model.domain.vo.LocationVO">
-	     SELECT   	DISTINCT LOCNAME 
-	     FROM    	LOCATION
-	  	 WHERE  	CHECKYN = 'Y' 
-	     ORDER BY 	LOCNAME
 	 </select>
 	 
 	 <insert id="insertemp" parameterType="model.domain.vo.EmployeeDeptDivVO" >

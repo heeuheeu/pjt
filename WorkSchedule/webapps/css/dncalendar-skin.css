@@ -1,3 +1,15 @@
+.actionbar {height: 50px;}
+.actionbar .workplace {float: left; width: 50%;}
+.actionbar .workplace a {color: white;}
+.actionbar .refresh { float: right; margin: 7px 10px;}
+.actionbar .refresh a img {
+	width: 36px;
+	right: 36px;
+	float: right; 
+
+}
+
+
 .dncalendar-inactive {
 	opacity: 0.2;
 }
@@ -16,9 +28,10 @@
 
 .dncalendar-header .dncalendar-links {
 	height: 19px;
-    width: 100%;
+    width: 98.5%;
     position: absolute;
     top: 2px;
+    margin: 0 auto;
 }
 
 .dncalendar-header .dncalendar-links div {
@@ -106,7 +119,7 @@
 	font-size:10px;
 	bottom:1px;
 	text-align:center;
-	width:100%
+	width:95%
 }
 
 .dncalendar-body table td.holiday {
@@ -130,15 +143,15 @@
 }
 
 .dncalendar-body table td.today-date {
-	border: 1px solid #7EE699;
-    color: #7EE699 !important;
-    background: #E9FDEE;
+	border: 1px solid #96D4FD;
+    color: #96D4FD !important;
+    background: #96D4FD;
 }
 
 .dncalendar-body table td.calendarClick.today-date {
-	border: 1px solid #0DCC3F;
-    color: #0DCC3F !important;
-    background: #E9FDEE;
+	border: 1px solid #D6A085;
+    color: #D6A085 !important;
+    background: #F4EDDD;
 }
 
 .dncalendar-body table td.note,

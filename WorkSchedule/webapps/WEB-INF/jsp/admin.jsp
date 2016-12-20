@@ -7,6 +7,8 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link href="css/adminForm.css" rel="stylesheet" type="text/css">
     
+    <script  src="https://use.fontawesome.com/b7a0d3c992.js"></script>
+    
     <!-- Bootstrap -->
 	<link href="./css/bootstrap.min.css" rel="stylesheet">
     
@@ -15,6 +17,8 @@
     <section>
       <div class="form">
         <form role="form" name="divadd" class="form-inline" action="divAdd.inc"	method="post" onsubmit="return checkdivname()">
+        <div style="font-size: 20px;"><i class="fa fa-cog fa-spin fa-3x fa-fw" style="color:#d3492c; font-size: 20px" aria-hidden="true"></i>
+        	관리자 페이지</div>
         <table>
           <thead>
             <tr>

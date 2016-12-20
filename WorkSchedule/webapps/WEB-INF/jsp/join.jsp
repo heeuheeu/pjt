@@ -11,12 +11,20 @@
 	<link href="./css/custom2.css" rel="stylesheet">   
 	<link href="./css/jasny-bootstrap.min.css " rel="stylesheet">
  
+    <script  src="https://use.fontawesome.com/b7a0d3c992.js"></script>
+    
   </head>
   <body>
     <section>
         
       <div class="sign-form">
         <form action="join.inc" method="post" role="form" id="joinBtn" enctype="multipart/form-data">
+        	<div style="font-size: 15px;"><i class="fa fa-cog fa-spin fa-3x fa-fw" style="color:#d3492c; " aria-hidden="true"></i>
+        	<b style="font-size: 40px; color: #3e3f44; font-weight: bold; letter-spacing: -2px; ">회원가입</b></div>
+        	
+        	
+        	<hr>
+        	<br>
         	
         	<div class="fileinput fileinput-new" data-provides="fileinput">
 			  <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 200px; height: 150px;"></div>
@@ -27,7 +35,7 @@
 			</div>
         	
 	        <input type="text" placeholder="사번" name="empid" id="empid" required maxlength='10'/><br>
-	        <input type="password" placeholder="비밀번호" name="emppwd" required/><br>
+	        <input type="password" placeholder="비밀번호" name="emppwd" required maxlength='12'/><br>
 	        <input type="text" placeholder="이름" name="empname" required/><br>
 	        <input type="text" onkeydown="mphon(this);" onkeyup="mphon(this);" placeholder="핸드폰 번호" name="empphone" maxlength="13" required/><br>
 	        <input type="email" placeholder="이메일" name="empmail" required/><br>
