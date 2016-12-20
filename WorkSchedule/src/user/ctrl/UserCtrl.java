@@ -165,7 +165,7 @@ public class UserCtrl {
 	@RequestMapping(value = "/calDay.inc")
 	public String userlist2(@RequestParam(value = "currDate") String currdate,
 			@RequestParam(value = "view") String view, HttpSession session, Model model) {
-		System.out.println("===================================�럹�씠吏� 蹂�寃�=====================================");
+		System.out.println("================================== PAGE CHANGE =====================================");
 		System.out.println("UserCtrl userlist2 calDay.inc / " + currdate);
 
 		// mylist reload
@@ -196,8 +196,8 @@ public class UserCtrl {
 		List<EmployeeFavWorkDeptVO> favlist = new ArrayList<EmployeeFavWorkDeptVO>();
 		favlist = service.selectempfav(useremp);
 
-		model.addAttribute("myinfo", useremp); // EmployeeWorkDeptVO -�궇吏� 蹂�寃� work �떎�떆 �떖湲�
-		model.addAttribute("myfav", favlist); // List<EmployeeFavWorkDeptVO> - fav �궇吏� 蹂�寃� work �떎�떆 �떖湲�
+		model.addAttribute("myinfo", useremp); // EmployeeWorkDeptVO 
+		model.addAttribute("myfav", favlist); // List<EmployeeFavWorkDeptVO> - fav 
 		model.addAttribute("day", currdate); /////////////////////////////////////////////////////// * String currdate *
 		model.addAttribute("view", view); ////////////////////////////////////////////////////////// * String view * 
 		
