@@ -11,7 +11,7 @@
     <link href="css/dashboard.css" rel="stylesheet" type="text/css">
       <!-- Bootstrap -->
     <link href="./css/bootstrap.min.css" rel="stylesheet">
-    <script  src="https://use.fontawesome.com/b7a0d3c992.js"></script>
+   
   </head>
  <body OnLoad="restart()"> 
 
@@ -168,7 +168,7 @@
 				/////////////////////////////////////////////////////////////////////////////////////////////			 
 			  //background color
 			    if(i<10) {		    			  		
-			    	/* var color = "status1";
+			    	var color = "status1";
 			  		
 			  		//now: AM
 			  		if(AMPM == "AM"){
@@ -182,32 +182,32 @@
 				    		color = "status4"; //노랑
 				    	}else if(lists[i].amloc=='구로'){
 				    		color = "status5"; //빨강
-				    	}else if(lists[i].amloc=='DAY-OFF'){
+				    	}else if(lists[i].amloc=='DAY OFF'){
 				    		color = "status6"; //휴무
 				    	}
 				    
 			  		}
 			  		//now: PM
 			  		else{
-			  			if(lists[i].amloc=='본사 9F' || lists[i].amloc=='본사 10F' || lists[i].amloc=='본사 14F' || lists[i].amloc=='본사 13F'){
+			  			if(lists[i].pmloc=='본사 9F' || lists[i].pmloc=='본사 10F' || lists[i].pmloc=='본사 14F' || lists[i].pmloc=='본사 13F'){
 				    		color = "status1"; //베이지
-				    	}else if(lists[i].amloc=='메사' || lists[i].amloc=='성수' || lists[i].amloc=='스타벅스 본사' || lists[i].amloc=='SI 본사' || lists[i].amloc=='건설'){
+				    	}else if(lists[i].pmloc=='메사' || lists[i].pmloc=='성수' || lists[i].pmloc=='스타벅스 본사' || lists[i].pmloc=='SI 본사' || lists[i].pmloc=='건설'){
 				    		color = "status2"; //초록
-				    	}else if(lists[i].amloc=='교육'){
+				    	}else if(lists[i].pmloc=='교육'){
 				    		color = "status3"; //연두
-				    	}else if(lists[i].amloc=='기타'){
+				    	}else if(lists[i].pmloc=='기타'){
 				    		color = "status4"; //노랑
-				    	}else if(lists[i].amloc=='구로'){
+				    	}else if(lists[i].pmloc=='구로'){
 				    		color = "status5"; //빨강
-				    	}else if(lists[i].amloc=='DAY-OFF'){
+				    	}else if(lists[i].pmloc=='DAY OFF'){
 				    		color = "status6"; //휴무
 				    	}
 			  		}		
 			  		
-			    	txt +="<article><div class='item-lay "+color+ "'>"; */
-			    	txt +="<article><div class='item-lay status1'>";
+			    	txt +="<article><div class='item-lay "+color+ "'>"; 
+			    	//txt +="<article><div class='item-lay status1'>";
 			    	txt +="<div class='profile'><img src='resources/"+lists[i].empimg+"'></div>";
-			    	/* txt +="<div class='name'>"+lists[i].empname+"</div>"; */
+			    	
 			    	
 			    	
 			    	if(lists[i].amloc == "기타"){
@@ -240,7 +240,7 @@
     		 for(var i=10 ; i < lists.length ; i++) {   
     			 
     			 
-    			 /*	var color = "status1";
+    			 	var color = "status1";
 		  		
 		  	 	//now: AM
 		  		if(AMPM == "AM"){
@@ -254,30 +254,30 @@
 			    		color = "status4"; //노랑
 			    	}else if(lists[i].amloc=='구로'){
 			    		color = "status5"; //빨강
-			    	}else if(lists[i].amloc=='DAY-OFF'){
+			    	}else if(lists[i].amloc=='DAY OFF'){
 			    		color = "status6"; //휴무
 			    	}
 			    
 		  		}
 		  		//now: PM
 		  		else{
-		  			if(lists[i].amloc=='본사 9F' || lists[i].amloc=='본사 10F' || lists[i].amloc=='본사 14F' || lists[i].amloc=='본사 13F'){
+		  			if(lists[i].pmloc=='본사 9F' || lists[i].pmloc=='본사 10F' || lists[i].pmloc=='본사 14F' || lists[i].pmloc=='본사 13F'){
 			    		color = "status1"; //베이지
-			    	}else if(lists[i].amloc=='메사' || lists[i].amloc=='성수' || lists[i].amloc=='스타벅스 본사' || lists[i].amloc=='SI 본사' || lists[i].amloc=='건설'){
+			    	}else if(lists[i].pmloc=='메사' || lists[i].pmloc=='성수' || lists[i].pmloc=='스타벅스 본사' || lists[i].pmloc=='SI 본사' || lists[i].pmloc=='건설'){
 			    		color = "status2"; //초록
-			    	}else if(lists[i].amloc=='교육'){
+			    	}else if(lists[i].pmloc=='교육'){
 			    		color = "status3"; //연두
-			    	}else if(lists[i].amloc=='기타'){
+			    	}else if(lists[i].pmloc=='기타'){
 			    		color = "status4"; //노랑
-			    	}else if(lists[i].amloc=='구로'){
+			    	}else if(lists[i].pmloc=='구로'){
 			    		color = "status5"; //빨강
-			    	}else if(lists[i].amloc=='DAY-OFF'){
+			    	}else if(lists[i].pmloc=='DAY OFF'){
 			    		color = "status6"; //휴무
 			    	}
 		  		}		
 		  		
-		    	txt +="<article><div class='item-lay "+color+ "'>"; */
-		    	txt +="<article><div class='item-lay status1'>";
+		    	txt +="<article><div class='item-lay "+color+ "'>"; 
+		    	//txt +="<article><div class='item-lay status1'>";
 		    	txt +="<div class='profile'><img src='resources/"+lists[i].empimg+"' /></div>";
 		    	/* txt +="<div class='name'>"+lists[i].empname+"</div>"; */
 		    	
@@ -306,8 +306,8 @@
     			 txt +="<section id='card-item'>";
     		 for(var i=20 ; i < lists.length ; i++) {      			
     			
-    			/*  
-     			var color = "status7";
+    			  
+     			var color = "status1";
 		  		
 		  		//now: AM
 		  		if(AMPM == "AM"){
@@ -321,30 +321,30 @@
 			    		color = "status4"; //노랑
 			    	}else if(lists[i].amloc=='구로'){
 			    		color = "status5"; //빨강
-			    	}else if(lists[i].amloc=='DAY-OFF'){
+			    	}else if(lists[i].amloc=='DAY OFF'){
 			    		color = "status6"; //휴무
 			    	}
 			    
 		  		}
 		  		//now: PM
 		  		else{
-		  			if(lists[i].amloc=='본사 9F' || lists[i].amloc=='본사 10F' || lists[i].amloc=='본사 14F' || lists[i].amloc=='본사 13F'){
+		  			if(lists[i].pmloc=='본사 9F' || lists[i].pmloc=='본사 10F' || lists[i].pmloc=='본사 14F' || lists[i].pmloc=='본사 13F'){
 			    		color = "status1"; //베이지
-			    	}else if(lists[i].amloc=='메사' || lists[i].amloc=='성수' || lists[i].amloc=='스타벅스 본사' || lists[i].amloc=='SI 본사' || lists[i].amloc=='건설'){
+			    	}else if(lists[i].pmloc=='메사' || lists[i].pmloc=='성수' || lists[i].pmloc=='스타벅스 본사' || lists[i].pmloc=='SI 본사' || lists[i].pmloc=='건설'){
 			    		color = "status2"; //초록
-			    	}else if(lists[i].amloc=='교육'){
+			    	}else if(lists[i].pmloc=='교육'){
 			    		color = "status3"; //연두
-			    	}else if(lists[i].amloc=='기타'){
+			    	}else if(lists[i].pmloc=='기타'){
 			    		color = "status4"; //노랑
-			    	}else if(lists[i].amloc=='구로'){
+			    	}else if(lists[i].pmloc=='구로'){
 			    		color = "status5"; //빨강
-			    	}else if(lists[i].amloc=='DAY-OFF'){
+			    	}else if(lists[i].pmloc=='DAY OFF'){
 			    		color = "status6"; //휴무
 			    	}
 		  		}		
 		  		
-		    	txt +="<article><div class='item-lay "+color+ "'>"; */
-		    	txt +="<article><div class='item-lay status1'>";
+		    	txt +="<article><div class='item-lay "+color+ "'>"; 
+		    	//txt +="<article><div class='item-lay status1'>";
     		
 		    	txt +="<div class='profile'><img src='resources/"+lists[i].empimg+"' /></div>";
 		    	/* txt +="<div class='name'>"+lists[i].empname+"</div>"; */
@@ -374,7 +374,7 @@
       			 txt +="<section id='card-item'>";
         		 for(var i=30 ; i < lists.length ; i++) {          			
         			 
-         		/* 	var color = "status7";
+         		 	var color = "status1";
    		  		
    		  		//now: AM
    		  		if(AMPM == "AM"){
@@ -388,30 +388,30 @@
 			    		color = "status4"; //노랑
 			    	}else if(lists[i].amloc=='구로'){
 			    		color = "status5"; //빨강
-			    	}else if(lists[i].amloc=='DAY-OFF'){
+			    	}else if(lists[i].amloc=='DAY OFF'){
 			    		color = "status6"; //휴무
 			    	}
    			    
    		  		}
    		  		//now: PM
    		  		else{
-	   		  		if(lists[i].amloc=='본사 9F' || lists[i].amloc=='본사 10F' || lists[i].amloc=='본사 14F' || lists[i].amloc=='본사 13F'){
+	   		  		if(lists[i].pmloc=='본사 9F' || lists[i].pmloc=='본사 10F' || lists[i].pmloc=='본사 14F' || lists[i].pmloc=='본사 13F'){
 			    		color = "status1"; //베이지
-			    	}else if(lists[i].amloc=='메사' || lists[i].amloc=='성수' || lists[i].amloc=='스타벅스 본사' || lists[i].amloc=='SI 본사' || lists[i].amloc=='건설'){
+			    	}else if(lists[i].pmloc=='메사' || lists[i].pmloc=='성수' || lists[i].pmloc=='스타벅스 본사' || lists[i].pmloc=='SI 본사' || lists[i].pmloc=='건설'){
 			    		color = "status2"; //초록
-			    	}else if(lists[i].amloc=='교육'){
+			    	}else if(lists[i].pmloc=='교육'){
 			    		color = "status3"; //연두
-			    	}else if(lists[i].amloc=='기타'){
+			    	}else if(lists[i].pmloc=='기타'){
 			    		color = "status4"; //노랑
-			    	}else if(lists[i].amloc=='구로'){
+			    	}else if(lists[i].pmloc=='구로'){
 			    		color = "status5"; //빨강
-			    	}else if(lists[i].amloc=='DAY-OFF'){
+			    	}else if(lists[i].pmloc=='DAY OFF'){
 			    		color = "status6"; //휴무
 			    	}
    		  		}		
    		  		
-   		    	txt +="<article><div class='item-lay "+color+ "'>"; */
-   		    	txt +="<article><div class='item-lay status1'>";
+   		    	txt +="<article><div class='item-lay "+color+ "'>"; 
+   		    	//txt +="<article><div class='item-lay status1'>";
         			 
   		    	txt +="<div class='profile'><img src='resources/"+lists[i].empimg+"' /></div>";
 			    	/* txt +="<div class='name'>"+lists[i].empname+"</div>"; */

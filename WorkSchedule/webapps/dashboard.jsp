@@ -10,11 +10,11 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link href="css/reset.css" rel="stylesheet" type="text/css">
     <link href="css/dashboard.css" rel="stylesheet" type="text/css">
-     <script  src="https://use.fontawesome.com/b7a0d3c992.js"></script>
+  
     <!-- Bootstrap -->
     <link href="./css/bootstrap.min.css" rel="stylesheet">
-    <link href="./css/font-awesome.min.css" rel="stylesheet" type="text/css" media="screen">
-    <link href="./css/font-awesome.css" rel="stylesheet" type="text/css" media="screen">
+   
+   
   </head>
   
   <body OnLoad="restart()"> 
@@ -22,13 +22,6 @@
 	  
 	<!--상단-->
 	<section id="top-bar">
-	
-	
-	<!--PM-->
-	<i class="fa fa-moon-o" aria-hidden="true" style="font-size:100px; float:left" ></i>	
-	<!--AM-->
-	<i class="fa fa-sun-o" aria-hidden="true" style="font-size:100px; float:left" ></i>
-	
 	
 		<div class="group-title">${myinfo.deptname}</div>
 		
@@ -44,7 +37,18 @@
 
 	</section>
 	<!--상단-->
-	
+		<div id="dash-carousel" class="dashoth-carousel">
+	        <div id="carousel-example-generic" class="carousel slide">
+	                 
+	             <div class="carousel-inner" id="carouselinner">     
+	                 
+	          	</div>
+	          	
+	        </div> 
+	  </div>
+	  
+	  
+	</div>
 	
 	
 	<div id="dash-carousel">
@@ -59,7 +63,7 @@
 	          	</div>	          	
 	        </div> 
 	  </div>	  
-	</div>
+
 	
 	
 	  

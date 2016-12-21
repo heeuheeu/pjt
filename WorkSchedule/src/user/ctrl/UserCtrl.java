@@ -644,7 +644,7 @@ public class UserCtrl {
 			service.nfcUpdatePm(nfc);
 		}
 
-		return null;
+		return "redirect:/user.inc";
 	}
 
 	@RequestMapping(value = "/delete.inc")

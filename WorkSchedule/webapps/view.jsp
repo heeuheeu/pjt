@@ -66,7 +66,7 @@
 	 
 	 <div class="actionbar">
 	       <div class="workplace"><a class="navbar-brand" href="user.inc">SSG워크플레이스</a></div>
-	       <div class="refresh"><a href="#" onclick="refresh()"><i class="fa fa-refresh fa-spin fa-3x fa-fw" style="color:gray; font-size: 25px; margin-top:5px"></i></a></div>
+	       <div class="refresh"><a href="user.inc"><i class="fa fa-refresh fa-spin fa-3x fa-fw" style="color:gray; font-size: 25px; margin-top:5px"></i></a></div>
 	 </div>
     </div>
 
