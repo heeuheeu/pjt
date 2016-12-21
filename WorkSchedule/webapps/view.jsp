@@ -257,7 +257,7 @@
 			         <option value="${locList.locname}">${locList.locname}</option>
 			        </c:forEach>
 			        <option value="교육">교육</option>
-			        <option value="DAY-OFF">DAY-OFF</option>
+			        <option value="DAY OFF">DAY OFF</option>
 		       	</select>
                 </center>
                 <center>
@@ -272,7 +272,7 @@
 			         <option value="${locList.locname}">${locList.locname}</option>
 			        </c:forEach>
 			        <option value="교육">교육</option>
-			        <option value="DAY-OFF">DAY-OFF</option>
+			        <option value="DAY OFF">DAY OFF</option>
 		       	</select>   
                 </center>
                 <center><input type="text" name="pmlocdetail" id="pmlocdetail" class="pmlocdetail" style="background-color: transparent"></center>

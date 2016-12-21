@@ -13,6 +13,7 @@
 		JOIN 	DEPARTMENT B USING (DEPTID)
 		JOIN 	WORK C USING (EMPID) 
 		WHERE 	EMPID = #{empid}
+		ORDER BY WORKDATE
 	</select>		
 
 </mapper>

@@ -317,7 +317,7 @@ public class UserCtrl {
 	@RequestMapping("/calMove.inc")
 	public String calendarMove() {
 		System.out.println("Userctrl calMove.inc");
-		return "calendar";
+		return "redirect:/calendar.jsp";
 	}
 
 	// requestMapping to calendar.jsp
