@@ -46,8 +46,8 @@
       
       <ul class="nav navmenu-nav btns">
       	<div class="btns">
-		        <li><a href="calMove.inc" class="btn1" style="color: white;"><i class="fa fa-user-circle" style="font-size: 25px;  margin-right:15px"></i><span style="font-size: 1.1em">나의일정</span></a></li>
-		        <li><a href="updateview.inc" class="btn1" style="color: white"><i class="fa fa-calendar-check-o" aria-hidden="true" style="font-size: 25px;margin-right:15px"></i><span style="font-size: 1.1em">정보수정</span></a></li>
+		        <li><a href="calMove.inc" class="btn1" style="color: white;"><i class="fa fa-calendar-check-o" style="font-size: 25px;  margin-right:15px"></i><span style="font-size: 1.1em">나의일정</span></a></li>
+		        <li><a href="updateview.inc" class="btn1" style="color: white"><i class="fa fa-user-circle" aria-hidden="true" style="font-size: 25px;margin-right:15px"></i><span style="font-size: 1.1em">정보수정</span></a></li>
 		        <li><a href="logout.inc" class="btn2" style="color: white"><i class="fa fa-sign-out" aria-hidden="true" style="font-size: 25px; margin-right:15px"></i><span style="font-size: 1.1em">로그아웃</span></a></li>
 		 </div>
       </ul>
@@ -79,12 +79,12 @@
 				<div class="modal-dialog">
 					<div class="modal-content">
 						<div class="modal-header">
-								<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+								<button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="font-size: 30px;  margin-top:-5px; ">
 								<i class="fa fa-times" aria-hidden="true"></i></button>
 								
 								<button type="button" class="close" aria-hidden="true" 
-									id="editbtn" style="float: left;" onclick="update()">
-								<i class="fa fa-check" aria-hidden="true"></i></button>
+									id="editbtn" style="float: left; font-size: 30px;  margin-top:-5px;" onclick="update();">
+								<i class="fa fa-check" aria-hidden="true" ></i></button>
 								
 						</div >		
 						<div class="modal-body" >
@@ -118,7 +118,7 @@
 					            
 					            <!-- <input type="text" name="amloc" id="amloc" class="amloc" style="background-color: transparent"> -->
 					            
-					            <select name="amloc" id="amloc" class="amloc" style="background-color: transparent">
+					            <select name="amloc" id="amloc" class="amloc" style="background-color: transparent; font-size:1.1em; width:130px;" >
 									<c:forEach items="${locList}" var="locList"> 
 							         <option value="${locList.locname}">${locList.locname}</option>
 							        </c:forEach>
@@ -127,7 +127,7 @@
 								</select>
 					            
 					            </center>
-					            <center><input type="text" name="amlocdetail" id="amlocdetail" class="amlocdetail" 
+					            <center><input type="text"  placeholder="상세내용 입력" name="amlocdetail" id="amlocdetail" class="amlocdetail" 
 					            style="background-color: transparent"></center>
 					          </div>
 					          
@@ -137,7 +137,7 @@
 					            
 					            <!-- <input type="text" name="pmloc" id="pmloc" class="pmloc" style="background-color: transparent"> -->
 					            
-					            <select name="pmloc" id="pmloc" class="pmloc" style="background-color: transparent;">
+					            <select name="pmloc" id="pmloc" class="pmloc" style="background-color: transparent;font-size:1.1em;  width:130px;">
 									<c:forEach items="${locList}" var="locList"> 
 							         <option value="${locList.locname}">${locList.locname}</option>
 							        </c:forEach>
@@ -146,7 +146,7 @@
 								</select>
 					            
 					            </center>
-					            <center><input type="text" name="pmlocdetail" id="pmlocdetail" class="pmlocdetail" 
+					            <center><input type="text"  placeholder="상세내용 입력" name="pmlocdetail" id="pmlocdetail" class="pmlocdetail" 
 					            style="background-color: transparent"></center>
 					          </div>
 					        </div>

@@ -44,17 +44,17 @@
 
 	 <insert id="addDiv" parameterType="model.domain.vo.DivisionVO">
 	   	INSERT INTO DIVISION
-	  	VALUES 	( concat('D',DIVSEQ.nextval), #{divname}, 'Y')
+	  	VALUES 	( concat('D',LPAD(DIVSEQ.nextval,4,'0')), #{divname}, 'Y')
 	 </insert>	
 	 
 	  <insert id="addDept" parameterType="model.domain.vo.DeptDivisionVO">
 	   	INSERT INTO DEPARTMENT
-	  	VALUES 	( concat('T',DEPTSEQ.nextval), #{deptname}, (SELECT DIVID FROM DIVISION WHERE DIVNAME = #{divname}) , 'Y')
+	  	VALUES 	( concat('T',LPAD(DEPTSEQ.nextval,4,'0')), #{deptname}, (SELECT DIVID FROM DIVISION WHERE DIVNAME = #{divname}) , 'Y')
 	 </insert>	
 	 
 	 <insert id="addLoc" parameterType="model.domain.vo.LocationVO">
 	   	INSERT INTO LOCATION
-	  	VALUES 	( concat('L',LOCSEQ.nextval), #{locname}, 'Y')
+	  	VALUES 	(concat('L',LPAD(LOCSEQ.nextval,4,'0')), #{locname}, 'Y')
 	 </insert>	
 	 
 	 
