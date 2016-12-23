@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link href="css/reset.css" rel="stylesheet" type="text/css">
-    <link href="css/dashboard.css" rel="stylesheet" type="text/css">
+    <link href="css/dashboardOtherDay.css" rel="stylesheet" type="text/css">
       <!-- Bootstrap -->
     <link href="./css/bootstrap.min.css" rel="stylesheet">
    
@@ -19,7 +19,7 @@
 	  
 	<!--상단-->
 	<section id="top-bar">
-		<div class="group-title">${myinfo.deptname}</div>
+		<div class="group-title"><a href="dashboard.inc">${myinfo.deptname}</a></div>
 	    <!--날짜-->
 	    <div class="date">
 	    	<a class="prev-text" onclick="prevDay()"> < </a> 
@@ -31,17 +31,18 @@
 	</section>
 	<!--상단-->
 	
-	
-	<div id="dash-carousel" class="dashoth-carousel">
-	        <div id="carousel-example-generic" class="carousel slide">
-	                 
-	             <div class="carousel-inner" id="carouselinner">     
-	                 
-	          	</div>
-	          	
+		<div id="dash-carousel" class="dashoth-carousel">
+	        <div id="carousel-example-generic" class="carousel slide">	                 
+	             <div class="carousel-inner" id="carouselinner"> </div>		          	 
+		          	 <!-- Controls -->
+		              <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+		                <span class="icon-prev"></span>
+		              </a>
+		              <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+		                <span class="icon-next"></span>
+		              </a>          	
 	        </div> 
-	  </div>
-	  
+	 	</div>		  
 	  
 	</div>
 	
@@ -174,7 +175,7 @@
 			  		if(AMPM == "AM"){
 			  			if(lists[i].amloc=='본사 9F' || lists[i].amloc=='본사 10F' || lists[i].amloc=='본사 14F' || lists[i].amloc=='본사 13F'){
 				    		color = "status1"; //베이지
-				    	}else if(lists[i].amloc=='메사' || lists[i].amloc=='성수' || lists[i].amloc=='스타벅스 본사' || lists[i].amloc=='SI 본사' || lists[i].amloc=='건설'){
+				    	}else if(lists[i].amloc=='메사' || lists[i].amloc=='성수' || lists[i].amloc=='스타벅스 본사' || lists[i].amloc=='SI 본사' || lists[i].amloc=='건설 본사'){
 				    		color = "status2"; //초록
 				    	}else if(lists[i].amloc=='교육'){
 				    		color = "status3"; //연두
@@ -183,7 +184,7 @@
 				    	}else if(lists[i].amloc=='구로'){
 				    		color = "status5"; //빨강
 				    	}else if(lists[i].amloc=='DAY OFF'){
-				    		color = "status6"; //휴무
+				    		color = "status6"; //파랑
 				    	}
 				    
 			  		}
@@ -191,7 +192,7 @@
 			  		else{
 			  			if(lists[i].pmloc=='본사 9F' || lists[i].pmloc=='본사 10F' || lists[i].pmloc=='본사 14F' || lists[i].pmloc=='본사 13F'){
 				    		color = "status1"; //베이지
-				    	}else if(lists[i].pmloc=='메사' || lists[i].pmloc=='성수' || lists[i].pmloc=='스타벅스 본사' || lists[i].pmloc=='SI 본사' || lists[i].pmloc=='건설'){
+				    	}else if(lists[i].pmloc=='메사' || lists[i].pmloc=='성수' || lists[i].pmloc=='스타벅스 본사' || lists[i].pmloc=='SI 본사' || lists[i].pmloc=='건설 본사'){
 				    		color = "status2"; //초록
 				    	}else if(lists[i].pmloc=='교육'){
 				    		color = "status3"; //연두
@@ -200,7 +201,7 @@
 				    	}else if(lists[i].pmloc=='구로'){
 				    		color = "status5"; //빨강
 				    	}else if(lists[i].pmloc=='DAY OFF'){
-				    		color = "status6"; //휴무
+				    		color = "status6"; //파랑
 				    	}
 			  		}		
 			  		
@@ -246,7 +247,7 @@
 		  		if(AMPM == "AM"){
 		  			if(lists[i].amloc=='본사 9F' || lists[i].amloc=='본사 10F' || lists[i].amloc=='본사 14F' || lists[i].amloc=='본사 13F'){
 			    		color = "status1"; //베이지
-			    	}else if(lists[i].amloc=='메사' || lists[i].amloc=='성수' || lists[i].amloc=='스타벅스 본사' || lists[i].amloc=='SI 본사' || lists[i].amloc=='건설'){
+			    	}else if(lists[i].amloc=='메사' || lists[i].amloc=='성수' || lists[i].amloc=='스타벅스 본사' || lists[i].amloc=='SI 본사' || lists[i].amloc=='건설 본사'){
 			    		color = "status2"; //초록
 			    	}else if(lists[i].amloc=='교육'){
 			    		color = "status3"; //연두
@@ -263,7 +264,7 @@
 		  		else{
 		  			if(lists[i].pmloc=='본사 9F' || lists[i].pmloc=='본사 10F' || lists[i].pmloc=='본사 14F' || lists[i].pmloc=='본사 13F'){
 			    		color = "status1"; //베이지
-			    	}else if(lists[i].pmloc=='메사' || lists[i].pmloc=='성수' || lists[i].pmloc=='스타벅스 본사' || lists[i].pmloc=='SI 본사' || lists[i].pmloc=='건설'){
+			    	}else if(lists[i].pmloc=='메사' || lists[i].pmloc=='성수' || lists[i].pmloc=='스타벅스 본사' || lists[i].pmloc=='SI 본사' || lists[i].pmloc=='건설 본사'){
 			    		color = "status2"; //초록
 			    	}else if(lists[i].pmloc=='교육'){
 			    		color = "status3"; //연두
@@ -313,7 +314,7 @@
 		  		if(AMPM == "AM"){
 		  			if(lists[i].amloc=='본사 9F' || lists[i].amloc=='본사 10F' || lists[i].amloc=='본사 14F' || lists[i].amloc=='본사 13F'){
 			    		color = "status1"; //베이지
-			    	}else if(lists[i].amloc=='메사' || lists[i].amloc=='성수' || lists[i].amloc=='스타벅스 본사' || lists[i].amloc=='SI 본사' || lists[i].amloc=='건설'){
+			    	}else if(lists[i].amloc=='메사' || lists[i].amloc=='성수' || lists[i].amloc=='스타벅스 본사' || lists[i].amloc=='SI 본사' || lists[i].amloc=='건설 본사'){
 			    		color = "status2"; //초록
 			    	}else if(lists[i].amloc=='교육'){
 			    		color = "status3"; //연두
@@ -330,7 +331,7 @@
 		  		else{
 		  			if(lists[i].pmloc=='본사 9F' || lists[i].pmloc=='본사 10F' || lists[i].pmloc=='본사 14F' || lists[i].pmloc=='본사 13F'){
 			    		color = "status1"; //베이지
-			    	}else if(lists[i].pmloc=='메사' || lists[i].pmloc=='성수' || lists[i].pmloc=='스타벅스 본사' || lists[i].pmloc=='SI 본사' || lists[i].pmloc=='건설'){
+			    	}else if(lists[i].pmloc=='메사' || lists[i].pmloc=='성수' || lists[i].pmloc=='스타벅스 본사' || lists[i].pmloc=='SI 본사' || lists[i].pmloc=='건설 본사'){
 			    		color = "status2"; //초록
 			    	}else if(lists[i].pmloc=='교육'){
 			    		color = "status3"; //연두
@@ -380,7 +381,7 @@
    		  		if(AMPM == "AM"){
 	   		  		if(lists[i].amloc=='본사 9F' || lists[i].amloc=='본사 10F' || lists[i].amloc=='본사 14F' || lists[i].amloc=='본사 13F'){
 			    		color = "status1"; //베이지
-			    	}else if(lists[i].amloc=='메사' || lists[i].amloc=='성수' || lists[i].amloc=='스타벅스 본사' || lists[i].amloc=='SI 본사' || lists[i].amloc=='건설'){
+			    	}else if(lists[i].amloc=='메사' || lists[i].amloc=='성수' || lists[i].amloc=='스타벅스 본사' || lists[i].amloc=='SI 본사' || lists[i].amloc=='건설 본사'){
 			    		color = "status2"; //초록
 			    	}else if(lists[i].amloc=='교육'){
 			    		color = "status3"; //연두
@@ -397,7 +398,7 @@
    		  		else{
 	   		  		if(lists[i].pmloc=='본사 9F' || lists[i].pmloc=='본사 10F' || lists[i].pmloc=='본사 14F' || lists[i].pmloc=='본사 13F'){
 			    		color = "status1"; //베이지
-			    	}else if(lists[i].pmloc=='메사' || lists[i].pmloc=='성수' || lists[i].pmloc=='스타벅스 본사' || lists[i].pmloc=='SI 본사' || lists[i].pmloc=='건설'){
+			    	}else if(lists[i].pmloc=='메사' || lists[i].pmloc=='성수' || lists[i].pmloc=='스타벅스 본사' || lists[i].pmloc=='SI 본사' || lists[i].pmloc=='건설 본사'){
 			    		color = "status2"; //초록
 			    	}else if(lists[i].pmloc=='교육'){
 			    		color = "status3"; //연두

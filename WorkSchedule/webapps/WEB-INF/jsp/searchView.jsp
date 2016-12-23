@@ -57,7 +57,7 @@
     <!--상단-->
     <section id="search-bar">
       <form action="search.inc" method="post">
-	      <input type="text" placeholder=" 이름 또는 부서 검색 " name = "searchKeyword"/>
+	      <input type="text" placeholder=" 이름 또는 부서 검색 " name = "searchKeyword" required="required"/>
 	      <input type="submit" value="검색"/>
 <%-- 	      <div class="path">
 	        <div><a href="">신세계아이앤씨</a><span>></span></div>
@@ -158,13 +158,13 @@
 					},
 					dataType : "json",
 					success : function(jarr) {
-						alert("success favorite insert");
+						//alert("success favorite insert");
 						$.each(jarr, function(idx, value) {
 							favid[idx] = value.empidfav;
 						});
 					},
 					error: function(json) {
-						alert("error favorite insert");
+						//alert("error favorite insert");
 						
 					}
 				});
@@ -181,7 +181,7 @@
 					},
 					dataType : "json",
 					success : function(jarr2) {
-						alert("success favorite delete");
+						//alert("success favorite delete");
 						if(jarr2.length != 0) {
 							$.each(jarr2, function(idx, value2) {
 								favid[idx] = value2.empidfav;
@@ -191,7 +191,7 @@
 						}	
 					},
 					error: function(json) {
-						alert("error favorite delete");
+						//alert("error favorite delete");
 					}
 				});
 	    	};

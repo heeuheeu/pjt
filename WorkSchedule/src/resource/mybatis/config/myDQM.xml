@@ -67,6 +67,7 @@
 									FROM 	FAVORITE 
 									WHERE 	EMPID=#{empid} )					
 		AND 	C.WORKDATE = #{currdate}
+		ORDER BY A.EMPNAME
 	</select>		
 
 	 <update id="updatemywork" parameterType="model.domain.vo.EmployeeWorkDeptVO">
@@ -111,6 +112,7 @@
 		WHERE 	A.DEPTID = #{deptid}	
 		AND		A.EMPID != 'hr'				
 		AND 	C.WORKDATE = #{currdate}
+		ORDER BY A.EMPNAME
 	</select>		
 	 	 			
 </mapper>

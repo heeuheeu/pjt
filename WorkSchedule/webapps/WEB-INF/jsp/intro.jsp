@@ -67,6 +67,10 @@
     
 	///////////////////remeber id////////////////////
     $(function(){
+    	
+    	
+    	 window.inc.introclear();
+	
     	 getid();
     	  $("#savechk").click(function(){
     	   saveid();

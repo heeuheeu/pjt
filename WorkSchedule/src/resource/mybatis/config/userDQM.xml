@@ -109,6 +109,7 @@
 		AND 	EMPID != 'hr'
 		AND		EMPID != 'admin'
 		AND		DEPTID = #{deptid}
+		ORDER BY A.EMPNAME
 	 </select>
 	 
 	 <insert id="addfavorite" parameterType="model.domain.vo.FavoriteVO">
@@ -126,11 +127,10 @@
 	   SELECT 	* 
 	   FROM 	EMPLOYEE
 	   JOIN 	DEPARTMENT USING (DEPTID)
-	   WHERE 	EMPNAME LIKE '%'||#{searchKeyword}||'%'
-	   OR 		DEPTNAME LIKE '%'||#{searchKeyword}||'%'
-	   AND 		EMPID != 'hr'
-	   AND		EMPID != 'admin'
-	   AND 		EMPID != #{empid}
+	   WHERE 	EMPID NOT IN ('hr', 'admin', #{empid})
+	   AND		(EMPNAME LIKE '%'||#{searchKeyword}||'%'
+	   OR 		DEPTNAME LIKE '%'||#{searchKeyword}||'%')
+	   ORDER BY	EMPNAME
  	 </select>
  	 
 	 <select id="searchdept" parameterType="model.domain.vo.EmployeeDeptDivVO" resultType="model.domain.vo.EmployeeDeptDivVO">
@@ -193,7 +193,7 @@
 
 	  <delete id="deletefav" parameterType="model.domain.vo.EmployeeDeptDivVO" >
   		DELETE   FROM FAVORITE
-  		WHERE    EMPID = #{empid} 	OR 	FAVID = #{empid}
+  		WHERE    EMPID = #{empid} 	OR 	EMPIDFAV = #{empid}
       </delete>
       
 	  <delete id="deletework" parameterType="model.domain.vo.EmployeeDeptDivVO" >

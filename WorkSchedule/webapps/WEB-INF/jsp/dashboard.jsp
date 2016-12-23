@@ -4,7 +4,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
-
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -13,57 +12,47 @@
   
     <!-- Bootstrap -->
     <link href="./css/bootstrap.min.css" rel="stylesheet">
-   
+    <link href="./css/font-awesome.css" rel="stylesheet" type="text/css" media="screen">
    
   </head>
   
-  <body OnLoad="restart()"> 
+ <body OnLoad="restart()"> 
 	<div class="dash-container"> 
-	  
 	<!--상단-->
 	<section id="top-bar">
 	
-		<div class="group-title">${myinfo.deptname}</div>
-		
+	<div class="group-title" ><a href="dashboard.inc">${myinfo.deptname}</a></div>
+	    <!--날짜-->  
+	  	<div class="refresh" ><a href="dashboard.inc"><i class="fa fa-refresh fa-spin fa-3x fa-fw" style="color:gray; font-size: 25px; margin-top:5px; float: right; clear:right;" onclick="refresh()"></i></a></div>
+		  
+		   
+	    <div class="date" >
+		    	<a class="prev-text" onclick="prevDay()"> < </a> 
+		        <a class="date-text" id="currDateView"></a>
+		        <a class="next-text" onclick="nextDay()"> > </a> 
+				<input type="hidden" id="currDate">
+		</div>
 	    <!--날짜-->
-	    <div class="date">
-	    	<a class="prev-text" onclick="prevDay()"> < </a> 
-	        <a class="date-text" id="currDateView"></a>
-	        <a class="next-text" onclick="nextDay()"> > </a> 
-			<input type="hidden" id="currDate">
-	    </div>
-	    <!--날짜-->
-	
-
 	</section>
 	<!--상단-->
+	
+	
 		<div id="dash-carousel" class="dashoth-carousel">
-	        <div id="carousel-example-generic" class="carousel slide">
-	                 
-	             <div class="carousel-inner" id="carouselinner">     
-	                 
-	          	</div>
-	          	
+	        <div id="carousel-example-generic" class="carousel slide">	                 
+	             <div class="carousel-inner" id="carouselinner"> </div>		          	 
+		          	 <!-- Controls -->
+	              <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+	                <span class="icon-prev"></span>
+	              </a>
+	              <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+	                <span class="icon-next"></span>
+	              </a>          	
 	        </div> 
-	  </div>
-	  
+	 	</div>	  
 	  
 	</div>
 	
 	
-	<div id="dash-carousel">
-	        <div id="carousel-example-generic" class="carousel slide">   
-	             <div class="carousel-inner" id="carouselinner">
-	              	  <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
-		                <span class="icon-prev"></span>
-		              </a>
-		              <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
-		                <span class="icon-next"></span>
-		              </a>    
-	          	</div>	          	
-	        </div> 
-	  </div>	  
-
 	
 	
 	  
@@ -112,16 +101,16 @@
 			  		if(AMPM == "AM"){
 				    	if(lists[i].amloc=='본사 9F' || lists[i].amloc=='본사 10F' || lists[i].amloc=='본사 14F' || lists[i].amloc=='본사 13F'){
 				    		color = "status1"; //베이지
-				    	}else if(lists[i].amloc=='메사' || lists[i].amloc=='성수' || lists[i].amloc=='스타벅스 본사' || lists[i].amloc=='SI 본사' || lists[i].amloc=='건설'){
+				    	}else if(lists[i].amloc=='메사' || lists[i].amloc=='성수' || lists[i].amloc=='스타벅스 본사' || lists[i].amloc=='SI 본사' || lists[i].amloc=='건설 본사 본사'){
 				    		color = "status2"; //초록
 				    	}else if(lists[i].amloc=='교육'){
 				    		color = "status3"; //연두
 				    	}else if(lists[i].amloc=='기타'){
 				    		color = "status4"; //노랑
 				    	}else if(lists[i].amloc=='구로'){
-				    		color = "status5"; //빨강
+				    		color = "status5"; //파랑
 				    	}else if(lists[i].amloc=='DAY OFF'){
-				    		color = "status6"; //휴무
+				    		color = "status6"; //빨강
 				    	}
 				    
 			  		}
@@ -129,16 +118,16 @@
 			  		else{
 			  			if(lists[i].pmloc=='본사 9F' || lists[i].pmloc=='본사 10F' || lists[i].pmloc=='본사 14F' || lists[i].pmloc=='본사 13F'){
 				    		color = "status1"; //베이지
-				    	}else if(lists[i].pmloc=='메사' || lists[i].pmloc=='성수' || lists[i].pmloc=='스타벅스 본사' || lists[i].pmloc=='SI 본사' || lists[i].pmloc=='건설'){
+				    	}else if(lists[i].pmloc=='메사' || lists[i].pmloc=='성수' || lists[i].pmloc=='스타벅스 본사' || lists[i].pmloc=='SI 본사' || lists[i].pmloc=='건설 본사 본사'){
 				    		color = "status2"; //초록
 				    	}else if(lists[i].pmloc=='교육'){
 				    		color = "status3"; //연두
 				    	}else if(lists[i].pmloc=='기타'){
 				    		color = "status4"; //노랑
 				    	}else if(lists[i].pmloc=='구로'){
-				    		color = "status5"; //빨강
+				    		color = "status5"; //파랑
 				    	}else if(lists[i].pmloc=='DAY OFF'){
-				    		color = "status6"; //휴무
+				    		color = "status6"; //빨강
 				    	}
 			  		}		
 			  		
@@ -148,17 +137,17 @@
 					///////////////////////////수정 은비///////////////////
 			    	if(AMPM == "AM"){
 				    	if(lists[i].amloc == "기타"){
-				    		txt +="<div class='ampm'><div class='am'><span>AM</span><div class='loc-text'>"+lists[i].amlocdetail+"</div></div>"; 
+				    		txt +="<div class='ampm'><div class='am'><span>"+lists[i].empname+"</span><div class='loc-text'>"+lists[i].amlocdetail+"</div></div>"; 
 				    	}else{
-				    		txt +="<div class='ampm'><div class='am'><span>AM</span><div class='loc-text'>"+lists[i].amloc+"</div></div>";
+				    		txt +="<div class='ampm'><div class='am'><span>"+lists[i].empname+"</span><div class='loc-text'>"+lists[i].amloc+"</div></div>";
 				    	}
 			    	}
 			    	
 			    	if(AMPM == "PM"){
 				    	if(lists[i].pmloc == "기타"){
-				    		txt +="<div class='ampm'><div class='pm'><span>PM</span><div class='loc-text'>"+lists[i].pmlocdetail+"</div></div>"; 
+				    		txt +="<div class='ampm'><div class='pm'><span>"+lists[i].empname+"</span><div class='loc-text'>"+lists[i].pmlocdetail+"</div></div>"; 
 				    	}else{
-				    		txt +="<div class='ampm'><div class='pm'><span>PM</span><div class='loc-text'>"+lists[i].pmloc+"</div></div>"; 
+				    		txt +="<div class='ampm'><div class='pm'><span>"+lists[i].empname+"</span><div class='loc-text'>"+lists[i].pmloc+"</div></div>"; 
 				    	}
 			    	}
 			    	/////////////////////수정 은비////////////////////////
@@ -187,16 +176,16 @@
 		  		if(AMPM == "AM"){
 		  			if(lists[i].amloc=='본사 9F' || lists[i].amloc=='본사 10F' || lists[i].amloc=='본사 14F' || lists[i].amloc=='본사 13F'){
 			    		color = "status1"; //베이지
-			    	}else if(lists[i].amloc=='메사' || lists[i].amloc=='성수' || lists[i].amloc=='스타벅스 본사' || lists[i].amloc=='SI 본사' || lists[i].amloc=='건설'){
+			    	}else if(lists[i].amloc=='메사' || lists[i].amloc=='성수' || lists[i].amloc=='스타벅스 본사' || lists[i].amloc=='SI 본사' || lists[i].amloc=='건설 본사'){
 			    		color = "status2"; //초록
 			    	}else if(lists[i].amloc=='교육'){
 			    		color = "status3"; //연두
 			    	}else if(lists[i].amloc=='기타'){
 			    		color = "status4"; //노랑
 			    	}else if(lists[i].amloc=='구로'){
-			    		color = "status5"; //빨강
+			    		color = "status5"; //파랑
 			    	}else if(lists[i].amloc=='DAY OFF'){
-			    		color = "status6"; //휴무
+			    		color = "status6"; //빨강
 			    	}
 			    
 		  		}
@@ -204,16 +193,16 @@
 		  		else{
 			  			if(lists[i].pmloc=='본사 9F' || lists[i].pmloc=='본사 10F' || lists[i].pmloc=='본사 14F' || lists[i].pmloc=='본사 13F'){
 				    		color = "status1"; //베이지
-				    	}else if(lists[i].pmloc=='메사' || lists[i].pmloc=='성수' || lists[i].pmloc=='스타벅스 본사' || lists[i].pmloc=='SI 본사' || lists[i].pmloc=='건설'){
+				    	}else if(lists[i].pmloc=='메사' || lists[i].pmloc=='성수' || lists[i].pmloc=='스타벅스 본사' || lists[i].pmloc=='SI 본사' || lists[i].pmloc=='건설 본사'){
 				    		color = "status2"; //초록
 				    	}else if(lists[i].pmloc=='교육'){
 				    		color = "status3"; //연두
 				    	}else if(lists[i].pmloc=='기타'){
 				    		color = "status4"; //노랑
 				    	}else if(lists[i].pmloc=='구로'){
-				    		color = "status5"; //빨강
+				    		color = "status5"; //파랑
 				    	}else if(lists[i].pmloc=='DAY OFF'){
-				    		color = "status6"; //휴무
+				    		color = "status6"; //빨강
 				    	}
 			  		}		
       			
@@ -223,17 +212,17 @@
 				
 		    	if(AMPM == "AM"){
 			    	if(lists[i].amloc == "기타"){
-			    		txt +="<div class='ampm'><div class='am'><span>AM</span><div class='loc-text'>"+lists[i].amlocdetail+"</div></div>"; 
+			    		txt +="<div class='ampm'><div class='am'><span>"+lists[i].empname+"</span><div class='loc-text'>"+lists[i].amlocdetail+"</div></div>"; 
 			    	}else{
-			    		txt +="<div class='ampm'><div class='am'><span>AM</span><div class='loc-text'>"+lists[i].amloc+"</div></div>";
+			    		txt +="<div class='ampm'><div class='am'><span>"+lists[i].empname+"</span><div class='loc-text'>"+lists[i].amloc+"</div></div>";
 			    	}
 		    	}
 		    	
 		    	if(AMPM == "PM"){
 			    	if(lists[i].pmloc == "기타"){
-			    		txt +="<div class='ampm'><div class='pm'><span>PM</span><div class='loc-text'>"+lists[i].pmlocdetail+"</div></div>"; 
+			    		txt +="<div class='ampm'><div class='pm'><span>"+lists[i].empname+"</span><div class='loc-text'>"+lists[i].pmlocdetail+"</div></div>"; 
 			    	}else{
-			    		txt +="<div class='ampm'><div class='pm'><span>PM</span><div class='loc-text'>"+lists[i].pmloc+"</div></div>"; 
+			    		txt +="<div class='ampm'><div class='pm'><span>"+lists[i].empname+"</span><div class='loc-text'>"+lists[i].pmloc+"</div></div>"; 
 			    	}
 		    	}
 		    	
@@ -255,16 +244,16 @@
  		  		if(AMPM == "AM"){
  		  			if(lists[i].amloc=='본사 9F' || lists[i].amloc=='본사 10F' || lists[i].amloc=='본사 14F' || lists[i].amloc=='본사 13F'){
 			    		color = "status1"; //베이지
-			    	}else if(lists[i].amloc=='메사' || lists[i].amloc=='성수' || lists[i].amloc=='스타벅스 본사' || lists[i].amloc=='SI 본사' || lists[i].amloc=='건설'){
+			    	}else if(lists[i].amloc=='메사' || lists[i].amloc=='성수' || lists[i].amloc=='스타벅스 본사' || lists[i].amloc=='SI 본사' || lists[i].amloc=='건설 본사'){
 			    		color = "status2"; //초록
 			    	}else if(lists[i].amloc=='교육'){
 			    		color = "status3"; //연두
 			    	}else if(lists[i].amloc=='기타'){
 			    		color = "status4"; //노랑
 			    	}else if(lists[i].amloc=='구로'){
-			    		color = "status5"; //빨강
+			    		color = "status5"; //파랑
 			    	}else if(lists[i].amloc=='DAY OFF'){
-			    		color = "status6"; //휴무
+			    		color = "status6"; //빨강
 			    	}
  			    
  		  		}
@@ -272,16 +261,16 @@
  		  		else{
 			  			if(lists[i].pmloc=='본사 9F' || lists[i].pmloc=='본사 10F' || lists[i].pmloc=='본사 14F' || lists[i].pmloc=='본사 13F'){
 				    		color = "status1"; //베이지
-				    	}else if(lists[i].pmloc=='메사' || lists[i].pmloc=='성수' || lists[i].pmloc=='스타벅스 본사' || lists[i].pmloc=='SI 본사' || lists[i].pmloc=='건설'){
+				    	}else if(lists[i].pmloc=='메사' || lists[i].pmloc=='성수' || lists[i].pmloc=='스타벅스 본사' || lists[i].pmloc=='SI 본사' || lists[i].pmloc=='건설 본사'){
 				    		color = "status2"; //초록
 				    	}else if(lists[i].pmloc=='교육'){
 				    		color = "status3"; //연두
 				    	}else if(lists[i].pmloc=='기타'){
 				    		color = "status4"; //노랑
 				    	}else if(lists[i].pmloc=='구로'){
-				    		color = "status5"; //빨강
+				    		color = "status5"; //파랑
 				    	}else if(lists[i].pmloc=='DAY OFF'){
-				    		color = "status6"; //휴무
+				    		color = "status6"; //빨강
 				    	}
 			  		}		
  		  		
@@ -291,17 +280,17 @@
 		    	
 		    	if(AMPM == "AM"){
 			    	if(lists[i].amloc == "기타"){
-			    		txt +="<div class='ampm'><div class='am'><span>AM</span><div class='loc-text'>"+lists[i].amlocdetail+"</div></div>"; 
+			    		txt +="<div class='ampm'><div class='am'><span>"+lists[i].empname+"</span><div class='loc-text'>"+lists[i].amlocdetail+"</div></div>"; 
 			    	}else{
-			    		txt +="<div class='ampm'><div class='am'><span>AM</span><div class='loc-text'>"+lists[i].amloc+"</div></div>";
+			    		txt +="<div class='ampm'><div class='am'><span>"+lists[i].empname+"</span><div class='loc-text'>"+lists[i].amloc+"</div></div>";
 			    	}
 		    	}
 		    	
 		    	if(AMPM == "PM"){
 			    	if(lists[i].pmloc == "기타"){
-			    		txt +="<div class='ampm'><div class='pm'><span>PM</span><div class='loc-text'>"+lists[i].pmlocdetail+"</div></div>"; 
+			    		txt +="<div class='ampm'><div class='pm'><span>"+lists[i].empname+"</span><div class='loc-text'>"+lists[i].pmlocdetail+"</div></div>"; 
 			    	}else{
-			    		txt +="<div class='ampm'><div class='pm'><span>PM</span><div class='loc-text'>"+lists[i].pmloc+"</div></div>"; 
+			    		txt +="<div class='ampm'><div class='pm'><span>"+lists[i].empname+"</span><div class='loc-text'>"+lists[i].pmloc+"</div></div>"; 
 			    	}
 		    	}
 		    	
@@ -322,32 +311,32 @@
      		  		if(AMPM == "AM"){
      		  			if(lists[i].amloc=='본사 9F' || lists[i].amloc=='본사 10F' || lists[i].amloc=='본사 14F' || lists[i].amloc=='본사 13F'){
 				    		color = "status1"; //베이지
-				    	}else if(lists[i].amloc=='메사' || lists[i].amloc=='성수' || lists[i].amloc=='스타벅스 본사' || lists[i].amloc=='SI 본사' || lists[i].amloc=='건설'){
+				    	}else if(lists[i].amloc=='메사' || lists[i].amloc=='성수' || lists[i].amloc=='스타벅스 본사' || lists[i].amloc=='SI 본사' || lists[i].amloc=='건설 본사'){
 				    		color = "status2"; //초록
 				    	}else if(lists[i].amloc=='교육'){
 				    		color = "status3"; //연두
 				    	}else if(lists[i].amloc=='기타'){
 				    		color = "status4"; //노랑
 				    	}else if(lists[i].amloc=='구로'){
-				    		color = "status5"; //빨강
+				    		color = "status5"; //파랑
 				    	}else if(lists[i].amloc=='DAY OFF'){
-				    		color = "status6"; //휴무
+				    		color = "status6"; //빨강
 				    	}     			    
      		  		}
      		  		//now: PM
      		  		else{
 			  			if(lists[i].pmloc=='본사 9F' || lists[i].pmloc=='본사 10F' || lists[i].pmloc=='본사 14F' || lists[i].pmloc=='본사 13F'){
 				    		color = "status1"; //베이지
-				    	}else if(lists[i].pmloc=='메사' || lists[i].pmloc=='성수' || lists[i].pmloc=='스타벅스 본사' || lists[i].pmloc=='SI 본사' || lists[i].pmloc=='건설'){
+				    	}else if(lists[i].pmloc=='메사' || lists[i].pmloc=='성수' || lists[i].pmloc=='스타벅스 본사' || lists[i].pmloc=='SI 본사' || lists[i].pmloc=='건설 본사'){
 				    		color = "status2"; //초록
 				    	}else if(lists[i].pmloc=='교육'){
 				    		color = "status3"; //연두
 				    	}else if(lists[i].pmloc=='기타'){
 				    		color = "status4"; //노랑
 				    	}else if(lists[i].pmloc=='구로'){
-				    		color = "status5"; //빨강
+				    		color = "status5"; //파랑
 				    	}else if(lists[i].pmloc=='DAY OFF'){
-				    		color = "status6"; //휴무
+				    		color = "status6"; //빨강
 				    	}
 			  		}		
      		  		
@@ -357,17 +346,17 @@
 			    	
 			    	if(AMPM == "AM"){
 				    	if(lists[i].amloc == "기타"){
-				    		txt +="<div class='ampm'><div class='am'><span>AM</span><div class='loc-text'>"+lists[i].amlocdetail+"</div></div>"; 
+				    		txt +="<div class='ampm'><div class='am'><span>"+lists[i].empname+"</span><div class='loc-text'>"+lists[i].amlocdetail+"</div></div>"; 
 				    	}else{
-				    		txt +="<div class='ampm'><div class='am'><span>AM</span><div class='loc-text'>"+lists[i].amloc+"</div></div>";
+				    		txt +="<div class='ampm'><div class='am'><span>"+lists[i].empname+"</span><div class='loc-text'>"+lists[i].amloc+"</div></div>";
 				    	}
 			    	}
 			    	
 			    	if(AMPM == "PM"){
 				    	if(lists[i].pmloc == "기타"){
-				    		txt +="<div class='ampm'><div class='pm'><span>PM</span><div class='loc-text'>"+lists[i].pmlocdetail+"</div></div>"; 
+				    		txt +="<div class='ampm'><div class='pm'><span>"+lists[i].empname+"</span><div class='loc-text'>"+lists[i].pmlocdetail+"</div></div>"; 
 				    	}else{
-				    		txt +="<div class='ampm'><div class='pm'><span>PM</span><div class='loc-text'>"+lists[i].pmloc+"</div></div>"; 
+				    		txt +="<div class='ampm'><div class='pm'><span>"+lists[i].empname+"</span><div class='loc-text'>"+lists[i].pmloc+"</div></div>"; 
 				    	}
 			    	}
 			    	
@@ -472,7 +461,7 @@
     function colorchange(){
     	$("#currDate").style.backgroundColor="#010101"
     }
-    
+
 
     	
 </script> 

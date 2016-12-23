@@ -48,8 +48,8 @@
       
       <ul class="nav navmenu-nav btns">
       <div class="btns">
-        <li><a href="calMove.inc" class="btn1" style="color: white;"><i class="fa fa-user-circle" style="font-size: 25px;  margin-right:15px"></i><span style="font-size: 1.1em">나의일정</span></a></li>
-        <li><a href="updateview.inc" class="btn1" style="color: white"><i class="fa fa-calendar-check-o" aria-hidden="true" style="font-size: 25px;margin-right:15px"></i><span style="font-size: 1.1em">정보수정</span></a></li>
+        <li><a href="calMove.inc" class="btn1" style="color: white;"><i class="fa fa-calendar-check-o" style="font-size: 25px;  margin-right:15px"></i><span style="font-size: 1.1em">나의일정</span></a></li>
+        <li><a href="updateview.inc" class="btn1" style="color: white"><i class="fa fa-user-circle" aria-hidden="true" style="font-size: 25px;margin-right:15px"></i><span style="font-size: 1.1em">정보수정</span></a></li>
         <li><a href="logout.inc" class="btn2" style="color: white"><i class="fa fa-sign-out" aria-hidden="true" style="font-size: 25px; margin-right:15px"></i><span style="font-size: 1.1em">로그아웃</span></a></li>
       </div>
       </ul>
@@ -81,7 +81,7 @@
 				  	<table class="mytable">
 				      <tr>
 				       <th><a class="prev-text" onclick="prevDayclick()"> < </a> <input type="hidden" id="prevbtn" onclick="prevDay()"></th>
-				       <th style="width: 60%"><a class="date-text" href="calMove.inc" id="currDateView"></a> </th>
+				       <th style="width: 60%; font-size: 16px"><a class="date-text" href="calMove.inc" id="currDateView"></a> </th>
 				       <th><a class="next-text" onclick="nextDayclick()"> > </a> <input type="hidden" id="nextbtn" onclick="nextDay()"> </th>
 				      </tr>
 				     </table>
@@ -112,12 +112,11 @@
 		<section id="card-item">
 		
 			<article>
-				<div class="item-lay">
-					<div class="profile">
-						<img src="resources/${myinfo.empimg}" 
-						onclick="show('${myinfo.empimg}', '${myinfo.empid}','${myinfo.empname}','${myinfo.deptname}',
+				<div class="item-lay" onclick="show('${myinfo.empimg}', '${myinfo.empid}','${myinfo.empname}','${myinfo.deptname}',
 						      '${myinfo.amloc}','${myinfo.amlocdetail}','${myinfo.pmloc}','${myinfo.pmlocdetail}',
 						      '${myinfo.workdate}','${myinfo.empphone}','${myinfo.empmail}')">
+					<div class="profile">
+						<img src="resources/${myinfo.empimg}">
 					</div>
 					<div class="name">${myinfo.empname}</div>
 					<div class="ampm">
@@ -215,11 +214,11 @@
    	<div class="modal-dialog">
     <div class="modal-content">
      <div class="modal-header">
-       <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+       <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="font-size: 30px; margin-top:-7px;">
        <i class="fa fa-times" aria-hidden="true"></i></button>
        
        <button type="button" class="close" aria-hidden="true" 
-        id="editbtn" style="float: left;" onclick="update()">
+        id="editbtn" style="float: left; font-size: 30px; margin-top:-7px;" onclick="update()">
       <i class="fa fa-check" aria-hidden="true"></i></button>
        
      </div >  
@@ -252,7 +251,7 @@
                 <span>AM</span>
                 <center>
                 <!-- <input type="text" name="amloc" id="amloc" class="amloc" style="background-color: transparent"> -->
-                <select name="amloc" id="amloc" class="amloc" style="background-color: transparent;">
+                <select name="amloc" id="amloc" class="amloc" style="background-color: transparent; font-size:1.1em; width:130px">
 			        <c:forEach items="${locList}" var="locList"> 
 			         <option value="${locList.locname}">${locList.locname}</option>
 			        </c:forEach>
@@ -261,13 +260,13 @@
 		       	</select>
                 </center>
                 <center>
-                <input type="text" name="amlocdetail" id="amlocdetail" class="amlocdetail" style="background-color: transparent"></center>
+                <input type="text" placeholder="상세내용 입력" name="amlocdetail" id="amlocdetail" class="amlocdetail" style="background-color: transparent"></center>
               </div>
               
               <div class="pm">
                 <span>PM</span>
                 <center>
-                <select name="pmloc" id="pmloc" class="pmloc" style="background-color: transparent;">
+                <select name="pmloc" id="pmloc" class="pmloc" style="background-color: transparent; font-size:1.1em; width:130px">
 			        <c:forEach items="${locList}" var="locList"> 
 			         <option value="${locList.locname}">${locList.locname}</option>
 			        </c:forEach>
@@ -275,7 +274,7 @@
 			        <option value="DAY OFF">DAY OFF</option>
 		       	</select>   
                 </center>
-                <center><input type="text" name="pmlocdetail" id="pmlocdetail" class="pmlocdetail" style="background-color: transparent"></center>
+                <center><input type="text" placeholder="상세내용 입력" name="pmlocdetail" id="pmlocdetail" class="pmlocdetail" style="background-color: transparent"></center>
               </div>
             </div>
             
@@ -380,8 +379,10 @@
 				//$("#workdateView").prop("disabled","true");
 				$("#amloc").prop("disabled","true");
 				$("#amlocdetail").prop("disabled","true");
+				$("#amlocdetail").removeAttr("placeholder");
 				$("#pmloc").prop("disabled","true");
 				$("#pmlocdetail").prop("disabled","true");
+				$("#pmlocdetail").removeAttr("placeholder");
 				$("#mail").show();
 				$("#tel").show();
 				$("#sms").show();

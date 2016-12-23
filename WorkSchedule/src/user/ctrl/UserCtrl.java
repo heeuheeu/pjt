@@ -530,7 +530,7 @@ public class UserCtrl {
 		
 		
 		
-		//////////////////////// Work Table 
+		/*//////////////////////// Work Table 
 		
 		List<String> emplist = new ArrayList<String>();
 		emplist = service.selectEmpList();
@@ -574,8 +574,8 @@ public class UserCtrl {
 		}
 		
 		//////////////////////// Work Table 
-		
-		return "dashboard";
+*/		
+		return "redirect:/dashboard.jsp";
 	}
 
 	
@@ -644,7 +644,7 @@ public class UserCtrl {
 			service.nfcUpdatePm(nfc);
 		}
 
-		return "redirect:/user.inc";
+		return null;
 	}
 
 	@RequestMapping(value = "/delete.inc")
